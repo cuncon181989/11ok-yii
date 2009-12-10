@@ -87,8 +87,19 @@ class Blogs extends CActiveRecord
             if ($this->isNewRecord){
                 $this->createDate= $this->updateDate= time();
                 $this->status= 1;
+                $this->settings= array('template'=>'default');
             }else
                 $this->updateDate= time();
+            return true;
+        }
+        
+        protected function beforeSave(){
+            $this->settings= serialize($this->settings);
+            return true;
+        }
+
+        protected function afterFind(){
+            $this->settings= unserialize($this->settings);
             return true;
         }
 

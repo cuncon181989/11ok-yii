@@ -148,6 +148,8 @@ class ArticlesController extends CController
 	public function actionList()
 	{
 		$criteria=new CDbCriteria;
+                if (!Yii::app()->user->id)
+                    $this->redirect(Yii::app()->user->loginUrl);
                 $criteria->addCondition('usersId='.Yii::app()->user->id);
                 
 		$pages=new CPagination(Articles::model()->count($criteria));

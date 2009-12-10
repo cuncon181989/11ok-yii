@@ -12,12 +12,6 @@
 <?php echo CHtml::encode($model->getAttributeLabel('id')); ?>:
 <?php echo CHtml::link($model->id,array('show','id'=>$model->id)); ?>
 <br/>
-<?php echo CHtml::encode($model->getAttributeLabel('parentId')); ?>:
-<?php echo CHtml::encode($model->parentId); ?>
-<br/>
-<?php echo CHtml::encode($model->getAttributeLabel('usersId')); ?>:
-<?php echo CHtml::encode($model->usersId); ?>
-<br/>
 <?php echo CHtml::encode($model->getAttributeLabel('blogsId')); ?>:
 <?php echo CHtml::encode($model->blogsId); ?>
 <br/>
@@ -29,9 +23,6 @@
 <br/>
 <?php echo CHtml::encode($model->getAttributeLabel('description')); ?>:
 <?php echo CHtml::encode($model->description); ?>
-<br/>
-<?php echo CHtml::encode($model->getAttributeLabel('settings')); ?>:
-<?php echo CHtml::encode($model->settings); ?>
 <br/>
 
 </div>

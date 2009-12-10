@@ -58,6 +58,9 @@ return array(
                 'thumb'=>array(
                     'class'=>'ext.phpthumb.EasyPhpThumb',
                 ),
+                'CFile'=>array(
+                    'class'=>'ext.CFile',
+                ),
 	),
 
 	// application-level parameters that can be accessed

@@ -1,7 +1,7 @@
 <?php $this->pageTitle=Yii::app()->name; ?>
 
 <h1>
-	Welcome, <?php echo Yii::app()->user->name; ?>!
+	Welcome, (<?php echo Yii::app()->user->id; ?>)<?php echo Yii::app()->user->name; ?>!
 </h1>
 <p>
 This is the homepage of <em><?php echo Yii::app()->name; ?></em>. You may modify the following files to customize the content of this page:

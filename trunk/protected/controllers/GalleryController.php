@@ -1,6 +1,6 @@
 <?php
 
-class GalleryAlbumsController extends CController
+class GalleryController extends CController
 {
 	const PAGE_SIZE=10;
 
@@ -37,11 +37,11 @@ class GalleryAlbumsController extends CController
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','delete'),
+				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin'),
+				'actions'=>array('admin','delete'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -55,7 +55,7 @@ class GalleryAlbumsController extends CController
 	 */
 	public function actionShow()
 	{
-		$this->render('show',array('model'=>$this->loadGalleryAlbums()));
+		$this->render('show',array('model'=>$this->loadGallery()));
 	}
 
 	/**
@@ -64,14 +64,17 @@ class GalleryAlbumsController extends CController
 	 */
 	public function actionCreate()
 	{
-		$model=new GalleryAlbums;
-		if(isset($_POST['GalleryAlbums']))
+		$model=new Gallery;
+                $ga= GalleryAlbums::model()->findAll('usersId='.Yii::app()->user->id);
+		if(isset($_POST['Gallery']))
 		{
-			$model->attributes=$_POST['GalleryAlbums'];
+			$model->attributes=$_POST['Gallery'];
 			if($model->save())
-				$this->redirect(array('list'));
+				$this->redirect(array('show','id'=>$model->id));
 		}
-		$this->render('create',array('model'=>$model));
+		$this->render('create',array('model'=>$model,
+                                             'ga'=>$ga,
+                ));
 	}
 
 	/**
@@ -80,10 +83,10 @@ class GalleryAlbumsController extends CController
 	 */
 	public function actionUpdate()
 	{
-		$model=$this->loadGalleryAlbums();
-		if(isset($_POST['GalleryAlbums']))
+		$model=$this->loadGallery();
+		if(isset($_POST['Gallery']))
 		{
-			$model->attributes=$_POST['GalleryAlbums'];
+			$model->attributes=$_POST['Gallery'];
 			if($model->save())
 				$this->redirect(array('show','id'=>$model->id));
 		}
@@ -99,7 +102,7 @@ class GalleryAlbumsController extends CController
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
-			$this->loadGalleryAlbums()->delete();
+			$this->loadGallery()->delete();
 			$this->redirect(array('list'));
 		}
 		else
@@ -112,12 +115,12 @@ class GalleryAlbumsController extends CController
 	public function actionList()
 	{
 		$criteria=new CDbCriteria;
-                $criteria->condition= 'usersId='.Yii::app()->user->id;
-		$pages=new CPagination(GalleryAlbums::model()->count($criteria));
+
+		$pages=new CPagination(Gallery::model()->count($criteria));
 		$pages->pageSize=self::PAGE_SIZE;
 		$pages->applyLimit($criteria);
 
-		$models=GalleryAlbums::model()->findAll($criteria);
+		$models=Gallery::model()->findAll($criteria);
 
 		$this->render('list',array(
 			'models'=>$models,
@@ -134,14 +137,14 @@ class GalleryAlbumsController extends CController
 
 		$criteria=new CDbCriteria;
 
-		$pages=new CPagination(GalleryAlbums::model()->count($criteria));
+		$pages=new CPagination(Gallery::model()->count($criteria));
 		$pages->pageSize=self::PAGE_SIZE;
 		$pages->applyLimit($criteria);
 
-		$sort=new CSort('GalleryAlbums');
+		$sort=new CSort('Gallery');
 		$sort->applyOrder($criteria);
 
-		$models=GalleryAlbums::model()->findAll($criteria);
+		$models=Gallery::model()->findAll($criteria);
 
 		$this->render('admin',array(
 			'models'=>$models,
@@ -155,17 +158,14 @@ class GalleryAlbumsController extends CController
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer the primary key value. Defaults to null, meaning using the 'id' GET variable
 	 */
-	public function loadGalleryAlbums($id=null)
+	public function loadGallery($id=null)
 	{
 		if($this->_model===null)
 		{
-                    if (!Yii::app()->user->id)
-                        $this->redirect(Yii::app()->user->loginUrl);
-                    $this->_model=GalleryAlbums::model()->find('id=:id AND usersId=:userid',
-                                                               array(':id'=>$_GET['id'],
-                                                                     ':userid'=>Yii::app()->user->id,));
-                    if($this->_model===null)
-                            throw new CHttpException(404,'The requested page does not exist.');
+			if($id!==null || isset($_GET['id']))
+				$this->_model=Gallery::model()->findbyPk($id!==null ? $id : $_GET['id']);
+			if($this->_model===null)
+				throw new CHttpException(404,'The requested page does not exist.');
 		}
 		return $this->_model;
 	}
@@ -177,7 +177,7 @@ class GalleryAlbumsController extends CController
 	{
 		if(isset($_POST['command'], $_POST['id']) && $_POST['command']==='delete')
 		{
-			$this->loadGalleryAlbums($_POST['id'])->delete();
+			$this->loadGallery($_POST['id'])->delete();
 			// reload the current page to avoid duplicated delete actions
 			$this->refresh();
 		}

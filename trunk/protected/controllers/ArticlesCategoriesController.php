@@ -55,7 +55,7 @@ class ArticlesCategoriesController extends CController
 	 */
 	public function actionShow()
 	{
-                    $this->render('show',array('model'=>$this->loadArticlesCategories()));
+            $this->render('show',array('model'=>$this->loadArticlesCategories()));
 	}
 
 	/**
@@ -159,6 +159,8 @@ class ArticlesCategoriesController extends CController
 	{
             if($this->_model===null)
             {
+                if (!Yii::app()->user->id)
+                    $this->redirect(Yii::app()->user->loginUrl);
                 $this->_model=ArticlesCategories::model()->find('id=:id AND usersId=:userid',
                    array(':id'=>$_GET['id'],
                          ':userid'=>Yii::app()->user->id,));

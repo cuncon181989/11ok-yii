@@ -8,6 +8,7 @@ class GalleryAlbums extends CActiveRecord
 	 * @var integer $parentId
 	 * @var integer $usersId
 	 * @var integer $blogsId
+	 * @var integer $status
 	 * @var integer $countGallery
 	 * @var string $name
 	 * @var string $description
@@ -41,7 +42,7 @@ class GalleryAlbums extends CActiveRecord
 		return array(
 			array('parentId, usersId, blogsId, countGallery', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
-			array('parentId,name,description', 'safe'),
+			array('parentId,status,name,description', 'safe'),
 		);
 	}
 
@@ -53,6 +54,8 @@ class GalleryAlbums extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'blog'=>array(self::BELONGS_TO,'blogs','blogsId'),
+                    'user'=>array(self::BELONGS_TO,'users','usersId'),
 		);
 	}
 
@@ -66,10 +69,28 @@ class GalleryAlbums extends CActiveRecord
 			'parentId' => '父级ID',
 			'usersId' => '用户ID',
 			'blogsId' => '博客ID',
+                        'status'=>'状态',
 			'countGallery' => '照片数',
 			'name' => '名称',
 			'description' => '描述',
 			'settings' => '设置',
 		);
 	}
+
+        protected function beforeValidate(){
+            if ($this->isNewRecord){
+                $this->usersId= Yii::app()->user->id;
+                $this->blogsId= Yii::app()->user->blogId;
+            }
+            return true;
+        }
+
+        public function getGalleryAlbumsStatus($list){
+            $tmpArr= array('1'=>'发布','2'=>'隐藏');
+            if (!is_null($list))
+                return $tmpArr;
+            else
+                return $tmpArr[$this->status];
+        }
+
 }

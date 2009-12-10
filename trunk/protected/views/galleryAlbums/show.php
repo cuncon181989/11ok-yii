@@ -10,22 +10,17 @@
 </div>
 
 <table class="dataGrid">
-<tr>
-	<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('parentId')); ?>
-</th>
-    <td><?php echo CHtml::encode($model->parentId); ?>
-</td>
-</tr>
+
 <tr>
 	<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('usersId')); ?>
 </th>
-    <td><?php echo CHtml::encode($model->usersId); ?>
+    <td><?php echo CHtml::encode($model->user->username); ?>
 </td>
 </tr>
 <tr>
 	<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('blogsId')); ?>
 </th>
-    <td><?php echo CHtml::encode($model->blogsId); ?>
+    <td><?php echo CHtml::encode($model->blog->name); ?>
 </td>
 </tr>
 <tr>
@@ -46,10 +41,5 @@
     <td><?php echo CHtml::encode($model->description); ?>
 </td>
 </tr>
-<tr>
-	<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('settings')); ?>
-</th>
-    <td><?php echo CHtml::encode($model->settings); ?>
-</td>
-</tr>
+
 </table>
