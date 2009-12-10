@@ -41,7 +41,7 @@ class GalleryAlbums extends CActiveRecord
 		return array(
 			array('parentId, usersId, blogsId, countGallery', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
-			array('description, settings', 'safe'),
+			array('parentId,name,description', 'safe'),
 		);
 	}
 
@@ -63,13 +63,13 @@ class GalleryAlbums extends CActiveRecord
 	{
 		return array(
 			'id' => 'Id',
-			'parentId' => 'Parent',
-			'usersId' => 'Users',
-			'blogsId' => 'Blogs',
-			'countGallery' => 'Count Gallery',
-			'name' => 'Name',
-			'description' => 'Description',
-			'settings' => 'Settings',
+			'parentId' => '父级ID',
+			'usersId' => '用户ID',
+			'blogsId' => '博客ID',
+			'countGallery' => '照片数',
+			'name' => '名称',
+			'description' => '描述',
+			'settings' => '设置',
 		);
 	}
 }
