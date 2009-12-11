@@ -135,5 +135,7 @@ div.yiiForm select.error
 div.yiiForm div.simple div,
 div.yiiForm div.complex div
 {
+	/*
 	margin-left: 110px;
+	*/
 }

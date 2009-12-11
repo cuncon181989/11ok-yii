@@ -26,7 +26,7 @@ return array(
 			'routes'=>array(
 				array(
 					'class'=>'CFileLogRoute',
-					'levels'=>'error',
+					'levels'=>'error,info',
 				),
 				array(
 					'class'=>'CWebLogRoute',
