@@ -92,17 +92,28 @@ class GalleryController extends CController
 	}
         public function actionUploadFiles()
         {
-            //Yii::app()->session->sessionID = $_POST['PHPSESSID'];
-            //Yii::app()->session->init();
-            // Do whatever you need to do with the files you just received
-            if(Yii::app()->getRequest()->isAjaxRequest()){
-                $files = var_export($_FILES, true);
-                mydebug($files);
-                Yii::log('Files'.$files);
-                Yii::log('Files'.'ga:'.$ga.' gs:'.$gs);
-                //$this->renderText(CJavaScript::jsonEncode($files));
+            Yii::app()->session->sessionID = $_POST['PHPSESSID'];
+            Yii::app()->session->init();
+            $gallery= new Gallery;
+            $saveDir= $gallery->getGalleryDir();
+            if(isset($_FILES)){
+                if(!is_dir($saveDir))
+                    mkdir($saveDir,0644);
+                $sfile= CUploadedFile::getInstance($user,'avatar');
+                $saveFileName= date(YmdHis).rand(1000-9999).'.'.$sfile->getExtensionName();
+                
+                $gallery->galleryAlbumsId= intval($_POST['ga']);
+                $gallery->status= intval($_POST['gs']);
+                $gallery->title = $_POST['Filename'];
+                $gallery->filePath= $saveDir;
+                $gallery->fileName= $saveFileName;
+                $gallery->fileType= $sfile->getExtensionName();
+                $gallery->fileSize= $sfile->getSize();
+                $gallery->settings= array();
+
+                Yii::log(Yii::app()->user->name.' uploadGallery:');
             }else
-                throw new CHttpException(404,'no Ajax');
+                throw new CHttpException(404,'no file');
         }
 	/**
 	 * Updates a particular model.

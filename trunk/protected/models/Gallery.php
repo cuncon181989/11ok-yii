@@ -119,6 +119,7 @@ class Gallery extends CActiveRecord
          */
         protected function beforeSave(){
             if ($this->isNewRecord){
+                $this->settings= seriallze();
                 $this->dbConnection->createCommand('update {{galleryalbums}} set countGallery=countGallery+1 WHERE id='.$this->galleryAlbumsId)->execute();
             }elseif ($this->oldGACate!=$this->galleryAlbumsId){
                 $this->dbConnection->createCommand('update {{galleryalbums}} set countArticles=galleryalbums+1 WHERE id='.$this->galleryAlbumsId)->execute();
@@ -126,5 +127,14 @@ class Gallery extends CActiveRecord
             }
             return true;
         }
-
+        /**
+         * @return string 图片目录
+         * @fullpath 是否完全路径，不完全路径主要thumb组件用
+         */
+        public function getGalleryDir($fullpath=true){
+            if ($fullpath)
+                return Yii::getPathOfAlias('webroot').DS.Yii::app()->params['uploadDir'].DS.$this->usersId;
+            else
+                return DS.Yii::app()->params['uploadDir'].DS.$this->usersId;
+        }
 }

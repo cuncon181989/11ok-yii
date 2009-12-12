@@ -179,7 +179,6 @@ class UsersController extends CController
         public function actionAvatar(){
             $user= $this->loadUsers();
             $saveDir= $user->getAvatarDir();
-            Yii::app()->clientScript->registerMetaTag('no-cache','','Pragma');
             if ($_FILES['Users']){ //如果是上传文件执行这里
                  $afile= CUploadedFile::getInstance($user,'avatar');
                  if(!is_dir($saveDir))
