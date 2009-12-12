@@ -92,26 +92,42 @@ class GalleryController extends CController
 	}
         public function actionUploadFiles()
         {
-            Yii::app()->session->sessionID = $_POST['PHPSESSID'];
-            Yii::app()->session->init();
+            //Yii::app()->session->sessionID = $_POST['PHPSESSID'];
+            //Yii::app()->session->init();
             $gallery= new Gallery;
             $saveDir= $gallery->getGalleryDir();
             if(isset($_FILES)){
                 if(!is_dir($saveDir))
                     mkdir($saveDir,0644);
-                $sfile= CUploadedFile::getInstance($user,'avatar');
-                $saveFileName= date(YmdHis).rand(1000-9999).'.'.$sfile->getExtensionName();
-                
-                $gallery->galleryAlbumsId= intval($_POST['ga']);
-                $gallery->status= intval($_POST['gs']);
-                $gallery->title = $_POST['Filename'];
-                $gallery->filePath= $saveDir;
-                $gallery->fileName= $saveFileName;
-                $gallery->fileType= $sfile->getExtensionName();
-                $gallery->fileSize= $sfile->getSize();
-                $gallery->settings= array();
-
-                Yii::log(Yii::app()->user->name.' uploadGallery:');
+                if(!is_dir($saveDir.DS.'s'))
+                    mkdir($saveDir.DS.'s',0644);
+                $ufile= CUploadedFile::getInstanceByName('gallery');
+                $saveFileName= date('YmdHis',time()).rand(100,999).'.'.$ufile->getExtensionName();
+                if ($ufile->saveAs($saveDir.$saveFileName)){
+                        $reWidth = Yii::app()->params['galleryWidth'];
+                        $reHeight= Yii::app()->params['galleryHeight'];
+                        $sWidth  = Yii::app()->params['gallerySWidth'];
+                        $sHeight = Yii::app()->params['gallerySHeight'];
+                        Yii::app()->thumb->setThumbsDirectory($gallery->getGalleryDir(false));
+                        Yii::app()->thumb->load($saveDir.$saveFileName);
+                        Yii::app()->thumb->resize($reWidth,$reHeight);//大图缩小
+                        Yii::app()->thumb->save($saveFileName);
+                        Yii::app()->thumb->resize($sWidth,$sHeight);//生成缩略图
+                        Yii::app()->thumb->save('s'.DS.$saveFileName);
+                        @Yii::log(Yii::app()->user->name.' uploadGallery:'.$saveDir.$saveFileName);
+                        $gallery->galleryAlbumsId= intval($_POST['ga']);
+                        $gallery->status= intval($_POST['gs']);
+                        $gallery->title = $_POST['Filename'];
+                        $gallery->fileName= $saveFileName;
+                        $gallery->fileType= $ufile->getExtensionName();
+                        $gallery->fileSize= $ufile->getSize();
+                        $gallery->settings= array();
+                        if ($gallery->save()){
+                                echo '1';//正确则要想办法判断所有文件是否上传完毕，完毕则显示写描述的页面。
+                        }else{
+                                //这里做删除文件并报错！
+                        }
+                }
             }else
                 throw new CHttpException(404,'no file');
         }

@@ -13,11 +13,12 @@ $this->widget('application.extensions.uploadify.EuploadifyWidget',
         'name'=>'uploadFiles',
         'options'=> array(
             'script' => $this->createUrl('Gallery/uploadFiles'),
+            'fileDataName'=>'gallery',
             'folder' => '/uploads/'.Yii::app()->user->id,
             'scriptData' => array('ga'=>$ga, 'gs'=>$gs, 'PHPSESSID' => session_id()),
             'fileDesc'=>'*.jpg *.gif *.png 图片文件',
             'fileExt' => '*.jpg;*gif;*png',
-            'sizeLimit'=>20480, //2M=2*1024Kb*1024Bytes=2097152
+            'sizeLimit'=>1572864, //2M=2*1024Kb*1024Bytes=2097152 1.5M=1572864B
             'buttonImg'=>'/images/browse-files.png',
             'wmode'=>'transparent',
             'width'=>102,
@@ -27,10 +28,10 @@ $this->widget('application.extensions.uploadify.EuploadifyWidget',
             ),
         'callbacks' => array(
            'onError' => 'function(event,queueId,fileObj,errorObj){
-                $("#uploadInfo").append(fileObj.name + "上传错误! 错误类型: "+ errorObj.type + "错误信息: "+ errorObj.info +"\n");
+                $("#uploadInfo").append(fileObj.name + "上传错误! 错误类型: "+ errorObj.type + " 错误信息: "+ errorObj.info +"<br />");
            }',
            'onComplete' => 'function(event,queueId,fileObj,response,data){
-                $("#uploadInfo").append(fileObj.name+ "上传完成！");
+                $("#uploadInfo").append(fileObj.name+ "上传完成！"+ "<br />");
                 $("#uploadInfo").append(response);
            }',
            'onAllComplete' => 'function(event,data){
