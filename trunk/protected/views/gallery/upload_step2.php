@@ -15,7 +15,9 @@ $this->widget('application.extensions.uploadify.EuploadifyWidget',
             'script' => $this->createUrl('Gallery/uploadFiles'),
             'folder' => '/uploads/'.Yii::app()->user->id,
             'scriptData' => array('ga'=>$ga, 'gs'=>$gs, 'PHPSESSID' => session_id()),
-            'fileExt' => '*.zip;*.jpg;*gif;*png',
+            'fileDesc'=>'*.jpg *.gif *.png 图片文件',
+            'fileExt' => '*.jpg;*gif;*png',
+            'sizeLimit'=>20480, //2M=2*1024Kb*1024Bytes=2097152
             'buttonImg'=>'/images/browse-files.png',
             'wmode'=>'transparent',
             'width'=>102,
@@ -24,10 +26,16 @@ $this->widget('application.extensions.uploadify.EuploadifyWidget',
             'multi' => true,
             ),
         'callbacks' => array(
-           'onError' => 'function(event,queueId,fileObj,errorObj){alert("Error: " + errorObj.type + "\nInfo: " + errorObj.info);}',
-           'onComplete' => 'function(event,queueId,fileObj,response,data){$("#test").html(response)}',
-           'onAllComplete' => 'function(event,data){alert("完成" + data.filesUploaded );}',
-           'onCancel' => 'function(event,queueId,fileObj,data){}',
+           'onError' => 'function(event,queueId,fileObj,errorObj){
+                $("#uploadInfo").append(fileObj.name + "上传错误! 错误类型: "+ errorObj.type + "错误信息: "+ errorObj.info +"\n");
+           }',
+           'onComplete' => 'function(event,queueId,fileObj,response,data){
+                $("#uploadInfo").append(fileObj.name+ "上传完成！");
+                $("#uploadInfo").append(response);
+           }',
+           'onAllComplete' => 'function(event,data){
+                alert("完成上传文件数: " + data.filesUploaded );
+           }',
         )
     ));
 ?>
@@ -41,7 +49,7 @@ $this->widget('application.extensions.uploadify.EuploadifyWidget',
     <?php echo CHtml::button('上传文件',array('onclick'=>"javascript:$('#uploadFiles').uploadifyUpload()")); ?> &nbsp&nbsp
     <?php echo CHtml::button('清除队列',array('onclick'=>"javascript:$('#uploadFiles').uploadifyClearQueue();")); ?>
 </div>
-<div id="test"></div>
+<div id="uploadInfo"></div>
 <?php echo CHtml::endForm(); ?>
 
 </div><!-- yiiForm -->
