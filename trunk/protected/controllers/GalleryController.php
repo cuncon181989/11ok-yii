@@ -33,11 +33,11 @@ class GalleryController extends CController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'list' and 'show' actions
-				'actions'=>array('list','show','uploadFiles'),
+				'actions'=>array('list','show','upload','uploadFiles'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','upload'),
+				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -64,6 +64,7 @@ class GalleryController extends CController
 	 */
 	public function actionCreate()
 	{
+                mydebug($_SESSION);
 		$model=new Gallery;
                 $ga= GalleryAlbums::model()->findAll('usersId='.Yii::app()->user->id);
 		if(isset($_POST['Gallery']))
@@ -80,23 +81,13 @@ class GalleryController extends CController
 	}
 	public function actionUpload()
 	{
-            $model=new Gallery;
-            if (isset($_POST['upload_step1'])){
-                $this->render('upload_step2', array('ga'=>$_POST['Gallery']['galleryAlbumsId'],
-                                                    'gs'=>$_POST['Gallery']['status'],
-                ));
-            }else{
-                $ga= GalleryAlbums::model()->findAll('usersId='.Yii::app()->user->id);
-                $this->render('upload_step1',array('model'=>$model,'ga'=>$ga,));
-            }
-	}
-        public function actionUploadFiles()
-        {
-            //Yii::app()->session->sessionID = $_POST['PHPSESSID'];
-            //Yii::app()->session->init();
-            $gallery= new Gallery;
-            $saveDir= $gallery->getGalleryDir();
-            if(isset($_FILES)){
+            @session_start();
+            $gallery=new Gallery;
+            if($_SESSION['uploadFinish']==true){
+                CVarDumper::dump($_SESSION,20,true);
+            }elseif(isset($_POST['ga'])){
+                mydebug($_POST);
+                $saveDir= $gallery->getGalleryDir();
                 if(!is_dir($saveDir))
                     mkdir($saveDir,0644);
                 if(!is_dir($saveDir.DS.'s'))
@@ -123,9 +114,71 @@ class GalleryController extends CController
                         $gallery->fileSize= $ufile->getSize();
                         $gallery->settings= array();
                         if ($gallery->save()){
-                                echo '1';//正确则要想办法判断所有文件是否上传完毕，完毕则显示写描述的页面。
+                                @$_SESSION['uploadFiles'][]= $gallery->id;
+                                if($_REQUEST['isComplete']==1){
+                                        @$_SESSION['uploadFinish']=true;
+                                        $this->redirect(array('upload'), 0);
+                                }
                         }else{
-                                //这里做删除文件并报错！
+                                unlink($saveDir.$saveFileName);
+                                unlink($saveDir.'s'.DS.$saveFileName);
+                                exit($_POST['Filename'].'文件保存出错!');
+                        }
+                }
+            }else{
+                    if (isset($_POST['upload_step1'])){
+                        $this->render('upload_step2', array('ga'=>$_POST['Gallery']['galleryAlbumsId'],
+                                                            'gs'=>$_POST['Gallery']['status'],
+                        ));
+                    }else{
+                        $ga= GalleryAlbums::model()->findAll('usersId='.Yii::app()->user->id);
+                        $this->render('upload_step1',array('model'=>$gallery,'ga'=>$ga,));
+                    }
+            }
+	}
+        public function actionUploadFiles()
+        {
+            //Yii::app()->session->sessionID = $_POST['PHPSESSID'];
+            //Yii::app()->session->init();
+            $gallery= new Gallery;
+            if(isset($_POST['ga'])){
+                $saveDir= $gallery->getGalleryDir();
+                if(!is_dir($saveDir))
+                    mkdir($saveDir,0644);
+                if(!is_dir($saveDir.DS.'s'))
+                    mkdir($saveDir.DS.'s',0644);
+                $ufile= CUploadedFile::getInstanceByName('gallery');
+                $saveFileName= date('YmdHis',time()).rand(100,999).'.'.$ufile->getExtensionName();
+                if ($ufile->saveAs($saveDir.$saveFileName)){
+                        $reWidth = Yii::app()->params['galleryWidth'];
+                        $reHeight= Yii::app()->params['galleryHeight'];
+                        $sWidth  = Yii::app()->params['gallerySWidth'];
+                        $sHeight = Yii::app()->params['gallerySHeight'];
+                        Yii::app()->thumb->setThumbsDirectory($gallery->getGalleryDir(false));
+                        Yii::app()->thumb->load($saveDir.$saveFileName);
+                        Yii::app()->thumb->resize($reWidth,$reHeight);//大图缩小
+                        Yii::app()->thumb->save($saveFileName);
+                        Yii::app()->thumb->resize($sWidth,$sHeight);//生成缩略图
+                        Yii::app()->thumb->save('s'.DS.$saveFileName);
+                        @Yii::log(Yii::app()->user->name.' uploadGallery:'.$saveDir.$saveFileName);
+                        $gallery->galleryAlbumsId= intval($_POST['ga']);
+                        $gallery->status= intval($_POST['gs']);
+                        $gallery->title = $_POST['Filename'];
+                        $gallery->fileName= $saveFileName;
+                        $gallery->fileType= $ufile->getExtensionName();
+                        $gallery->fileSize= $ufile->getSize();
+                        $gallery->settings= array();
+                        if ($gallery->save()){
+                                @session_start();
+                                @$_SESSION['uploadFiles'][]= $gallery->id;
+                                if($_REQUEST['isComplete']==1){
+                                        @$_SESSION['uploadFinish']=true;
+                                        $this->redirect(array('upload'), 0);
+                                }
+                        }else{
+                                unlink($saveDir.$saveFileName);
+                                unlink($saveDir.'s'.DS.$saveFileName);
+                                exit($_POST['Filename'].'文件保存出错!');
                         }
                 }
             }else
@@ -169,7 +222,7 @@ class GalleryController extends CController
 	public function actionList()
 	{
 		$criteria=new CDbCriteria;
-
+                $criteria->addCondition('usersId='.Yii::app()->user->id);
 		$pages=new CPagination(Gallery::model()->count($criteria));
 		$pages->pageSize=self::PAGE_SIZE;
 		$pages->applyLimit($criteria);
@@ -216,8 +269,8 @@ class GalleryController extends CController
 	{
 		if($this->_model===null)
 		{
-			if($id!==null || isset($_GET['id']))
-				$this->_model=Gallery::model()->findbyPk($id!==null ? $id : $_GET['id']);
+			if($id!==null || $_GET['id'])
+				$this->_model=Gallery::model()->findbyPk($id? $id: $_GET['id'],'usersId=:uid',array(':uid'=>Yii::app()->user->id));
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}

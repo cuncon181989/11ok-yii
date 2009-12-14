@@ -49,7 +49,7 @@
 <?php echo CHtml::encode($model->metaData); ?>
 <br/>
 <?php echo CHtml::encode($model->getAttributeLabel('settings')); ?>:
-<?php echo CHtml::encode($model->settings); ?>
+<?php echo $model->settings; ?>
 <br/>
 <?php echo CHtml::encode($model->getAttributeLabel('createDate')); ?>:
 <?php echo CHtml::encode($model->createDate); ?>

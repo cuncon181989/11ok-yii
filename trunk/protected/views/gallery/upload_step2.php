@@ -4,7 +4,7 @@
 Fields with <span class="required">*</span> are required.
 </p>
 
-<?php echo CHtml::beginForm(array('Gallery/UploadFiles'),'POST',array('enctype'=>'multipart/form-data')); ?>
+<?php echo CHtml::beginForm(array('Gallery/Upload'),'POST',array('enctype'=>'multipart/form-data')); ?>
 <div class="simple">
 <label>选择文件</label>
 <?php
@@ -12,10 +12,10 @@ $this->widget('application.extensions.uploadify.EuploadifyWidget',
     array(
         'name'=>'uploadFiles',
         'options'=> array(
-            'script' => $this->createUrl('Gallery/uploadFiles'),
+            'script' => $this->createUrl('Gallery/upload'),
             'fileDataName'=>'gallery',
             'folder' => '/uploads/'.Yii::app()->user->id,
-            'scriptData' => array('ga'=>$ga, 'gs'=>$gs, 'PHPSESSID' => session_id()),
+            'scriptData' => array('ga'=>$ga, 'gs'=>$gs,'isComplete'=>0, 'PHPSESSID' => session_id()),
             'fileDesc'=>'*.jpg *.gif *.png 图片文件',
             'fileExt' => '*.jpg;*gif;*png',
             'sizeLimit'=>1572864, //2M=2*1024Kb*1024Bytes=2097152 1.5M=1572864B
@@ -23,6 +23,8 @@ $this->widget('application.extensions.uploadify.EuploadifyWidget',
             'wmode'=>'transparent',
             'width'=>102,
             'queueID'=>'FilesQueue',
+            'queueSizeLimit'=>4,
+            //'simUploadLimit'=>1, //如果这里数字改变那么onComplete里的fileCount也要跟着变要不会造成无法正确判断文件是否传完了
             'auto' => false,
             'multi' => true,
             ),
@@ -31,20 +33,27 @@ $this->widget('application.extensions.uploadify.EuploadifyWidget',
                 $("#uploadInfo").append(fileObj.name + "上传错误! 错误类型: "+ errorObj.type + " 错误信息: "+ errorObj.info +"<br />");
            }',
            'onComplete' => 'function(event,queueId,fileObj,response,data){
+                if (data.fileCount== 1){
+                        $("#uploadFiles").uploadifySettings("scriptData",{"ga":'.$ga.',"gs":'.$gs.',"isComplete":1,"PHPSESSID":"'.session_id().'"});
+                }
+                $("#uploadInfo").append("剩余文件数："+ data.fileCount);
                 $("#uploadInfo").append(fileObj.name+ "上传完成！"+ "<br />");
                 $("#uploadInfo").append(response);
            }',
+           'onSelectOnce' => 'function(event,data){
+                if (data.fileCount== 1){
+                        $("#uploadFiles").uploadifySettings("scriptData",{"ga":'.$ga.',"gs":'.$gs.',"isComplete":1,"PHPSESSID":"'.session_id().'"});
+                }else{
+                        $("#uploadFiles").uploadifySettings("scriptData",{"ga":'.$ga.',"gs":'.$gs.',"isComplete":0,"PHPSESSID":"'.session_id().'"});
+                }
+           }',
            'onAllComplete' => 'function(event,data){
-                alert("完成上传文件数: " + data.filesUploaded );
            }',
         )
     ));
 ?>
 </div>
 <div id="FilesQueue" style="margin-left:100px;width:395px;height:200px;border:1px solid #d5d5d5;overflow:auto;margin-bottom:10px;padding:2px 5px;"> </div>
-<div class="action">
-<?php //echo CHtml::submitButton('保存'); ?>
-</div>
 <div class="simple">
     <label>&nbsp;</label>
     <?php echo CHtml::button('上传文件',array('onclick'=>"javascript:$('#uploadFiles').uploadifyUpload()")); ?> &nbsp&nbsp

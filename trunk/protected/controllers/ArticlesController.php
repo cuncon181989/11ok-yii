@@ -37,11 +37,11 @@ class ArticlesController extends CController
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','delete'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -196,13 +196,13 @@ class ArticlesController extends CController
 	 */
 	public function loadArticles($id=null)
 	{
-		if ($id!==null){
-                    $this->_model=Articles::model()->findByPk($id);
-		}else{
-                    $this->_model=Articles::model()->findAll('usersId=:uid AND blogsId=:bid',array(':uid'=>Yii::app()->user->id,':bid'=>Yii::app()->user->blogId));
-                }
                 if($this->_model===null)
-                        throw new CHttpException(404,'The requested page does not exist.');
+                {
+                        if ($id!==null || $_GET['id'])
+                            $this->_model=Articles::model()->findByPk($id? $id: $_GET['id'],'usersId=:uid AND blogsId=:bid',array(':uid'=>Yii::app()->user->id,':bid'=>Yii::app()->user->blogId));
+                        if($this->_model===null)
+                            throw new CHttpException(404,'The requested page does not exist.');
+                }
 		return $this->_model;
 	}
 

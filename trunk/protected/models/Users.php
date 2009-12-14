@@ -146,6 +146,12 @@ class Users extends CActiveRecord
             $this->dbConnection->createCommand('update {{blogs}} set blogCategoryId='.$this->blogCategoryId.' WHERE usersId='.$this->id)->execute(); 
         }
         /**
+         * 删除用户的时候减少相应行业统计
+         */
+        protected function beforeDelete(){
+                $this->dbconnection->createCommand('update {{blogcategories}} set `countBlogs`=`countBlogs`-1 WHERE id='.$this->blogCategoryId)->execute();
+        }
+        /**
          * @return string 用户性别
          * @return array 性别列表
          */

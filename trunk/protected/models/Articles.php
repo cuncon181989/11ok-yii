@@ -131,13 +131,23 @@ class Articles extends CActiveRecord
                 $this->dbConnection->createCommand('update {{articlescategories}} set countArticles=countArticles+1 WHERE id='.$this->articlesCategoryId)->execute();
                 $this->dbConnection->createCommand('update {{globalarticlescategories}} set countArticles=countArticles+1 WHERE id='.$this->globalArticlesCategoriesId)->execute();
             }elseif ($this->oldArtCate!=$this->articlesCategoryId){
+                //更像个人分类
                 $this->dbConnection->createCommand('update {{articlescategories}} set countArticles=countArticles+1 WHERE id='.$this->articlesCategoryId)->execute();
                 $this->dbConnection->createCommand('update {{articlescategories}} set countArticles=countArticles-1 WHERE id='.$this->oldArtCate)->execute();
             }elseif ($this->oldGArtCate!=$this->globalArticlesCategoriesId){
+                //更像全局分类
                 $this->dbConnection->createCommand('update {{globalarticlescategories}} set countArticles=countArticles+1 WHERE id='.$this->globalArticlesCategoriesId)->execute();
                 $this->dbConnection->createCommand('update {{globalarticlescategories}} set countArticles=countArticles-1 WHERE id='.$this->oldGArtCate)->execute();
             }
             return true;
         }
-
+        /**
+         * 删除前删除相应的分类统计
+         */
+        protected function beforeDelete(){
+                $this->dbConnection->createCommand('update {{articlescategories}} set countArticles=countArticles-1 WHERE id='.$this->oldArtCate)->execute();
+                $this->dbConnection->createCommand('update {{globalarticlescategories}} set countArticles=countArticles-1 WHERE id='.$this->oldGArtCate)->execute();
+                $this->dbConnection->createCommand('DELETE FROM {{articlestext}} WHERE articlesId='.$this->id .' LIMIT 1')->execute();
+                return true;
+        }
 }

@@ -85,7 +85,7 @@
 <tr>
 	<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('settings')); ?>
 </th>
-    <td><?php echo CHtml::encode($model->settings); ?>
+    <td><?php echo $model->settings; ?>
 </td>
 </tr>
 <tr>
