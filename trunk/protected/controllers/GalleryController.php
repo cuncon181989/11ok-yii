@@ -81,12 +81,16 @@ class GalleryController extends CController
 	}
 	public function actionUpload()
 	{
-            @session_start();
+            //@session_start();
             $gallery=new Gallery;
             if($_SESSION['uploadFinish']==true){
-                CVarDumper::dump($_SESSION,20,true);
+                CVarDumper::dump($_SESSION['uploadFiles'],20,true);
+                //$gallerys = Gallery::model()->findAll('id in(:id)',array(':id'=>$_SESSION['uploadFiles']));
+                //exit('end');
+                //mydebug($gallerys);
             }elseif(isset($_POST['ga'])){
-                mydebug($_POST);
+                Yii::app()->session->sessionID = $_POST['PHPSESSID'];
+                Yii::app()->session->init();
                 $saveDir= $gallery->getGalleryDir();
                 if(!is_dir($saveDir))
                     mkdir($saveDir,0644);
