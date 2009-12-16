@@ -1,5 +1,7 @@
 <?php $this->pageTitle=Yii::app()->name; ?>
 
+<?php CVarDumper::dump(Yii::app()->user,10,true); ?>
+
 <h1>
 	Welcome, (<?php echo Yii::app()->user->id; ?>)<?php echo Yii::app()->user->name; ?>!
 </h1>

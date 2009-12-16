@@ -77,7 +77,6 @@ class Gallery extends CActiveRecord
 			'usersId' => '用户ID',
 			'blogsId' => '博客ID',
 			'status' => '状态',
-			'isNew' => '是否刚上传的',
 			'countReads' => '查看数',
 			'countComments' => '评论数',
 			'title' => '标题',
@@ -102,12 +101,9 @@ class Gallery extends CActiveRecord
 
         protected function beforeValidate(){
             if($this->isNewRecord){
-                $this->isNew= 1;
                 $this->createDate= time();
                 $this->usersId= Yii::app()->user->id;
                 $this->blogsId= Yii::app()->user->blogId;
-            }else {
-                $this->isNew= 0;
             }
             return true;
         }
@@ -127,8 +123,8 @@ class Gallery extends CActiveRecord
             if ($this->isNewRecord){
                 $this->dbConnection->createCommand('update {{galleryalbums}} set countGallery=countGallery+1 WHERE id='.$this->galleryAlbumsId)->execute();
             }elseif ($this->oldGACate!=$this->galleryAlbumsId){
-                $this->dbConnection->createCommand('update {{galleryalbums}} set countArticles=galleryalbums+1 WHERE id='.$this->galleryAlbumsId)->execute();
-                $this->dbConnection->createCommand('update {{galleryalbums}} set countArticles=galleryalbums-1 WHERE id='.$this->oldGACate)->execute();
+                $this->dbConnection->createCommand('update {{galleryalbums}} set countGallery=countGallery+1 WHERE id='.$this->galleryAlbumsId)->execute();
+                $this->dbConnection->createCommand('update {{galleryalbums}} set countGallery=countGallery-1 WHERE id='.$this->oldGACate)->execute();
             }
             return true;
         }
@@ -153,5 +149,8 @@ class Gallery extends CActiveRecord
                 else
                     return DS.Yii::app()->params['uploadDir'].DS.$this->usersId;
             }
+        }
+        public function getGalleryUrl(){
+                return Yii::app()->getRequest()->getBaseUrl().'/'.Yii::app()->params[uploadDir].'/'.$this->usersId.'/';
         }
 }

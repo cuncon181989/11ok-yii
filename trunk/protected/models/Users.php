@@ -47,6 +47,7 @@ class Users extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('username, password, password2, verifyCode, province, city, area, blogCategoryId, oldBlogCate, userType, avatar, sex, birthday','safe'),
+                        array('top_trade, top_site','safe', 'on'=>'admin'),
 			array('email, province, blogCategoryId', 'required'),
                         array('birthday','type','type'=>'date','dateFormat'=>'yyyy-mm-dd','message'=>'生日必须为正确的日期格式！'),
                         array('avatar', 'file', 'types'=>'jpg, gif, png','maxSize'=>'128000','tooLarge'=>'文件大小不能超过128K'),
@@ -95,6 +96,9 @@ class Users extends CActiveRecord
 			'birthday' => '生日',
 			'userType' => '类型',
 			'userStatus' => '状态',
+                        'top_trade'=>'行业推荐',
+                        'top_site'=>'全站推荐',
+                        'settings'=>'设置',
                         'verifyCode'=>'验证码',
 			'lastLoginDate' => '最后登陆时间',
 			'regIp' => '注册IP',
@@ -124,6 +128,7 @@ class Users extends CActiveRecord
          */
         protected function afterFind(){
             $this->oldBlogCate= $this->blogCategoryId;
+            $this->settings= unserialize($this->settings);
         }
         /**
          * 这里更新一下行业统计字段
@@ -136,6 +141,7 @@ class Users extends CActiveRecord
                 $this->dbConnection->createCommand('update {{blogcategories}} set `countBlogs`=`countBlogs`+1 WHERE id='.$this->blogCategoryId)->execute();
                 $this->dbconnection->createCommand('update {{blogcategories}} set `countBlogs`=`countBlogs`-1 WHERE id='.$this->oldBlogCate)->execute();
             }
+            $this->settings= serialize($this->settings);
             return true;
         }
         /**

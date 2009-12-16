@@ -29,7 +29,7 @@ class UserIdentity extends CUserIdentity
         {
             $this->_id=$user->id;
             $this->username=$user->username;
-            $this->setState('blogId',$user->blogs->id);//记录博客id号
+            $this->setState('blogId',(int)$user->blogs->id);//记录博客id号
             $this->errorCode=self::ERROR_NONE;
         }
         return !$this->errorCode;

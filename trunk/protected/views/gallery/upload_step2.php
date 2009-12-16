@@ -1,10 +1,10 @@
 <div class="yiiForm">
 
 <p>
-Fields with <span class="required">*</span> are required.
+系统限制一次最多选择10张图片上传！
 </p>
 
-<?php echo CHtml::beginForm(array('Gallery/Upload'),'POST',array('enctype'=>'multipart/form-data')); ?>
+<?php echo CHtml::beginForm(array('Gallery/UploadFiles'),'POST',array('enctype'=>'multipart/form-data')); ?>
 <div class="simple">
 <label>选择文件</label>
 <?php
@@ -12,7 +12,7 @@ $this->widget('application.extensions.uploadify.EuploadifyWidget',
     array(
         'name'=>'uploadFiles',
         'options'=> array(
-            'script' => $this->createUrl('Gallery/upload'),
+            'script' => $this->createUrl('Gallery/uploadFiles'),
             'fileDataName'=>'gallery',
             'folder' => '/uploads/'.Yii::app()->user->id,
             'scriptData' => array('ga'=>$ga, 'gs'=>$gs,'isComplete'=>0, 'PHPSESSID' => session_id()),
@@ -23,7 +23,7 @@ $this->widget('application.extensions.uploadify.EuploadifyWidget',
             'wmode'=>'transparent',
             'width'=>102,
             'queueID'=>'FilesQueue',
-            'queueSizeLimit'=>4,
+            'queueSizeLimit'=>10,
             //'simUploadLimit'=>1, //如果这里数字改变那么onComplete里的fileCount也要跟着变要不会造成无法正确判断文件是否传完了
             'auto' => false,
             'multi' => true,
@@ -48,7 +48,8 @@ $this->widget('application.extensions.uploadify.EuploadifyWidget',
                 }
            }',
            'onAllComplete' => 'function(event,data){
-           }',
+                self.location="'.$this->createUrl('gallery/upload').'";
+           }'
         )
     ));
 ?>

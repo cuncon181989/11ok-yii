@@ -33,11 +33,11 @@ class GalleryController extends CController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'list' and 'show' actions
-				'actions'=>array('list','show','upload','uploadFiles'),
+				'actions'=>array('uploadFiles'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('list','show','create','update','upload'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -58,94 +58,56 @@ class GalleryController extends CController
 		$this->render('show',array('model'=>$this->loadGallery()));
 	}
 
-	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'show' page.
-	 */
-	public function actionCreate()
-	{
-                mydebug($_SESSION);
-		$model=new Gallery;
-                $ga= GalleryAlbums::model()->findAll('usersId='.Yii::app()->user->id);
-		if(isset($_POST['Gallery']))
-		{
-                    mydebug($_POST,0,'var_dump');
-                    mydebug($_FILES);
-			$model->attributes=$_POST['Gallery'];
-			if($model->save())
-				$this->redirect(array('show','id'=>$model->id));
-		}
-		$this->render('create',array('model'=>$model,
-                                             'ga'=>$ga,
-                ));
-	}
+        /**
+         * 上传的几步操作
+         */
 	public function actionUpload()
 	{
-            //@session_start();
-            $gallery=new Gallery;
-            if($_SESSION['uploadFinish']==true){
-                CVarDumper::dump($_SESSION['uploadFiles'],20,true);
-                //$gallerys = Gallery::model()->findAll('id in(:id)',array(':id'=>$_SESSION['uploadFiles']));
-                //exit('end');
-                //mydebug($gallerys);
-            }elseif(isset($_POST['ga'])){
-                Yii::app()->session->sessionID = $_POST['PHPSESSID'];
-                Yii::app()->session->init();
-                $saveDir= $gallery->getGalleryDir();
-                if(!is_dir($saveDir))
-                    mkdir($saveDir,0644);
-                if(!is_dir($saveDir.DS.'s'))
-                    mkdir($saveDir.DS.'s',0644);
-                $ufile= CUploadedFile::getInstanceByName('gallery');
-                $saveFileName= date('YmdHis',time()).rand(100,999).'.'.$ufile->getExtensionName();
-                if ($ufile->saveAs($saveDir.$saveFileName)){
-                        $reWidth = Yii::app()->params['galleryWidth'];
-                        $reHeight= Yii::app()->params['galleryHeight'];
-                        $sWidth  = Yii::app()->params['gallerySWidth'];
-                        $sHeight = Yii::app()->params['gallerySHeight'];
-                        Yii::app()->thumb->setThumbsDirectory($gallery->getGalleryDir(false));
-                        Yii::app()->thumb->load($saveDir.$saveFileName);
-                        Yii::app()->thumb->resize($reWidth,$reHeight);//大图缩小
-                        Yii::app()->thumb->save($saveFileName);
-                        Yii::app()->thumb->resize($sWidth,$sHeight);//生成缩略图
-                        Yii::app()->thumb->save('s'.DS.$saveFileName);
-                        @Yii::log(Yii::app()->user->name.' uploadGallery:'.$saveDir.$saveFileName);
-                        $gallery->galleryAlbumsId= intval($_POST['ga']);
-                        $gallery->status= intval($_POST['gs']);
-                        $gallery->title = $_POST['Filename'];
-                        $gallery->fileName= $saveFileName;
-                        $gallery->fileType= $ufile->getExtensionName();
-                        $gallery->fileSize= $ufile->getSize();
-                        $gallery->settings= array();
-                        if ($gallery->save()){
-                                @$_SESSION['uploadFiles'][]= $gallery->id;
-                                if($_REQUEST['isComplete']==1){
-                                        @$_SESSION['uploadFinish']=true;
-                                        $this->redirect(array('upload'), 0);
+            @session_start();
+            if (isset($_POST['upload_save'])){
+                //是编辑上传文件后的保存.
+                $gallery= new Gallery;
+                $dbTrans= $gallery->getDbConnection()->beginTransaction();
+                try{
+                        foreach ($_POST as $id => $info) {
+                                if(is_array($info)){
+                                        gallery::model()->updateByPk($info['id'], array('title'=>$info['title'],'description'=>$info['description']));
                                 }
-                        }else{
-                                unlink($saveDir.$saveFileName);
-                                unlink($saveDir.'s'.DS.$saveFileName);
-                                exit($_POST['Filename'].'文件保存出错!');
                         }
+                        $dbTrans->commit();
+                        unset($_SESSION['uploadFiles']);
+                        unset($_SESSION['uploadFinish']);
+                        $this->redirect(array('gallery/list'));
+                }catch (Exception $e){
+                        $dbTrans->rollback();
+                        $this->redirect(array('upload'));
                 }
+            }elseif($_SESSION['uploadFinish']==true){
+                //如果上传完毕则显示编辑界面
+                $this->render('upload_save',array('files'=>$_SESSION['uploadFiles']));
+            }elseif (isset($_POST['upload_step1'])){
+                //是第一步提交则显示第二步
+                $this->render('upload_step2', array('ga'=>$_POST['Gallery']['galleryAlbumsId'],
+                                                    'gs'=>$_POST['Gallery']['status'],
+                ));
             }else{
-                    if (isset($_POST['upload_step1'])){
-                        $this->render('upload_step2', array('ga'=>$_POST['Gallery']['galleryAlbumsId'],
-                                                            'gs'=>$_POST['Gallery']['status'],
-                        ));
-                    }else{
-                        $ga= GalleryAlbums::model()->findAll('usersId='.Yii::app()->user->id);
-                        $this->render('upload_step1',array('model'=>$gallery,'ga'=>$ga,));
-                    }
+                //开始上传
+                $model=new Gallery;
+                $ga= GalleryAlbums::model()->findAll('usersId='.Yii::app()->user->id);
+                $this->render('upload_step1',array('model'=>$model,'ga'=>$ga,));
             }
 	}
+        /**
+         * 上传文件的保存
+         */
         public function actionUploadFiles()
-        {
-            //Yii::app()->session->sessionID = $_POST['PHPSESSID'];
-            //Yii::app()->session->init();
-            $gallery= new Gallery;
+        {       
+            if(isset($_POST['PHPSESSID'])){
+                    Yii::app()->session->sessionID = $_POST['PHPSESSID'];
+                    Yii::app()->session->init();
+            }
             if(isset($_POST['ga'])){
+                $gallery= new Gallery;
                 $saveDir= $gallery->getGalleryDir();
                 if(!is_dir($saveDir))
                     mkdir($saveDir,0644);
@@ -164,20 +126,19 @@ class GalleryController extends CController
                         Yii::app()->thumb->save($saveFileName);
                         Yii::app()->thumb->resize($sWidth,$sHeight);//生成缩略图
                         Yii::app()->thumb->save('s'.DS.$saveFileName);
-                        @Yii::log(Yii::app()->user->name.' uploadGallery:'.$saveDir.$saveFileName);
+                        @Yii::log(Yii::app()->user->name.' 上传照片:'.$saveDir.$saveFileName);
                         $gallery->galleryAlbumsId= intval($_POST['ga']);
                         $gallery->status= intval($_POST['gs']);
-                        $gallery->title = $_POST['Filename'];
+                        $gallery->title = $ufile->getName(); //$_POST['Filename']
                         $gallery->fileName= $saveFileName;
                         $gallery->fileType= $ufile->getExtensionName();
                         $gallery->fileSize= $ufile->getSize();
                         $gallery->settings= array();
                         if ($gallery->save()){
                                 @session_start();
-                                @$_SESSION['uploadFiles'][]= $gallery->id;
+                                @$_SESSION['uploadFiles'][]= $gallery;
                                 if($_REQUEST['isComplete']==1){
                                         @$_SESSION['uploadFinish']=true;
-                                        $this->redirect(array('upload'), 0);
                                 }
                         }else{
                                 unlink($saveDir.$saveFileName);
@@ -186,7 +147,7 @@ class GalleryController extends CController
                         }
                 }
             }else
-                throw new CHttpException(404,'no file');
+                throw new CHttpException(404);
         }
 	/**
 	 * Updates a particular model.
@@ -194,14 +155,17 @@ class GalleryController extends CController
 	 */
 	public function actionUpdate()
 	{
-		$model=$this->loadGallery();
+		$gallery=$this->loadGallery();
+                $ga= GalleryAlbums::model()->findAll('usersId='.Yii::app()->user->id);
 		if(isset($_POST['Gallery']))
 		{
-			$model->attributes=$_POST['Gallery'];
-			if($model->save())
-				$this->redirect(array('show','id'=>$model->id));
+			$gallery->attributes=$_POST['Gallery'];
+			if($gallery->save())
+				$this->redirect(array('show','id'=>$gallery->id));
 		}
-		$this->render('update',array('model'=>$model));
+		$this->render('update',array('gallery'=>$gallery,
+                                             'ga'=>$ga,
+                                        ));
 	}
 
 	/**

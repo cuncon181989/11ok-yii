@@ -1,8 +1,8 @@
-<h2>Managing Gallery</h2>
+<h2>管理照片</h2>
 
 <div class="actionBar">
-[<?php echo CHtml::link('Gallery List',array('list')); ?>]
-[<?php echo CHtml::link('New Gallery',array('create')); ?>]
+[<?php echo CHtml::link('照片列表',array('list')); ?>]
+[<?php echo CHtml::link('上传照片',array('create')); ?>]
 </div>
 
 <table class="dataGrid">
@@ -42,7 +42,7 @@
     <td><?php echo CHtml::encode($model->fileType); ?></td>
     <td><?php echo CHtml::encode($model->fileSize); ?></td>
     <td><?php echo CHtml::encode($model->metaData); ?></td>
-    <td><?php echo CHtml::encode($model->settings); ?></td>
+    <td><?php echo $model->settings; ?></td>
     <td><?php echo CHtml::encode($model->createDate); ?></td>
     <td>
       <?php echo CHtml::link('Update',array('update','id'=>$model->id)); ?>

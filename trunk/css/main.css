@@ -118,6 +118,7 @@ table.dataGrid tr.odd
 
 div.item
 {
+  clear:both;
 	margin: 10px 0 0 0;
 	border: 1px solid silver;
 	padding: 5px;
@@ -125,3 +126,10 @@ div.item
 
 .yiiForm textarea{width:430px;}
 .yiiForm iframe {background-color:#FFF}
+div.item span{width:110px;float:left;}
+div.item img{
+	max-width:100px;
+	max-height:75px;
+	width: expression(this.width > 100 && this.width / 75 >= this.height / 75 ? 100 : true);
+	height: expression(this.height > 75 ? 75 : true);
+}

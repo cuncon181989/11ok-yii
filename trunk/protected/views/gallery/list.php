@@ -1,8 +1,8 @@
 <h2>Gallery List</h2>
 
 <div class="actionBar">
-[<?php echo CHtml::link('New Gallery',array('create')); ?>]
-[<?php echo CHtml::link('Manage Gallery',array('admin')); ?>]
+[<?php echo CHtml::link('上传照片',array('upload')); ?>]
+[<?php echo CHtml::link('管理照片',array('admin')); ?>]
 </div>
 
 <?php $this->widget('CLinkPager',array('pages'=>$pages)); ?>
