@@ -66,4 +66,17 @@ class GlobalArticlesCategories extends CActiveRecord
 			'countArticles' => 'Count Articles',
 		);
 	}
+        /**
+         *
+         */
+        protected function afterFind(){
+            $this->settings  = unserialize($this->settings);
+        }
+        /**
+         * @return true
+         */
+        protected function beforeSave(){
+            $this->settings= serialize($this->settings);
+            return true;
+        }
 }

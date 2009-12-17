@@ -81,4 +81,17 @@ class ArticlesCategories extends CActiveRecord
             }
             return true;
         }
+        /**
+         *
+         */
+        protected function afterFind(){
+            $this->settings  = unserialize($this->settings);
+        }
+        /**
+         * @return true
+         */
+        protected function beforeSave(){
+            $this->settings= serialize($this->settings);
+            return true;
+        }
 }

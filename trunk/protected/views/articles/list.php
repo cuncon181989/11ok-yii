@@ -1,4 +1,4 @@
-<h2>Articles List</h2>
+<h2>文章列表</h2>
 
 <div class="actionBar">
 [<?php echo CHtml::link('New Articles',array('create')); ?>]

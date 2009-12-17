@@ -121,15 +121,15 @@ class Gallery extends CActiveRecord
         protected function beforeSave(){
             $this->settings= serialize($this->settings);
             if ($this->isNewRecord){
-                $this->dbConnection->createCommand('update {{galleryalbums}} set countGallery=countGallery+1 WHERE id='.$this->galleryAlbumsId)->execute();
+                GalleryAlbums::model()->updateCounters(array('countGallery'=>1),'id=:id',array(':id'=>$this->galleryAlbumsId));
             }elseif ($this->oldGACate!=$this->galleryAlbumsId){
-                $this->dbConnection->createCommand('update {{galleryalbums}} set countGallery=countGallery+1 WHERE id='.$this->galleryAlbumsId)->execute();
-                $this->dbConnection->createCommand('update {{galleryalbums}} set countGallery=countGallery-1 WHERE id='.$this->oldGACate)->execute();
+                GalleryAlbums::model()->updateCounters(array('countGallery'=>1),'id=:id',array(':id'=>$this->galleryAlbumsId));
+                GalleryAlbums::model()->updateCounters(array('countGallery'=>-1),'id=:id',array(':id'=>$this->oldGACate));
             }
             return true;
         }
         protected function afterDelete(){
-                $this->dbConnection->createCommand('update {{galleryalbums}} set countGallery=countGallery-1 WHERE id='.$this->galleryAlbumsId)->execute();
+                GalleryAlbums::model()->updateCounters(array('countGallery'=>-1),'id=:id',array(':id'=>$this->galleryAlbumsId));
                 unlink($this->getGalleryDir().$this->fileName);
                 unlink($this->getGalleryDir().'s'.DS.$this->fileName);
         }

@@ -43,3 +43,8 @@
 </tr>
 
 </table>
+<div>
+        <?php foreach ($model->gallerys as $key=>$gallery):  ?>
+                <img src="<?php echo $gallery->getGalleryUrl().'s/'.$gallery->fileName; ?>" />
+        <?php endforeach ?>
+</div>

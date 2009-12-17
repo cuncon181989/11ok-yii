@@ -69,6 +69,7 @@ class ArticlesController extends CController
 		{
                         $model->attributes=$_POST['Articles'];
                         if($model->validate()){
+                           //这里用事务来处理，要是不用事务则把保存text的工作放到articles模型的afterSave事件中去处理
                            $transaction=Yii::app()->getDB()->beginTransaction();
                            $artText= new ArticlesText();
                             try{

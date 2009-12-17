@@ -119,6 +119,7 @@ class Articles extends CActiveRecord
          * 记录一下是否更改了类别便于保存前更新相应类别的统计
          */
         protected function afterFind(){
+            $this->settings= unserialize($this->settings);
             $this->oldArtCate = $this->articlesCategoryId;
             $this->oldGArtCate= $this->globalArticlesCategoriesId;
         }
@@ -128,17 +129,22 @@ class Articles extends CActiveRecord
          */
         protected function beforeSave(){
             if ($this->isNewRecord){
-                $this->dbConnection->createCommand('update {{articlescategories}} set countArticles=countArticles+1 WHERE id='.$this->articlesCategoryId)->execute();
-                $this->dbConnection->createCommand('update {{globalarticlescategories}} set countArticles=countArticles+1 WHERE id='.$this->globalArticlesCategoriesId)->execute();
-            }elseif ($this->oldArtCate!=$this->articlesCategoryId){
-                //更像个人分类
-                $this->dbConnection->createCommand('update {{articlescategories}} set countArticles=countArticles+1 WHERE id='.$this->articlesCategoryId)->execute();
-                $this->dbConnection->createCommand('update {{articlescategories}} set countArticles=countArticles-1 WHERE id='.$this->oldArtCate)->execute();
-            }elseif ($this->oldGArtCate!=$this->globalArticlesCategoriesId){
-                //更像全局分类
-                $this->dbConnection->createCommand('update {{globalarticlescategories}} set countArticles=countArticles+1 WHERE id='.$this->globalArticlesCategoriesId)->execute();
-                $this->dbConnection->createCommand('update {{globalarticlescategories}} set countArticles=countArticles-1 WHERE id='.$this->oldGArtCate)->execute();
+                ArticlesCategories::model()->updateCounters(array('countArticles'=>1),'id=:id',array(':id'=>$this->articlesCategoryId));
+                GlobalArticlesCategories::model()->updateCounters(array('countArticles'=>1),'id=:id',array(':id'=>$this->globalArticlesCategoriesId));
+                Blogs::model()->updateCounters(array('countPosts'=>1),'id=:id',array(':id'=>$this->blogsId));
+            }else{
+                    if ($this->oldArtCate!=$this->articlesCategoryId){
+                        //更像个人分类
+                        ArticlesCategories::model()->updateCounters(array('countArticles'=>1),'id=:id',array(':id'=>$this->articlesCategoryId));
+                        ArticlesCategories::model()->updateCounters(array('countArticles'=>-1),'id=:id',array(':id'=>$this->oldArtCate));
+                    }
+                    if ($this->oldGArtCate!=$this->globalArticlesCategoriesId){
+                        //更像全局分类
+                        GlobalArticlesCategories::model()->updateCounters(array('countArticles'=>1),'id=:id',array(':id'=>$this->globalArticlesCategoriesId));
+                        GlobalArticlesCategories::model()->updateCounters(array('countArticles'=>-1),'id=:id',array(':id'=>$this->oldGArtCate));
+                    }
             }
+            $this->settings= serialize($this->settings);
             return true;
         }
         /**
@@ -147,6 +153,7 @@ class Articles extends CActiveRecord
         protected function beforeDelete(){
                 $this->dbConnection->createCommand('update {{articlescategories}} set countArticles=countArticles-1 WHERE id='.$this->oldArtCate)->execute();
                 $this->dbConnection->createCommand('update {{globalarticlescategories}} set countArticles=countArticles-1 WHERE id='.$this->oldGArtCate)->execute();
+                $this->dbConnection->createCommand('update {{blogs}} set countPosts=countPosts-1 WHERE id='.$this->blogsId)->execute();
                 $this->dbConnection->createCommand('DELETE FROM {{articlestext}} WHERE articlesId='.$this->id .' LIMIT 1')->execute();
                 return true;
         }

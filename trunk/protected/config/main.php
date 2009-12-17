@@ -9,6 +9,9 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'11ok.net',
 	'language'=>'zh_cn',
+	'timeZone' => 'Asia/Shanghai',
+        'theme'=>'defalut',
+        //'defaultController'=>'site',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -40,26 +43,34 @@ return array(
 		),
 		// uncomment the following to set up database
 		'db'=>array(
-                    'class'=>'CDbConnection',
-                    'connectionString'=>'mysql:host=localhost;dbname=11ok_yii',
-                    'charset'=>'utf8',
-                    'username'=>'webuser',
-                    'password'=>'webuser',
-                    'tablePrefix'=>'y11ok_',
-                    'enableParamLogging'=>true,
+                        'class'=>'CDbConnection',
+                        'connectionString'=>'mysql:host=localhost;dbname=11ok_yii',
+                        'charset'=>'utf8',
+                        'username'=>'webuser',
+                        'password'=>'webuser',
+                        'tablePrefix'=>'y11ok_',
+                        'enableParamLogging'=>true,
+                ),
+                'themeManager'=>array(
+                        
                 ),
                 /**
+                'urlManager'=>array(
+                        'urlFormat'=>'path',
+                        'urlSuffix'=>'.html',
+                        'showScriptName'=>false,
+                ),
                 'cache'=>array(
-                    'class'=>'system.caching.CFileCache',
-                    'cacheFileSuffix'=>'.html',
-                    'directoryLevel'=>1,
+                        'class'=>'system.caching.CFileCache',
+                        'cacheFileSuffix'=>'.html',
+                        'directoryLevel'=>1,
                 ),
                 /**/
                 'thumb'=>array(
-                    'class'=>'ext.phpthumb.EasyPhpThumb',
+                        'class'=>'ext.phpthumb.EasyPhpThumb',
                 ),
                 'CFile'=>array(
-                    'class'=>'ext.CFile',
+                        'class'=>'ext.CFile',
                 ),
 	),
 
