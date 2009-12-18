@@ -133,3 +133,4 @@ div.item img{
 	width: expression(this.width > 100 && this.width / 75 >= this.height / 75 ? 100 : true);
 	height: expression(this.height > 75 ? 75 : true);
 }
+#cke_contents_Articles_content{background-color:#FFF;}

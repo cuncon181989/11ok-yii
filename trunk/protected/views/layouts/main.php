@@ -28,7 +28,8 @@
 		array('label'=>'更新资料', 'url'=>array('/users/update'), 'visible'=>!Yii::app()->user->isGuest),
 	),
 )); ?>
-
+<?php echo CHtml::link('abc', $this->createUrl('site/contact',array('username'=>Yii::app()->user->name))); ?> | 
+<?php echo CHtml::link('gallery', $this->createUrl('gallery/list',array('username'=>Yii::app()->user->name))); ?>
 </div><!-- mainmenu -->
 </div><!-- header -->
 

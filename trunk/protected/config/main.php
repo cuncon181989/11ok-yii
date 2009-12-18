@@ -10,7 +10,8 @@ return array(
 	'name'=>'11ok.net',
 	'language'=>'zh_cn',
 	'timeZone' => 'Asia/Shanghai',
-        'theme'=>'defalut',
+        'theme'=>'summary',
+
         //'defaultController'=>'site',
 
 	// preloading 'log' component
@@ -56,9 +57,15 @@ return array(
                 ),
                 /**
                 'urlManager'=>array(
+                        //'class'=>'ext.DUrlManager',
                         'urlFormat'=>'path',
-                        'urlSuffix'=>'.html',
-                        'showScriptName'=>false,
+                        //'urlSuffix'=>'.html',
+                        //'showScriptName'=>false,
+                        'rules'=>array(
+                                // '/<username:\w+>/<_c:>/<_a:>' => '<_c>/<_a>',
+                                // '/<username:\w+>/'=>'blogs/show',
+                                // '/<username:\w+>/<_c:(blogs|articles)>/<id:\d+>/<_a:(create|update|delete)>' => '<_c>/<_a>',
+                        ),
                 ),
                 'cache'=>array(
                         'class'=>'system.caching.CFileCache',

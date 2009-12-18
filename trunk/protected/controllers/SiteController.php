@@ -5,6 +5,8 @@ class SiteController extends CController
 	/**
 	 * Declares class-based actions.
 	 */
+        public $blogCate= 'abc';
+
 	public function actions()
 	{
 		return array(
@@ -25,7 +27,10 @@ class SiteController extends CController
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+                //$this->blogCate= $this->getBlogCategory();
+		$this->render('index',array(
+                                            
+                                        ));
 	}
 
 	/**
@@ -77,4 +82,8 @@ class SiteController extends CController
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
+
+        public function getBlogCategory(){
+                return BlogCategories::model()->findall();
+        }
 }
