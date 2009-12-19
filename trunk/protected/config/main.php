@@ -10,7 +10,6 @@ return array(
 	'name'=>'11ok.net',
 	'language'=>'zh_cn',
 	'timeZone' => 'Asia/Shanghai',
-        'theme'=>'summary',
 
         //'defaultController'=>'site',
 
@@ -86,6 +85,8 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'admin@11ok.net',
+                //默认theme
+                'defautTheme'=>'default',
                 //用户上传的目录
                 'uploadDir' =>'uploads',
                 //头像大小

@@ -124,13 +124,3 @@ div.item
 	padding: 5px;
 }
 
-.yiiForm textarea{width:430px;}
-.yiiForm iframe {background-color:#FFF}
-div.item span{width:110px;float:left;}
-div.item img{
-	max-width:100px;
-	max-height:75px;
-	width: expression(this.width > 100 && this.width / 75 >= this.height / 75 ? 100 : true);
-	height: expression(this.height > 75 ? 75 : true);
-}
-#cke_contents_Articles_content{background-color:#FFF;}

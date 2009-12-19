@@ -23,14 +23,14 @@
         </div>
 		<div class="clr"></div>
         <div id="search">
-        <?php echo CHtml::beginForm('site/search'); ?>
+        <?php echo CHtml::beginForm(array('site/search')); ?>
 <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/pcas.js'); ?>
           <span>地区：</span>
           <label>
-              <select name="search[province]" class="formcss" id="select"></select>
+              <?php echo CHtml::dropDownList('search[province]',1,array(),array('class'=>'formcss')); ?>
           </label>
           <label>
-              <select name="search[city]" class="formcss" id="select2"></select>
+              <?php echo CHtml::dropDownList('search[city]',1,array(),array('class'=>'formcss')); ?>
           </label>
           <span>行业：</span>
           <label>
@@ -38,17 +38,21 @@
           </label>
           <span>关键字：</span>
           <label>
-            <input name="textfield" type="text" class="formcss" id="textfield" value="请输入关键字" />
+          <?php echo CHtml::textField('search[keyword]', '请输入关键字', array('class'=>'formcss','onfocus'=>'javascript:this.value.substr(0,3)==\'请输入\'?this.value=\'\':\'\'')); ?>
           </label>
           <label>
-            <input type="submit" class="buttoncss" name="button" onfocus="javascript:blur();" id="button" value="搜商友" />
+            <?php echo CHtml::submitButton('搜商友', array('class'=>'buttoncss','onfocus'=>'javascript:blur();','name'=>'searchSubmit')); ?>
           </label>
+        <?php echo CHtml::endForm(); ?>
 <script type="text/javascript">new PCAS("search[province]","search[city]")</script>
-        <?php CHtml::endForm() ?>
         </div>
     </div>
     <div class="clr"></div>
 <?php echo $content; ?>
+<div id="under">
+        <div id="underFont" align="center"><a href="/index.php?op=Summary" target="_blank">首页</a>|<a href="/index.php?op=BlogList" target="_blank">商人库</a>|<a href="/read" target="_blank">充电休闲</a>|<a href="/bbs" target="_blank">论坛</a>|<a href="http://www.11ok.net/Contact%20.htm#p">关于我们</a>|<a href="http://www.11ok.net/Contact%20.htm#p">广告合作</a>|<a href="/stp" target="_blank">网站地图</a>|<a href="lianjie.html">友情链接</a>|<a href="#">全站搜索</a></div>
+        <div align="center" id="underFont02">Copyright (c) 2008-2018 中国搜商网 All Rights Reserved 版权所有<br />中华人民共和国信息产业部ICP备案：<a href="http://www.miibeian.gov.cn" target="_blank">湘ICP备案中</a></div>
+</div>
 </div>
 </body>
 </html>

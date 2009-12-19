@@ -20,7 +20,7 @@
     <div class="frame" style="margin: 0 1em; width: 100px; height: 100px;">
        预览区：
        <div id="preview" style="width: 100px; height: 100px; overflow: hidden;">
-        <?php echo CHtml::image($user->getAvatarUrl().$user->avatar,'预览图',array('style'=>'width:100px;height:100px;'));?>
+        <?php echo CHtml::image($user->getAvatarUrl('big'),'预览图',array('style'=>'width:100px;height:100px;'));?>
        </div>
     </div> <br /><br />
     <div class="simple">
@@ -37,7 +37,7 @@
     <?php echo CHtml::hiddenField('img[h]') ?>
     <?php echo CHtml::hiddenField('img[srcName]',$user->avatar) ?>
     <div class="frame" style="margin: 0 0.3em; width:<?php echo $avatarSize[0]; ?>px; height: <?php echo $avatarSize[1]; ?>px;">
-        <?php echo CHtml::image($user->getAvatarUrl().$user->avatar,'',array('id'=>'photo'));?>
+        <?php echo CHtml::image($user->getAvatarUrl('big'),'',array('id'=>'photo'));?>
     </div> <br /><br />
     <?php echo CHtml::submitButton('保存',array('id'=>'saveAvatar','name'=>'saveAvatar')); ?>
     <?php echo CHtml::endForm(); ?>

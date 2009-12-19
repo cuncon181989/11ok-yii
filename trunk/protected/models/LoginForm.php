@@ -34,7 +34,7 @@ class LoginForm extends CFormModel
 		return array(
 			'rememberMe'=>'下次自动登录',
                         'username'=>'用户名',
-                        'password'=>'密码',
+                        'password'=>'密　码',
 		);
 	}
 
@@ -55,10 +55,10 @@ class LoginForm extends CFormModel
 					Yii::app()->user->login($identity,$duration);
 					break;
 				case UserIdentity::ERROR_USERNAME_INVALID:
-					$this->addError('username','Username is incorrect.');
+					$this->addError('username','用户名错误！');
 					break;
 				default: // UserIdentity::ERROR_PASSWORD_INVALID
-					$this->addError('password','Password is incorrect.');
+					$this->addError('password','密码错误！');
 					break;
 			}
 		}

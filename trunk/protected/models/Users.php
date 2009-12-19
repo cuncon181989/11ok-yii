@@ -180,25 +180,36 @@ class Users extends CActiveRecord
                 //return Yii::app()->getBasePath().DS.'..'.DS.Yii::app()->params['uploadDir'].DS.$this->id.DS;
         }
         /**
-         *  @return string 头像url路径，不含头像文件名
+         *  @return string 头像url路径包含文件名
          */
-        public function getAvatarUrl(){
-                return Yii::app()->getRequest()->getBaseUrl().'/'.Yii::app()->params[uploadDir].'/'.$this->id.'/';
+        public function getAvatarUrl($size='medium'){
+                $avatar= $this->getAvatarImg($size);
+                if ($avatar=='noavatar1.jpg' || $avatar=='noavatar2.jpg')
+                        return Yii::app()->getRequest()->getBaseUrl().'/images/'.$avatar;
+                else
+                        return Yii::app()->getRequest()->getBaseUrl().'/'.Yii::app()->params[uploadDir].'/'.$this->id.'/'.$avatar;
         }
         /**
          * @param string $size 头像的大小
-         * @return string 根据大小返回头像文件名
+         * @return string 根据大小返回头像文件名，不含路径，要完整路径请用getAvatarUrl
          */
-        public function getAvatarImg($size=null){
+        public function getAvatarImg($size='medium'){
             if (!empty($this->avatar)){
-                if (is_null($size))
-                    return $this->avatar;
-                elseif ($size=='medium')
+                //如果有头像则根据$size输入大中小图
+                if ($size=='medium')
                     return 'mediumAvatar.'.substr($this->avatar,-3);
-                else
+                elseif ($size=='small')
                     return 'smallAvatar.'.substr($this->avatar,-3);
-            }else
-                return false;
+                else
+                    return $this->avatar;
+            }else{
+                //没有上传头像则根据性别输出男女图
+                if($this->getUserSex()=='男')
+                        return 'noavatar1.jpg';
+                else
+                        return 'noavatar2.jpg';
+            }
+                
         }
         /**
          *
@@ -211,5 +222,19 @@ class Users extends CActiveRecord
                 return $tmpArr;
             else
                 return $tmpArr[$this->userStatus];
+        }
+        /**
+         * @param <int> $limit 设置返回多少条站点推荐会员
+         * @return <objects> 返回limit指定数量的站点推荐的会员
+         */
+        public function getTopSite($limit=6){
+                return Users::model()->findAll('top_site=1 order by id desc limit '.$limit);
+        }
+        /**
+         * @param <int> $limit 设置返回多少条行业推荐会员
+         * @return <objects> 返回limit指定数量的行业推荐的会员
+         */
+        public function getTopTrade($limit=6){
+                return Users::model()->findAll('top_trade=1 order by id desc limit '.$limit);
         }
 }

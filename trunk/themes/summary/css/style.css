@@ -1,3 +1,4 @@
+@import "form.css";
 body {
 	margin:0px;
 	padding:0px;
@@ -39,15 +40,15 @@ a:hover {
 
 /*----------------------------------------------------------------*/
 #wrapper  {margin:0 auto; width:1003px;}
-/*Í·²¿¿ªÊ¼*/
+/*å¤´éƒ¨å¼€å§‹*/
 #webHeader{ background:url(../images/top_bg.gif) repeat-x; height:120px; margin-bottom:6px;overflow:hidden;}
 #webLogo{ float:left; width:277px; height:84px;overflow:hidden;}
 .logo{width:135px;height:65px; padding:19px 0 0 10px;}
 #mainNav{height:84px; width:726px; float:right;overflow:hidden;}
-/*Ê×Ò³¶¥²¿ÎÄ×Ö¹ã¸æ*/
+/*é¦–é¡µé¡¶éƒ¨æ–‡å­—å¹¿å‘Š*/
 #topTextAd{height:43px;overflow:hidden; padding:5px 10px 0px 0px;}
 #topTextAd a  {padding:0px 10px 0px 10px;}
-/*Ö÷²Ëµ¥¿ªÊ¼*/
+/*ä¸»èœå•å¼€å§‹*/
 .Search_nav {width:681px; height:36px; float:right;background:url(../images/menuTab_Bg.gif) no-repeat; overflow:hidden; padding-left:48px; line-height:36px; font-size:14px;}
 .Search_nav a span {float:left;display:block; height:36px;display:inline;font-weight:bold;}
 /*.Search_nav a {float:left;text-decoration:none;color:#000000;display:inline;cursor:pointer;}
@@ -61,17 +62,17 @@ a.happy:link,a.happy:visited {float:left;text-decoration:none;color:#000000;disp
 a.happy:hover{color:#fff;background:url(../images/menuTab_03.gif) no-repeat;text-decoration:none;}
 a.bbs:link,a.bbs:visited {float:left;text-decoration:none;color:#000000;display:inline;cursor:pointer;width:75px; padding:2px 0px 0px 74px;}
 a.bbs:hover{color:#fff;background:url(../images/menuTab_04.gif) no-repeat;text-decoration:none;}
-/*ËÑË÷²Ëµ¥¿ªÊ¼*/
+/*æœç´¢èœå•å¼€å§‹*/
 #search  {height:36px; padding-top:8px;}
 #search span  {color:#fff;font-weight:bold;line-height:26px; margin:0px 2px 0px 15px;}
 .formcss  {color:#05ace6; border:1px solid #bbb; margin:0px;}
 .buttoncss  {font-weight:bold; color:#fff; background:url(../images/buttonbj01.gif) no-repeat; border:0px; height:20px; width:55px; line-height:20px; text-align:center;}
-/*¶¥²¿½áÊø*/
-/*ÕıÎÄÄÚÈİ¿ªÊ¼*/
+/*é¡¶éƒ¨ç»“æŸ*/
+/*æ­£æ–‡å†…å®¹å¼€å§‹*/
 #webMain  {width:973px;}
 #webLeftmain  {float:left; width:709px;}
 #webRightmain  {float:right; width:239px;}
-/*------------Ê×Ò³ÍÆ¼ö¿ªÊ¼--------------*/
+/*------------é¦–é¡µæ¨èå¼€å§‹--------------*/
 #recommendfont  {float:left; width:358px; height:255px; background:url(../images/line02.gif) no-repeat; padding:12px 21px 0px 10px;}
 .left_neirong dl{padding-bottom:8px;}
 .left_neirong dt{padding-left:15px;background: url(../images/left_alt01.gif) left 10px no-repeat;line-height:25px;padding-top:4px;}
@@ -87,9 +88,9 @@ a.bbs:hover{color:#fff;background:url(../images/menuTab_04.gif) no-repeat;text-d
 .scroller .flat a{display:block}
 .ad {font-size: 10px; width:320px; margin:0 auto;}
 .line03  {background:url(../images/line03.gif) no-repeat; height:4px; margin-bottom:10px;} 
-/*------------Ê×Ò³ÍÆ¼ö½áÊø-------------*/
+/*------------é¦–é¡µæ¨èç»“æŸ-------------*/
 
-/*------------ÉÌÈËÔÚÏß¿ªÊ¼--------------*/
+/*------------å•†äººåœ¨çº¿å¼€å§‹--------------*/
 #peopleonline  {border:1px solid #cecece; width:707px; height:164px;}
 #onlineTitle  {height:26px; background:url(../images/line04.gif); line-height:26px; padding-left:11px;}
 #onlineTitle span  { background:url(../images/icon-all.gif) no-repeat; height:26px; width:200px;display: -moz-inline-stack; display: inline-block; padding-left:21px; font-size:14px; font-weight:bold; color:#f08200; float:left}
@@ -97,16 +98,16 @@ a.bbs:hover{color:#fff;background:url(../images/menuTab_04.gif) no-repeat;text-d
 #pic_list  {margin:10px 0px 9px 0px;}
 #pic_list li  {border-right:dashed 1px #ccc;list-style-type:none;width:16%;overflow:hidden;float:left;}
 #pic_list li img  {width:85px; height:85px; margin-bottom:4px;}
-/*------------ÉÌÈËÔÚÏß½áÊø--------------*/
+/*------------å•†äººåœ¨çº¿ç»“æŸ--------------*/
 
-/*------------ĞĞÒµÈË²Å¿ªÊ¼--------------*/
+/*------------è¡Œä¸šäººæ‰å¼€å§‹--------------*/
 #talent  {border:1px solid #cecece; width:707px; height:164px;}
 #talentTitle  {height:26px; background:url(../images/line04.gif); line-height:26px; padding-left:11px;}
 #talentTitle span  {height:26px;width:200px;display: -moz-inline-stack;display: inline-block;padding-left:21px;font-size:14px;font-weight:bold;color:#44a100;float:left;background-image: url(../images/icon-all.gif);background-repeat: no-repeat;}
 #talentTitle a  {color:#44a100; float:right; margin-right:20px;}
-/*------------ĞĞÒµÈË²Å½áÊø--------------*/
+/*------------è¡Œä¸šäººæ‰ç»“æŸ--------------*/
 
-/*------------¹©ÇóĞÅÏ¢¿ªÊ¼--------------*/
+/*------------ä¾›æ±‚ä¿¡æ¯å¼€å§‹--------------*/
 #gongying,#qiugou  {width:348px;}
 #gongyingTitle,#qiugouTitle  {border-left:1px solid #cecece; border-top:1px solid #cecece; border-right:1px solid #cecece; background:url(../images/line04.gif) repeat-x;height:26px; padding:0px 10px 0px 11px;}
 #gongyingTitle span,#qiugouTitle span  {height:26px;width:200px;display: -moz-inline-stack;display: inline-block;padding-left:21px;font-size:14px;font-weight:bold;color:#44a100;float:left;background-image: url(../images/icon-all.gif);background-repeat: no-repeat; background-position:left -23px; line-height:26px;}
@@ -118,9 +119,9 @@ li.top2{background:url(../images/icon-all.gif) left -106px no-repeat;}
 li.top3{background:url(../images/icon-all.gif) left -134px no-repeat;}
 li.top4{background:url(../images/icon-all.gif) left -162px no-repeat;}
 li.top5{background:url(../images/icon-all.gif) left -190px no-repeat;}
-/*------------¹©ÇóĞÅÏ¢½áÊø--------------*/
+/*------------ä¾›æ±‚ä¿¡æ¯ç»“æŸ--------------*/
 
-/*------------µÇÂ½¿ò¿ªÊ¼--------------*/
+/*------------ç™»é™†æ¡†å¼€å§‹--------------*/
 #login  {width:239px; margin-bottom:10px;}
 #logindetail  {background:url(../images/loginline02.gif) repeat-y; padding:12px 30px 5px 30px;}
 #loginTitle  {background:url(../images/loginpic01.gif) no-repeat; padding-left:52px; height:38px; line-height:35px; font-weight:bold; font-size:14px; color:#efefef;}
@@ -131,9 +132,9 @@ li.top5{background:url(../images/icon-all.gif) left -190px no-repeat;}
 .bottoncss  {background:url(../images/loginanniu.gif) no-repeat; width:114px; height:26px; font-weight:bold; color:#666; border:0px;}
 #lianjiewenzi  {margin-top:2px; background:url(../images/line05.gif) top left no-repeat; padding:10px 0px 2px 0px;}
 #lianjiewenzi a  {color:#bbb; text-decoration:underline;}
-/*------------µÇÂ½¿ò½áÊø--------------*/
+/*------------ç™»é™†æ¡†ç»“æŸ--------------*/
 
-/*------------sortĞĞÒµ·ÖÀà¿ªÊ¼--------------*/
+/*------------sortè¡Œä¸šåˆ†ç±»å¼€å§‹--------------*/
 #sort  {margin-bottom:10px; border:1px solid #ebebeb;}
 #sortTitle  {background:url(../images/line06.gif) repeat-x; height:31px; line-height:31px; padding-left:4px;}
 #sortTitle span  {display:block; background:url(../images/icon01.gif) center left no-repeat; padding-left:29px; font-weight:bold; color:#f08200; font-size:14px;}
@@ -142,34 +143,34 @@ li.top5{background:url(../images/icon-all.gif) left -190px no-repeat;}
 li.bj0  {background-color:#ebebeb; clear:both;}
 li.bj1  {clear:both;}
 #sortNeirong li a  {float:left; width:32.5%;}
-/*------------sortĞĞÒµ·ÖÀà½áÊø--------------*/
+/*------------sortè¡Œä¸šåˆ†ç±»ç»“æŸ--------------*/
 
-/*------------¹ã¸æ¿ªÊ¼--------------*/
+/*------------å¹¿å‘Šå¼€å§‹--------------*/
 #guanggao  {margin-bottom:10px;}
-/*------------¹ã¸æ½áÊø--------------*/
-/*ÕıÎÄÄÚÈİ½áÊø*/
+/*------------å¹¿å‘Šç»“æŸ--------------*/
+/*æ­£æ–‡å†…å®¹ç»“æŸ*/
 
-/*µ×²¿¿ªÊ¼*/
+/*åº•éƒ¨å¼€å§‹*/
 #webunder  {width:973px;}
-/*------------ÓÑÇéÁ´½Ó¿ªÊ¼--------------*/
-#lianjie  {border-left:1px solid #dfdfdf; border-right:1px solid #dfdfdf; border-bottom:1px solid #dfdfdf; width:971px; margin-bottom:15px; background:url(../images/line07.gif) left top repeat-x;}
+/*------------å‹æƒ…é“¾æ¥å¼€å§‹--------------*/
+#lianjie  {border-left:1px solid #dfdfdf; border-right:1px solid #dfdfdf; border-bottom:1px solid #dfdfdf; width:971px; background:url(../images/line07.gif) left top repeat-x;}
 #lianjieTitle  {padding:0px 20px 0px 10px;}
 #lianjieTitle span  {background:url(../images/lianjiebj.gif) no-repeat; height:35px; width:123px; display:block; color:#fff; font-weight:bold; line-height:30px; font-size:14px; text-align:center; float:left;}
 #lianjieTitle a  {float:right; display:block; width:50px; background:url(../images/more.gif) center bottom no-repeat; text-align:center; height:19px; padding:0px; margin-top:11px; line-height:19px;}
 #lianjieNeirong  {padding:0px 10px 0px 10px; line-height:25px;}
 #lianjieNeirong a  {display:block; width:11%; float:left;}
-/*------------ÓÑÇéÁ´½Ó½áÊø--------------*/
+/*------------å‹æƒ…é“¾æ¥ç»“æŸ--------------*/
 
-/*------------µ×²¿¿ªÊ¼--------------*/
-#under  {width:973px;}
+/*------------åº•éƒ¨å¼€å§‹--------------*/
+#under  {width:973px; margin-top:15px;}
 #underFont  {height:25px; border-bottom:1px dashed #fc8701;color:#fc8701; font-weight:bold; margin-bottom:5px;}
 #underFont a  {color:#fc8701; margin:0px 5px 0px 5px;}
 #underFont02  {line-height:25px; margin-bottom:10px;}
-/*------------µ×²¿½áÊø--------------*/
-/*µ×²¿½áÊø*/
+/*------------åº•éƒ¨ç»“æŸ--------------*/
+/*åº•éƒ¨ç»“æŸ*/
 
 
-/*------------ÉÌÈË¿â¿ªÊ¼--------------*/
+/*------------å•†äººåº“å¼€å§‹--------------*/
 #businessTitle  {height:44px; width:709px; background:url(../images/line08.gif) repeat-x;}
 .businessfont02  {float:right; background:url(../images/title02.gif) no-repeat; height:44px; width:163px; display:block; color:#f08200; line-height:44px;}
 .businessfont02 a  {color:#f08200; margin:10px 10px}
@@ -180,9 +181,9 @@ li.bj1  {clear:both;}
 .pagfont  {text-align:right; display:block; padding-right:10px; background:url(../images/title04.gif) right top  no-repeat; height:29px; line-height:29px;}
 .pagfont a,.pagfont span  {margin:3px 3px; color:#aaa}
 
-/*------------ÉÌÈË¿â½áÊø--------------*/
+/*------------å•†äººåº“ç»“æŸ--------------*/
 
-/*------------ÓÃ»§×¢²á¿ªÊ¼--------------*/
+/*------------ç”¨æˆ·æ³¨å†Œå¼€å§‹--------------*/
 #registerTitle  {width:947px; background-color:#f7f5ec; border:1px solid #f1efe5; padding:11px 11px 11px 13px; margin-bottom:10px; height:26px;}
 #registerTitle img  {margin-right:5px;}
 .fontbiaoti  {color:#f08200; font-weight:bold; font-size:14px;}
@@ -209,6 +210,6 @@ li.bj1  {clear:both;}
 #jianjie  {width:187px; text-align:center; margin-bottom:10px;}
 #tishi  {background:url(../images/pic06.gif) left top no-repeat; padding-left:100px; line-height:30px; margin-left:200px;}
 .tishifont01  {color:#f00; font-weight:bold; font-size:14px;}
-/*------------ÓÃ»§×¢²á½áÊø--------------*/
+/*------------ç”¨æˆ·æ³¨å†Œç»“æŸ--------------*/
 
 

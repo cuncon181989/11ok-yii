@@ -1,4 +1,3 @@
-
     <div id="webMain" align="left">
     	<div id="webLeftmain">
         	<div id="recommend">
@@ -23,11 +22,10 @@
                 <div id="pic_list" align="center">
                 	<ul>
                     	<li><a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/photo00.gif" alt="11ok商人在线" /></a><br /><a href="blog02/index.html">龙程<br />邵阳易翔商务</a></li>
-                        <li><a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/photo00.gif" alt="11ok商人在线" /></a><br /><a href="blog/index.html">龙程<br />邵阳易翔商务</a></li>
-                        <li><a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/photo00.gif" alt="11ok商人在线" /></a><br /><a href="#">龙程<br />邵阳易翔商务</a></li>
-                        <li><a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/photo00.gif" alt="11ok商人在线" /></a><br /><a href="#">龙程<br />邵阳易翔商务</a></li>
-                        <li><a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/photo00.gif" alt="11ok商人在线" /></a><br /><a href="#">龙程<br />邵阳易翔商务</a></li>
-                        <li><a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/photo00.gif" alt="11ok商人在线" /></a><br /><a href="#">龙程<br />邵阳易翔商务</a></li>
+                        <?php foreach ($users->getTopSite() as $key=>$user): ?>
+                        <li><?php echo CHtml::link(CHtml::image($user->getAvatarUrl(), $user->username), array('blogs/index','id'=>$user->id,'username'=>$user->username)); ?><br />
+                            <?php echo CHtml::link($user->username.'<br />'.$user->username, array('blogs/index','id'=>$user->id,'username'=>$user->username)); ?></li>
+                        <?php endforeach ?>
                     </ul>
                 </div>
             </div>
@@ -83,17 +81,25 @@
             	<div id="loginLine01"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/loginline01.gif" /></div>
                 <div id="logindetail">
                 	<div id="loginTitle">欢迎登陆搜商网</div>
-                    <form id="form2" name="form2" method="post" action="">
-                    <div id="loginform"><span>用户名：
-                      <input name="textfield2" type="text" class="formcss" id="textfield2" size="15" maxlength="15" /></span>
-                     <span>密　码：
-                      <input name="textfield2" type="text" class="formcss" id="textfield2" size="15" maxlength="15" />
-                     </span>
-                      <div id="forma" align="right"><a href="#">忘记密码？</a></div>
-                      <div align="center"><input name="input" type="button" onfocus="javascript:blur();" class="bottoncss" value="点击登陆" /></div>
-                      <div id="lianjiewenzi" align="center"><a href="register.html">加入搜商网,免费发布商情！</a></div>
-                    </div>
-                    </form>
+                    <?php if(Yii::app()->user->isGuest): ?>
+                    <?php echo CHtml::beginForm(array('site/login'),'POST',array('name'=>'loginForm')); ?>
+                        <div id="loginform">
+                        <span>
+                        <?php echo CHtml::activeLabel($form,'username'); ?>：
+                        <?php echo CHtml::activeTextField($form,'username',array('size'=>15,'maxlength'=>15,'class'=>'formcss')); ?>
+                        </span>
+                        <span>
+                        <?php echo CHtml::activeLabel($form,'password'); ?>：
+                        <?php echo CHtml::activePasswordField($form,'password',array('size'=>15,'maxlength'=>15,'class'=>'formcss')); ?>
+                        </span>
+                        <div id="forma" align="right"><a href="#">忘记密码？</a></div>
+                        <div align="center"><?php echo CHtml::submitButton('点击登陆',array('class'=>'bottomcss','onfocus'=>'javascript:blur();')); ?></div>
+                        <div id="lianjiewenzi" align="center"><a href="register.html">加入搜商网,免费发布商情！</a></div>
+                        </div>
+                    <?php echo CHtml::endForm(); ?>
+                    <?php else: ?>
+                        <div>欢迎你！<?php echo Yii::app()->user->name ?></div>
+                    <?php endif ?>
                 </div>
                 <div id="loginLine03"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/loginline03.gif" /></div>
             </div>
@@ -130,9 +136,5 @@
                 <div class="clr"></div>
                 <div id="lianjieNeirong"><a href="http://www.yix123.com/" target="_blank" >易翔商务网</a><a href="http://www.baidu.com/" target="_blank">百度首页</a><a href="http://www.ctmo.gov.cn/" target="_blank">国家商标局</a><a href="http://www.sipo.gov.cn/" target="_blank">国家知识产权局</a><a href="http://www.alibaba.com.cn/" target="_blank">阿里巴巴</a><a href="http://www.11ok.net/" target="_blank">中华商人网</a><a href="http://www.yix123.com.cn/" target="_blank">易翔商务空间站</a><a href="http://www.yix123.cn/" target="_blank">易翔网络部</a><a href="http://www.icris.cr.gov.hk/csci/" target="_blank">香港公司查询</a><a href="http://www.syhd.gov.cn/" target="_blank">邵阳市工商局</a><a href="http://www.hnii.gov.cn/" target="_blank">湖南信息产业厅</a><a href="http://www.sina.com.cn/" target="_blank">新浪在线</a><a href="http://www.sina.com.cn/" target="_blank">网易在线</a><a href="http://www.qq.com/" target="_blank">腾讯在线</a><a href="http://www.sy18.com/" target="_blank">邵阳信息网</a><a href="http://sy.2118.com.cn/" target="_blank">邵阳信息港</a><a href="http://www.hxonl.com/" target="_blank">湖湘网</a><a href="http://www.5460.net/" target="_blank">中国同学录</a><a href="http://www.hunantv.com/" target="_blank">金鹰网</a><a href="http://www.szol.net/" target="_blank">深圳在线</a></div>
                 <div class="clr"></div>
-        </div>
-        <div id="under">
-                <div id="underFont" align="center"><a href="/index.php?op=Summary" target="_blank">首页</a>|<a href="/index.php?op=BlogList" target="_blank">商人库</a>|<a href="/read" target="_blank">充电休闲</a>|<a href="/bbs" target="_blank">论坛</a>|<a href="http://www.11ok.net/Contact%20.htm#p">关于我们</a>|<a href="http://www.11ok.net/Contact%20.htm#p">广告合作</a>|<a href="/stp" target="_blank">网站地图</a>|<a href="lianjie.html">友情链接</a>|<a href="#">全站搜索</a></div>
-                <div align="center" id="underFont02">Copyright (c) 2008-2018 中国搜商网 All Rights Reserved 版权所有<br />中华人民共和国信息产业部ICP备案：<a href="http://www.miibeian.gov.cn" target="_blank">湘ICP备案中</a></div>
         </div>
     </div>

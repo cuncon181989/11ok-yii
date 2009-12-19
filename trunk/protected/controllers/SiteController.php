@@ -7,6 +7,10 @@ class SiteController extends CController
 	 */
         public $blogCate= 'abc';
 
+        public function init(){
+                Yii::app()->setTheme('summary');
+                parent::init();
+        }
 	public function actions()
 	{
 		return array(
@@ -27,9 +31,11 @@ class SiteController extends CController
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-                //$this->blogCate= $this->getBlogCategory();
-		$this->render('index',array(
-                                            
+                $form=new LoginForm;
+                $users= new Users;
+                
+		$this->render('index',array('form'=>$form,
+                                            'users'=>$users,
                                         ));
 	}
 

@@ -21,7 +21,7 @@
 <tr>
 	<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('avatar')); ?>
 </th>
-    <td><?php echo CHtml::image($model->getAvatarUrl().$model->getAvatarImg('medium'));?>[<?php echo CHtml::link('编辑头像',array('avatar','id'=>$model->id)); ?>]
+    <td><?php echo CHtml::image($model->getAvatarUrl());?>[<?php echo CHtml::link('编辑头像',array('avatar','id'=>$model->id)); ?>]
 </td>
 </tr>
 <tr>
