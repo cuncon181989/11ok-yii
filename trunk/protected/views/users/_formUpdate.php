@@ -17,6 +17,14 @@
     <?php echo CHtml::activePasswordField($model,'password2',array('size'=>25,'maxlength'=>32)); ?>
     </div>
     <div class="simple">
+    <?php echo CHtml::activeLabelEx($model,'realname'); ?>
+    <?php echo CHtml::activeTextField($model,'realname',array('size'=>25,'maxlength'=>12)); ?>
+    </div>
+    <div class="simple">
+    <?php echo CHtml::activeLabelEx($model,'compnay'); ?>
+    <?php echo CHtml::activeTextField($model,'compnay',array('size'=>25,'maxlength'=>50)); ?>
+    </div>
+    <div class="simple">
     <?php echo CHtml::activeLabelEx($model,'email'); ?>
     <?php echo CHtml::activeTextField($model,'email',array('size'=>25,'maxlength'=>50)); ?>
     </div>

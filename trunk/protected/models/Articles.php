@@ -134,12 +134,12 @@ class Articles extends CActiveRecord
                 Blogs::model()->updateCounters(array('countPosts'=>1),'id=:id',array(':id'=>$this->blogsId));
             }else{
                     if ($this->oldArtCate!=$this->articlesCategoryId){
-                        //更像个人分类
+                        //更新个人分类
                         ArticlesCategories::model()->updateCounters(array('countArticles'=>1),'id=:id',array(':id'=>$this->articlesCategoryId));
                         ArticlesCategories::model()->updateCounters(array('countArticles'=>-1),'id=:id',array(':id'=>$this->oldArtCate));
                     }
                     if ($this->oldGArtCate!=$this->globalArticlesCategoriesId){
-                        //更像全局分类
+                        //更新全局分类
                         GlobalArticlesCategories::model()->updateCounters(array('countArticles'=>1),'id=:id',array(':id'=>$this->globalArticlesCategoriesId));
                         GlobalArticlesCategories::model()->updateCounters(array('countArticles'=>-1),'id=:id',array(':id'=>$this->oldGArtCate));
                     }
@@ -157,4 +157,5 @@ class Articles extends CActiveRecord
                 $this->dbConnection->createCommand('DELETE FROM {{articlestext}} WHERE articlesId='.$this->id .' LIMIT 1')->execute();
                 return true;
         }
+
 }

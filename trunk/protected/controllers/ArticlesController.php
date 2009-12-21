@@ -223,7 +223,8 @@ class ArticlesController extends CController
         public function loadArticlesCategory (){
             $artCate= ArticlesCategories::model()->findAll('usersId=:uid',array(':uid'=>Yii::app()->user->id));
             if ($artCate==null)
-               throw new CHttpException(404, '没有个人分类，请先创建分类！');
+                $this->redirect(array('articlesCategories/create'));
+                //throw new CHttpException(404, '没有个人分类，请先创建分类！');
             return $artCate;
         }
 

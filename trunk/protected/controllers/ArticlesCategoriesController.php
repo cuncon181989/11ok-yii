@@ -69,7 +69,7 @@ class ArticlesCategoriesController extends CController
 		{
 			$model->attributes=$_POST['ArticlesCategories'];
 			if($model->save())
-				$this->redirect(array('list'));
+				$this->redirect(array('articles/create'));
 		}
 		$this->render('create',array('model'=>$model));
 	}

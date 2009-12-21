@@ -21,10 +21,9 @@
                 <div class="clr"></div>
                 <div id="pic_list" align="center">
                 	<ul>
-                    	<li><a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/photo00.gif" alt="11ok商人在线" /></a><br /><a href="blog02/index.html">龙程<br />邵阳易翔商务</a></li>
-                        <?php foreach ($users->getTopSite() as $key=>$user): ?>
-                        <li><?php echo CHtml::link(CHtml::image($user->getAvatarUrl(), $user->username), array('blogs/index','id'=>$user->id,'username'=>$user->username)); ?><br />
-                            <?php echo CHtml::link($user->username.'<br />'.$user->username, array('blogs/index','id'=>$user->id,'username'=>$user->username)); ?></li>
+                    	<?php foreach ($summary->getTopSite() as $key=>$user): ?>
+                        <li title="<?php echo $user->realname; ?>"><?php echo CHtml::link(CHtml::image($user->getAvatarUrl(), $user->realname), array('blog/index','uid'=>$user->id,'username'=>$user->username)); ?><br />
+                            <?php echo CHtml::link($user->realname.'<br />'.$user->compnay, array('blog/index','uid'=>$user->id,'username'=>$user->username)); ?></li>
                         <?php endforeach ?>
                     </ul>
                 </div>
@@ -35,13 +34,11 @@
                 <div class="clr"></div>
                 <div id="pic_list" align="center">
                 	<ul>
-                    	<li><a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/photo00.gif" alt="11ok商人在线" /></a><br /><a href="#">龙程<br />邵阳易翔商务</a></li>
-                        <li><a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/photo00.gif" alt="11ok商人在线" /></a><br /><a href="#">龙程<br />邵阳易翔商务</a></li>
-                        <li><a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/photo00.gif" alt="11ok商人在线" /></a><br /><a href="#">龙程<br />邵阳易翔商务</a></li>
-                        <li><a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/photo00.gif" alt="11ok商人在线" /></a><br /><a href="#">龙程<br />邵阳易翔商务</a></li>
-                        <li><a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/photo00.gif" alt="11ok商人在线" /></a><br /><a href="#">龙程<br />邵阳易翔商务</a></li>
-                        <li><a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/photo00.gif" alt="11ok商人在线" /></a><br /><a href="#">龙程<br />邵阳易翔商务</a></li>
-                    </ul>
+                    	<?php foreach ($summary->getTopTrade() as $key=>$user): ?>
+                        <li title="<?php echo $user->realname; ?>"><?php echo CHtml::link(CHtml::image($user->getAvatarUrl(), $user->realname), array('blog/index','uid'=>$user->id,'username'=>$user->username)); ?><br />
+                            <?php echo CHtml::link($user->realname.'<br />'.$user->compnay, array('blog/index','uid'=>$user->id,'username'=>$user->username)); ?></li>
+                        <?php endforeach ?>
+                        </ul>
                 </div>
             </div>
             <div class="clr" style="height:10px"></div>
@@ -51,12 +48,9 @@
                     <div class="clr"></div>
                     <div id="gongqiuNeirong">
                     	<ul>
-                        <li class="top0"><a href="#" target="_blank">谁是中国最富有的女人？</a></li>
-                        <li class="top1"><a href="#" target="_blank">新海马4款新车上市</a></li>
-                        <li class="top2"><a href="#" target="_blank">“8”种创业赢利模式</a></li>
-                        <li class="top3"><a href="#" target="_blank">谁更能帮中小企业做国外市场？</a></li>
-                        <li class="top4"><a href="#" target="_blank">李开发：郎咸平“七板斧”诋毁国企</a></li>
-                        <li class="top5"><a href="#" target="_blank">为什么“白狼”已经取代“白衣天使</a></li>
+                        <?php foreach ($summary->getByGCate(2) as $key=>$article): ?>
+                                <li class="top<?php echo $key; ?>"><?php echo CHtml::link($article->title,array('blog/articles', 'artid'=>$article->id,'bid'=>$article->blogsId,'uid'=>$article->usersId)); ?></li>
+                        <?php endforeach ?>
                         </ul>
                     </div>
                 </div>
@@ -65,12 +59,9 @@
                     <div class="clr"></div>
                     <div id="gongqiuNeirong">
                     	<ul>
-                        <li class="top0"><a href="#" target="_blank">谁是中国最富有的女人？</a></li>
-                        <li class="top1"><a href="#" target="_blank">新海马4款新车上市</a></li>
-                        <li class="top2"><a href="#" target="_blank">“8”种创业赢利模式</a></li>
-                        <li class="top3"><a href="#" target="_blank">谁更能帮中小企业做国外市场？</a></li>
-                        <li class="top4"><a href="#" target="_blank">李开发：郎咸平“七板斧”诋毁国企</a></li>
-                        <li class="top5"><a href="#" target="_blank">为什么“白狼”已经取代“白衣天使</a></li>
+                        <?php foreach ($summary->getByGCate(3) as $key=>$article): ?>
+                                <li class="top<?php echo $key; ?>"><?php echo CHtml::link($article->title,array('blog/articles', 'artid'=>$article->id,'bid'=>$article->blogsId,'uid'=>$article->usersId)); ?></li>
+                        <?php endforeach ?>
                         </ul>
                     </div>
                 </div>
@@ -99,6 +90,7 @@
                     <?php echo CHtml::endForm(); ?>
                     <?php else: ?>
                         <div>欢迎你！<?php echo Yii::app()->user->name ?></div>
+                        <div><?php echo CHtml::link('进入自己的博客', array('blogs/index','id'=>Yii::app()->user->id,'username'=>Yii::app()->user->name)); ?></div>
                     <?php endif ?>
                 </div>
                 <div id="loginLine03"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/loginline03.gif" /></div>

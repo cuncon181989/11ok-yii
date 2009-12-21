@@ -9,6 +9,8 @@ class Users extends CActiveRecord
 	 * @var string $password
 	 * @var string $email
 	 * @var string $avatar
+	 * @var string $realname
+	 * @var string $compnay
 	 * @var integer $sex
 	 * @var string $birthday
 	 * @var integer $userType
@@ -46,17 +48,19 @@ class Users extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, password2, verifyCode, province, city, area, blogCategoryId, oldBlogCate, userType, avatar, sex, birthday','safe'),
-                        array('top_trade, top_site','safe', 'on'=>'admin'),
+			array('username, password, password2, realname, compnay, verifyCode, province, city, area, blogCategoryId, oldBlogCate, userType, avatar, sex, birthday','safe'),
 			array('email, province, blogCategoryId', 'required'),
+                        array('top_trade, top_site','safe', 'on'=>'admin'),
                         array('birthday','type','type'=>'date','dateFormat'=>'yyyy-mm-dd','message'=>'生日必须为正确的日期格式！'),
-                        array('avatar', 'file', 'types'=>'jpg, gif, png','maxSize'=>'128000','tooLarge'=>'文件大小不能超过128K'),
+                        array('avatar', 'file', 'types'=>'jpg, gif, png','maxSize'=>'128000','tooLarge'=>'文件大小不能超过128K','allowEmpty'=>TRUE),
+			array('avatar', 'length', 'max'=>255),
 			array('username, password', 'required', 'on'=>'register'),
-			array('username', 'length', 'min'=>4, 'max'=>25),
+			array('username', 'length', 'min'=>4, 'max'=>25 ),
+			array('username', 'match', 'pattern'=>'/^[\w]+$/', message=>'用户名只能是字母数字下划线！' ),
+			array('username', 'unique','className'=>'users','attributeName'=>'username'),
 			array('password', 'length', 'min'=>4, 'max'=>32),
 			array('password2', 'compare', 'compareAttribute'=>'password', 'on'=>'register'),
 			array('email', 'email'),
-			array('avatar', 'length', 'max'=>255),
 			array('regIp, lastLoginIp', 'length', 'max'=>15),
 			array('sex', 'in', 'range'=>array(0,1,2)),
                         array('verifyCode', 'captcha', 'allowEmpty'=>!extension_loaded('gd'), 'on'=>'register'),
@@ -88,6 +92,8 @@ class Users extends CActiveRecord
 			'password2' => '重复密码',
 			'email' => 'Email',
 			'avatar' => '头像',
+			'realname' => '真实姓名',
+			'compnay' => '所在企业',
 			'sex' => '性别',
                         'province'=>'所在地',
                         'city'=>'市',
@@ -222,19 +228,5 @@ class Users extends CActiveRecord
                 return $tmpArr;
             else
                 return $tmpArr[$this->userStatus];
-        }
-        /**
-         * @param <int> $limit 设置返回多少条站点推荐会员
-         * @return <objects> 返回limit指定数量的站点推荐的会员
-         */
-        public function getTopSite($limit=6){
-                return Users::model()->findAll('top_site=1 order by id desc limit '.$limit);
-        }
-        /**
-         * @param <int> $limit 设置返回多少条行业推荐会员
-         * @return <objects> 返回limit指定数量的行业推荐的会员
-         */
-        public function getTopTrade($limit=6){
-                return Users::model()->findAll('top_trade=1 order by id desc limit '.$limit);
         }
 }

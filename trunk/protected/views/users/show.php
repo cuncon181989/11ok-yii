@@ -12,6 +12,19 @@
     <td><?php echo CHtml::encode($model->username); ?>
 </td>
 </tr>
+
+<tr>
+	<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('realname')); ?>
+</th>
+    <td><?php echo CHtml::encode($model->realname); ?>
+</td>
+</tr>
+<tr>
+	<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('compnay')); ?>
+</th>
+    <td><?php echo CHtml::encode($model->compnay); ?>
+</td>
+</tr>
 <tr>
 	<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('email')); ?>
 </th>

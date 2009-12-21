@@ -32,13 +32,38 @@ class SiteController extends CController
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
                 $form=new LoginForm;
-                $users= new Users;
-                
+                $summary= new Summary;
 		$this->render('index',array('form'=>$form,
-                                            'users'=>$users,
+                                            'summary'=>$summary,
                                         ));
 	}
 
+        public function actionSearch(){
+                //mydebug($_POST);
+                if (isset($_POST['search'])){
+                        extract($_POST['search']);
+                        //mydebug($keyword);
+                        $criteria= new CDbCriteria;
+                        if (!empty($keyword)){
+                                $criteria->addSearchCondition('username', $keyword, true, 'OR');
+                                $criteria->addSearchCondition('realname', $keyword, true, 'OR');
+                                $criteria->addSearchCondition('compnay', $keyword, true, 'OR');
+                        }
+                        if (!empty($province))
+                                $criteria->addSearchCondition('province', $province);
+                        if (!empty($city))
+                                $criteria->addSearchCondition('city', $city, true, 'OR');
+                        if (!empty($blogCategoryId))
+                                $criteria->addSearchCondition('blogCategoryId', $blogCategoryId);
+                        $users= Users::model()->findAll($criteria);
+                        
+                        mydebug($users,0);
+
+                        $this->render('search', array());
+                }
+        }
+
+        
 	/**
 	 * Displays the contact page
 	 */

@@ -34,7 +34,7 @@
           </label>
           <span>行业：</span>
           <label>
-          <?php echo CHtml::dropDownList('search[blogCategoryId]', 1, CHtml::listData($this->getBlogCategory(),'id','name'),array('class'=>'formcss')); ?>
+          <?php echo CHtml::dropDownList('search[blogCategoryId]', '', CHtml::listData($this->getBlogCategory(),'id','name'),array('class'=>'formcss','prompt'=>"请选择行业")); ?>
           </label>
           <span>关键字：</span>
           <label>

@@ -160,10 +160,10 @@ class UsersController extends CController
                         //$model->setScenario('update');
                         if (!empty($_POST['Users']['password'])){
                             $model->password= md5($model->password);
-                            if ($model->save(true,array('password','email','birthday','sex','blogCategoryId','province','city','area')))
+                            if ($model->save(true,array('password','email','birthday','sex','realname','compnay','blogCategoryId','province','city','area')))
                                 $this->redirect(array('show','id'=>$model->id));
                         }else{
-                            if ($model->save(true,array('email','birthday','sex','blogCategoryId','province','city','area')))
+                            if ($model->save(true,array('email','birthday','sex','realname','compnay','blogCategoryId','province','city','area')))
                                 $this->redirect(array('show','id'=>$model->id));
                         }
 		}

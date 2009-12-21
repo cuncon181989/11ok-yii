@@ -54,18 +54,19 @@ return array(
                 'themeManager'=>array(
                         
                 ),
-                /**
                 'urlManager'=>array(
-                        //'class'=>'ext.DUrlManager',
+                        //'class'=>'ext.DUrlManager',//DUrlManager为每个连接加上当前用户名这是不对的，应该是加上博客所有人的
                         'urlFormat'=>'path',
                         //'urlSuffix'=>'.html',
-                        //'showScriptName'=>false,
+                        'showScriptName'=>false,
                         'rules'=>array(
-                                // '/<username:\w+>/<_c:>/<_a:>' => '<_c>/<_a>',
+                                '/<username:\w+>/<_c:(blog)>/<_a:>' => '<_c>/<_a>',
+                                //'/<username:\w+>/<_c:>/<_a:>' => '<_c>/<_a>',
                                 // '/<username:\w+>/'=>'blogs/show',
                                 // '/<username:\w+>/<_c:(blogs|articles)>/<id:\d+>/<_a:(create|update|delete)>' => '<_c>/<_a>',
                         ),
                 ),
+                /**
                 'cache'=>array(
                         'class'=>'system.caching.CFileCache',
                         'cacheFileSuffix'=>'.html',
