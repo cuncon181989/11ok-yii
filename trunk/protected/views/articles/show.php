@@ -1,9 +1,7 @@
 <h2>查看文章<?php echo $model->id; ?></h2>
 
-<div class="actionBar">
-[<?php echo CHtml::link('文章列表',array('list')); ?>]
-[<?php echo CHtml::link('创建文章',array('create')); ?>]
-[<?php echo CHtml::link('更新文章',array('update','id'=>$model->id)); ?>]
+<div class="actionBar">[<?php echo CHtml::link('文章列表',array('list')); ?>]
+[<?php echo CHtml::link('创建文章',array('create')); ?>] [<?php echo CHtml::link('更新文章',array('update','id'=>$model->id)); ?>]
 [<?php echo CHtml::linkButton('删除文章',array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure?')); ?>
 ] [<?php echo CHtml::link('管理文章',array('admin')); ?>]</div>
 
