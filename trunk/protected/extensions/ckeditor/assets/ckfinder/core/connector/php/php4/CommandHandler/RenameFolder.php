@@ -31,75 +31,75 @@ require_once CKFINDER_CONNECTOR_LIB_DIR . "/CommandHandler/XmlCommandHandlerBase
  */
 class CKFinder_Connector_CommandHandler_RenameFolder extends CKFinder_Connector_CommandHandler_XmlCommandHandlerBase
 {
-    /**
-     * Command name
-     *
-     * @access private
-     * @var string
-     */
-    var $command = "RenameFolder";
+	/**
+	 * Command name
+	 *
+	 * @access private
+	 * @var string
+	 */
+	var $command = "RenameFolder";
 
 
-    /**
-     * handle request and build XML
-     * @access protected
-     *
-     */
-    function buildXml()
-    {
-        if (!$this->_currentFolder->checkAcl(CKFINDER_CONNECTOR_ACL_FOLDER_RENAME)) {
-            $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_UNAUTHORIZED);
-        }
+	/**
+	 * handle request and build XML
+	 * @access protected
+	 *
+	 */
+	function buildXml()
+	{
+		if (!$this->_currentFolder->checkAcl(CKFINDER_CONNECTOR_ACL_FOLDER_RENAME)) {
+			$this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_UNAUTHORIZED);
+		}
 
-        if (!isset($_GET["NewFolderName"])) {
-            $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_INVALID_NAME);
-        }
+		if (!isset($_GET["NewFolderName"])) {
+			$this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_INVALID_NAME);
+		}
 
-        $newFolderName = CKFinder_Connector_Utils_FileSystem::convertToFilesystemEncoding($_GET["NewFolderName"]);
-        $resourceTypeInfo = $this->_currentFolder->getResourceTypeConfig();
+		$newFolderName = CKFinder_Connector_Utils_FileSystem::convertToFilesystemEncoding($_GET["NewFolderName"]);
+		$resourceTypeInfo = $this->_currentFolder->getResourceTypeConfig();
 
-        if (!CKFinder_Connector_Utils_FileSystem::checkFileName($newFolderName) || $resourceTypeInfo->checkIsHiddenFolder($newFolderName)) {
-            $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_INVALID_NAME);
-        }
+		if (!CKFinder_Connector_Utils_FileSystem::checkFileName($newFolderName) || $resourceTypeInfo->checkIsHiddenFolder($newFolderName)) {
+			$this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_INVALID_NAME);
+		}
 
-        // The root folder cannot be deleted.
-        if ($this->_currentFolder->getClientPath() == "/") {
-            $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_INVALID_REQUEST);
-        }
+		// The root folder cannot be deleted.
+		if ($this->_currentFolder->getClientPath() == "/") {
+			$this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_INVALID_REQUEST);
+		}
 
-        $oldFolderPath = $this->_currentFolder->getServerPath();
-        $bMoved = false;
+		$oldFolderPath = $this->_currentFolder->getServerPath();
+		$bMoved = false;
 
-        if (!is_dir($oldFolderPath)) {
-            $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_INVALID_REQUEST);
-        }
+		if (!is_dir($oldFolderPath)) {
+			$this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_INVALID_REQUEST);
+		}
 
-        //let's calculate new folder name
-        $newFolderPath = dirname($oldFolderPath).DIRECTORY_SEPARATOR.$newFolderName.DIRECTORY_SEPARATOR;
+		//let's calculate new folder name
+		$newFolderPath = dirname($oldFolderPath).DIRECTORY_SEPARATOR.$newFolderName.DIRECTORY_SEPARATOR;
 
-        if (file_exists($newFolderPath)) {
-            $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_ALREADY_EXIST);
-        }
+		if (file_exists($newFolderPath)) {
+			$this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_ALREADY_EXIST);
+		}
 
-        $bMoved = @rename($oldFolderPath, $newFolderPath);
+		$bMoved = @rename($oldFolderPath, $newFolderPath);
 
-        if (!$bMoved) {
-            $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_ACCESS_DENIED);
-        } else {
-            $newThumbsServerPath = dirname($this->_currentFolder->getThumbsServerPath()) . '/' . $newFolderName . '/';
-            if (!@rename($this->_currentFolder->getThumbsServerPath(), $newThumbsServerPath)) {
-                CKFinder_Connector_Utils_FileSystem::unlink($this->_currentFolder->getThumbsServerPath());
-            }
-        }
+		if (!$bMoved) {
+			$this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_ACCESS_DENIED);
+		} else {
+			$newThumbsServerPath = dirname($this->_currentFolder->getThumbsServerPath()) . '/' . $newFolderName . '/';
+			if (!@rename($this->_currentFolder->getThumbsServerPath(), $newThumbsServerPath)) {
+				CKFinder_Connector_Utils_FileSystem::unlink($this->_currentFolder->getThumbsServerPath());
+			}
+		}
 
-        $newFolderPath = preg_replace(",[^/]+/?$,", $newFolderName, $this->_currentFolder->getClientPath()) . '/';
-        $newFolderUrl = $resourceTypeInfo->getUrl() . ltrim($newFolderPath, '/');
+		$newFolderPath = preg_replace(",[^/]+/?$,", $newFolderName, $this->_currentFolder->getClientPath()) . '/';
+		$newFolderUrl = $resourceTypeInfo->getUrl() . ltrim($newFolderPath, '/');
 
-        $oRenameNode = new Ckfinder_Connector_Utils_XmlNode("RenamedFolder");
-        $this->_connectorNode->addChild($oRenameNode);
+		$oRenameNode = new Ckfinder_Connector_Utils_XmlNode("RenamedFolder");
+		$this->_connectorNode->addChild($oRenameNode);
 
-        $oRenameNode->addAttribute("newName", CKFinder_Connector_Utils_FileSystem::convertToConnectorEncoding($newFolderName));
-        $oRenameNode->addAttribute("newPath", CKFinder_Connector_Utils_FileSystem::convertToConnectorEncoding($newFolderPath));
-        $oRenameNode->addAttribute("newUrl", CKFinder_Connector_Utils_FileSystem::convertToConnectorEncoding($newFolderUrl));
-    }
+		$oRenameNode->addAttribute("newName", CKFinder_Connector_Utils_FileSystem::convertToConnectorEncoding($newFolderName));
+		$oRenameNode->addAttribute("newPath", CKFinder_Connector_Utils_FileSystem::convertToConnectorEncoding($newFolderPath));
+		$oRenameNode->addAttribute("newUrl", CKFinder_Connector_Utils_FileSystem::convertToConnectorEncoding($newFolderUrl));
+	}
 }

@@ -32,13 +32,13 @@ class GlobalArticlesCategoriesController extends CController
 	public function accessRules()
 	{
 		return array(
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+		array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('create','update','list','show','admin','delete'),
 				'users'=>array('admin'),
-			),
-			array('deny',  // deny all users
+		),
+		array('deny',  // deny all users
 				'users'=>array('*'),
-			),
+		),
 		);
 	}
 
@@ -61,7 +61,7 @@ class GlobalArticlesCategoriesController extends CController
 		{
 			$model->attributes=$_POST['GlobalArticlesCategories'];
 			if($model->save())
-				$this->redirect(array('show','id'=>$model->id));
+			$this->redirect(array('show','id'=>$model->id));
 		}
 		$this->render('create',array('model'=>$model));
 	}
@@ -77,7 +77,7 @@ class GlobalArticlesCategoriesController extends CController
 		{
 			$model->attributes=$_POST['GlobalArticlesCategories'];
 			if($model->save())
-				$this->redirect(array('show','id'=>$model->id));
+			$this->redirect(array('show','id'=>$model->id));
 		}
 		$this->render('update',array('model'=>$model));
 	}
@@ -95,7 +95,7 @@ class GlobalArticlesCategoriesController extends CController
 			$this->redirect(array('list'));
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 
 	/**
@@ -152,9 +152,9 @@ class GlobalArticlesCategoriesController extends CController
 		if($this->_model===null)
 		{
 			if($id!==null || isset($_GET['id']))
-				$this->_model=GlobalArticlesCategories::model()->findbyPk($id!==null ? $id : $_GET['id']);
+			$this->_model=GlobalArticlesCategories::model()->findbyPk($id!==null ? $id : $_GET['id']);
 			if($this->_model===null)
-				throw new CHttpException(404,'The requested page does not exist.');
+			throw new CHttpException(404,'The requested page does not exist.');
 		}
 		return $this->_model;
 	}

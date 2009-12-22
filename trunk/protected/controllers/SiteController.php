@@ -2,15 +2,21 @@
 
 class SiteController extends CController
 {
+        const PAGE_SIZE=10;
 	/**
 	 * Declares class-based actions.
 	 */
         public $blogCate= 'abc';
 
+        /**
+         * 为本控制器做初始化操作
+         */
         public function init(){
+                //设置本控制器使用summary皮肤
                 Yii::app()->setTheme('summary');
                 parent::init();
         }
+
 	public function actions()
 	{
 		return array(
@@ -29,22 +35,38 @@ class SiteController extends CController
 	 */
 	public function actionIndex()
 	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
                 $form=new LoginForm;
                 $summary= new Summary;
 		$this->render('index',array('form'=>$form,
                                             'summary'=>$summary,
                                         ));
 	}
+        /**
+         * 商人库列表
+         */
+        public function actionList(){
+                $criteria= new CDbCriteria();
+                $criteria->addCondition('userStatus=1');
 
+                $pages= new CPagination(Users::model()->count($criteria));
+                $pages->pageSize= self::PAGE_SIZE;
+                $pages->applyLimit($criteria);
+                        
+                $users= Users::model()->findAll($criteria);
+                $this->render('list', array('users'=>$users,
+
+                                        ));
+        }
+        /**
+         * 搜索
+         */
         public function actionSearch(){
-                //mydebug($_POST);
+                mydebug($_POST,0);
                 if (isset($_POST['search'])){
                         extract($_POST['search']);
                         //mydebug($keyword);
                         $criteria= new CDbCriteria;
-                        if (!empty($keyword)){
+                        if (!empty($keyword) && $keyword!='请输入关键字'){
                                 $criteria->addSearchCondition('username', $keyword, true, 'OR');
                                 $criteria->addSearchCondition('realname', $keyword, true, 'OR');
                                 $criteria->addSearchCondition('compnay', $keyword, true, 'OR');

@@ -1,9 +1,7 @@
 <h2>文章列表</h2>
 
-<div class="actionBar">
-[<?php echo CHtml::link('New Articles',array('create')); ?>]
-[<?php echo CHtml::link('Manage Articles',array('admin')); ?>]
-</div>
+<div class="actionBar">[<?php echo CHtml::link('New Articles',array('create')); ?>]
+[<?php echo CHtml::link('Manage Articles',array('admin')); ?>]</div>
 
 <?php $this->widget('CLinkPager',array('pages'=>$pages)); ?>
 

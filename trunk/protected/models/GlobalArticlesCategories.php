@@ -36,9 +36,9 @@ class GlobalArticlesCategories extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('countArticles', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>255),
-			array('description, settings', 'safe'),
+		array('countArticles', 'numerical', 'integerOnly'=>true),
+		array('name', 'length', 'max'=>255),
+		array('description, settings', 'safe'),
 		);
 	}
 
@@ -66,17 +66,17 @@ class GlobalArticlesCategories extends CActiveRecord
 			'countArticles' => 'Count Articles',
 		);
 	}
-        /**
-         *
-         */
-        protected function afterFind(){
-            $this->settings  = unserialize($this->settings);
-        }
-        /**
-         * @return true
-         */
-        protected function beforeSave(){
-            $this->settings= serialize($this->settings);
-            return true;
-        }
+	/**
+	 *
+	 */
+	protected function afterFind(){
+		$this->settings  = unserialize($this->settings);
+	}
+	/**
+	 * @return true
+	 */
+	protected function beforeSave(){
+		$this->settings= serialize($this->settings);
+		return true;
+	}
 }

@@ -26,7 +26,7 @@ class SiteTest extends WebTestCase
 		$this->open('');
 		// ensure the user is logged out
 		if($this->isTextPresent('Logout'))
-			$this->clickAndWait('link=Logout');
+		$this->clickAndWait('link=Logout');
 
 		// test login process, including validation
 		$this->clickAndWait('link=Login');

@@ -31,34 +31,34 @@ require_once CKFINDER_CONNECTOR_LIB_DIR . "/ErrorHandler/Base.php";
  * @copyright CKSource - Frederico Knabben
  */
 class CKFinder_Connector_ErrorHandler_FileUpload extends CKFinder_Connector_ErrorHandler_Base {
-    /**
-     * Throw file upload error, return true if error has been thrown, false if error has been catched
-     *
-     * @param int $number
-     * @param string $text
-     * @access public
-     */
-    public function throwError($number, $uploaded = false, $exit = true) {
-        if ($this->_catchAllErrors || in_array($number, $this->_skipErrorsArray)) {
-            return false;
-        }
+	/**
+	 * Throw file upload error, return true if error has been thrown, false if error has been catched
+	 *
+	 * @param int $number
+	 * @param string $text
+	 * @access public
+	 */
+	public function throwError($number, $uploaded = false, $exit = true) {
+		if ($this->_catchAllErrors || in_array($number, $this->_skipErrorsArray)) {
+			return false;
+		}
 
-        $oRegistry = & CKFinder_Connector_Core_Factory :: getInstance("Core_Registry");
-        $sFileName = $oRegistry->get("FileUpload_fileName");
+		$oRegistry = & CKFinder_Connector_Core_Factory :: getInstance("Core_Registry");
+		$sFileName = $oRegistry->get("FileUpload_fileName");
 
-        header('Content-Type: text/html; charset=utf-8');
+		header('Content-Type: text/html; charset=utf-8');
 
-        $errorMessage = CKFinder_Connector_Utils_Misc :: getErrorMessage($number, $sFileName);
-        if (!$uploaded) {
-            $sFileName = "";
-        }
+		$errorMessage = CKFinder_Connector_Utils_Misc :: getErrorMessage($number, $sFileName);
+		if (!$uploaded) {
+			$sFileName = "";
+		}
 
-        echo "<script type=\"text/javascript\">";
-        echo "window.parent.OnUploadCompleted('" . str_replace("'", "\\'", $sFileName) . "', '" . str_replace("'", "\\'", $errorMessage) . "') ;";
-        echo "</script>";
+		echo "<script type=\"text/javascript\">";
+		echo "window.parent.OnUploadCompleted('" . str_replace("'", "\\'", $sFileName) . "', '" . str_replace("'", "\\'", $errorMessage) . "') ;";
+		echo "</script>";
 
-        if ($exit) {
-            exit;
-        }
-    }
+		if ($exit) {
+			exit;
+		}
+	}
 }

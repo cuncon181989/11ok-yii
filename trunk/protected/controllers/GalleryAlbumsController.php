@@ -32,21 +32,21 @@ class GalleryAlbumsController extends CController
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'list' and 'show' actions
+		array('allow',  // allow all users to perform 'list' and 'show' actions
 				'actions'=>array('list','show'),
 				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+		),
+		array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update','delete'),
 				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+		),
+		array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin'),
 				'users'=>array('admin'),
-			),
-			array('deny',  // deny all users
+		),
+		array('deny',  // deny all users
 				'users'=>array('*'),
-			),
+		),
 		);
 	}
 
@@ -69,7 +69,7 @@ class GalleryAlbumsController extends CController
 		{
 			$model->attributes=$_POST['GalleryAlbums'];
 			if($model->save())
-				$this->redirect(array('list'));
+			$this->redirect(array('list'));
 		}
 		$this->render('create',array('model'=>$model));
 	}
@@ -85,7 +85,7 @@ class GalleryAlbumsController extends CController
 		{
 			$model->attributes=$_POST['GalleryAlbums'];
 			if($model->save())
-				$this->redirect(array('show','id'=>$model->id));
+			$this->redirect(array('show','id'=>$model->id));
 		}
 		$this->render('update',array('model'=>$model));
 	}
@@ -103,7 +103,7 @@ class GalleryAlbumsController extends CController
 			$this->redirect(array('list'));
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 
 	/**
@@ -112,7 +112,7 @@ class GalleryAlbumsController extends CController
 	public function actionList()
 	{
 		$criteria=new CDbCriteria;
-                $criteria->condition= 'usersId='.Yii::app()->user->id;
+		$criteria->condition= 'usersId='.Yii::app()->user->id;
 		$pages=new CPagination(GalleryAlbums::model()->count($criteria));
 		$pages->pageSize=self::PAGE_SIZE;
 		$pages->applyLimit($criteria);
@@ -159,13 +159,13 @@ class GalleryAlbumsController extends CController
 	{
 		if($this->_model===null)
 		{
-                    if (!Yii::app()->user->id)
-                        $this->redirect(Yii::app()->user->loginUrl);
-                    $this->_model=GalleryAlbums::model()->find('id=:id AND usersId=:userid',
-                                                               array(':id'=>$_GET['id'],
+			if (!Yii::app()->user->id)
+			$this->redirect(Yii::app()->user->loginUrl);
+			$this->_model=GalleryAlbums::model()->find('id=:id AND usersId=:userid',
+			array(':id'=>$_GET['id'],
                                                                      ':userid'=>Yii::app()->user->id,));
-                    if($this->_model===null)
-                            throw new CHttpException(404,'The requested page does not exist.');
+			if($this->_model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
 		}
 		return $this->_model;
 	}

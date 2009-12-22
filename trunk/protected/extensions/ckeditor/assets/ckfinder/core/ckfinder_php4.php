@@ -50,11 +50,11 @@ class CKFinder
 	{
 		$className = $this->ClassName ;
 		if ( !empty( $className ) )
-			$className = ' class="' . $className . '"' ;
+		$className = ' class="' . $className . '"' ;
 
 		$id = $this->Id ;
 		if ( !empty( $id ) )
-			$id = ' id="' . $id . '"' ;
+		$id = ' id="' . $id . '"' ;
 			
 		return '<iframe src="' . $this->_BuildUrl() . '" width="' . $this->Width . '" ' .
 			'height="' . $this->Height . '"' . $className . $id . ' frameborder="0" scrolling="no"></iframe>' ;
@@ -63,22 +63,22 @@ class CKFinder
 	function _BuildUrl( $url = "" )
 	{
 		if ( !$url )
-			$url = $this->BasePath ;
+		$url = $this->BasePath ;
 
 		$qs = "" ;
 
 		if ( empty( $url ) )
-			$url = CKFINDER_DEFAULT_BASEPATH ;
+		$url = CKFINDER_DEFAULT_BASEPATH ;
 
 		if ( $url[ strlen( $url ) - 1 ] != '/' )
-			$url = $url . '/' ;
+		$url = $url . '/' ;
 
 		$url .= 'ckfinder.html' ;
 
 		if ( !empty( $this->SelectFunction ) )
-			$qs .= '?action=js&amp;func=' . $this->SelectFunction ;
+		$qs .= '?action=js&amp;func=' . $this->SelectFunction ;
 
-		if ( !empty( $this->SelectFunctionData ) ) 
+		if ( !empty( $this->SelectFunctionData ) )
 		{
 			$qs .= $qs ? "&amp;" : "?" ;
 			$qs .= 'data=' . rawurlencode($this->SelectFunctionData) ;
@@ -93,11 +93,11 @@ class CKFinder
 		{
 			$qs .= $qs ? "&amp;" : "?" ;
 			$qs .= 'thumbFunc=' . ( !empty( $this->SelectThumbnailFunction ) ? $this->SelectThumbnailFunction : $this->SelectFunction ) ;
-			
+				
 			if ( !empty( $this->SelectThumbnailFunctionData ) )
-				$qs .= '&amp;tdata=' . rawurlencode( $this->SelectThumbnailFunctionData ) ;
+			$qs .= '&amp;tdata=' . rawurlencode( $this->SelectThumbnailFunctionData ) ;
 			else if ( empty( $this->SelectThumbnailFunction ) && !empty( $this->SelectFunctionData ) )
-				$qs .= '&amp;tdata=' . rawurlencode( $this->SelectFunctionData ) ;
+			$qs .= '&amp;tdata=' . rawurlencode( $this->SelectFunctionData ) ;
 		}
 
 		if ( !empty( $this->StartupPath ) )
@@ -132,30 +132,30 @@ class CKFinder
 	function SetupFCKeditor( &$editorObj, $basePath = CKFINDER_DEFAULT_BASEPATH, $imageType = null, $flashType = null )
 	{
 		if ( empty( $basePath ) )
-			$basePath = CKFINDER_DEFAULT_BASEPATH ;
+		$basePath = CKFINDER_DEFAULT_BASEPATH ;
 
 		// If it is a path relative to the current page.
 		if ( $basePath[0] != '/' )
 		{
 			$basePath = substr( $_SERVER[ 'REQUEST_URI' ], 0, strrpos( $_SERVER[ 'REQUEST_URI' ], '/' ) + 1 ) .
-				$basePath ;
+			$basePath ;
 		}
 
 		$ckfinder = new CKFinder( $basePath ) ;
 		$ckfinder->SetupFCKeditorObject( $editorObj, $imageType, $flashType );
 	}
-	
+
 	// Non-static method of attaching CKFinder to FCKeditor
 	function SetupFCKeditorObject( &$editorObj, $imageType = null, $flashType = null )
 	{
 		$url = $this->BasePath ;
-		
+
 		// If it is a path relative to the current page.
 		if ( isset($url[0]) && $url[0] != '/' )
 		{
 			$url = substr( $_SERVER[ 'REQUEST_URI' ], 0, strrpos( $_SERVER[ 'REQUEST_URI' ], '/' ) + 1 ) . $url ;
 		}
-		
+
 		$url = $this->_BuildUrl( $url ) ;
 		$qs = ( strpos($url, "?") !== false ) ? "&amp;" : "?" ;
 
@@ -177,7 +177,7 @@ class CKFinder
 		$editorObj->Config['LinkBrowserURL'] = $url ;
 		$editorObj->Config['ImageBrowserURL'] = $url . $qs . 'type=' . ( empty( $imageType ) ? 'Images' : $imageType ) ;
 		$editorObj->Config['FlashBrowserURL'] = $url . $qs . 'type=' . ( empty( $flashType ) ? 'Flash' : $flashType ) ;
-		
+
 		$dir = substr( $url, 0, strrpos( $url, "/" ) + 1 ) ;
 		$editorObj->Config['LinkUploadURL'] = $dir . urlencode( 'core/connector/php/connector.php?command=QuickUpload&type=Files' ) ;
 		$editorObj->Config['ImageUploadURL'] = $dir . urlencode( 'core/connector/php/connector.php?command=QuickUpload&type=') . ( empty( $imageType ) ? 'Images' : $imageType ) ;

@@ -50,8 +50,8 @@ require_once CKFINDER_CONNECTOR_LIB_DIR . "/Utils/Misc.php";
  * @return string
  */
 function resolveUrl($baseUrl) {
-    $fileSystem =& CKFinder_Connector_Core_Factory::getInstance("Utils_FileSystem");
-    return $fileSystem->getDocumentRootPath() . $baseUrl;
+	$fileSystem =& CKFinder_Connector_Core_Factory::getInstance("Utils_FileSystem");
+	return $fileSystem->getDocumentRootPath() . $baseUrl;
 }
 
 $utilsSecurity =& CKFinder_Connector_Core_Factory::getInstance("Utils_Security");
@@ -70,8 +70,8 @@ CKFinder_Connector_Core_Factory::initFactory();
 $connector =& CKFinder_Connector_Core_Factory::getInstance("Core_Connector");
 
 if(isset($_GET['command'])) {
-    $connector->executeCommand($_GET['command']);
+	$connector->executeCommand($_GET['command']);
 }
 else {
-    $connector->handleInvalidCommand();
+	$connector->handleInvalidCommand();
 }
