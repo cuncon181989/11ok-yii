@@ -49,7 +49,8 @@
     </div>
     <div class="clr"></div>
 <?php echo $content; ?>
-<div id="under">
+    <div class="clr"></div>
+    <div id="under">
         <div id="underFont" align="center"><a href="/index.php?op=Summary" target="_blank">首页</a>|<a href="/index.php?op=BlogList" target="_blank">商人库</a>|<a href="/read" target="_blank">充电休闲</a>|<a href="/bbs" target="_blank">论坛</a>|<a href="http://www.11ok.net/Contact%20.htm#p">关于我们</a>|<a href="http://www.11ok.net/Contact%20.htm#p">广告合作</a>|<a href="/stp" target="_blank">网站地图</a>|<a href="lianjie.html">友情链接</a>|<a href="#">全站搜索</a></div>
         <div align="center" id="underFont02">Copyright (c) 2008-2018 中国搜商网 All Rights Reserved 版权所有<br />中华人民共和国信息产业部ICP备案：<a href="http://www.miibeian.gov.cn" target="_blank">湘ICP备案中</a></div>
 </div>

@@ -172,7 +172,7 @@ li.bj1  {clear:both;}
 
 /*------------商人库开始--------------*/
 #businessTitle  {height:44px; width:709px; background:url(../images/line08.gif) repeat-x;}
-.businessfont02  {float:right; background:url(../images/title02.gif) no-repeat; height:44px; width:163px; display:block; color:#f08200; line-height:44px;}
+.businessfont02  {float:right; background:url(../images/title02.gif) top right no-repeat; height:44px; width:175px; display:block; color:#f08200; line-height:44px; text-align:right;}
 .businessfont02 a  {color:#f08200; margin:10px 10px}
 #businessNeirong  {width:709px;}
 #businessNeirong li  {display:block; width:212px; float:left; height:86px; margin:0px 7px 14px 7px; border:1px dashed #f2cca2; background-color:#faf7ee; padding:6px 3px 6px 3px; line-height:22px;}
