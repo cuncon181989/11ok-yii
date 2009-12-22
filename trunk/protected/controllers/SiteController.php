@@ -2,13 +2,9 @@
 
 class SiteController extends CController
 {
-        const PAGE_SIZE=10;
-	/**
-	 * Declares class-based actions.
-	 */
-        public $blogCate= 'abc';
+        const PAGE_SIZE=6;
 
-        /**
+         /**
          * 为本控制器做初始化操作
          */
         public function init(){
@@ -47,25 +43,32 @@ class SiteController extends CController
         public function actionList(){
                 $criteria= new CDbCriteria();
                 $criteria->addCondition('userStatus=1');
+                if (isset($_GET['order']))
+                        $criteria->order= ($_GET['order']=='hot')? 'regDate ASC': 'regDate DESC';
 
                 $pages= new CPagination(Users::model()->count($criteria));
                 $pages->pageSize= self::PAGE_SIZE;
                 $pages->applyLimit($criteria);
-                        
-                $users= Users::model()->findAll($criteria);
+                
+                $users= Users::model()->with('blogs','blogCategory')->findAll($criteria);
                 $this->render('list', array('users'=>$users,
-
+                                            'pages'=>$pages,
                                         ));
         }
         /**
          * 搜索
          */
         public function actionSearch(){
-                mydebug($_POST,0);
                 if (isset($_POST['search'])){
                         extract($_POST['search']);
                         //mydebug($keyword);
                         $criteria= new CDbCriteria;
+                        $criteria->addCondition('userStatus=1 AND realname IS NOT NULL');
+
+                        $pages= new CPagination(Users::model()->count($criteria));
+                        $pages->pageSize= self::PAGE_SIZE;
+                        $pages->applyLimit($criteria);
+
                         if (!empty($keyword) && $keyword!='请输入关键字'){
                                 $criteria->addSearchCondition('username', $keyword, true, 'OR');
                                 $criteria->addSearchCondition('realname', $keyword, true, 'OR');
@@ -77,11 +80,12 @@ class SiteController extends CController
                                 $criteria->addSearchCondition('city', $city, true, 'OR');
                         if (!empty($blogCategoryId))
                                 $criteria->addSearchCondition('blogCategoryId', $blogCategoryId);
+
                         $users= Users::model()->findAll($criteria);
                         
-                        mydebug($users,0);
-
-                        $this->render('search', array());
+                        $this->render('list', array('users'=>$users,
+                                                    'pages'=>$pages,
+                                                ));
                 }
         }
 
