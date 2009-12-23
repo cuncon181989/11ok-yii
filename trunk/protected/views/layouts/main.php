@@ -11,37 +11,11 @@
 <body>
 <div id="page">
 
-<div id="header">
-<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?> &nbsp;&nbsp; - &nbsp; <?php echo Yii::app()->user->name ?></div>
-<div id="mainmenu">
-<?php $this->widget('application.components.MainMenu',array(
-	'items'=>array(
-		array('label'=>'首页', 'url'=>array('/site/index')),
-		array('label'=>'联系我们', 'url'=>array('/site/contact')),
-		array('label'=>'文章', 'url'=>array('/articles/list')),
-		array('label'=>'文章分类', 'url'=>array('/articlescategories/list'), 'visible'=>!Yii::app()->user->isGuest),
-		array('label'=>'博客分类', 'url'=>array('/BlogCategories/list'), 'visible'=>!Yii::app()->user->isGuest),
-		array('label'=>'博客管理', 'url'=>array('/blogs/list'), 'visible'=>!Yii::app()->user->isGuest),
-		array('label'=>'登录', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-		array('label'=>'退出', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
-		array('label'=>'注册', 'url'=>array('/users/register'), 'visible'=>Yii::app()->user->isGuest),
-		array('label'=>'更新资料', 'url'=>array('/users/update'), 'visible'=>!Yii::app()->user->isGuest),
-	),
-)); ?>
-</div><!-- mainmenu -->
-</div><!-- header -->
-
 <div id="content">
 <?php echo $content; ?>
-</div><!-- content -->
+</div>
 
-<div id="footer">
-Copyright &copy; 2009 by 易翔商务.<br/>
-All Rights Reserved.<br/>
-<?php echo Yii::powered(); ?>
-</div><!-- footer -->
-
-</div><!-- page -->
+</div>
 </body>
 
 </html>
