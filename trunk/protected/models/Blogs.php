@@ -59,7 +59,10 @@ class Blogs extends CActiveRecord
 		return array(
                     'blogCategory'=>array(self::BELONGS_TO,'BlogCategories','blogCategoryId'),
                     'users'=>array(self::BELONGS_TO,'Users','usersId'),
-                    'articlesCategory'=>array(self::HAS_MANY,'ArticlesCategories','blogId'),
+                    'articlesCategory'=>array(self::HAS_MANY,'ArticlesCategories','blogsId'),
+                    'articles'=>array(self::HAS_MANY,'Articles','blogsId'),
+                    'gallery'=>array(self::HAS_MANY,'Gallery','blogsId'),
+                    'galleryAlbums'=>array(self::HAS_MANY,'GalleryAlbums','blogsId'),
 		);
 	}
 

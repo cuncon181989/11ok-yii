@@ -57,6 +57,7 @@ return array(
                 'urlManager'=>array(
                         //'class'=>'ext.DUrlManager',//DUrlManager为每个连接加上当前用户名这是不对的，应该是加上博客所有人的,放到控制器初始化里面去做了
                         'urlFormat'=>'path',
+                        //'appendParams'=>false,
                         //'urlSuffix'=>'.html',
                         'showScriptName'=>false,
                         'rules'=>array(

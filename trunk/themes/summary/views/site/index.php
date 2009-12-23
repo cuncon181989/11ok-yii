@@ -49,7 +49,7 @@
                     <div id="gongqiuNeirong">
                     	<ul>
                         <?php foreach ($summary->getByGCate(2) as $key=>$article): ?>
-                                <li class="top<?php echo $key; ?>"><?php echo CHtml::link($article->title,array('blog/articles', 'artid'=>$article->id,'bid'=>$article->blogsId,'uid'=>$article->usersId)); ?></li>
+                                <li class="top<?php echo $key; ?>"><?php echo CHtml::link($article->title,array('blog/articles', 'artid'=>$article->id,'bid'=>$article->blogsId)); ?></li>
                         <?php endforeach ?>
                         </ul>
                     </div>
@@ -60,7 +60,7 @@
                     <div id="gongqiuNeirong">
                     	<ul>
                         <?php foreach ($summary->getByGCate(3) as $key=>$article): ?>
-                                <li class="top<?php echo $key; ?>"><?php echo CHtml::link($article->title,array('blog/articles', 'artid'=>$article->id,'bid'=>$article->blogsId,'uid'=>$article->usersId)); ?></li>
+                                <li class="top<?php echo $key; ?>"><?php echo CHtml::link($article->title,array('blog/articles', 'artid'=>$article->id,'bid'=>$article->blogsId)); ?></li>
                         <?php endforeach ?>
                         </ul>
                     </div>

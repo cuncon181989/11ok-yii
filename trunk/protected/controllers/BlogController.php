@@ -8,13 +8,16 @@ class BlogController extends CController
          */
         public function init(){
                 //设置本控制器使用的皮肤
-                if (isset($_GET['uid'])){
+                if (isset($_GET['username'])){
+                        $user= Users::model()->with('blogs')->find('username=:username', array(':username'=>$_GET['username']));
+                        $theme= $user->blogs->settings['theme'];
+                }elseif (isset($_GET['uid'])){
                         $blog= Blogs::model()->find('usersId=:uid',array(':uid'=>intval($_GET['uid'])));
                         $theme= $blog->settings['theme'];
-                        Yii::app()->setTheme($theme);
                 }else{
-                        Yii::app()->setTheme('default');
+                        $theme='default';
                 }
+                Yii::app()->setTheme($theme);
                 parent::init();
         }
 
@@ -27,10 +30,6 @@ class BlogController extends CController
 			'accessControl', // perform access control for CRUD operations
 		);
 	}
-
-        public function actionIndex(){
-                $this->render('index', array());
-        }
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
@@ -56,43 +55,20 @@ class BlogController extends CController
 		),
 		);
 	}
+        /**
+         *  博客首页
+         */
+        public function actionIndex(){
+                $blog= Blogs::model()->with('users','articles','gallery')->find('{{blogs}}.usersId=:uid',array(':uid'=>intval($_GET['uid'])));
+                $this->render('index', array('blog'=>$blog,
+                                        ));
+        }
+        /**
+         *  文章列表页
+         */
+        public function actionArticles(){
 
+                $this->render('articles', array());
+        }
 
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
-	{
-		$this->processAdminCommand();
-
-		$criteria=new CDbCriteria;
-
-		$pages=new CPagination(Blogs::model()->count($criteria));
-		$pages->pageSize=self::PAGE_SIZE;
-		$pages->applyLimit($criteria);
-
-		$sort=new CSort('Blogs');
-		$sort->applyOrder($criteria);
-
-		$models=Blogs::model()->findAll($criteria);
-
-		$this->render('admin',array(
-			'models'=>$models,
-			'pages'=>$pages,
-			'sort'=>$sort,
-		));
-	}
-
-	/**
-	 * Executes any command triggered on the admin page.
-	 */
-	protected function processAdminCommand()
-	{
-		if(isset($_POST['command'], $_POST['id']) && $_POST['command']==='delete')
-		{
-			$this->loadBlogs($_POST['id'])->delete();
-			// reload the current page to avoid duplicated delete actions
-			$this->refresh();
-		}
-	}
 }
