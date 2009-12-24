@@ -46,10 +46,10 @@ class Articles extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('blogsId, articlesCategoryId, globalArticlesCategoriesId, title, content', 'required'),
-			array('blogsId, usersId,articlesCategoryId, globalArticlesCategoriesId, countReads, countComments, top, status, createDate, updateDate', 'numerical', 'integerOnly'=>true),
+			array('articlesCategoryId, globalArticlesCategoriesId, title, content', 'required'),
+			array('articlesCategoryId, globalArticlesCategoriesId, top, status', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>255),
-			array('title, summary, content, top, status, articlesCategoryId, globalArticlesCategoriesId', 'safe'),
+			array('summary, content', 'safe'),
 		);
 	}
 

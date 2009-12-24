@@ -34,7 +34,6 @@ class ArticlesText extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('articlesId', 'required'),
 			array('articlesId', 'numerical', 'integerOnly'=>true),
 			array('articlesId, content', 'safe'),
 		);

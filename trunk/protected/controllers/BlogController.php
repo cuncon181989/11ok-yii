@@ -6,14 +6,20 @@ class BlogController extends CController
          /**
          * 为本控制器做初始化操作
          */
+        public $_user;
+
         public function init(){
                 //设置本控制器使用的皮肤
                 if (isset($_GET['username'])){
                         $user= Users::model()->with('blogs')->find('username=:username', array(':username'=>$_GET['username']));
+                        $this->_user= $user->attributes;
                         $theme= $user->blogs->settings['theme'];
+                        unset($user);
                 }elseif (isset($_GET['uid'])){
-                        $blog= Blogs::model()->find('usersId=:uid',array(':uid'=>intval($_GET['uid'])));
+                        $blog= Blogs::model()->with('users')->find('usersId=:uid',array(':uid'=>intval($_GET['uid'])));
+                        $this->_user= $blog->users->attributes;
                         $theme= $blog->settings['theme'];
+                        unset($user);
                 }else{
                         $theme='default';
                 }
@@ -59,7 +65,7 @@ class BlogController extends CController
          *  博客首页
          */
         public function actionIndex(){
-                $blog= Blogs::model()->with('users','articles','gallery')->find('{{blogs}}.usersId=:uid',array(':uid'=>intval($_GET['uid'])));
+                $blog= Blogs::model()->with('users','articles','gallery')->find('{{blogs}}.usersId=:uid',array(':uid'=>$this->_user['realname']));
                 $this->render('index', array('blog'=>$blog,
                                         ));
         }

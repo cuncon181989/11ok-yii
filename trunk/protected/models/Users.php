@@ -61,7 +61,6 @@ class Users extends CActiveRecord
 			array('password', 'length', 'min'=>4, 'max'=>32),
 			array('password2', 'compare', 'compareAttribute'=>'password', 'on'=>'register'),
 			array('email', 'email'),
-			array('regIp, lastLoginIp', 'length', 'max'=>15),
 			array('sex', 'in', 'range'=>array(0,1,2)),
                         array('verifyCode', 'captcha', 'allowEmpty'=>!extension_loaded('gd'), 'on'=>'register'),
 		);

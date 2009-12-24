@@ -42,10 +42,8 @@ class UserInfo extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('usersId', 'required'),
-			array('usersId', 'numerical', 'integerOnly'=>true),
-			array('position, address, hobby, msn', 'length', 'max'=>255),
-			array('native, url, mobilePhone', 'length', 'max'=>50),
+			array('position, address, hobby', 'length', 'max'=>255),
+			array('native, url, mobilePhone, msn', 'length', 'max'=>50),
 			array('tel', 'length', 'max'=>25),
 			array('qq', 'length', 'max'=>11),
 			array('about', 'safe'),
@@ -60,6 +58,7 @@ class UserInfo extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                        'user'=>array(self::BELONGS_TO,'users','usersId'),
 		);
 	}
 
@@ -69,17 +68,17 @@ class UserInfo extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'usersId' => 'Users',
-			'position' => 'Position',
-			'address' => 'Address',
-			'native' => 'Native',
-			'url' => 'Url',
-			'hobby' => 'Hobby',
-			'tel' => 'Tel',
-			'mobilePhone' => 'Mobile Phone',
-			'qq' => 'Qq',
-			'msn' => 'Msn',
-			'about' => 'About',
+			'usersId' => 'UID',
+			'position' => '职位',
+			'address' => '详细地址',
+			'native' => '籍贯',
+			'url' => '网址',
+			'hobby' => '业余爱好',
+			'tel' => '电话',
+			'mobilePhone' => '手机',
+			'qq' => 'QQ',
+			'msn' => 'MSN',
+			'about' => '关于自己',
 		);
 	}
 }

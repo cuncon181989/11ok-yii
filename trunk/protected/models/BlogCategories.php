@@ -36,10 +36,8 @@ class BlogCategories extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('countBlogs', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>50),
 			array('description', 'length', 'max'=>255),
-			array('name, description', 'safe'),
 		);
 	}
 

@@ -44,12 +44,12 @@ class GuestBook extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('createDate', 'required'),
-			array('blogsId, parentId, private, usersId, status, createDate', 'numerical', 'integerOnly'=>true),
-			array('userName', 'length', 'max'=>25),
-			array('userEmail, userUrl, title', 'length', 'max'=>255),
-			array('clientIp', 'length', 'max'=>15),
-			array('content', 'safe'),
+			array('userName, userEmail, content', 'required'),
+			array('private, status, createDate', 'numerical', 'integerOnly'=>true),
+			array('userName', 'length', 'min'=>3, 'max'=>25),
+                        array('userEmail', 'Email'),
+                        array('userUrl', 'Url'),
+			array('title', 'safe'),
 		);
 	}
 
@@ -71,18 +71,18 @@ class GuestBook extends CActiveRecord
 	{
 		return array(
 			'id' => 'Id',
-			'blogsId' => 'Blogs',
-			'parentId' => 'Parent',
-			'private' => 'Private',
-			'usersId' => 'Users',
-			'userName' => 'User Name',
-			'userEmail' => 'User Email',
-			'userUrl' => 'User Url',
-			'title' => 'Title',
-			'content' => 'Content',
-			'clientIp' => 'Client Ip',
-			'status' => 'Status',
-			'createDate' => 'Create Date',
+			'blogsId' => 'BID',
+			'parentId' => '父级',
+			'private' => '不公开',
+			'usersId' => 'UID',
+			'userName' => '姓名',
+			'userEmail' => 'Email',
+			'userUrl' => 'Url',
+			'title' => '标题',
+			'content' => '内容',
+			'clientIp' => '发布者IP',
+			'status' => '状态',
+			'createDate' => '发布日期',
 		);
 	}
 }

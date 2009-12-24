@@ -43,9 +43,8 @@ class Blogs extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name', 'required'),
-			array('usersId, blogCategoryId, countPosts, countComments, status', 'numerical'),
 			array('name', 'length', 'max'=>50),
-			array('name,about', 'safe'),
+			array('about', 'safe'),
 		);
 	}
 

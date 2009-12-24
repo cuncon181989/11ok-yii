@@ -35,8 +35,6 @@ class Visits extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('visitDate', 'required'),
-			array('userId, visitId, visitDate', 'numerical', 'integerOnly'=>true),
 		);
 	}
 
@@ -58,9 +56,9 @@ class Visits extends CActiveRecord
 	{
 		return array(
 			'id' => 'Id',
-			'userId' => 'User',
-			'visitId' => 'Visit',
-			'visitDate' => 'Visit Date',
+			'userId' => '查看者UID',
+			'visitId' => '查看UID',
+			'visitDate' => '日期',
 		);
 	}
 }

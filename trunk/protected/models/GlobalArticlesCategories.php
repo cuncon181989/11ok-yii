@@ -36,7 +36,6 @@ class GlobalArticlesCategories extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-		array('countArticles', 'numerical', 'integerOnly'=>true),
 		array('name', 'length', 'max'=>255),
 		array('description, settings', 'safe'),
 		);

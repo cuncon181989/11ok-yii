@@ -38,10 +38,10 @@ class ArticlesCategories extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('usersId, blogsId, parentId, countArticles', 'numerical', 'integerOnly'=>true),
+			array('parentId', 'numerical', 'integerOnly'=>true),
 			array('name', 'required'),
 			array('name', 'length','min'=>2, 'max'=>50),
-			array('parentId, name, description', 'safe'),
+			array('description', 'safe'),
 		);
 	}
 

@@ -37,8 +37,7 @@ class Friends extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('createDate', 'required'),
-			array('userId, friendId, status, createDate', 'numerical', 'integerOnly'=>true),
+			array('friendId, createDate', 'numerical', 'integerOnly'=>true),
 			array('message', 'length', 'max'=>255),
 		);
 	}
