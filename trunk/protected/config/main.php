@@ -49,6 +49,7 @@ return array(
                         'username'=>'webuser',
                         'password'=>'webuser',
                         'tablePrefix'=>'y11ok_',
+                        //'enableProfiling'=>true,
                         'enableParamLogging'=>true,
                 ),
                 'themeManager'=>array(
