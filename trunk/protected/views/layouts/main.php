@@ -21,7 +21,7 @@
                         <?php echo CHtml::link('我的留言', array('blog/guestbook','username'=>$this->_user['username'])); ?></div>
         </div>
         <?php echo $content; ?>
-    <div id="webUnder">CopyRight © 11ok.net 2009-2019 </div>
+        <div id="webUnder">CopyRight © 11ok.net 2009-2019 MEM:<?php echo number_format(memory_get_usage()). ' (peak): '. number_format(memory_get_peak_usage()); ?></div>
 </div>
 </div>
 </body>

@@ -1,6 +1,6 @@
 <div id="webMain">
     	<div id="webLeftmain">
-                <?php if ($this->_user['userType']==2): ?>
+                <?php if ($this->_user->userType==2): ?>
                 <div id="webGongqiu">
                 <ul>
                 <li><strong>我的供应</strong><br />
@@ -18,12 +18,12 @@
                 </div>
                 <?php endif ?>
                 <div id="webDiary">
-                <a href="diary.html" class="dTitle">>>我的日记</a>
+                <?php echo CHtml::link('&gt;&gt;我的日记', array('articles','username'=>$this->_user->username), array('class'=>'dTitle')); ?>
                 <?php foreach ($articles as $key=>$article): ?>
                 <div id="dNeirong">
                         <div id="dBiaoti">
-                                <span class="FloatLeft"><?php echo CHtml::link($article->title, array('article','aid'=>$article->id,'username'=>$this->_user['username'])); ?></span>
-                                <span class="FloatRight"><?php echo CHtml::link('查看全文', array('article','aid'=>$article->id,'username'=>$this->_user['username'])); ?>|
+                                <span class="FloatLeft"><?php echo CHtml::link($article->title, array('article','aid'=>$article->id,'username'=>$this->_user->username)); ?></span>
+                                <span class="FloatRight"><?php echo CHtml::link('查看全文', array('article','aid'=>$article->id,'username'=>$this->_user->username)); ?>|
                                         评论(<?php echo CHtml::encode($article->countComments); ?>)|<span>发表日期：<?php echo date('Y-m-d', $article->createDate); ?></span></span>
                         <div class="clr"></div>
                         </div>
@@ -34,13 +34,13 @@
                 <?php endforeach ?>
                 </div>
             <div id="webPhoto">
-            	<div id="pBiaoti"><a href="photo.html">>>我的相册</a></div>
+            	<div id="pBiaoti"><?php echo CHtml::link('&gt;&gt;我的相册', array('galleryAlbums','username'=>$this->_user->username)); ?></div>
                 <div id="pzhengwen">
                 	<div id="socroll_img" >
                      <div id="socroll_img1" class="socroll_content">
                       <ul>
                         <?php foreach ($galleries as $key=>$gallery): ?>
-                        <li><?php echo CHtml::link(CHtml::image($gallery->getGalleryUrl()),array('gallery','gid'=>$gallery->id,'username'=>$this->_user['username'])); ?></li>
+                        <li><?php echo CHtml::link(CHtml::image($gallery->getGalleryUrl()),array('gallery','gid'=>$gallery->id,'username'=>$this->_user->username)); ?></li>
                         <?php endforeach ?>
                       </ul>
                      </div>
@@ -68,77 +68,52 @@
         </div>
         <div id="webRightmain">
         	<div id="webKuang">
-            	<div id="kTitle"><a href="about.html">个人资料</a></div>
+            	<div id="kTitle"><a href="#">个人资料</a></div>
                 <div id="aNeirong">
                 	<div class="nr-touxiang" align="center">
-                    	<form>
-                                <img src="<?php echo Yii::app()->theme->baseUrl; ?>/image/photo00.gif" /><br />
-                        <input name="" type="button" onfocus="javascript:blur();" class="anniubj" value="加为好友" />
-                        　<input type="button" onfocus="javascript:blur();" class="anniubj" value="悄悄话" />
-                        <div class="clr"></div>
-                        </form>
+                        <?php echo CHtml::image($this->_user->getAvatarUrl('big')); ?><br />
+                        <div>
+                                <?php echo CHtml::link('加为好友', array('addFriend','uid'=>$this->_user->id)); ?> | 
+                                <?php echo CHtml::link('悄悄话', array('addSms','uid'=>$this->_user->id)); ?>
+                        </div>
                     </div>
                     <div class="nr-ziliao">
-                    	姓名：微笑、在线<br />
-                      性别：女<br />
-                      籍贯：湖南邵东<br />
-                      生日：1989-05-11<br />
-                      爱好：唱歌,跳舞,绘画,外出旅游<br />
-                      企业：品牌化妆品折扣店<br />
-                      地址：邵阳市敏州路口中国建设银行对面<br />
-                      职位：老板<br />
-                      网址：http://<br />
-                      行业：(3)日化用品<br />
-                      联系方式：513964832
+                      姓名：<?php echo CHtml::encode($this->_user->realname); ?><br />
+                      性别：<?php echo CHtml::encode($this->_user->getUserSex()); ?><br />
+                      籍贯：<?php echo CHtml::encode($this->_user->userinfo->native); ?><br />
+                      生日：<?php echo CHtml::encode($this->_user->birthday); ?><br />
+                      爱好：<?php echo CHtml::encode($this->_user->userinfo->hobby); ?><br />
+                      企业：<?php echo CHtml::encode($this->_user->compnay); ?><br />
+                      地址：<?php echo CHtml::encode($this->_user->userinfo->address); ?><br />
+                      职位：<?php echo CHtml::encode($this->_user->userinfo->position); ?><br />
+                      网址：<?php echo CHtml::encode($this->_user->userinfo->url); ?><br />
+                      行业：<?php echo CHtml::encode($this->_user->blogCategory->name); ?><br />
+                      手机：<?php echo CHtml::encode($this->_user->userinfo->mobilePhone); ?>
                     </div>
                 </div>
             </div>
         	<div id="webKuang">
             	<div id="kTitle">我的好友</div>
                 <div id="kNeirong">
-                    <div class="Rf-friend"> <a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/touxiang.gif" /></a>姓名：<a href="#" target="_blank">冷落清秋</a><br />
-              	    公司：<a href="#" target="_blank">浙江品心茶业</a><br />
-              	    网址：<a href="#" target="_blank">http://www.11ok.net</a>
+                    <?php foreach ($this->_user->friends as $key=>$friend): ?>
+                    <div class="Rf-friend">
+                            <?php echo CHtml::link(CHtml::image($friend->getAvatarUrl('small')), array('blog/index','username'=>$friend->username)); ?>
+                            姓名：<?php echo CHtml::link($friend->realname, array('blog/index','username'=>$friend->username)); ?><br />
+                            公司：<?php echo CHtml::encode($friend->compnay); ?><br />
+                            行业：<?php echo CHtml::encode($friend->blogCategory->name); ?>
               	    <div class="clr"></div>
                     </div>
-                    <div class="Rf-friend"> <a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/touxiang.gif" /></a>姓名：<a href="#" target="_blank">冷落清秋</a><br />
-              	    公司：<a href="#" target="_blank">浙江品心茶业</a><br />
-              	    网址：<a href="#" target="_blank">http://www.11ok.net</a>
-              	    <div class="clr"></div>
-                    </div>
-                    <div class="Rf-friend"> <a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/touxiang.gif" /></a>姓名：<a href="#" target="_blank">冷落清秋</a><br />
-              	    公司：<a href="#" target="_blank">浙江品心茶业</a><br />
-              	    网址：<a href="#" target="_blank">http://www.11ok.net</a>
-              	    <div class="clr"></div>
-                    </div>
-                    <div class="Rf-friend"> <a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/touxiang.gif" /></a>姓名：<a href="#" target="_blank">冷落清秋</a><br />
-              	    公司：<a href="#" target="_blank">浙江品心茶业</a><br />
-              	    网址：<a href="#" target="_blank">http://www.11ok.net</a>
-              	    <div class="clr"></div>
-                    </div>
-                    <div class="Rf-friend"> <a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/touxiang.gif" /></a>姓名：<a href="#" target="_blank">冷落清秋</a><br />
-              	    公司：<a href="#" target="_blank">浙江品心茶业</a><br />
-              	    网址：<a href="#" target="_blank">http://www.11ok.net</a>
-              	    <div class="clr"></div>
-                    </div>
+                    <?php endforeach ?>
                 </div>
             </div>
             <div id="webFangke">
             	<div id="fkTitle">最近访客</div>
                 <div id="fkNeirong">
-                	<ul>
-                    	<li><a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/touxiang.gif" /></a><br />
-               	      <a href="#">闲庭信步</a></li>
-                    	<li><a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/touxiang02.gif" /></a><br />
-               	      <a href="#">夏末初秋</a></li>
-                    	<li><a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/touxiang03.gif" /></a><br />
-               	      <a href="#">临轩听雨</a></li>
-                    	<li><a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/touxiang04.gif" /></a><br />
-               	      <a href="#">男人如毒</a></li>
-                    	<li><a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/touxiang05.gif" /></a><br />
-               	      <a href="#">四叶草</a></li>
-                    	<li><a href="#"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/touxiang.gif" /></a><br />
-               	      <a href="#">闲庭信步</a></li>
+                    <ul>
+                    <?php foreach ($this->_user->visits as $key=>$visit): ?>
+                            <li><?php echo CHtml::link(CHtml::image($visit->getAvatarUrl('small')), array('blog/index','username'=>$visit->username)); ?><br />
+                                <?php echo CHtml::link($visit->realname, $url); ?></li>
+                    <?php endforeach ?>
                     </ul>
                     <div class="clr"></div>
                 </div>
