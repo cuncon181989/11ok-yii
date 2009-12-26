@@ -76,6 +76,10 @@ class Users extends CActiveRecord
 		return array(
                     'blogCategory'=>array(self::BELONGS_TO,'BlogCategories','blogCategoryId'),
                     'blogs'=>array(self::HAS_ONE,'blogs','usersId'),
+                    'userinfo'=>array(self::HAS_ONE,'userinfo','usersId'),
+                    'friends'=>array(self::MANY_MANY,'users','{{friends}}(userId,friendId)', 'limit'=>5),
+                    //'visits'=>array(self::MANY_MANY,'users','{{Visits}}(userId,visitId)', 'limit'=>16),
+                    'visits'=>array(self::MANY_MANY,'users','{{Visits}}(visitId,userId)', 'limit'=>16),
 		);
 	}
 
@@ -134,6 +138,7 @@ class Users extends CActiveRecord
         protected function afterFind(){
             $this->oldBlogCate= $this->blogCategoryId;
             $this->settings= unserialize($this->settings);
+            if ($this->realname=='') $this->realname= $this->username;
         }
         /**
          * 这里更新一下行业统计字段

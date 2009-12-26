@@ -56,7 +56,7 @@ class GalleryAlbums extends CActiveRecord
 		return array(
                         'blog'=>array(self::BELONGS_TO,'blogs','blogsId'),
                         'user'=>array(self::BELONGS_TO,'users','usersId'),
-                        'gallerys'=>array(self::HAS_MANY,'gallery','galleryAlbumsId'),
+                        'gallerys'=>array(self::HAS_MANY,'gallery','galleryAlbumsId', 'limit'=>10),
 		);
 	}
 

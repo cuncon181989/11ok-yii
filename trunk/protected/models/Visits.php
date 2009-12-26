@@ -61,4 +61,13 @@ class Visits extends CActiveRecord
 			'visitDate' => '日期',
 		);
 	}
+        /**
+         * @return 更新时间字段
+         */
+        protected function beforeValidate(){
+            if($this->isNewRecord)
+                $this->visitDate= time();
+            return true;
+        }
+
 }

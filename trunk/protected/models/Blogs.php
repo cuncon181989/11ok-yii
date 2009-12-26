@@ -59,8 +59,8 @@ class Blogs extends CActiveRecord
                     'blogCategory'=>array(self::BELONGS_TO,'BlogCategories','blogCategoryId'),
                     'users'=>array(self::BELONGS_TO,'Users','usersId'),
                     'articlesCategory'=>array(self::HAS_MANY,'ArticlesCategories','blogsId'),
-                    'articles'=>array(self::HAS_MANY,'Articles','blogsId'),
-                    'gallery'=>array(self::HAS_MANY,'Gallery','blogsId'),
+                    'articles'=>array(self::HAS_MANY,'Articles','blogsId', 'limit'=>10),
+                    'gallery'=>array(self::HAS_MANY,'Gallery','blogsId', 'limit'=>10),
                     'galleryAlbums'=>array(self::HAS_MANY,'GalleryAlbums','blogsId'),
 		);
 	}

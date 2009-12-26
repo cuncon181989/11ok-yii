@@ -33,7 +33,10 @@ return array(
 				),
 				array(
 					'class'=>'CWebLogRoute',
-					'levels'=>'trace, info, profile, error, warning',
+				),
+				array(
+					'class'=>'CProfileLogRoute',
+                                        'enabled'=>true,
 				),
 			),
 		),
