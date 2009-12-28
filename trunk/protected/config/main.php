@@ -42,7 +42,7 @@ return array(
 		),
 		'user'=>array(
 			// enable cookie-based authentication
-			'allowAutoLogin'=>true,
+			// 'allowAutoLogin'=>true,
 		),
 		// uncomment the following to set up database
 		'db'=>array(
@@ -52,7 +52,7 @@ return array(
                         'username'=>'webuser',
                         'password'=>'webuser',
                         'tablePrefix'=>'y11ok_',
-                        //'enableProfiling'=>true,
+                        'enableProfiling'=>true,
                         'enableParamLogging'=>true,
                 ),
                 'themeManager'=>array(
@@ -83,6 +83,9 @@ return array(
                 ),
                 'CFile'=>array(
                         'class'=>'ext.CFile',
+                ),
+                'DRedirect'=>array(
+                        'class'=>'ext.DRedirect',
                 ),
 	),
 

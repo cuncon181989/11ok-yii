@@ -65,8 +65,8 @@ class Visits extends CActiveRecord
          * @return 更新时间字段
          */
         protected function beforeValidate(){
-            if($this->isNewRecord)
-                $this->visitDate= time();
+            //不管是新插入还是更新都应该记录当前时间
+            $this->visitDate= time();
             return true;
         }
 
