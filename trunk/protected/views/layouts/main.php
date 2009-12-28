@@ -10,7 +10,7 @@
 <div id="webmap" align="center">
 <div id="webHeader" align="left">
         <div id="headerTitle" class="FloatLeft">欢迎来到<?php echo $this->_user['realname']; ?>的<img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/ie.gif" />家</div>
-    <div id="logo" class="FloatRight"><a href="http://www.11ok.net" target="_blank"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/logo.gif" /></a></div>
+        <div id="logo" class="FloatRight"><a href="<?php echo Yii::app()->getRequest()->baseUrl.'/'; ?>" target="_blank"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/logo.gif" /></a></div>
     <div class="clr"></div>
 </div>
 <div id="weball" align="left">
