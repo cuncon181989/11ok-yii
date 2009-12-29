@@ -155,14 +155,16 @@ class BlogController extends CController
          */
          public function actionAddFriend(){
                 $uid= $_GET['uid'];
+                if (Yii::app()->user->id==$uid)
+                        Yii::app()->DRedirect->redirect(Yii::app()->getRequest()->getUrlReferrer(),'自己和自己这么熟了还要加好友？系统不允许哦^_^');
                 if (Yii::app()->user->isGuest){
                         Yii::app()->user->returnUrl=$this->createUrl('addfriend',array('uid'=>$uid));
                         Yii::app()->DRedirect->redirect(array('site/login'),'需要登录才能添加好友！');
                 }else{
                         if(Friends::model()->exists('userId=:uid AND friendId=:fid', array(':uid'=>Yii::app()->user->id,':fid'=>$uid))){
-                                Yii::app()->DRedirect->redirect(array('blog/index'),'你们已经是朋友了！不需要重复添加^_^');
+                                Yii::app()->DRedirect->redirect(array('blog/index','username'=>$this->_user->username),'已经在你的好友列表了！不需要重复添加^_^');
                         }else{
-                                Yii::app()->DRedirect->redirect(array('blog/index'),'添加成功！');
+                                Yii::app()->DRedirect->redirect(array('blog/index','username'=>$this->_user->username),'添加成功！');
                         }
                 }
          }
