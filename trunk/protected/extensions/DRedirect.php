@@ -2,7 +2,7 @@
 class DRedirect extends CApplicationComponent
 {
         //添加一个指定时间后的带消息跳转
-        public static function redirect($url,$msg=NULL,$end=true,$time=3){
+        public static function redirect($url,$msg=NULL,$time=3,$end=true){
                 if(is_array($url))
 		{
 			$route=isset($url[0]) ? $url[0] : '';

@@ -65,6 +65,7 @@ class Articles extends CActiveRecord
                     'user'=>array(self::BELONGS_TO,'Users','usersId'),
                     'gArtCate'=>array(self::BELONGS_TO,'GlobalArticlesCategories','globalArticlesCategoriesId'),
                     'artText'=>array(self::HAS_ONE,'ArticlesText','articlesId'),
+                    'comments'=>array(self::HAS_MANY,'ArticlesComments','articlesId'),
 		);
 	}
 

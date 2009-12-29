@@ -32,6 +32,7 @@
                         </div>
                 </div>
                 <?php endforeach ?>
+                <?php $this->widget('CLinkPager',array('pages'=>$pages)); ?>
                 </div>
             <div id="webPhoto">
             	<div id="pBiaoti"><?php echo CHtml::link('&gt;&gt;我的相册', array('galleryAlbums','username'=>$this->_user->username)); ?></div>
