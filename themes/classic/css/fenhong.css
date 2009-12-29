@@ -1,0 +1,132 @@
+body {
+	margin:0px auto;
+	padding:0px;
+	font-size:12px;
+	color:#666;
+	background-color:#fff;
+}
+.clr {
+	clear:both;
+	margin:0px;
+	padding:0px;
+	font-size:0px;
+	line-height:0px;
+	height:0px;
+}
+p,ul,span,dt,dl,li,hr,img{
+	margin:0px;
+	padding:0px;
+	border:none;
+	list-style-type:none;
+	font-style:normal;
+	font-weight:normal;
+}
+a {
+	color:#666;
+	text-decoration:none;
+}
+a:hover {
+	text-decoration: none;
+	color:#d1437a;
+}
+
+.FloatLeft {
+	float:left;
+}
+.FloatRight {
+	float:right;
+}
+form  {margin:0px;}
+
+#socroll_img{OVERFLOW:hidden;WIDTH:638px;HEIGHT:140px;white-space:nowrap;}
+.socroll_content, .socroll_content ul, .socroll_content ul li{display:inline;list-style:none;}
+.socroll_content li img {width:177px; height:130px; border:3px solid #ccc;}
+
+/*-------------整体样式-----------------------*/
+#webmap  {width:1003px;}
+#webHeader  {width:1003px; height:194px; background:url(../images/picfenhong.jpg) center top no-repeat;}
+#headerTitle  {padding:40px 0px 0px 10px; height:43px; font:Arial, Helvetica, sans-serif; font-size:36px; font-weight:bold; color:#ed5298}
+#logo img  {margin:10px 10px 0px 0px; border:3px solid #f5a8c6;}
+#weball  {width:910px;}
+#webMenu  {height:45px; background:url(../images/fenhongmenu02.gif) center bottom no-repeat;}
+#menu  {height:34px; line-height:34px; background:url(../images/fenhongmenu.gif) center top no-repeat; font-weight:bold; font-size:14px; color:#fff;}
+#menu a  {margin:30px 30px; font-weight:bold; color:#fff;}
+#menu a:hover  { color:#ed5298}
+
+
+#webLeftmain  {width:648px; float:left;}
+#webGongqiu  {border:1px solid #d1437a; background-color:#feb8d4; padding:5px 10px 5px 10px; margin-bottom:15px; line-height:25px;}
+#webGongqiu li  {float:left; width:50%;}
+#webGongqiu strong  {color:#d1437a;}
+#webDiary,#webPhoto,#webabout  {line-height:25px; margin-bottom:15px;}
+
+
+
+
+#webRightmain  {width:252px; float:right;}
+#webKuang  {margin-bottom:10px;}
+#kTitle  {height:25px; line-height:25px; padding-left:27px; font-weight:bold; background:url(../images/fenhongtitle.gif) left top no-repeat; font-size:14px;color:#FFF;}
+#kTitle a  {color:#FFF;}
+.nr-ziliao  {line-height:22px;}
+#kNeirong,#aNeirong  {border:1px solid #fe93bd; padding:6px;}
+#webFangke  {border:1px solid #fe93bd; padding:6px;color:#d1437a;}
+#fkTitle  {height:20px; padding-left:19px; line-height:19px; font-weight:bold; background:url(../images/icon.gif) left center no-repeat; margin-bottom:5px;}
+#fkNeirong li  {width:25%; float:left; margin-bottom:5px; text-align:center;}
+#fkNeirong img  {width:42px; height:42px; border:2px solid #e3e3e3; margin-bottom:3px;}
+
+#webUnder  {margin-top:10px; background:url(../images/whiteunderline.gif) center top no-repeat; height:52px; text-align:center; line-height:52px;}
+
+.anniubj  {background:url(../images/anniu01.gif) left top no-repeat; border:0px; height:20px; width:60px; margin-top:5px;}
+/*-------------整体样式结束-----------------------*/
+
+
+
+
+/*--------更换样式--------*/
+.dTitle  {margin-left:10px; font-size:14px; font-weight:bold;color:#d1437a;}
+#dBiaoti,#pBiaoti,#aboutBiaoti  {height:25px; background-color:#fe93bd; border-left:3px solid #d1437a; border-bottom:1px solid #fe93bd;color:#d1437a;}
+#dBiaoti a,#dBiaoti span  {margin:0px 7px 0px 7px;color:#d1437a;}
+#dzhengwen,#pzhengwen,#aboutzhengwen  {padding:5px;}
+#pBiaoti a  {font-size:14px; font-weight:bold; margin-left:10px;color:#d1437a;}
+#aboutBiaoti a  {margin:0px 10px 0px 10px;}
+#aboutzhengwen img  {margin:5px 20px 0px 20px; border:3px solid #e3e3e3;}
+.fontcent  {text-align:center;}
+.diarypage a,#diarypage span  {margin:5px 5px;}
+#diarypinglun  {padding:5px;}
+#diarypinglun li  {border-top:1px solid #c8c8c8; margin-bottom:10px;}
+#diarypinglun li img  {width:42px; height:42px; border:2px solid #e3e3e3; margin:5px;}
+.leftpinglun  {display:block; text-align:center; background-color:#fceef5; margin-right:3px; width:56px;}
+.rightpinglun  {display:block; background-color:#fceef5;width:569px; padding:5px;}
+.huifu  {background-color:#fffdfe; width:535px; padding:0px 10px 0px 10px; margin-left:14px;}
+
+#webphotolist li  {border-bottom:1px dashed #ccc; line-height:25px; height:25px; background:url(../images/iconwhite03.gif) left center no-repeat; padding-left:20px;}
+#webxiangce  {padding:10px;}
+#webxiangce li  {float:left; width:33%; margin-bottom:10px; text-align:center;}
+#webxiangce img  {width:180px; height:135px; border:3px solid #e3e3e3; margin-bottom:3px;}
+#xiangceDetails  {margin-top:10px;}
+
+
+.nr-touxiang img  {margin-bottom:5px;}
+.Rf-friend  {border-bottom:1px solid #ccc; line-height:16px; margin-top:10px;}
+#kNeirong img  {height:42px; width:42px; border:2px solid #e3e3e3; float:left; margin:0px 10px 10px 0px;}
+/*--------更换样式结束--------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
