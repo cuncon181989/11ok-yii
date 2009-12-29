@@ -97,11 +97,17 @@ class BlogController extends CController
          *  博客首页
          */
         public function actionIndex(){
-                Yii::app()->user->setFlash('abc','abcc');
-                //$blog= Blogs::model()->find('{{blogs}}.usersId=:uid', array(':uid'=>$this->_user['id']));
-                $articles= Articles::model()->findAll('blogsId=:bid AND status=1 ORDER BY id DESC LIMIT 6', array(':bid'=>$this->_blog->id));
+                //下面是为文章分页
+                $acriteria= new CDbCriteria();
+                $acriteria->condition= 'blogsId=:bid AND status=1';
+                $acriteria->params= array(':bid'=>$this->_blog->id);
+                $acriteria->order= 'createDate DESC';
+                $pages= new CPagination(Articles::model()->count($acriteria));
+		$pages->pageSize=self::PAGE_SIZE;
+		$pages->applyLimit($acriteria);
+                
+                $articles= Articles::model()->findAll($acriteria);
                 $galleries= Gallery::model()->findAll('blogsId=:bid AND status=1 ORDER BY id DESC LIMIT 6', array(':bid'=>$this->_blog->id));
-                //$friends= Users::model()->with('friends')->findAll('{{users}}.id=:uid AND status=1', array(':uid'=>$this->_user->id));
                 if ($this->_user['userType']==2){
                         $gongying= Articles::model()->findAll('blogsId=:bid AND globalArticlesCategoriesId=2 AND status=1 ORDER BY id DESC LIMIT 5', array(':bid'=>$this->_blog->id));
                         $gongying= Articles::model()->findAll('blogsId=:bid AND globalArticlesCategoriesId=3 AND status=1 ORDER BY id DESC LIMIT 5', array(':bid'=>$this->_blog->id));
@@ -111,6 +117,7 @@ class BlogController extends CController
                 }
                 $this->render('index', array(
                                              'articles'=>$articles,
+                                             'pages'=>$pages,
                                              'galleries'=>$galleries,
                                              'gongying'=>$gongying,
                                              'qiqgou'=>$qiugou,
@@ -127,8 +134,13 @@ class BlogController extends CController
          *  文章页
          */
         public function actionArticle(){
-
-                $this->render('article', array());
+                $aid= $_GET['aid'];
+                $article= Articles::model()->with('artText','comments')->findByPk($aid, '{{articles}}.usersId=:uid AND {{articles}}.status=1', array(':uid'=>$this->_user->id));
+                if (Yii::app()->user->getState('viewArt'.$article->id)!=1){
+                        Articles::model()->updateCounters(array('countReads'=>1), 'id=:aid', array('aid'=>$article->id));
+                }
+                Yii::app()->user->setState('viewArt'.$article->id,1);
+                $this->render('article', array('article'=>$article,));
         }
         /**
          *  相册列表页
@@ -159,12 +171,18 @@ class BlogController extends CController
                         Yii::app()->DRedirect->redirect(Yii::app()->getRequest()->getUrlReferrer(),'自己和自己这么熟了还要加好友？系统不允许哦^_^');
                 if (Yii::app()->user->isGuest){
                         Yii::app()->user->returnUrl=$this->createUrl('addfriend',array('uid'=>$uid));
-                        Yii::app()->DRedirect->redirect(array('site/login'),'需要登录才能添加好友！');
+                        Yii::app()->DRedirect->redirect(array('site/login'),'需要登录才能添加好友！',3,false);
+                        Yii::app()->user->returnUrl=$this->createUrl('site/index');
                 }else{
                         if(Friends::model()->exists('userId=:uid AND friendId=:fid', array(':uid'=>Yii::app()->user->id,':fid'=>$uid))){
-                                Yii::app()->DRedirect->redirect(array('blog/index','username'=>$this->_user->username),'已经在你的好友列表了！不需要重复添加^_^');
+                                Yii::app()->DRedirect->redirect(Yii::app()->getRequest()->getUrlReferrer(),'已经在你的好友列表了！不需要重复添加^_^');
                         }else{
-                                Yii::app()->DRedirect->redirect(array('blog/index','username'=>$this->_user->username),'添加成功！');
+                                $friend= new friends;
+                                $friend->userId   = Yii::app()->user->id;
+                                $friend->friendId = $uid;
+                                $friend->status  =1;
+                                $friend->save();
+                                Yii::app()->DRedirect->redirect(Yii::app()->getRequest()->getUrlReferrer(),'添加成功！');
                         }
                 }
          }

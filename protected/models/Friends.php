@@ -60,11 +60,22 @@ class Friends extends CActiveRecord
 	{
 		return array(
 			'id' => 'Id',
-			'userId' => 'User',
-			'friendId' => 'Friend',
-			'status' => 'Status',
-			'message' => 'Message',
-			'createDate' => 'Create Date',
+			'userId' => '用户id',
+			'friendId' => '好友id',
+			'status' => '状态',
+			'message' => '附加消息',
+			'createDate' => '请求时间',
 		);
 	}
+        /**
+         * @return 更新时间字段
+         */
+        protected function beforeValidate(){
+            //不管是新插入还是更新都应该记录当前时间
+            if ($this->isNewRecord){
+                $this->createDate= time();
+            }
+            return true;
+        }
+
 }
