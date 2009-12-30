@@ -91,6 +91,7 @@
                     <?php else: ?>
                         <div>欢迎你！<?php echo Yii::app()->user->name ?></div>
                         <div><?php echo CHtml::link('进入自己的博客', array('blogs/index','id'=>Yii::app()->user->id,'username'=>Yii::app()->user->name)); ?></div>
+                        <div><?php echo CHtml::link('退出', array('site/logout')); ?></div>
                     <?php endif ?>
                 </div>
                 <div id="loginLine03"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/loginline03.gif" /></div>

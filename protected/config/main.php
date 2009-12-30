@@ -52,8 +52,9 @@ return array(
                         'username'=>'webuser',
                         'password'=>'webuser',
                         'tablePrefix'=>'y11ok_',
-                        'enableProfiling'=>true,
+                        //'enableProfiling'=>true,
                         'enableParamLogging'=>true,
+                        //'schemaCachingDuration'=>3600,
                 ),
                 'themeManager'=>array(
                         
@@ -71,11 +72,10 @@ return array(
                                 // '/<username:\w+>/<_c:(blogs|articles)>/<id:\d+>/<_a:(create|update|delete)>' => '<_c>/<_a>',
                         ),
                 ),
-                /**
+                /**/
                 'cache'=>array(
                         'class'=>'system.caching.CFileCache',
-                        'cacheFileSuffix'=>'.html',
-                        'directoryLevel'=>1,
+                        'directoryLevel'=>0,
                 ),
                 /**/
                 'thumb'=>array(

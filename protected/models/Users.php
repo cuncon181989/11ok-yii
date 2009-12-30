@@ -124,11 +124,11 @@ class Users extends CActiveRecord
                 $this->regDate= $this->lastLoginDate= time();
                 $this->userStatus=1;
                 $http1=new CHttpRequest();
-                $this->regIp= $http1->getUserHostAddress();
+                $this->regIp= Yii::app()->getRequest()->getUserHostAddress();
             }else{
                 $this->lastLoginDate= time();
                 $http1=new CHttpRequest();
-                $this->lastLoginIp= $http1->getUserHostAddress();
+                $this->lastLoginIp= Yii::app()->getRequest()->getUserHostAddress();
             }
             return true;
         }

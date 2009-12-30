@@ -63,13 +63,17 @@ class ArticlesText extends CActiveRecord
 		);
 	}
         /**
-         *  保存前设置noHtmlContent内容并清除不需要的格式字符
+         *  保存前设置
          * @return <type>
          */
         protected function beforeSave(){
-            $this->noHtmlContent= strip_tags($this->content);
-            $this->noHtmlContent= preg_replace("/^\r\n|\r\n$|[\f\t\v]+|[ ]*&nbsp;/",'',$this->noHtmlContent);
-            $this->noHtmlContent= preg_replace("/[\r\n]{4,}/","\n",$this->noHtmlContent);
             return true;
+        }
+        
+        public function getNoHtmlContent(){
+            $noHtml= strip_tags($this->content);
+            $noHtml= preg_replace("/^\r\n|\r\n$|[\f\t\v]+|[ ]*&nbsp;/",'',$noHtml);
+            $noHtml= preg_replace("/[\r\n]{4,}/","\n",$noHtml);
+            return nl2br($noHtml);
         }
 }
