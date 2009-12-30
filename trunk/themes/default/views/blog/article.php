@@ -1,6 +1,7 @@
 <div id="webMain">
         <div id="webLeftmain">
                 <div id="webDiary">
+                        <div><?php echo Yii::app()->user->getFlash('addcommment'); ?></div>
                         <div class="FloatLeft"><?php echo CHtml::link('&gt;&gt;我的日记', array('articles','username'=>$this->_user->username), array('class'=>'dTitle')); ?></div>
                         <div class="FloatRight diarypage"></div>
                         <div class="clr" style="height:5px;"></div>
@@ -8,88 +9,67 @@
                                <h3><?php echo CHtml::encode($article->title); ?></h3>
                                <div>查看(<?php echo $article->countReads; ?>) 评论(<?php echo $article->countComments; ?>) 发布日期：<?php echo date('Y-m-d H:i:s',$article->createDate); ?></div>
                                 <p id="dzhengwen">
-                                        <?php echo $article->artText->content; ?>
+                                        <?php echo $article->artText->getNoHtmlContent(); ?>
                                 </p>
                         </div>
-                        <div id="dBiaoti"><strong class="FloatLeft">　所有评论</strong><span class="FloatRight diarypage"><a href="#">下一页</a><a href="#">上一页</a><span>共12条</span></span>
+                        <div id="dBiaoti"><strong class="FloatLeft">　所有评论</strong><span class="FloatRight diarypage"><span>共<?php echo $article->countComments; ?>条</span></span>
                                 <div class="clr"></div></div>
                         <div id="diarypinglun">
                                 <ul>
+                                        <?php foreach ($article->comments as $key=>$comment): ?>
                                         <li>
-                                                <span class="FloatLeft leftpinglun"><img src="images/touxiang.gif" /><br />闲庭漫步</span>
-                                                <span class="FloatRight rightpinglun">用户：admin　 发表于：2009-07-24 16:09:42<br />
-                                                        GT视频网站放出了，EA其下RTS全新续作《命令与征服4》</span>
-                                                <div class="clr"></div>
-                                        </li>
-                                        <li>
-                                                <span class="FloatLeft leftpinglun"><img src="images/touxiang.gif" /><br />闲庭漫步</span>
-                                                <span class="FloatRight rightpinglun">用户：admin　 发表于：2009-07-24 16:09:42<br />
-                                                        GT视频网站放出了，EA其下RTS全新续作《命令与征服4》
-                                                        <div class="huifu">可惜我没有时间去看啊</div>
+                                                <span class="FloatLeft leftpinglun">
+                                                <?php if ($comment->usersId>0): ?>
+                                                <?php echo CHtml::link(CHtml::image($comment->user->getAvatarUrl()),array('blog/index','username'=>$comment->user->username)); ?><br />
+                                                <?php echo CHtml::link(CHtml::encode($comment->userName),array('blog/index','username'=>$comment->user->username)); ?>
+                                                <?php else: ?>
+                                                <?php echo CHtml::image(Yii::app()->getRequest()->baseUrl.'/images/guestAvatar.gif'); ?>
+                                                <?php echo CHtml::encode($comment->userName); ?>
+                                                <?php endif ?>
                                                 </span>
+                                                <span class="FloatRight rightpinglun">
+                                                <?php echo CHtml::encode($comment->title); ?><br />
+                                                <?php echo CHtml::encode($comment->content); ?><br />
+                                                <?php echo date('Y-m-d H:i:s',$comment->createDate); ?></span>
                                                 <div class="clr"></div>
                                         </li>
-                                        <li>
-                                                <span class="FloatLeft leftpinglun"><img src="images/touxiang.gif" /><br />闲庭漫步</span>
-                                                <span class="FloatRight rightpinglun">用户：admin　 发表于：2009-07-24 16:09:42<br />
-                                                        GT视频网站放出了，EA其下RTS全新续作《命令与征服4》征服4》
-                                                        <div class="huifu">可惜我没有时间去看啊</div>
-                                                </span>
-                                                <div class="clr"></div>
-                                        </li>
-                                        <li>
-                                                <span class="FloatLeft leftpinglun"><img src="images/touxiang.gif" /><br />闲庭漫步</span>
-                                                <span class="FloatRight rightpinglun">用户：admin　 发表于：2009-07-24 16:09:42<br />
-                                                        GT视频网站放出了，EA其下RTS全新续作《命令与征服4》GT视频网站放出了，EA其下RTS全新续作《命令与征服4》GT视频网站放出了，EA其下RTS全新续作《命令与征服4》GT视频网站放出了，EA其下RTS全新续作《命令与征服4》GT视频网站放出了，EA其下RTS全新续作《命令与征服4》</span>
-                                                <div class="clr"></div>
-                                        </li>
-                                        <li>
-                                                <span class="FloatLeft leftpinglun"><img src="images/touxiang.gif" /><br />闲庭漫步</span>
-                                                <span class="FloatRight rightpinglun">用户：admin　 发表于：2009-07-24 16:09:42<br />
-                                                        GT视频网站放出了，EA其下RTS全新续作《命令与征服4》征服4》
-                                                        <div class="huifu">可惜我没有时间去看啊</div>
-                                                </span>
-                                                <div class="clr"></div>
-                                        </li>
+                                        <?php endforeach ?>
                                 </ul>
                         </div>
-                        <div id="dBiaoti">　<strong>发表评论</strong></div>
-                        <form>
-                                标题（必填）：
-                                <label>
-                                        <input type="text" name="textfield" id="textfield" />
-                                </label>
-                                <br />
-                                内容（必填）：
-                                <label>
-                                        <textarea name="textarea" id="textarea" cols="45" rows="5"></textarea>
-                                </label>
-                                <br />
-                                昵称（必填）：
-                                <label>
-                                        <input type="text" name="textfield3" id="textfield3" />
-                                </label>
-                                <br />
-                                电子邮件：　　
-                                <label>
-                                        <input type="text" name="textfield2" id="textfield2" />
-                                </label>
-                                <br />
-                                个人网页：　　
-                                <label>
-                                        <input type="text" name="textfield4" id="textfield4" />
-                                </label>
-                                <label>
-                                        <div align="center">
-                                                <label>
-                                                        <input type="submit" name="button2" onfocus="javascript:blur();" class="anniubj" id="button2" value="重置" />
-
-                                                </label>
-                                                <label>
-                                                        <input type="submit" class="anniubj" onfocus="javascript:blur();" name="button" id="button" value="提交" />
-                                                </label>
+                        <div id="dBiaoti"><a href="#" name="addcomment" /><strong>发表评论</strong></a></div>
+                        <div class="yiiForm">
+                                <?php echo CHtml::beginForm(); ?>
+                                <?php echo CHtml::errorSummary($commentModel); ?>
+                                <?php if (Yii::app()->user->isGuest): ?>
+                                        <div class="simple">
+                                        <?php echo CHtml::activeLabelEx($commentModel,'userName'); ?>
+                                        <?php echo CHtml::activeTextField($commentModel, 'userName'); ?>
                                         </div>
-                        </form>
+                                        <div class="simple">
+                                        <?php echo CHtml::activeLabelEx($commentModel,'userEmail'); ?>
+                                        <?php echo CHtml::activeTextField($commentModel, 'userEmail'); ?>
+                                        </div>
+                                        <div class="simple">
+                                        <?php echo CHtml::activeLabelEx($commentModel,'userUrl'); ?>
+                                        <?php echo CHtml::activeTextField($commentModel, 'userUrl'); ?>
+                                        </div>
+                                <?php else: ?>
+                                        <?php echo CHtml::hiddenField('isLogin',1); ?>
+                                <?php endif ?>
+                                <div class="simple">
+                                <?php echo CHtml::activeHiddenField($commentModel, 'articlesId',array('value'=>$article->id)); ?>
+                                <?php echo CHtml::activeLabelEx($commentModel,'title'); ?>
+                                <?php echo CHtml::activeTextField($commentModel, 'title'); ?>
+                                </div>
+                                <div class="simple">
+                                <?php echo CHtml::activeLabelEx($commentModel,'content'); ?>
+                                <?php echo CHtml::activeTextArea($commentModel, 'content'); ?>
+                                </div>
+                                <div class="simple">
+                                <?php echo CHtml::submitButton('提交'); ?>
+                                </div>
+                                <?php echo CHtml::endForm(); ?>
+                        </div>
                 </div>
         </div>
         <div id="webRightmain">

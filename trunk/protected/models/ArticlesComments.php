@@ -45,12 +45,12 @@ class ArticlesComments extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                        array('userName, userEmail, title, content', 'required'),
+                        array('userName, title, content', 'required'),
                         array('userEmail', 'email'),
                         array('userUrl', 'url'),
-			array('articlesid, private, status', 'numerical', 'integerOnly'=>true),
+			array('articlesId, private, status', 'numerical', 'integerOnly'=>true),
 			array('userName, userEmail, userUrl, title', 'length', 'max'=>255),
-			array('content', 'length', 'min'=>10),
+			array('content', 'length', 'min'=>6),
 		);
 	}
 
@@ -62,6 +62,7 @@ class ArticlesComments extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                        'user'=>array(self::BELONGS_TO,'users','usersId'),
 		);
 	}
 
@@ -87,4 +88,15 @@ class ArticlesComments extends CActiveRecord
 			'createDate' => '发布日期',
 		);
 	}
+        protected function beforeValidate(){
+            if($this->isNewRecord){
+                $this->clientIp  = Yii::app()->getRequest()->getUserHostAddress();
+                $this->createDate= time();
+            }
+            return true;
+        }
+
+        protected function beforeSave(){
+                return true;
+        }
 }

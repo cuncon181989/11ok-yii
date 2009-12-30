@@ -29,7 +29,10 @@ class BlogController extends CController
                 if (empty($theme))
                         $theme='default';
                 Yii::app()->setTheme($theme);
-
+                //如果当前用户是所有者则设置个标识
+                if (Yii::app()->user->id== $this->_user->id)
+                        Yii::app()->user->setState('isOwner',1);
+                        
                 //插入最近查看数据
                 //当当前用户大于0则是登录用户，并且不是自己，并且当前会话只记录一次！
                 if (Yii::app()->user->id>0 && Yii::app()->user->id!=$this->_user->id && Yii::app()->user->getState('view'.$this->_user->id)!='1'){
@@ -134,13 +137,33 @@ class BlogController extends CController
          *  文章页
          */
         public function actionArticle(){
-                $aid= $_GET['aid'];
-                $article= Articles::model()->with('artText','comments')->findByPk($aid, '{{articles}}.usersId=:uid AND {{articles}}.status=1', array(':uid'=>$this->_user->id));
-                if (Yii::app()->user->getState('viewArt'.$article->id)!=1){
-                        Articles::model()->updateCounters(array('countReads'=>1), 'id=:aid', array('aid'=>$article->id));
+                //添加评论
+                $comment= new ArticlesComments;
+                if ($_POST['ArticlesComments']){
+                        $comment= new ArticlesComments;
+                        $comment->attributes= $_POST['ArticlesComments'];
+                        $comment->blogsId= $this->_blog->id;
+                        $comment->status= 1;//这里可以根据文章或blog的设置来设置；
+                        if ($_POST['isLogin']==1){
+                                $comment->usersId=Yii::app()->user->id;
+                                $comment->userName=Yii::app()->user->name;
+                        }
+                        if ($comment->save()){
+                                Yii::app()->user->setFlash('addcommment','添加评论成功！');
+                                $this->redirect(Yii::app()->getRequest()->getUrlReferrer());
+                                //Yii::app()->DRedirect->redirect(Yii::app()->getRequest()->getUrlReferrer(),'评论添加成功！系统正在返回。',1);
+                        }
                 }
-                Yii::app()->user->setState('viewArt'.$article->id,1);
-                $this->render('article', array('article'=>$article,));
+                //显示文章
+                $aid= intval($_GET['aid']);
+                $article= Articles::model()->with('artText','comments')->findByPk($aid, '{{articles}}.usersId=:uid AND {{articles}}.status=1', array(':uid'=>$this->_user->id));
+                if (Yii::app()->user->getState('viewArt'.$aid)!=1){
+                        Articles::model()->updateCounters(array('countReads'=>1), 'id=:aid', array('aid'=>$aid));
+                }
+                Yii::app()->user->setState('viewArt'.$aid,1);
+                $this->render('article', array('article'=>$article,
+                                               'commentModel'=>$comment,
+                                        ));
         }
         /**
          *  相册列表页
