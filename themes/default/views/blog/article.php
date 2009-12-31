@@ -1,15 +1,15 @@
 <div id="webMain">
         <div id="webLeftmain">
                 <div id="webDiary">
-                        <div><?php echo Yii::app()->user->getFlash('addcommment'); ?></div>
                         <div class="FloatLeft"><?php echo CHtml::link('&gt;&gt;我的日记', array('articles','username'=>$this->_user->username), array('class'=>'dTitle')); ?></div>
-                        <div class="FloatRight diarypage"></div>
+                        <div class="FloatRight diarypage"><?php if(Yii::app()->user->getState('isOwner')){echo CHtml::link('添加新日记', array('articles/create','username'=>$this->_user->username));} ?></div>
+                        <div class="clr"></div>
                         <div class="clr" style="height:5px;"></div>
                         <div id="dNeirong">
                                <h3><?php echo CHtml::encode($article->title); ?></h3>
                                <div>查看(<?php echo $article->countReads; ?>) 评论(<?php echo $article->countComments; ?>) 发布日期：<?php echo date('Y-m-d H:i:s',$article->createDate); ?></div>
                                 <p id="dzhengwen">
-                                        <?php echo $article->artText->getNoHtmlContent(); ?>
+                                        <?php echo $article->artText->content; ?>
                                 </p>
                         </div>
                         <div id="dBiaoti"><strong class="FloatLeft">　所有评论</strong><span class="FloatRight diarypage"><span>共<?php echo $article->countComments; ?>条</span></span>
@@ -28,7 +28,7 @@
                                                 <?php endif ?>
                                                 </span>
                                                 <span class="FloatRight rightpinglun">
-                                                <?php echo CHtml::encode($comment->title); ?><br />
+                                                <?php echo CHtml::link(CHtml::encode($comment->title),'#',array('name'=>$comment->id)); ?><br />
                                                 <?php echo CHtml::encode($comment->content); ?><br />
                                                 <?php echo date('Y-m-d H:i:s',$comment->createDate); ?></span>
                                                 <div class="clr"></div>
@@ -37,7 +37,8 @@
                                 </ul>
                         </div>
                         <div id="dBiaoti"><a href="#" name="addcomment" /><strong>发表评论</strong></a></div>
-                        <div class="yiiForm">
+                        <div class="flashMsg"><?php echo Yii::app()->user->getFlash('addcommment'); ?></div>
+                        <div class="okform">
                                 <?php echo CHtml::beginForm(); ?>
                                 <?php echo CHtml::errorSummary($commentModel); ?>
                                 <?php if (Yii::app()->user->isGuest): ?>
@@ -63,7 +64,7 @@
                                 </div>
                                 <div class="simple">
                                 <?php echo CHtml::activeLabelEx($commentModel,'content'); ?>
-                                <?php echo CHtml::activeTextArea($commentModel, 'content'); ?>
+                                <?php echo CHtml::activeTextArea($commentModel, 'content', array('rows'=>3,'cols'=>30)); ?>
                                 </div>
                                 <div class="simple">
                                 <?php echo CHtml::submitButton('提交'); ?>
@@ -72,58 +73,6 @@
                         </div>
                 </div>
         </div>
-        <div id="webRightmain">
-                <div id="webKuang">
-                        <div id="kTitle"><a href="#">个人资料</a></div>
-                        <div id="aNeirong">
-                                <div class="nr-touxiang" align="center">
-                                        <?php echo CHtml::image($this->_user->getAvatarUrl('big')); ?><br />
-                                        <div>
-                                                <?php echo CHtml::link('加为好友', array('addFriend','uid'=>$this->_user->id,'username'=>Yii::app()->user->name)); ?> |
-                                                <?php echo CHtml::link('悄悄话', array('addSms','uid'=>$this->_user->id,'username'=>Yii::app()->user->name)); ?>
-                                        </div>
-                                </div>
-                                <div class="nr-ziliao">
-                                        姓名：<?php echo CHtml::encode($this->_user->realname); ?><br />
-                                        性别：<?php echo CHtml::encode($this->_user->getUserSex()); ?><br />
-                                        籍贯：<?php echo CHtml::encode($this->_user->userinfo->native); ?><br />
-                                        生日：<?php echo CHtml::encode($this->_user->birthday); ?><br />
-                                        爱好：<?php echo CHtml::encode($this->_user->userinfo->hobby); ?><br />
-                                        企业：<?php echo CHtml::encode($this->_user->compnay); ?><br />
-                                        地址：<?php echo CHtml::encode($this->_user->userinfo->address); ?><br />
-                                        职位：<?php echo CHtml::encode($this->_user->userinfo->position); ?><br />
-                                        网址：<?php echo CHtml::encode($this->_user->userinfo->url); ?><br />
-                                        行业：<?php echo CHtml::encode($this->_user->blogCategory->name); ?><br />
-                                        手机：<?php echo CHtml::encode($this->_user->userinfo->mobilePhone); ?>
-                                </div>
-                        </div>
-                </div>
-                <div id="webKuang">
-                        <div id="kTitle">我的好友</div>
-                        <div id="kNeirong">
-                                <?php foreach ($this->_user->friends as $key=>$friend): ?>
-                                <div class="Rf-friend">
-                                                <?php echo CHtml::link(CHtml::image($friend->getAvatarUrl('small')), array('blog/index','username'=>$friend->username)); ?>
-                                        姓名：<?php echo CHtml::link($friend->realname, array('blog/index','username'=>$friend->username)); ?><br />
-                                        公司：<?php echo CHtml::encode($friend->compnay); ?><br />
-                                        行业：<?php echo CHtml::encode($friend->blogCategory->name); ?>
-                                        <div class="clr"></div>
-                                </div>
-                                <?php endforeach ?>
-                        </div>
-                </div>
-                <div id="webFangke">
-                        <div id="fkTitle">最近访客</div>
-                        <div id="fkNeirong">
-                                <ul>
-                                        <?php foreach ($this->_user->visits as $key=>$visit): ?>
-                                        <li><?php echo CHtml::link(CHtml::image($visit->getAvatarUrl('small')), array('blog/index','username'=>$visit->username)); ?><br />
-                                                <?php echo CHtml::link($visit->realname, $url); ?></li>
-                                        <?php endforeach ?>
-                                </ul>
-                                <div class="clr"></div>
-                        </div>
-                </div>
-        </div>
+        <?php echo $this->renderPartial('sidebar') ?>
         <div class="clr"></div>
 </div>

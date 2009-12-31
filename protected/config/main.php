@@ -17,10 +17,11 @@ return array(
 	'preload'=>array('log'),
 
 	// autoloading model and component classes
-	'import'=>array(
-		'application.models.*',
-		'application.components.*',
-	),
+        'import'=>array(
+                'application.models.*',
+                'application.components.*',
+                'ext.DController',
+        ),
 
 	// application components
 	'components'=>array(
@@ -54,7 +55,7 @@ return array(
                         'tablePrefix'=>'y11ok_',
                         //'enableProfiling'=>true,
                         'enableParamLogging'=>true,
-                        //'schemaCachingDuration'=>3600,
+                        'schemaCachingDuration'=>3600,
                 ),
                 'themeManager'=>array(
                         
@@ -66,13 +67,12 @@ return array(
                         //'urlSuffix'=>'.html',
                         'showScriptName'=>false,
                         'rules'=>array(
-                                '/<username:\w+>/<_c:(blog)>/<_a:>' => '<_c>/<_a>',
-                                //'/<username:\w+>/<_c:>/<_a:>' => '<_c>/<_a>',
-                                // '/<username:\w+>/'=>'blogs/show',
+                                '/<_c:(site)>/<_a:>' => '<_c>/<_a>',
+                                '/<username:\w+>/<_c:>/<_a:>' => '<_c>/<_a>',
                                 // '/<username:\w+>/<_c:(blogs|articles)>/<id:\d+>/<_a:(create|update|delete)>' => '<_c>/<_a>',
                         ),
                 ),
-                /**/
+                /**
                 'cache'=>array(
                         'class'=>'system.caching.CFileCache',
                         'directoryLevel'=>0,

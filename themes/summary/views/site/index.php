@@ -49,7 +49,7 @@
                     <div id="gongqiuNeirong">
                     	<ul>
                         <?php foreach ($summary->getByGCate(2) as $key=>$article): ?>
-                                <li class="top<?php echo $key; ?>"><?php echo CHtml::link($article->title,array('blog/articles', 'artid'=>$article->id,'bid'=>$article->blogsId)); ?></li>
+                                <li class="top<?php echo $key; ?>"><?php echo CHtml::link($article->title,array('blog/article', 'aid'=>$article->id,'uid'=>$article->usersId)); ?></li>
                         <?php endforeach ?>
                         </ul>
                     </div>
@@ -60,7 +60,7 @@
                     <div id="gongqiuNeirong">
                     	<ul>
                         <?php foreach ($summary->getByGCate(3) as $key=>$article): ?>
-                                <li class="top<?php echo $key; ?>"><?php echo CHtml::link($article->title,array('blog/articles', 'artid'=>$article->id,'bid'=>$article->blogsId)); ?></li>
+                                <li class="top<?php echo $key; ?>"><?php echo CHtml::link($article->title,array('blog/article', 'aid'=>$article->id,'uid'=>$article->usersId)); ?></li>
                         <?php endforeach ?>
                         </ul>
                     </div>
@@ -90,7 +90,7 @@
                     <?php echo CHtml::endForm(); ?>
                     <?php else: ?>
                         <div>欢迎你！<?php echo Yii::app()->user->name ?></div>
-                        <div><?php echo CHtml::link('进入自己的博客', array('blogs/index','id'=>Yii::app()->user->id,'username'=>Yii::app()->user->name)); ?></div>
+                        <div><?php echo CHtml::link('进入自己的博客', array('blog/index','username'=>Yii::app()->user->name)); ?></div>
                         <div><?php echo CHtml::link('退出', array('site/logout')); ?></div>
                     <?php endif ?>
                 </div>
