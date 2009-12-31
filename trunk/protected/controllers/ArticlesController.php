@@ -1,6 +1,6 @@
 <?php
 
-class ArticlesController extends CController
+class ArticlesController extends DController
 {
 	const PAGE_SIZE=10;
 

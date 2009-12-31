@@ -1,66 +1,8 @@
 <?php
 
-class BlogController extends CController
+class BlogController extends DController
 {
 	const PAGE_SIZE=10;
-        //存用户信息
-        public $_user;
-        //存blog信息
-        public $_blog;
-
-         /**
-         * 为本控制器做初始化操作
-         */
-         public function init(){
-                //先执行父级初始化
-                parent::init();
-                //设置本控制器使用的皮肤
-                if (isset($_GET['username'])){
-                        $user= Users::model()->with('blogs','userinfo')->find('username=:username', array(':username'=>$_GET['username']));
-                        $this->_user= $user;
-                        $this->_blog= $user->blogs;
-                        $theme= $user->blogs->settings['theme'];
-                }elseif (isset($_GET['uid'])){
-                        $blog= Blogs::model()->with('users')->find('usersId=:uid',array(':uid'=>intval($_GET['uid'])));
-                        $this->_user= $blog->users;
-                        $this->_blog= $blog;
-                        $theme= $blog->settings['theme'];
-                }
-                if (empty($theme))
-                        $theme='default';
-                Yii::app()->setTheme($theme);
-                //如果当前用户是所有者则设置个标识
-                if (Yii::app()->user->id== $this->_user->id)
-                        Yii::app()->user->setState('isOwner',1);
-                        
-                //插入最近查看数据
-                //当当前用户大于0则是登录用户，并且不是自己，并且当前会话只记录一次！
-                if (Yii::app()->user->id>0 && Yii::app()->user->id!=$this->_user->id && Yii::app()->user->getState('view'.$this->_user->id)!='1'){
-                        //如果当前用户查看过此用户则更新当前用户
-                        $num= Visits::model()->updateAll(array('userId'=>Yii::app()->user->id, 'visitId'=>$this->_user->id, 'visitDate'=>time()),
-                                                               'userId=:uid AND visitId=:vid ORDER BY visitDate ASC LIMIT 1',
-                                                               array('uid'=>Yii::app()->user->id,':vid'=>$this->_user->id)
-                                                        );
-                        if ($num==0){
-                                $vCount= Visits::model()->count('visitId=:vid',array(':vid'=>$this->_user->id));
-                                if ($vCount>=12){
-                                //如果用户数大于12则刚新前面的记录
-                                //否则更新最前面的一条
-                                Visits::model()->updateAll(array('userId'=>Yii::app()->user->id, 'visitId'=>$this->_user->id, 'visitDate'=>time()),
-                                                                 'visitId=:vid ORDER BY visitDate ASC LIMIT 1',
-                                                                 array(':vid'=>$this->_user->id)
-                                                           );
-                                }else{
-                                        //否则插入新的记录
-                                        $visit= new Visits;
-                                        $visit->userId = Yii::app()->user->id;
-                                        $visit->visitId= $this->_user->id;
-                                        $visit->save();
-                                }
-                        }
-                        Yii::app()->user->setState('view'.$this->_user->id,'1');
-                }
-        }
 
 	/**
 	 * @return array action filters
@@ -130,8 +72,20 @@ class BlogController extends CController
          *  文章列表页
          */
         public function actionArticles(){
+                //下面是为文章分页
+                $acriteria= new CDbCriteria();
+                $acriteria->condition= 'blogsId=:bid AND status=1';
+                $acriteria->params= array(':bid'=>$this->_blog->id);
+                $acriteria->order= 'createDate DESC';
+                $pages= new CPagination(Articles::model()->count($acriteria));
+		$pages->pageSize=self::PAGE_SIZE * 2;//这里可以根据用户博客设置来决定显示多少
+		$pages->applyLimit($acriteria);
 
-                $this->render('articles', array());
+                $articles= Articles::model()->findAll($acriteria);
+                $this->render('articles', array(
+                                             'articles'=>$articles,
+                                             'pages'=>$pages,
+                                        ));
         }
         /**
          *  文章页
@@ -149,22 +103,27 @@ class BlogController extends CController
                                 $comment->userName=Yii::app()->user->name;
                         }
                         if ($comment->save()){
+                                Articles::model()->updateCounters(array('countComments'=>1), 'id=:aid', array(':aid'=>$comment->articlesId));
                                 Yii::app()->user->setFlash('addcommment','添加评论成功！');
-                                $this->redirect(Yii::app()->getRequest()->getUrlReferrer());
-                                //Yii::app()->DRedirect->redirect(Yii::app()->getRequest()->getUrlReferrer(),'评论添加成功！系统正在返回。',1);
+                                $this->redirect(array('article','aid'=>$comment->articlesId,'username'=>$this->_user->username,'#'=>$comment->id));
                         }
                 }
                 //显示文章
                 $aid= intval($_GET['aid']);
-                $article= Articles::model()->with('artText','comments')->findByPk($aid, '{{articles}}.usersId=:uid AND {{articles}}.status=1', array(':uid'=>$this->_user->id));
+                if (!$aid)
+                        throw new CHttpException (404,'参数错误！文章id无效');
+                $article= Articles::model()->with('artText','comments','comments.user')->findByPk($aid, '{{articles}}.usersId=:uid AND {{articles}}.status=1', array(':uid'=>$this->_user->id));
+                if ($article==null)
+                        throw new CHttpException(404);
                 if (Yii::app()->user->getState('viewArt'.$aid)!=1){
-                        Articles::model()->updateCounters(array('countReads'=>1), 'id=:aid', array('aid'=>$aid));
+                        Articles::model()->updateCounters(array('countReads'=>1), 'id=:aid', array(':aid'=>$aid));
                 }
                 Yii::app()->user->setState('viewArt'.$aid,1);
                 $this->render('article', array('article'=>$article,
                                                'commentModel'=>$comment,
                                         ));
         }
+
         /**
          *  相册列表页
          */
