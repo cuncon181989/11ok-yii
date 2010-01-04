@@ -1,9 +1,8 @@
-<div class="yiiForm">
+<div class="okForm">
 
 <p>
-Fields with <span class="required">*</span> are required.
+带 <span class="required">*</span> 项目为必填项
 </p>
-<?php //mydebug($artCate,0); ?>
 <?php echo CHtml::beginForm(); ?>
 
 <?php echo CHtml::errorSummary($model); ?>

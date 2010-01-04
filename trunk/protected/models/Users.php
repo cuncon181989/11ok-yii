@@ -78,7 +78,6 @@ class Users extends CActiveRecord
                     'blogs'=>array(self::HAS_ONE,'blogs','usersId'),
                     'userinfo'=>array(self::HAS_ONE,'userinfo','usersId'),
                     'friends'=>array(self::MANY_MANY,'users','{{friends}}(userId,friendId)', 'limit'=>5),
-                    //'visits'=>array(self::MANY_MANY,'users','{{Visits}}(userId,visitId)', 'limit'=>16),
                     'visits'=>array(self::MANY_MANY,'users','{{Visits}}(visitId,userId)', 'limit'=>16),
 		);
 	}

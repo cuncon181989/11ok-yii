@@ -1,7 +1,7 @@
 <h2>文章列表</h2>
 
-<div class="actionBar">[<?php echo CHtml::link('New Articles',array('create')); ?>]
-[<?php echo CHtml::link('Manage Articles',array('admin')); ?>]</div>
+<div class="actionBar">[<?php echo CHtml::link('写新文章',array('create','username'=>Yii::app()->user->name)); ?>]
+[<?php echo CHtml::link('管理文章',array('admin','username'=>Yii::app()->user->name)); ?>]</div>
 
 <?php $this->widget('CLinkPager',array('pages'=>$pages)); ?>
 
@@ -10,14 +10,11 @@
 <?php echo CHtml::encode($model->getAttributeLabel('id')); ?>:
 <?php echo CHtml::link($model->id,array('show','id'=>$model->id)); ?>
 <br/>
-<?php echo CHtml::encode($model->getAttributeLabel('blogsId')); ?>:
-<?php echo CHtml::encode($model->blogsId); ?>
-<br/>
 <?php echo CHtml::encode($model->getAttributeLabel('usersId')); ?>:
 <?php echo CHtml::encode($model->user->username); ?>
 <br/>
 <?php echo CHtml::encode($model->getAttributeLabel('globalArticlesCategoriesId')); ?>:
-<?php echo CHtml::encode($model->globalArticlesCategoriesId); ?>
+<?php echo CHtml::encode($model->gArtCate->name); ?>
 <br/>
 <?php echo CHtml::encode($model->getAttributeLabel('countReads')); ?>:
 <?php echo CHtml::encode($model->countReads); ?>

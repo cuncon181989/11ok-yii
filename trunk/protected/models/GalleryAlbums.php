@@ -94,4 +94,19 @@ class GalleryAlbums extends CActiveRecord
                 return $tmpArr[$this->status];
         }
 
+        public function beforeSave(){
+                $this->settings= serialize($this->settings);
+        }
+        
+        public function afterFind(){
+                $this->settings= unserialize($this->settings);
+        }
+
+        public function getGAimg(){
+                $img= $this->settings['image'];
+                if (!empty($img))
+                        return Yii::app()->getRequest()->getBaseUrl().'/'.Yii::app()->params[uploadDir].'/'.$this->usersId.'/s/'.$img;
+                else
+                        return Yii::app()->getRequest()->getBaseUrl().'/images/galleryAlbums.gif';
+        }
 }

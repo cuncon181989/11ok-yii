@@ -22,7 +22,7 @@ class BlogController extends DController
 	{
 		return array(
 		array('allow',  // allow all users to perform 'list' and 'show' actions
-				'actions'=>array('index','articles','article','galleryalbums','gallery','guestbook','addFriend','addSms'),
+				'actions'=>array('index','articles','article','galleryalbums','galleries','gallery','guestbook','addFriend','addSms'),
 				'users'=>array('*'),
 		),
 		array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -128,9 +128,27 @@ class BlogController extends DController
          *  相册列表页
          */
         public function actionGalleryAlbums(){
-
-                $this->render('GalleryAlbums', array());
+                //下面是分页
+                $acriteria= new CDbCriteria();
+                $acriteria->condition= 'blogsId=:bid AND status=1';
+                $acriteria->params= array(':bid'=>$this->_blog->id);
+                $pages= new CPagination(Articles::model()->count($acriteria));
+		$pages->pageSize= 9;//这里可以根据用户博客设置来决定显示多少
+		$pages->applyLimit($acriteria);
+                $galleries= GalleryAlbums::model()->findAll($acriteria);
+                $this->render('GalleryAlbums', array(
+                                             'galleries'=>$galleries,
+                                             'pages'=>$pages,
+                                        ));
         }
+        /**
+         *  相册页
+         */
+         public function actionGalleries(){
+                 
+                 $this->render('Galleries', array(
+                                                ));
+         }
         /**
          *  相片页
          */

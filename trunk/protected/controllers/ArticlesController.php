@@ -78,7 +78,7 @@ class ArticlesController extends DController
                                 $artText->content= $model->content;
                                 $artText->save();
                                 $transaction->commit();
-                                $this->redirect(array('show','id'=>$model->id));
+                                $this->redirect(array('show','id'=>$model->id,'username'=>Yii::app()->user->name));
                             }catch(Exception $e){
                                 $transaction->rollBack();
                                 throw $e;
@@ -114,7 +114,7 @@ class ArticlesController extends DController
                             $artText->content= $model->content;
                             $artText->save();
                             $transaction->commit();
-                            $this->redirect(array('show','id'=>$model->id));
+                            $this->redirect(array('show','id'=>$model->id,'username'=>Yii::app()->user->name));
                         }catch(Exception $e){
                             $transaction->rollBack();
                             throw $e;
@@ -148,21 +148,24 @@ class ArticlesController extends DController
 	 */
 	public function actionList()
 	{
-		$criteria=new CDbCriteria;
-                if (!Yii::app()->user->id)
-                    $this->redirect(Yii::app()->user->loginUrl);
-                $criteria->addCondition('usersId='.Yii::app()->user->id);
-                
-		$pages=new CPagination(Articles::model()->count($criteria));
-		$pages->pageSize=self::PAGE_SIZE;
-		$pages->applyLimit($criteria);
+                $this->redirect(array('blog/articles','username'=>Yii::app()->user->name));
+                /**
+                        $criteria=new CDbCriteria;
+                        if (!Yii::app()->user->id)
+                            $this->redirect(Yii::app()->user->loginUrl);
+                        $criteria->addCondition('usersId='.Yii::app()->user->id);
 
-		$models=Articles::model()->findAll($criteria);
+                        $pages=new CPagination(Articles::model()->count($criteria));
+                        $pages->pageSize=self::PAGE_SIZE;
+                        $pages->applyLimit($criteria);
 
-		$this->render('list',array(
-			'models'=>$models,
-			'pages'=>$pages,
-		));
+                        $models=Articles::model()->findAll($criteria);
+
+                        $this->render('list',array(
+                                'models'=>$models,
+                                'pages'=>$pages,
+                        ));
+                /**/
 	}
 
 	/**
@@ -173,6 +176,8 @@ class ArticlesController extends DController
 		$this->processAdminCommand();
 
 		$criteria=new CDbCriteria;
+                $criteria->order= '{{articles}}.id DESC';
+                $criteria->addCondition('{{articles}}.usersId='.Yii::app()->user->id);
 
 		$pages=new CPagination(Articles::model()->count($criteria));
 		$pages->pageSize=self::PAGE_SIZE;
@@ -181,7 +186,7 @@ class ArticlesController extends DController
 		$sort=new CSort('Articles');
 		$sort->applyOrder($criteria);
 
-		$models=Articles::model()->findAll($criteria);
+		$models=Articles::model()->with('artCate','gArtCate')->findAll($criteria);
 
 		$this->render('admin',array(
 			'models'=>$models,
@@ -232,5 +237,4 @@ class ArticlesController extends DController
             return GlobalArticlesCategories::model()->findAll();
         }
 
-        
 }

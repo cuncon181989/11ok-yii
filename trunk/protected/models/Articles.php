@@ -63,6 +63,7 @@ class Articles extends CActiveRecord
 		return array(
                     'blog'=>array(self::BELONGS_TO,'Blogs','blogsId'),
                     'user'=>array(self::BELONGS_TO,'Users','usersId'),
+                    'artCate'=>array(self::BELONGS_TO,'ArticlesCategories','articlesCategoryId'),
                     'gArtCate'=>array(self::BELONGS_TO,'GlobalArticlesCategories','globalArticlesCategoriesId'),
                     'artText'=>array(self::HAS_ONE,'ArticlesText','articlesId'),
                     'comments'=>array(self::HAS_MANY,'ArticlesComments','articlesId'),
@@ -93,7 +94,7 @@ class Articles extends CActiveRecord
 		);
 	}
 
-        public function getArticlesStatus($list){
+        public function getArticlesStatus($list=null){
             $tmpArr= array('1'=>'发布','2'=>'草稿');
             if (!is_null($list))
                 return $tmpArr;
@@ -101,6 +102,15 @@ class Articles extends CActiveRecord
                 return $tmpArr[$this->status];
         }
 
+        public function getArticlesTop($list=null){
+            $tmpArr= array('0'=>'否','1'=>'是');
+            if (!is_null($list))
+                return $tmpArr;
+            else
+                return $tmpArr[$this->top];
+        }
+
+        
         /**
          *
          * @return 更新时间字段
@@ -156,6 +166,7 @@ class Articles extends CActiveRecord
                 $this->dbConnection->createCommand('update {{globalarticlescategories}} set countArticles=countArticles-1 WHERE id='.$this->oldGArtCate)->execute();
                 $this->dbConnection->createCommand('update {{blogs}} set countPosts=countPosts-1 WHERE id='.$this->blogsId)->execute();
                 $this->dbConnection->createCommand('DELETE FROM {{articlestext}} WHERE articlesId='.$this->id .' LIMIT 1')->execute();
+                $this->dbConnection->createCommand('DELETE FROM {{articlescomments}} WHERE articlesId='.$this->id)->execute();
                 return true;
         }
 

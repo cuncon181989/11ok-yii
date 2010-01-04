@@ -15,7 +15,7 @@ class DController extends CController
                 parent::init();
                 //设置本控制器使用的皮肤
                 if (isset($_GET['username'])){
-                        $user= Users::model()->with('blogs','userinfo')->find('username=:username', array(':username'=>$_GET['username']));
+                        $user= Users::model()->with('blogs','userinfo','blogCategory','friends','visits')->find('{{users}}.username=:username', array(':username'=>$_GET['username']));
                         $this->_user= $user;
                         $this->_blog= $user->blogs;
                         $theme= $user->blogs->settings['theme'];
