@@ -1,0 +1,38 @@
+@import "_form.css";
+/* end of overall style */ /* begin data grid style */
+table.dataGrid {
+	background: white;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table.dataGrid th,table.dataGrid td {
+	font-size: 12px;
+	border: 1px #4F81BD solid;
+	padding: 0.3em;
+}
+
+table.dataGrid th {
+	background: #d3dfee;
+	text-align: center;
+}
+
+table.dataGrid th.label {
+	width: 150px;
+}
+
+table.dataGrid tr.odd {
+	background: #E6F2FF;
+}
+
+/* end of data grid style */
+.actionBar {
+	margin: 10px;
+}
+
+div.item {
+	clear: both;
+	margin: 10px 0 0 0;
+	border: 1px solid silver;
+	padding: 5px;
+}

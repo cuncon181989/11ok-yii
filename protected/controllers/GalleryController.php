@@ -1,6 +1,6 @@
 <?php
 
-class GalleryController extends CController
+class GalleryController extends DController
 {
 	const PAGE_SIZE=10;
 
