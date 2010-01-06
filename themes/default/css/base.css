@@ -1,5 +1,7 @@
-@import "_form.css";
-/* end of overall style */ /* begin data grid style */
+@import url("_form.css");
+
+.r  {float:right;}
+.l  {float:left;}
 table.dataGrid {
 	background: white;
 	border-collapse: collapse;

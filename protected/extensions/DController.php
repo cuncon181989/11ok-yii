@@ -19,12 +19,14 @@ class DController extends CController
                         $this->_user= $user;
                         $this->_blog= $user->blogs;
                         $theme= $user->blogs->settings['theme'];
+                        $user= null;
                         //unset($user);
                 }elseif (isset($_GET['uid'])){
                         $blog= Blogs::model()->with('users')->find('usersId=:uid',array(':uid'=>intval($_GET['uid'])));
                         $this->_user= $blog->users;
                         $this->_blog= $blog;
                         $theme= $blog->settings['theme'];
+                        $blog= null;
                         //unset($blog);
                 }
                 if (!$this->_user)

@@ -2,7 +2,7 @@
 
 class BlogController extends DController
 {
-	const PAGE_SIZE=10;
+	const PAGE_SIZE=12;
 
 	/**
 	 * @return array action filters
@@ -145,16 +145,28 @@ class BlogController extends DController
          *  相册页
          */
          public function actionGalleries(){
-                 
-                 $this->render('Galleries', array(
+                $gaid= intval($_GET['gaid']);
+                $acriteria= new CDbCriteria();
+                $acriteria->condition= 'blogsId=:bid AND galleryAlbumsId=:gaid AND status=1';
+                $acriteria->params= array(':bid'=>$this->_blog->id,'gaid'=>$gaid);
+                $pages= new CPagination(Gallery::model()->count($acriteria));
+                $pages->pageSize= self::PAGE_SIZE; //这里可以根据用户博客设置来决定显示多少
+                $pages->applyLimit($acriteria);
+
+                $galleries= Gallery::model()->findAll($acriteria);
+                $this->render('Galleries', array('galleries'=>$galleries,
+                                                 'pages'=>$pages,
                                                 ));
          }
         /**
          *  相片页
          */
         public function actionGallery(){
-
-                $this->render('Gallery', array());
+                $gid= intval($_GET['gid']);
+                $gallery= Gallery::model()->findByPk($gid, 'blogsId=:bid AND status=1', array(':bid'=>$this->_blog->id));
+                if ($gallery===null)
+                        throw new Exception('没有找到图片', 404);
+                $this->render('Gallery', array('gallery'=>$gallery,));
         }
         /**
          *  留言板列表页

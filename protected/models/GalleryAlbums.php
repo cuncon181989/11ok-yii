@@ -40,7 +40,8 @@ class GalleryAlbums extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('parentId, ', 'numerical', 'integerOnly'=>true),
+			array('parentId, status', 'numerical', 'integerOnly'=>true),
+                        array('name', 'required'),
 			array('name', 'length', 'max'=>255),
 			array('status, description', 'safe'),
 		);
@@ -80,13 +81,13 @@ class GalleryAlbums extends CActiveRecord
 
         protected function beforeValidate(){
             if ($this->isNewRecord){
-                $this->usersId= Yii::app()->user->id;
-                $this->blogsId= Yii::app()->user->blogId;
+                $this->usersId= intval(Yii::app()->user->id);
+                $this->blogsId= intval(Yii::app()->user->blogId);
             }
             return true;
         }
 
-        public function getGalleryAlbumsStatus($list){
+        public function getGalleryAlbumsStatus($list=null){
             $tmpArr= array('1'=>'发布','2'=>'隐藏');
             if (!is_null($list))
                 return $tmpArr;
@@ -96,10 +97,12 @@ class GalleryAlbums extends CActiveRecord
 
         public function beforeSave(){
                 $this->settings= serialize($this->settings);
+                return true;
         }
         
         public function afterFind(){
                 $this->settings= unserialize($this->settings);
+                return true;
         }
 
         public function getGAimg(){

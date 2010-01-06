@@ -1,6 +1,6 @@
 <?php
 
-class GalleryAlbumsController extends CController
+class GalleryAlbumsController extends DController
 {
 	const PAGE_SIZE=10;
 
@@ -69,7 +69,7 @@ class GalleryAlbumsController extends CController
 		{
 			$model->attributes=$_POST['GalleryAlbums'];
 			if($model->save())
-			$this->redirect(array('list'));
+                                $this->redirect(array('blog/galleries','gaid'=>$model->id,'username'=>$this->_user->username));
 		}
 		$this->render('create',array('model'=>$model));
 	}
@@ -85,7 +85,7 @@ class GalleryAlbumsController extends CController
 		{
 			$model->attributes=$_POST['GalleryAlbums'];
 			if($model->save())
-			$this->redirect(array('show','id'=>$model->id));
+                                $this->redirect(array('blog/galleries','gaid'=>$model->id,'username'=>$this->_user->username));
 		}
 		$this->render('update',array('model'=>$model));
 	}
@@ -98,12 +98,13 @@ class GalleryAlbumsController extends CController
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
-			// we only allow deletion via POST request
-			$this->loadGalleryAlbums()->delete();
-			$this->redirect(array('list'));
-		}
-		else
-		throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+                        if (Gallery::model()->count('galleryAlbumsId=:gaid', array(':gaid'=>$_POST['id']))==0){
+                                $this->loadGalleryAlbums()->delete();
+                                        $this->redirect(Yii::app()->getRequest()->getUrlReferrer());
+                        }else
+                                Yii::app()->DRedirect->redirect(Yii::app()->getRequest()->getUrlReferrer(),'相册不为空，请先将照片移走或删除再删除相册！',50);
+		}else
+                        throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 
 	/**
@@ -111,6 +112,8 @@ class GalleryAlbumsController extends CController
 	 */
 	public function actionList()
 	{
+                $this->redirect(array('blog/galleryAlbums','username'=>$this->_user->username));
+                /**
 		$criteria=new CDbCriteria;
 		$criteria->condition= 'usersId='.Yii::app()->user->id;
 		$pages=new CPagination(GalleryAlbums::model()->count($criteria));
@@ -123,6 +126,7 @@ class GalleryAlbumsController extends CController
 			'models'=>$models,
 			'pages'=>$pages,
 		));
+                /**/
 	}
 
 	/**
@@ -131,9 +135,10 @@ class GalleryAlbumsController extends CController
 	public function actionAdmin()
 	{
 		$this->processAdminCommand();
-
+                
 		$criteria=new CDbCriteria;
-
+                $criteria->condition= '{{galleryalbums}}.usersId=:uid';
+                $criteria->params= array(':uid'=>Yii::app()->user->id);
 		$pages=new CPagination(GalleryAlbums::model()->count($criteria));
 		$pages->pageSize=self::PAGE_SIZE;
 		$pages->applyLimit($criteria);
@@ -160,10 +165,8 @@ class GalleryAlbumsController extends CController
 		if($this->_model===null)
 		{
 			if (!Yii::app()->user->id)
-			$this->redirect(Yii::app()->user->loginUrl);
-			$this->_model=GalleryAlbums::model()->find('id=:id AND usersId=:userid',
-			array(':id'=>$_GET['id'],
-                                                                     ':userid'=>Yii::app()->user->id,));
+                                $this->redirect(Yii::app()->user->loginUrl);
+			$this->_model=GalleryAlbums::model()->find('id=:id AND usersId=:userid',array(':id'=>$_REQUEST['id'],':userid'=>Yii::app()->user->id,));
 			if($this->_model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		}
@@ -177,7 +180,7 @@ class GalleryAlbumsController extends CController
 	{
 		if(isset($_POST['command'], $_POST['id']) && $_POST['command']==='delete')
 		{
-			$this->loadGalleryAlbums($_POST['id'])->delete();
+			//$this->loadGalleryAlbums($_POST['id'])->delete();
 			// reload the current page to avoid duplicated delete actions
 			$this->refresh();
 		}

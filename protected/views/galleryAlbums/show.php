@@ -1,9 +1,11 @@
 <h2>View GalleryAlbums <?php echo $model->id; ?></h2>
 
-<div class="actionBar">[<?php echo CHtml::link('GalleryAlbums List',array('list')); ?>]
-[<?php echo CHtml::link('New GalleryAlbums',array('create')); ?>] [<?php echo CHtml::link('Update GalleryAlbums',array('update','id'=>$model->id)); ?>]
-[<?php echo CHtml::linkButton('Delete GalleryAlbums',array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure?')); ?>
-] [<?php echo CHtml::link('Manage GalleryAlbums',array('admin')); ?>]</div>
+<div class="actionBar">
+[<?php echo CHtml::link('GalleryAlbums List',array('list')); ?>]
+[<?php echo CHtml::link('New GalleryAlbums',array('create')); ?>]
+[<?php echo CHtml::link('Update GalleryAlbums',array('update','id'=>$model->id)); ?>]
+[<?php echo CHtml::linkButton('Delete GalleryAlbums',array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure?')); ?>]
+[<?php echo CHtml::link('Manage GalleryAlbums',array('admin')); ?>]</div>
 
 <table class="dataGrid">
 

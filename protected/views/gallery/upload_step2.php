@@ -1,4 +1,4 @@
-<div class="yiiForm">
+<div class="okform">
 
 <p>
 系统限制一次最多选择10张图片上传！
