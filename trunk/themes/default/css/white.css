@@ -42,7 +42,7 @@ form  {margin:0px;}
 .socroll_content, .socroll_content ul, .socroll_content ul li{display:inline;list-style:none;}
 .socroll_content li img {width:177px; height:130px; border:3px solid #ccc;}
 
-/*-------------整体样式-----------------------*/
+/*-------------鏁翠綋鏍峰紡-----------------------*/
 #webmap  {width:1003px;}
 #webHeader  {width:1003px; height:194px; background:url(../images/picwhite.jpg) center top no-repeat;}
 #headerTitle  {padding:40px 0px 0px 10px; height:43px; font:Arial, Helvetica, sans-serif; font-size:36px; font-weight:bold;}
@@ -75,12 +75,12 @@ form  {margin:0px;}
 #webUnder  {margin-top:10px; background:url(../images/whiteunderline.gif) center top no-repeat; height:52px; text-align:center; line-height:52px;}
 
 .anniubj  {background:url(../images/anniu01.gif) left top no-repeat; border:0px; height:20px; width:60px; margin-top:5px;}
-/*-------------整体样式结束-----------------------*/
+/*-------------鏁翠綋鏍峰紡缁撴潫-----------------------*/
 
 
 
 
-/*--------更换样式--------*/
+/*--------鏇存崲鏍峰紡--------*/
 .dTitle  {margin-left:10px; font-size:14px; font-weight:bold;}
 #dBiaoti,#pBiaoti,#aboutBiaoti  {height:25px; background-color:#c8c8c8; border-left:3px solid #8a8a8a; border-bottom:1px solid #dcdcdc;}
 #dBiaoti a,#dBiaoti span  {margin:0px 7px 0px 7px;}
@@ -107,7 +107,7 @@ form  {margin:0px;}
 .nr-touxiang img  {margin-bottom:5px;}
 .Rf-friend  {border-bottom:1px solid #ccc; line-height:16px; margin-top:10px;}
 #kNeirong img  {height:42px; width:42px; border:2px solid #e3e3e3; float:left; margin:0px 10px 10px 0px;}
-/*--------更换样式结束--------*/
+/*--------鏇存崲鏍峰紡缁撴潫--------*/
 
 
 

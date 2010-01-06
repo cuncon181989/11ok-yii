@@ -41,12 +41,16 @@ function param($name){
 	return Yii::app()->params[$name];
 }
 
-function myDebug($arr,$end=true, $funcName='print_r'){
-	echo '<br /><pre>';
-	$funcName($arr);
-	echo '</pre><br />';
+function myDebug($arr,$end=false, $funcName=null){
+        if(is_null($funcName)){
+                CVarDumper::dump($arr,10,true);
+        }else{
+                echo '<br /><pre>';
+                $funcName($arr);
+                echo '</pre><br />';
+        }
 	if ($end)
-	exit();
+                Yii::app()->end(200);
 }
 
 function Generate_Brief($text){

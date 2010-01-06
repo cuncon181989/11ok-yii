@@ -1,4 +1,4 @@
-<div class="yiiForm">
+<div class="okform">
     <p>第一步选择分类：</p>
 <?php echo CHtml::beginForm(); ?>
 <?php echo CHtml::errorSummary($model); ?>

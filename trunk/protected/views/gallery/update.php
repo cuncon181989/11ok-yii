@@ -7,7 +7,7 @@
 </div>
 
 <?php echo CHtml::beginForm(); ?>
-<div class="yiiForm">
+<div class="okform">
         <div class="simple">
         <?php echo CHtml::label('缩略图',''); ?>
         <?php echo Chtml::image($gallery->getGalleryUrl().'s/'.$gallery->fileName); ?>
