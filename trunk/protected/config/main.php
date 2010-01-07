@@ -105,8 +105,8 @@ return array(
                 'galleryWidth' =>600,  
                 'galleryHeight'=>600,
                 //相册的缩略图大小
-                'gallerySWidth' =>160, 
-                'gallerySHeight'=>120,
+                'gallerySWidth' =>180,
+                'gallerySHeight'=>135,
                 //
 	),
 );

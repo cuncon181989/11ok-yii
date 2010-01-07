@@ -3,7 +3,7 @@
     	  <div id="webPhoto">
        	    <div id="pBiaoti"><?php echo CHtml::link('&gt;&gt;我的相册', array('galleryAlbums','username'=>$this->_user->username), array('class'=>'dTitle')); ?>
                 <span class="r"><?php echo CHtml::link('上传相片',array('gallery/upload','username'=>$this->_user->username)); ?>
-                      <?php echo CHtml::link('管理相册',array('galleryAlbums/admin','username'=>$this->_user->username)); ?>
+                      <?php echo CHtml::link('管理相片',array('gallery/admin','username'=>$this->_user->username)); ?>
                 </span>
             </div>
                 <div id="webxiangce">

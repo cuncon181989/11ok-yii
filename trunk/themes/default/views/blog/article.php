@@ -23,7 +23,7 @@
                                                 <?php echo CHtml::link(CHtml::image($comment->user->getAvatarUrl()),array('blog/index','username'=>$comment->user->username)); ?><br />
                                                 <?php echo CHtml::link(CHtml::encode($comment->userName),array('blog/index','username'=>$comment->user->username)); ?>
                                                 <?php else: ?>
-                                                <?php echo CHtml::image(Yii::app()->getRequest()->baseUrl.'/images/guestAvatar.gif'); ?>
+                                                <?php echo CHtml::image(Yii::app()->getRequest()->baseUrl.'/images/guestAvatar.gif'); ?><br />
                                                 <?php echo CHtml::encode($comment->userName); ?>
                                                 <?php endif ?>
                                                 </span>

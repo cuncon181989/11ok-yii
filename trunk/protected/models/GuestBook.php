@@ -44,11 +44,11 @@ class GuestBook extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('userName, userEmail, content', 'required'),
+			array('userName, content', 'required'),
 			array('private, status, createDate', 'numerical', 'integerOnly'=>true),
 			array('userName', 'length', 'min'=>3, 'max'=>25),
-                        array('userEmail', 'Email'),
-                        array('userUrl', 'Url'),
+                        array('userEmail', 'email'),
+                        array('userUrl', 'url'),
 			array('title', 'safe'),
 		);
 	}
@@ -61,6 +61,7 @@ class GuestBook extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                        'user'=>array(self::BELONGS_TO,'users','usersId'),
 		);
 	}
 
@@ -85,4 +86,11 @@ class GuestBook extends CActiveRecord
 			'createDate' => '发布日期',
 		);
 	}
+        protected function beforeValidate(){
+            if($this->isNewRecord){
+                $this->clientIp  = Yii::app()->getRequest()->getUserHostAddress();
+                $this->createDate= time();
+            }
+            return true;
+        }
 }

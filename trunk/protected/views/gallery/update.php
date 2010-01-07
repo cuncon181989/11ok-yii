@@ -1,16 +1,16 @@
 <h2>更新照片信息</h2>
 
 <div class="actionBar">
-[<?php echo CHtml::link('照片列表',array('list')); ?>]
-[<?php echo CHtml::link('上传照片',array('upload')); ?>]
-[<?php echo CHtml::link('管理照片',array('admin')); ?>]
+[<?php echo CHtml::link('照片列表',array('list','username'=>$this->_user->username)); ?>]
+[<?php echo CHtml::link('上传照片',array('upload','username'=>$this->_user->username)); ?>]
+[<?php echo CHtml::link('管理照片',array('admin','username'=>$this->_user->username)); ?>]
 </div>
 
 <?php echo CHtml::beginForm(); ?>
 <div class="okform">
         <div class="simple">
         <?php echo CHtml::label('缩略图',''); ?>
-        <?php echo Chtml::image($gallery->getGalleryUrl().'s/'.$gallery->fileName); ?>
+        <?php echo Chtml::image($gallery->getGalleryUrl('small')); ?>
         </div>
         <div class="simple">
         <?php echo CHtml::activeLabelEx($gallery, 'title'); ?>
