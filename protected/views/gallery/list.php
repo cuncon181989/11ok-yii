@@ -1,7 +1,7 @@
 <h2>Gallery List</h2>
 
-<div class="actionBar">[<?php echo CHtml::link('上传照片',array('upload')); ?>]
-[<?php echo CHtml::link('管理照片',array('admin')); ?>]</div>
+<div class="actionBar">[<?php echo CHtml::link('上传照片',array('upload','username'=>$this->_user->username)); ?>]
+[<?php echo CHtml::link('管理照片',array('admin','username'=>$this->_user->username)); ?>]</div>
 
 <?php $this->widget('CLinkPager',array('pages'=>$pages)); ?>
 

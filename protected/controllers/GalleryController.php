@@ -37,7 +37,7 @@ class GalleryController extends DController
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('list','show','create','update','upload'),
+				'actions'=>array('admin','delete','update','upload'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -77,7 +77,7 @@ class GalleryController extends DController
                         $dbTrans->commit();
                         unset($_SESSION['uploadFiles']);
                         unset($_SESSION['uploadFinish']);
-                        $this->redirect(array('gallery/list'));
+                        $this->redirect(array('blog/galleryAlbums','username'=>$this->_user->username));
                 }catch (Exception $e){
                         $dbTrans->rollback();
                         $this->redirect(array('upload'));
@@ -161,7 +161,7 @@ class GalleryController extends DController
 		{
 			$gallery->attributes=$_POST['Gallery'];
 			if($gallery->save())
-				$this->redirect(array('show','id'=>$gallery->id));
+				$this->redirect(array('admin','id'=>$gallery->id,'username'=>$this->_user->username));
 		}
 		$this->render('update',array('gallery'=>$gallery,
                                              'ga'=>$ga,
@@ -178,7 +178,7 @@ class GalleryController extends DController
 		{
 			// we only allow deletion via POST request
 			$this->loadGallery()->delete();
-			$this->redirect(array('list'));
+			$this->redirect(array('blog/galleryAlbums','username'=>$this->_user->username));
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
@@ -189,6 +189,8 @@ class GalleryController extends DController
 	 */
 	public function actionList()
 	{
+                $this->redirect(array('blog/galleryAlbums','username'=>$this->_user->username));
+                /**
 		$criteria=new CDbCriteria;
                 $criteria->addCondition('usersId='.Yii::app()->user->id);
 		$pages=new CPagination(Gallery::model()->count($criteria));
@@ -201,6 +203,7 @@ class GalleryController extends DController
 			'models'=>$models,
 			'pages'=>$pages,
 		));
+                /**/
 	}
 
 	/**
@@ -211,6 +214,8 @@ class GalleryController extends DController
 		$this->processAdminCommand();
 
 		$criteria=new CDbCriteria;
+                $criteria->condition= '{{gallery}}.usersId=:uid';
+                $criteria->params= array(':uid'=>$this->_user->id);
 
 		$pages=new CPagination(Gallery::model()->count($criteria));
 		$pages->pageSize=self::PAGE_SIZE;
@@ -219,7 +224,7 @@ class GalleryController extends DController
 		$sort=new CSort('Gallery');
 		$sort->applyOrder($criteria);
 
-		$models=Gallery::model()->findAll($criteria);
+		$models=Gallery::model()->with('galleryAlbums')->findAll($criteria);
 
 		$this->render('admin',array(
 			'models'=>$models,

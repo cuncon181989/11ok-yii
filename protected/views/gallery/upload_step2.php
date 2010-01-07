@@ -4,7 +4,7 @@
 系统限制一次最多选择10张图片上传！
 </p>
 
-<?php echo CHtml::beginForm(array('Gallery/UploadFiles'),'POST',array('enctype'=>'multipart/form-data')); ?>
+<?php echo CHtml::beginForm(array('Gallery/UploadFiles','username'=>$this->_user->username),'POST',array('enctype'=>'multipart/form-data')); ?>
 <div class="simple">
 <label>选择文件</label>
 <?php
@@ -12,14 +12,14 @@ $this->widget('application.extensions.uploadify.EuploadifyWidget',
     array(
         'name'=>'uploadFiles',
         'options'=> array(
-            'script' => $this->createUrl('Gallery/uploadFiles'),
+            'script' => $this->createUrl('Gallery/uploadFiles', array('username'=>$this->_user->username)),
             'fileDataName'=>'gallery',
-            'folder' => '/uploads/'.Yii::app()->user->id,
+            'folder' => DS.Yii::app()->params['uploadDir'].DS.Yii::app()->user->id,
             'scriptData' => array('ga'=>$ga, 'gs'=>$gs,'isComplete'=>0, 'PHPSESSID' => session_id()),
             'fileDesc'=>'*.jpg *.gif *.png 图片文件',
             'fileExt' => '*.jpg;*gif;*png',
             'sizeLimit'=>1572864, //2M=2*1024Kb*1024Bytes=2097152 1.5M=1572864B
-            'buttonImg'=>'/images/browse-files.png',
+            'buttonImg'=> Yii::app()->getRequest()->getBaseUrl().'/images/browse-files.png',
             'wmode'=>'transparent',
             'width'=>102,
             'queueID'=>'FilesQueue',
@@ -46,13 +46,18 @@ $this->widget('application.extensions.uploadify.EuploadifyWidget',
                 }else{
                         $("#uploadFiles").uploadifySettings("scriptData",{"ga":'.$ga.',"gs":'.$gs.',"isComplete":0,"PHPSESSID":"'.session_id().'"});
                 }
+                $("#countQueue").html("当前已经选择"+data.fileCount+"个文件，最多10个。");
+           }',
+           'onCancel' => 'function(event,data){
+                $("#countQueue").html("");
            }',
            'onAllComplete' => 'function(event,data){
-                self.location="'.$this->createUrl('gallery/upload').'";
+                self.location="'.$this->createUrl('gallery/upload',array('gaid'=>$ga,'username'=>$this->_user->username)).'";
            }'
         )
     ));
 ?>
+<span id="countQueue"></span>
 </div>
 <div id="FilesQueue" style="margin-left:100px;width:395px;height:200px;border:1px solid #d5d5d5;overflow:auto;margin-bottom:10px;padding:2px 5px;"> </div>
 <div class="simple">

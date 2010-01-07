@@ -1,9 +1,11 @@
 <h2>查看照片<?php echo $model->id; ?></h2>
 
-<div class="actionBar">[<?php echo CHtml::link('照片列表',array('list')); ?>]
-[<?php echo CHtml::link('上传照片',array('create')); ?>] [<?php echo CHtml::link('更新照片',array('update','id'=>$model->id)); ?>]
-[<?php echo CHtml::linkButton('删除照片',array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure?')); ?>]
-[<?php echo CHtml::link('管理照片',array('admin')); ?>]</div>
+<div class="actionBar">
+[<?php echo CHtml::link('照片列表',array('list','username'=>$this->_user->username)); ?>]
+[<?php echo CHtml::link('上传照片',array('create','username'=>$this->_user->username)); ?>]
+[<?php echo CHtml::link('更新照片',array('update','id'=>$model->id,'username'=>$this->_user->username)); ?>]
+[<?php echo CHtml::linkButton('删除照片',array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure?','username'=>$this->_user->username)); ?>]
+[<?php echo CHtml::link('管理照片',array('admin','username'=>$this->_user->username)); ?>]</div>
 
 <table class="dataGrid">
 	<tr>

@@ -3,7 +3,7 @@
             	<div id="kTitle"><a href="#">个人资料</a></div>
                 <div id="aNeirong">
                 	<div class="nr-touxiang" align="center">
-                        <?php echo CHtml::image($this->_user->getAvatarUrl('big')); ?><br />
+                        <?php echo CHtml::image($this->_user->getAvatarUrl()); ?><br />
                         <div>
                                 <?php echo CHtml::link('加为好友', array('addFriend','uid'=>$this->_user->id,'username'=>Yii::app()->user->name)); ?> | 
                                 <?php echo CHtml::link('悄悄话', array('addSms','uid'=>$this->_user->id,'username'=>Yii::app()->user->name)); ?>

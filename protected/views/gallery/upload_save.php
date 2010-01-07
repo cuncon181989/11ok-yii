@@ -3,7 +3,7 @@
 <?php echo CHtml::beginForm(); ?>
 <?php foreach($files as $n=>$file): ?>
 <div class="item">
-<span><img align="left" src="<?php echo $file->getGalleryUrl().'s/'.$file->fileName; ?>" /></span>
+<span><img align="left" src="<?php echo $file->getGalleryUrl('small') ?>" /></span>
 <?php echo CHtml::hiddenField($file->id.'[id]',$file->id); ?>
 <?php echo CHtml::activeLabelEx($file,'title'); ?>:
 <?php echo CHtml::textField($file->id.'[title]',$file->title); ?>

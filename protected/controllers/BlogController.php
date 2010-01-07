@@ -98,7 +98,7 @@ class BlogController extends DController
                         $comment->attributes= $_POST['ArticlesComments'];
                         $comment->blogsId= $this->_blog->id;
                         $comment->status= 1;//这里可以根据文章或blog的设置来设置；
-                        if ($_POST['isLogin']==1){
+                        if ($_POST['isLogin']==1 && !Yii::app()->user->isGuest){
                                 $comment->usersId=Yii::app()->user->id;
                                 $comment->userName=Yii::app()->user->name;
                         }
@@ -165,14 +165,39 @@ class BlogController extends DController
                 $gid= intval($_GET['gid']);
                 $gallery= Gallery::model()->findByPk($gid, 'blogsId=:bid AND status=1', array(':bid'=>$this->_blog->id));
                 if ($gallery===null)
-                        throw new Exception('没有找到图片', 404);
+                        throw new CHttpException('没有找到可以查看的图片', 404);
                 $this->render('Gallery', array('gallery'=>$gallery,));
         }
         /**
          *  留言板列表页
          */
         public function actionGuestbook(){
-                $this->render('Guestbook', array());
+                $gb= new GuestBook;
+                //保存新发布的留言
+                if (isset($_POST['GuestBook'])){
+                        $gb->attributes= $_POST['GuestBook'];
+                        $gb->blogsId= $this->_blog->id;
+                        $gb->status= 1;//这里可以根据文章或blog的设置来设置；
+                        if ($_POST['isLogin']==1 && !Yii::app()->user->isGuest){
+                                $gb->usersId=Yii::app()->user->id;
+                                $gb->userName=Yii::app()->user->name;
+                        }
+                        if ($gb->save())
+                                Yii::app()->DRedirect->redirect(Yii::app()->getRequest()->getUrlReferrer(),'留言成功!');
+                }else{
+                        $acriteria= new CDbCriteria();
+                        $acriteria->condition= 'blogsId=:bid AND status=1';
+                        $acriteria->params= array(':bid'=>$this->_blog->id);
+                        $acriteria->order= 'createDate DESC';
+                        $pages= new CPagination(GuestBook::model()->count($acriteria));
+                        $pages->pageSize=self::PAGE_SIZE;//这里可以根据用户博客设置来决定显示多少
+                        $pages->applyLimit($acriteria);
+                        $guestbooks= GuestBook::model()->with('user')->findAll($acriteria);
+                }
+                $this->render('Guestbook', array('guestbooks'=>$guestbooks,
+                                                 'gb'=>$gb,
+                                                 'pages'=>$pages,
+                                                ));
         }
         /**
          * 添加好友

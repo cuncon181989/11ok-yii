@@ -63,6 +63,7 @@ class Gallery extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
                         'blog'=>array(self::BELONGS_TO,'blogs','blogsId'),
+                        'galleryAlbums'=>array(self::BELONGS_TO,'galleryAlbums','galleryAlbumsId'),
 		);
 	}
 
@@ -91,7 +92,7 @@ class Gallery extends CActiveRecord
 		);
 	}
 
-        public function getGalleryStatus($list){
+        public function getGalleryStatus($list=null){
             $tmpArr= array('1'=>'发布', '2'=>'隐藏');
             if (!is_null($list))
                 return $tmpArr;
