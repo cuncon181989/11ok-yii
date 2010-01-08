@@ -45,7 +45,7 @@ class GuestBook extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('userName, content', 'required'),
-			array('private, status, createDate', 'numerical', 'integerOnly'=>true),
+			array('private, parentId, status, createDate', 'numerical', 'integerOnly'=>true),
 			array('userName', 'length', 'min'=>3, 'max'=>25),
                         array('userEmail', 'email'),
                         array('userUrl', 'url'),
@@ -62,6 +62,8 @@ class GuestBook extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
                         'user'=>array(self::BELONGS_TO,'users','usersId'),
+                        'parent'=>array(self::BELONGS_TO,'GuestBook','parentId'),
+                        'reply'=>array(self::HAS_MANY,'GuestBook','parentId'),
 		);
 	}
 
@@ -92,5 +94,13 @@ class GuestBook extends CActiveRecord
                 $this->createDate= time();
             }
             return true;
+        }
+        public function getIsPrivate(){
+                $tmpArr= array('0'=>'否','1'=>'是');
+                return $tmpArr[$this->private];
+        }
+        public function beforeDelete(){
+                GuestBook::model()->deleteAll('parentId=:gbid', array(':gbid'=>$this->id));
+                return true;
         }
 }

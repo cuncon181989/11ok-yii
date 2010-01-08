@@ -1,11 +1,11 @@
-<h2>New GuestBook</h2>
+<h2>回复留言</h2>
 
 <div class="actionBar">
-[<?php echo CHtml::link('GuestBook List',array('list')); ?>]
-[<?php echo CHtml::link('Manage GuestBook',array('admin')); ?>]
+[<?php echo CHtml::link('留言列表',array('blog/guestbook', 'username'=>$this->_user->username)); ?>]
+[<?php echo CHtml::link('管理留言',array('admin', 'username'=>Yii::app()->user->name)); ?>]
 </div>
 
 <?php echo $this->renderPartial('_form', array(
-	'model'=>$model,
-	'update'=>false,
+	'gb'=>$guestbook,
+	'reply'=>true,
 )); ?>

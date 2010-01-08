@@ -5,8 +5,8 @@
                 	<div class="nr-touxiang" align="center">
                         <?php echo CHtml::image($this->_user->getAvatarUrl()); ?><br />
                         <div>
-                                <?php echo CHtml::link('加为好友', array('addFriend','uid'=>$this->_user->id,'username'=>Yii::app()->user->name)); ?> | 
-                                <?php echo CHtml::link('悄悄话', array('addSms','uid'=>$this->_user->id,'username'=>Yii::app()->user->name)); ?>
+                                <?php echo CHtml::link('加为好友', array('addFriend','uid'=>$this->_user->id,'username'=>$this->_user->username)); ?> |
+                                <?php echo CHtml::link('悄悄话', array('addSms','uid'=>$this->_user->id,'username'=>$this->_user->username)); ?>
                         </div>
                     </div>
                     <div class="nr-ziliao">

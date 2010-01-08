@@ -28,7 +28,12 @@
         <?php echo CHtml::activeTextArea($gb, 'content', array('rows'=>3,'cols'=>30)); ?>
         </div>
         <div class="simple">
-        <?php echo CHtml::submitButton('提交'); ?>
+        <?php echo CHtml::activeLabelEx($gb,'private'); ?>
+        <?php echo CHtml::activeCheckBox($gb, 'private'); ?>
+        <?php if ($reply){echo CHtml::activeHiddenField($gb, 'parentId',array('value'=>$_GET['gbid']));} ?>
+        </div>
+        <div class="simple">
+        <?php echo CHtml::submitButton($reply? '回复': '提交'); ?>
         </div>
 <?php echo CHtml::endForm(); ?>
 </div>

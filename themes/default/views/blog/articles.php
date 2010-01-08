@@ -2,8 +2,8 @@
     	<div id="webLeftmain">
                 <div id="webDiary">
                 <div class="FloatLeft"><?php echo CHtml::link('&gt;&gt;我的日志', array('articles','username'=>$this->_user->username), array('class'=>'dTitle')); ?></div>
-                <div class="FloatRight diarypage"><?php echo CHtml::link('写新文章',array('articles/create','username'=>Yii::app()->user->name)); ?>
-                <?php echo CHtml::link('管理文章',array('articles/admin','username'=>Yii::app()->user->name)); ?></div>
+                <div class="FloatRight diarypage"><?php if(Yii::app()->user->getState('isOwner')){echo CHtml::link('写新文章',array('articles/create','username'=>Yii::app()->user->name));} ?>
+                <?php if(Yii::app()->user->getState('isOwner')){echo CHtml::link('管理文章',array('articles/admin','username'=>Yii::app()->user->name));} ?></div>
                 <div class="clr"></div>
                 <?php foreach ($articles as $key=>$article): ?>
                 <div id="dNeirong">

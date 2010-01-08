@@ -56,8 +56,14 @@ class GuestBookController extends DController
 		if(isset($_POST['GuestBook']))
 		{
 			$guestbook->attributes=$_POST['GuestBook'];
+                        $guestbook->blogsId= $this->_blog->id;
+                        $guestbook->status= 1;//这里可以根据文章或blog的设置来设置；
+                        if ($_POST['isLogin']==1 && !Yii::app()->user->isGuest){
+                                $guestbook->usersId=Yii::app()->user->id;
+                                $guestbook->userName=Yii::app()->user->name;
+                        }
 			if($guestbook->save())
-				$this->redirect(array('blog/guestbook','username'=>$this->_user->username));
+				Yii::app()->DRedirect->redirect(array('blog/guestbook','username'=>$this->_user->username),'回复留言成功!');
 		}
 		$this->render('reply',array('guestbook'=>$guestbook));
 	}
@@ -69,9 +75,8 @@ class GuestBookController extends DController
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
-			// we only allow deletion via POST request
 			$this->loadGuestBook()->delete();
-			$this->redirect(array('list'));
+                                Yii::app()->DRedirect->redirect(array('blog/guestbook','username'=>$this->_user->username),'删除留言成功!');
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
@@ -84,6 +89,8 @@ class GuestBookController extends DController
 		$this->processAdminCommand();
 
 		$criteria=new CDbCriteria;
+                $criteria->condition= 'blogsId=:bid';
+                $criteria->params= array(':bid'=>$this->_blog->id);
 
 		$pages=new CPagination(GuestBook::model()->count($criteria));
 		$pages->pageSize=self::PAGE_SIZE;
@@ -111,7 +118,7 @@ class GuestBookController extends DController
 		if($this->_model===null)
 		{
 			if($id!==null || isset($_GET['id']))
-				$this->_model=GuestBook::model()->findbyPk($id!==null ? $id : $_GET['id'], 'blogsId=:bid', array(':bid'=>$this->_blog->bid));
+				$this->_model=GuestBook::model()->findbyPk($id!==null ? $id : $_GET['id'], 'blogsId=:bid', array(':bid'=>Yii::app()->user->blogId));
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}
