@@ -63,7 +63,7 @@ class Gallery extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
                         'blog'=>array(self::BELONGS_TO,'blogs','blogsId'),
-                        'galleryAlbums'=>array(self::BELONGS_TO,'galleryAlbums','galleryAlbumsId'),
+                        'galleryAlbums'=>array(self::BELONGS_TO,'GalleryAlbums','galleryAlbumsId'),
 		);
 	}
 

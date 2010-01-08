@@ -2,7 +2,7 @@
     	<div id="webLeftmain">
     	  <div id="webPhoto">
        	    <div id="pBiaoti"><?php echo CHtml::link('&gt;&gt;我的相册', array('galleryAlbums','username'=>$this->_user->username), array('class'=>'dTitle')); ?>
-                    <span class="r"><?php echo CHtml::linkButton('删除照片',array('submit'=>array('gallery/delete','id'=>$gallery->id,'username'=>$this->_user->username),'confirm'=>'确定删除?')); ?></span>
+                    <span class="r"><?php if(Yii::app()->user->getState('isOwner')){echo CHtml::linkButton('删除照片',array('submit'=>array('gallery/delete','id'=>$gallery->id,'username'=>Yii::app()->user->name),'confirm'=>'确定删除?'));} ?></span>
             </div>
                 <div id="xiangceDetails" align="center">
                       <?php echo CHtml::image($gallery->getGalleryUrl(), $gallery->title); ?><br />

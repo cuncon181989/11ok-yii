@@ -6,10 +6,11 @@
                         <div id="diarypinglun">
                                 <ul>
                                 <?php foreach ($guestbooks as $key=>$guestbook): ?>
+                                        <?php if ($guestbook->private==0 || Yii::app()->user->getState('isOwner')): ?>
                                         <li>
                                                 <div class="FloatLeft leftpinglun">
                                                 <?php if ($guestbook->usersId>0): ?>
-                                                <?php echo CHtml::link(CHtml::image($guestbook->user->getAvatarUrl()),array('blog/index','username'=>$guestbook->user->username)); ?><br />
+                                                <?php echo CHtml::link(CHtml::image($guestbook->user->getAvatarUrl('small')),array('blog/index','username'=>$guestbook->user->username)); ?><br />
                                                 <?php echo CHtml::link(CHtml::encode($guestbook->userName),array('blog/index','username'=>$guestbook->user->username)); ?>
                                                 <?php else: ?>
                                                 <?php echo CHtml::image(Yii::app()->getRequest()->baseUrl.'/images/guestAvatar.gif'); ?><br />
@@ -17,12 +18,23 @@
                                                 <?php endif ?>
                                                 </div>
                                                 <div class="FloatRight rightpinglun">
-                                                        <div><span class="l">标题：<?php echo CHtml::encode($guestbook->title); ?></span><span class="r"><?php if(Yii::app()->user->getState('isOwner')){echo CHtml::link('回复留言', array('guestbook/reply','gbid'=>$guestbook->id,'username'=>$this->_user->username));} ?></span></div>
-                                                        <p>内容：<?php echo CHtml::encode($guestbook->content); ?></p>
-                                                        <div><span class="r">发表于：<?php echo date('Y-m-d H:i:s',$guestbook->createDate); ?></span></div>
+                                                        <div><span class="l">标题：<?php echo CHtml::encode($guestbook->title); ?></span>
+                                                                <span class="r"><?php if(Yii::app()->user->getState('isOwner')){echo CHtml::link('回复留言', array('guestbook/reply','gbid'=>$guestbook->id,'username'=>Yii::app()->user->name));} ?>
+                                                                <?php if(Yii::app()->user->getState('isOwner')){echo CHtml::linkButton('删除留言',array('submit'=>array('guestbook/delete','id'=>$guestbook->id,'username'=>Yii::app()->user->name),'confirm'=>'确定删除留言及回复?'));}; ?></span></div>
+                                                                <br /><p>内容：<?php echo CHtml::encode($guestbook->content); ?></p>
+                                                                <div class="text_right"><?php echo date('Y-m-d H:i:s',$guestbook->createDate); ?></div>
+                                                                <?php if ($guestbook->reply): ?>
+                                                                <?php foreach ($guestbook->reply as $key=>$g): ?>
+                                                                <div class="reply"><?php $g->userName; ?>回复：<?php echo CHtml::encode($g->title); ?> 
+                                                                        <br />回复内容：<?php echo CHtml::encode($g->content); ?>
+                                                                        <div class="text_right"><?php if(Yii::app()->user->getState('isOwner')){echo CHtml::linkButton('删除回复',array('submit'=>array('guestbook/delete','id'=>$g->id,'username'=>Yii::app()->user->name),'confirm'=>'确定删除回复?'));}; ?> [<?php echo date('Y-m-d H:i:s',$g->createDate) ?>]</div>
+                                                                </div>
+                                                                <?php endforeach ?>
+                                                                <?php endif ?>
                                                 </div>
                                                 <div class="clr"></div>
                                         </li>
+                                        <?php endif ?>
                                 <?php endforeach ?>
                                 </ul>
                         </div>

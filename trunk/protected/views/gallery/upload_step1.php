@@ -5,6 +5,7 @@
 <div class="simple">
 <?php echo CHtml::activeLabelEx($model,'galleryAlbumsId'); ?>
 <?php echo CHtml::activeDropDownList($model,'galleryAlbumsId', CHtml::listData($ga, 'id', 'name')); ?>
+<?php echo CHtml::link('创建相册', array('galleryAlbums/create','username'=>Yii::app()->user->name)); ?>
 </div>
 <div class="simple">
 <?php echo CHtml::activeLabelEx($model,'status'); ?>

@@ -60,6 +60,7 @@ class BlogController extends DController
                         $gongying= array();
                         $qiqgou  = array();
                 }
+                $this->pageTitle= $this->_user->realname.'的e家';
                 $this->render('index', array(
                                              'articles'=>$articles,
                                              'pages'=>$pages,
@@ -82,6 +83,7 @@ class BlogController extends DController
 		$pages->applyLimit($acriteria);
 
                 $articles= Articles::model()->findAll($acriteria);
+                $this->pageTitle= $this->_user->realname.'的文章列表';
                 $this->render('articles', array(
                                              'articles'=>$articles,
                                              'pages'=>$pages,
@@ -119,6 +121,7 @@ class BlogController extends DController
                         Articles::model()->updateCounters(array('countReads'=>1), 'id=:aid', array(':aid'=>$aid));
                 }
                 Yii::app()->user->setState('viewArt'.$aid,1);
+                $this->pageTitle= $article->title;
                 $this->render('article', array('article'=>$article,
                                                'commentModel'=>$comment,
                                         ));
@@ -136,6 +139,8 @@ class BlogController extends DController
 		$pages->pageSize= 9;//这里可以根据用户博客设置来决定显示多少
 		$pages->applyLimit($acriteria);
                 $galleries= GalleryAlbums::model()->findAll($acriteria);
+
+                $this->pageTitle= $this->_user->realname.'的相册集';
                 $this->render('GalleryAlbums', array(
                                              'galleries'=>$galleries,
                                              'pages'=>$pages,
@@ -147,13 +152,13 @@ class BlogController extends DController
          public function actionGalleries(){
                 $gaid= intval($_GET['gaid']);
                 $acriteria= new CDbCriteria();
-                $acriteria->condition= 'blogsId=:bid AND galleryAlbumsId=:gaid AND status=1';
+                $acriteria->condition= '{{gallery}}.blogsId=:bid AND galleryAlbumsId=:gaid AND {{gallery}}.status=1';
                 $acriteria->params= array(':bid'=>$this->_blog->id,'gaid'=>$gaid);
                 $pages= new CPagination(Gallery::model()->count($acriteria));
                 $pages->pageSize= self::PAGE_SIZE; //这里可以根据用户博客设置来决定显示多少
                 $pages->applyLimit($acriteria);
 
-                $galleries= Gallery::model()->findAll($acriteria);
+                $galleries= Gallery::model()->with('galleryAlbums')->findAll($acriteria);
                 $this->render('Galleries', array('galleries'=>$galleries,
                                                  'pages'=>$pages,
                                                 ));
@@ -165,7 +170,8 @@ class BlogController extends DController
                 $gid= intval($_GET['gid']);
                 $gallery= Gallery::model()->findByPk($gid, 'blogsId=:bid AND status=1', array(':bid'=>$this->_blog->id));
                 if ($gallery===null)
-                        throw new CHttpException('没有找到可以查看的图片', 404);
+                        throw new CHttpException(404,'没有找到可以查看的图片');
+                $this->pageTitle= $gallery->title;
                 $this->render('Gallery', array('gallery'=>$gallery,));
         }
         /**
@@ -186,14 +192,16 @@ class BlogController extends DController
                                 Yii::app()->DRedirect->redirect(Yii::app()->getRequest()->getUrlReferrer(),'留言成功!');
                 }else{
                         $acriteria= new CDbCriteria();
-                        $acriteria->condition= 'blogsId=:bid AND status=1';
+                        $acriteria->condition= 'blogsId=:bid AND status=1 AND parentId=0';
                         $acriteria->params= array(':bid'=>$this->_blog->id);
                         $acriteria->order= 'createDate DESC';
                         $pages= new CPagination(GuestBook::model()->count($acriteria));
                         $pages->pageSize=self::PAGE_SIZE;//这里可以根据用户博客设置来决定显示多少
                         $pages->applyLimit($acriteria);
-                        $guestbooks= GuestBook::model()->with('user')->findAll($acriteria);
+                        $guestbooks= GuestBook::model()->with('user','reply')->findAll($acriteria);
                 }
+
+                $this->pageTitle= $this->_user->realname.'的留言板';
                 $this->render('Guestbook', array('guestbooks'=>$guestbooks,
                                                  'gb'=>$gb,
                                                  'pages'=>$pages,
@@ -209,10 +217,9 @@ class BlogController extends DController
                 if (Yii::app()->user->isGuest){
                         Yii::app()->user->returnUrl=$this->createUrl('addfriend',array('uid'=>$uid));
                         Yii::app()->DRedirect->redirect(array('site/login'),'需要登录才能添加好友！',3,false);
-                        Yii::app()->user->returnUrl=$this->createUrl('site/index');
                 }else{
                         if(Friends::model()->exists('userId=:uid AND friendId=:fid', array(':uid'=>Yii::app()->user->id,':fid'=>$uid))){
-                                Yii::app()->DRedirect->redirect(Yii::app()->getRequest()->getUrlReferrer(),'已经在你的好友列表了！不需要重复添加^_^');
+                                Yii::app()->DRedirect->redirect(array('blog/index','username'=>Yii::app()->user->name),'已经在你的好友列表了！不需要重复添加^_^');
                         }else{
                                 $friend= new friends;
                                 $friend->userId   = Yii::app()->user->id;
