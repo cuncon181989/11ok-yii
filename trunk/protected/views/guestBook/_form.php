@@ -27,12 +27,14 @@
         <?php echo CHtml::activeLabelEx($gb,'content'); ?>
         <?php echo CHtml::activeTextArea($gb, 'content', array('rows'=>3,'cols'=>30)); ?>
         </div>
+        <?php if (!$reply): ?>
         <div class="simple">
         <?php echo CHtml::activeLabelEx($gb,'private'); ?>
         <?php echo CHtml::activeCheckBox($gb, 'private'); ?>
-        <?php if ($reply){echo CHtml::activeHiddenField($gb, 'parentId',array('value'=>$_GET['gbid']));} ?>
         </div>
+        <?php endif ?>
         <div class="simple">
+        <?php if ($reply){echo CHtml::activeHiddenField($gb, 'parentId',array('value'=>$_GET['gbid']));} ?>
         <?php echo CHtml::submitButton($reply? '回复': '提交'); ?>
         </div>
 <?php echo CHtml::endForm(); ?>

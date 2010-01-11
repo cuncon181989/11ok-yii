@@ -73,6 +73,6 @@
                         </div>
                 </div>
         </div>
-        <?php echo $this->renderPartial('sidebar') ?>
+        <?php echo $this->renderPartial('sidebar_article') ?>
         <div class="clr"></div>
 </div>

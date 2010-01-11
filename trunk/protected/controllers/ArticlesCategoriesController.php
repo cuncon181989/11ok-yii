@@ -1,6 +1,6 @@
 <?php
 
-class ArticlesCategoriesController extends CController
+class ArticlesCategoriesController extends DController
 {
 	const PAGE_SIZE=10;
 
@@ -32,12 +32,8 @@ class ArticlesCategoriesController extends CController
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'list' and 'show' actions
-				'actions'=>array('list','show'),
-				'users'=>array('*'),
-			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','delete'),
+				'actions'=>array('admin','create','update','delete'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -69,7 +65,7 @@ class ArticlesCategoriesController extends CController
 		{
 			$model->attributes=$_POST['ArticlesCategories'];
 			if($model->save())
-				$this->redirect(array('articles/create'));
+				$this->redirect(array('articlesCategories/admin','username'=>Yii::app()->user->name));
 		}
 		$this->render('create',array('model'=>$model));
 	}
@@ -85,7 +81,7 @@ class ArticlesCategoriesController extends CController
 		{
 			$model->attributes=$_POST['ArticlesCategories'];
 			if($model->save())
-				$this->redirect(array('show','id'=>$model->id));
+				$this->redirect(array('articlesCategories/admin','username'=>Yii::app()->user->name));
 		}
 		$this->render('update',array('model'=>$model));
 	}
@@ -133,6 +129,7 @@ class ArticlesCategoriesController extends CController
 		$this->processAdminCommand();
 
 		$criteria=new CDbCriteria;
+		$criteria->condition= 'usersId='.Yii::app()->user->id;
 
 		$pages=new CPagination(ArticlesCategories::model()->count($criteria));
 		$pages->pageSize=self::PAGE_SIZE;
@@ -161,9 +158,7 @@ class ArticlesCategoriesController extends CController
             {
                 if (!Yii::app()->user->id)
                     $this->redirect(Yii::app()->user->loginUrl);
-                $this->_model=ArticlesCategories::model()->find('id=:id AND usersId=:userid',
-                   array(':id'=>$_GET['id'],
-                         ':userid'=>Yii::app()->user->id,));
+                $this->_model=ArticlesCategories::model()->find('id='.($id?$id:intval($_GET['id'])).' AND usersId='.Yii::app()->user->id);
                 if($this->_model===null)
                     throw new CHttpException(404,'参数错误！');
             }
@@ -176,8 +171,11 @@ class ArticlesCategoriesController extends CController
 	protected function processAdminCommand()
 	{
 		if(isset($_POST['command'], $_POST['id']) && $_POST['command']==='delete')
-		{
-			$this->loadArticlesCategories($_POST['id'])->delete();
+		{	
+			if (Articles::model()->count('id='.$_POST['id'])>0)
+				Yii::app()->DRedirect->redirect('admin','本分类下还有文章，不能被删除！');
+			else
+				$this->loadArticlesCategories($_POST['id'])->delete();
 			// reload the current page to avoid duplicated delete actions
 			$this->refresh();
 		}

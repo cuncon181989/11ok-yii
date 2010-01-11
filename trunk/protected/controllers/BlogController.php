@@ -73,9 +73,12 @@ class BlogController extends DController
          *  文章列表页
          */
         public function actionArticles(){
+		$acid= intval($_GET['acid']);
                 //下面是为文章分页
                 $acriteria= new CDbCriteria();
                 $acriteria->condition= 'blogsId=:bid AND status=1';
+		if (!empty($acid))
+			$acriteria->addCondition('articlesCategoryId='.$acid);
                 $acriteria->params= array(':bid'=>$this->_blog->id);
                 $acriteria->order= 'createDate DESC';
                 $pages= new CPagination(Articles::model()->count($acriteria));
@@ -114,7 +117,7 @@ class BlogController extends DController
                 $aid= intval($_GET['aid']);
                 if (!$aid)
                         throw new CHttpException (404,'参数错误！文章id无效');
-                $article= Articles::model()->with('artText','comments','comments.user')->findByPk($aid, '{{articles}}.usersId=:uid AND {{articles}}.status=1', array(':uid'=>$this->_user->id));
+                $article= Articles::model()->with('artText','comments','comments.user')->findByPk($aid, 't.usersId=:uid AND t.status=1', array(':uid'=>$this->_user->id));
                 if ($article==null)
                         throw new CHttpException(404);
                 if (Yii::app()->user->getState('viewArt'.$aid)!=1){
@@ -152,7 +155,7 @@ class BlogController extends DController
          public function actionGalleries(){
                 $gaid= intval($_GET['gaid']);
                 $acriteria= new CDbCriteria();
-                $acriteria->condition= '{{gallery}}.blogsId=:bid AND galleryAlbumsId=:gaid AND {{gallery}}.status=1';
+                $acriteria->condition= 't.blogsId=:bid AND galleryAlbumsId=:gaid AND t.status=1';
                 $acriteria->params= array(':bid'=>$this->_blog->id,'gaid'=>$gaid);
                 $pages= new CPagination(Gallery::model()->count($acriteria));
                 $pages->pageSize= self::PAGE_SIZE; //这里可以根据用户博客设置来决定显示多少
