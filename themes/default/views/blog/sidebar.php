@@ -32,7 +32,6 @@
                             <?php echo CHtml::link(CHtml::image($friend->getAvatarUrl('small')), array('blog/index','username'=>$friend->username)); ?>
                             姓名：<?php echo CHtml::link($friend->realname, array('blog/index','username'=>$friend->username)); ?><br />
                             公司：<?php echo CHtml::encode($friend->compnay); ?><br />
-                            行业：<?php echo CHtml::encode($friend->blogCategory->name); ?>
               	    <div class="clr"></div>
                     </div>
                     <?php endforeach ?>

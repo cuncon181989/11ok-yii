@@ -38,7 +38,7 @@
 <div id="footer">
 Copyright &copy; 2009 by 易翔商务.<br/>
 All Rights Reserved.<br/>
-<?php echo Yii::powered(); ?>
+<?php echo Yii::powered(); ?> MEM:<?php echo round(memory_get_usage()/1024/1024,4). 'M (peak): '. round(memory_get_peak_usage()/1024/1024,4); ?>
 </div><!-- footer -->
 
 </div><!-- page -->

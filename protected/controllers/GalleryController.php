@@ -214,7 +214,7 @@ class GalleryController extends DController
 		$this->processAdminCommand();
 
 		$criteria=new CDbCriteria;
-                $criteria->condition= '{{gallery}}.usersId=:uid';
+                $criteria->condition= 't.usersId=:uid';
                 $criteria->params= array(':uid'=>$this->_user->id);
 
 		$pages=new CPagination(Gallery::model()->count($criteria));

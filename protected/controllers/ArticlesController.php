@@ -176,8 +176,8 @@ class ArticlesController extends DController
 		$this->processAdminCommand();
 
 		$criteria=new CDbCriteria;
-                $criteria->order= '{{articles}}.id DESC';
-                $criteria->addCondition('{{articles}}.usersId='.Yii::app()->user->id);
+                $criteria->order= 't.id DESC';
+                $criteria->addCondition('t.usersId='.Yii::app()->user->id);
 
 		$pages=new CPagination(Articles::model()->count($criteria));
 		$pages->pageSize=self::PAGE_SIZE;

@@ -13,6 +13,6 @@
                 </div>
     	  </div>
         </div>
-        <?php echo $this->renderPartial('sidebar') ?>
+        <?php echo $this->renderPartial('sidebar_gallery') ?>
         <div class="clr"></div>
 </div>
