@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>11OK搜商网，最大的商人交流平台，最多的信息发布平台，11OK搜商网您的商务洽谈平台！！</title>
 <link href="<?php echo Yii::app()->theme->baseUrl ?>/css/style.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo Yii::app()->theme->baseUrl ?>/css/base.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>

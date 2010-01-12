@@ -7,10 +7,10 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'11ok.net',
+	'name'=>'搜商网 - 11ok.net',
 	'language'=>'zh_cn',
 	'timeZone' => 'Asia/Shanghai',
-
+	'homeUrl'=>'/',
         //'defaultController'=>'site',
 
 	// preloading 'log' component
@@ -69,6 +69,7 @@ return array(
                         'rules'=>array(
                                 '/<_c:(site)>/<_a:>' => '<_c>/<_a>',
                                 '/<username:\w+>/<_c:>/<_a:>' => '<_c>/<_a>',
+                                '<_c:>/<_a:>' => '<_c>/<_a>',
                                 // '/<username:\w+>/<_c:(blogs|articles)>/<id:\d+>/<_a:(create|update|delete)>' => '<_c>/<_a>',
                         ),
                 ),

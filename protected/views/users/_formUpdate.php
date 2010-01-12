@@ -1,4 +1,4 @@
-<div class="yiiForm">
+<div class="okform">
     <p>
     带<span class="required">*</span>的项目必须填写
     </p>

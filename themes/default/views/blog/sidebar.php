@@ -4,11 +4,14 @@
                 <div id="aNeirong">
                 	<div class="nr-touxiang" align="center">
                         <?php echo CHtml::image($this->_user->getAvatarUrl()); ?><br />
-                        <div>
+                        <div> <?php if (Yii::app()->user->getState(isOwner)): ?>
+                                <?php echo CHtml::link('编辑资料', array('users/update','id'=>$this->_user->id,'username'=>$this->_user->username)); ?>
+			      <?php else: ?>
                                 <?php echo CHtml::link('加为好友', array('addFriend','uid'=>$this->_user->id,'username'=>$this->_user->username)); ?> |
                                 <?php echo CHtml::link('悄悄话', array('addSms','uid'=>$this->_user->id,'username'=>$this->_user->username)); ?>
+			      <?php endif ?>
                         </div>
-                    </div>
+			</div>
                     <div class="nr-ziliao">
                       姓名：<?php echo CHtml::encode($this->_user->realname); ?><br />
                       性别：<?php echo CHtml::encode($this->_user->getUserSex()); ?><br />

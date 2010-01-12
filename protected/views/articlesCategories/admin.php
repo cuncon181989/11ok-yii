@@ -18,7 +18,7 @@
 	<?php foreach($models as $n=>$model): ?>
 		<tr class="<?php echo $n%2?'even':'odd';?>">
 			<td><?php echo CHtml::link($model->id,array('show','id'=>$model->id)); ?></td>
-			<td><?php echo CHtml::encode($model->name); ?></td>
+			<td><?php echo CHtml::link(CHtml::encode($model->name),array('blog/articles','acid'=>$model->id,'username'=>Yii::app()->user->name)); ?></td>
 			<td><?php echo CHtml::encode($model->description); ?></td>
 			<td><?php echo CHtml::encode($model->countArticles); ?></td>
 			<td><?php echo CHtml::link('更新',array('update','id'=>$model->id,'username'=>Yii::app()->user->name)); ?>

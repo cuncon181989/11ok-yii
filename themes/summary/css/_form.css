@@ -1,27 +1,17 @@
-/**
- * CSS styles for form and input fields.
- *
- * These styles are used with form and input fields generated via yiic script.
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @link http://www.yiiframework.com/
- * @copyright Copyright &copy; 2008-2009 Yii Software LLC
- * @license http://www.yiiframework.com/license/
- */
-div.yiiForm {
-	border: 2px solid #B7DDF2;
-	background: #EBF4FB;
+div.okform {
+	border: 2px solid #F08200;
+	background: #E7E7E7;
+	margin: 5px 0px;
 	padding: 5px;
-	text-align: left;
-	width: 550px;
-	margin: 0 auto;
+	text-align:left;
+	/* width: 550px; */
 }
 
-div.yiiForm label.required {
+div.okform label.required {
 	
 }
 
-div.yiiForm span.required {
+div.okform span.required {
 	color: red;
 }
 
@@ -44,40 +34,41 @@ div.errorSummary ul {
 
 div.errorSummary ul li {
 	list-style: square;
+        line-height:18px;
 }
 
-div.yiiForm p.hint {
+div.okform p.hint {
 	color: gray;
 	font-size: 90%;
 	margin: 0 0 0 110px;
 }
 
-div.yiiForm fieldset {
+div.okform fieldset {
 	border: #DDD 1px solid;
 	margin: 10px 0;
 	padding: 10px;
 }
 
-div.yiiForm legend {
+div.okform legend {
 	font-weight: bold;
 }
 
-div.yiiForm label {
+div.okform label {
 	
 }
 
-div.yiiForm div.action {
+div.okform div.action {
 	clear: left;
 	margin-left: 110px;
 	padding: 0.25em 0;
 }
 
-div.yiiForm div.simple,div.yiiForm div.complex {
+div.okform div.simple,div.okform div.complex {
 	clear: left;
 	padding: 0.25em 0;
 }
 
-div.yiiForm div.simple label,div.yiiForm div.complex span {
+div.okform div.simple label,div.okform div.complex span {
 	display: block;
 	float: left;
 	margin-right: 10px;
@@ -86,7 +77,7 @@ div.yiiForm div.simple label,div.yiiForm div.complex span {
 	width: 100px;
 }
 
-div.yiiForm div.simple label.normalsort {
+div.okform div.simple label.normalsort {
 	display: block;
 	float: right;
 	margin-right: 10px;
@@ -95,7 +86,7 @@ div.yiiForm div.simple label.normalsort {
 	width: 100px;
 }
 
-div.yiiForm div.simple span label {
+div.okform div.simple span label {
 	display: inline;
 	float: none;
 	margin-right: 10px;
@@ -104,27 +95,27 @@ div.yiiForm div.simple span label {
 	width: 30px;
 }
 
-div.yiiForm label.error,div.yiiForm span.error {
+div.okform label.error,div.okform span.error {
 	color: #C00;
 }
 
-div.yiiForm input.error,div.yiiForm textarea.error,div.yiiForm select.error
+div.okform input.error,div.okform textarea.error,div.okform select.error
 	{
 	background: #FEE;
 	border-color: #C00;
 }
 
-div.yiiForm div.simple div,div.yiiForm div.complex div { /*
+div.okform div.simple div,div.okform div.complex div { /*
 	margin-left: 110px;
 	*/
 	
 }
 
-.yiiForm textarea {
+.11okForm textarea {
 	width: 430px;
 }
 
-.yiiForm iframe {
+.11okForm iframe {
 	background-color: #FFF
 }
 

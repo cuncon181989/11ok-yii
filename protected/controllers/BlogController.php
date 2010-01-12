@@ -86,6 +86,8 @@ class BlogController extends DController
 		$pages->applyLimit($acriteria);
 
                 $articles= Articles::model()->findAll($acriteria);
+		if (null== $articles)
+			throw new CHttpException(404,'没有找到该页！');
                 $this->pageTitle= $this->_user->realname.'的文章列表';
                 $this->render('articles', array(
                                              'articles'=>$articles,

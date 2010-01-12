@@ -1,6 +1,7 @@
 <h2>用户注册：第二步</h2>
 
-<div class="yiiForm">
+<?php Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl.'/css/base.css') ; ?>
+<div class="okform">
     <p>
     带<span class="required">*</span>的项目必须填写
     </p>

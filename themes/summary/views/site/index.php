@@ -85,7 +85,7 @@
                         </span>
                         <div id="forma" align="right"><a href="#">忘记密码？</a></div>
                         <div align="center"><?php echo CHtml::submitButton('点击登陆',array('class'=>'bottomcss','onfocus'=>'javascript:blur();')); ?></div>
-                        <div id="lianjiewenzi" align="center"><a href="register.html">加入搜商网,免费发布商情！</a></div>
+                        <div id="lianjiewenzi" align="center"><?php echo CHtml::link('加入搜商网,免费发布商情！', array('site/register')); ?></div>
                         </div>
                     <?php echo CHtml::endForm(); ?>
                     <?php else: ?>

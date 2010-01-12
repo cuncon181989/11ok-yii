@@ -109,6 +109,59 @@ class SiteController extends CController
 		}
 		$this->render('contact',array('contact'=>$contact));
 	}
+	
+        public function actionRegister()
+        {
+            $model=new Users;
+            $blogs= new Blogs;
+            $blogCate= BlogCategories::model()->findAll();
+            //先判断第二步
+            if(isset($_POST['Blogs'])){
+                $model->attributes=$_POST['Users'];
+                $blogs->attributes=$_POST['Blogs'];
+                if ($blogs->validate()){
+                   $transaction=Yii::app()->getDB()->beginTransaction();
+                    try{
+                        $model->password= md5($model->password);
+                        $model->save();
+                        $blogs->usersId= $model->id;
+			$blogs->blogCategoryId= $model->blogCategoryId;
+                        $blogs->save();
+                        $transaction->commit();
+                        $this->redirect(array('site/login'));
+                    }catch(Exception $e){
+                        $transaction->rollBack();
+                        throw $e;
+                    }
+                }else{
+                    $model->attributes=$_POST['Users'];
+                    //$blogCate= BlogCategories::model()->findAll();
+                    $this->render('register2',array('reg1user'=>$model,
+                                                    'blogCate'=>$blogCate,
+                                                    'blogs'=>$blogs,
+                    ));
+                }
+            //再判断第一步
+            }elseif(isset($_POST['Users'])){
+                $model->attributes=$_POST['Users'];
+                $model->setScenario('register');
+                if ($model->validate()){
+                    //$blogCate= BlogCategories::model()->findAll();
+                    $blogs->blogCategoryId= $model->blogCategoryId;
+                    $this->render('register2',array('reg1user'=>$model,
+                                                   // 'blogCate'=>$blogCate,
+                                                    'blogs'=>$blogs,
+                    ));
+                }else
+                    $this->render('register',array('model'=>$model,
+                                               'blogCate'=>$blogCate,
+                ));
+            }else
+                //Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/pcas.js');
+                $this->render('register',array('model'=>$model,
+                                               'blogCate'=>$blogCate,
+                ));
+        }
 
 	/**
 	 * Displays the login page

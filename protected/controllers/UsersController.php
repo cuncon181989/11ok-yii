@@ -1,6 +1,6 @@
 <?php
 
-class UsersController extends CController
+class UsersController extends DController
 {
 	const PAGE_SIZE=10;
 
@@ -60,7 +60,7 @@ class UsersController extends CController
 				'users'=>array('@'),
 			),
 			array('allow',  // allow all users to perform 'list' and 'show' actions
-				'actions'=>array('register', 'captcha', 'list'),
+				'actions'=>array('register', 'captcha'),
 				'users'=>array('*'),
 			),
 			array('deny',  // deny all users
@@ -83,6 +83,8 @@ class UsersController extends CController
 	 */
         public function actionRegister()
         {
+		$this->redirect('site/register');
+		/**
             $model=new Users;
             $blogs= new Blogs;
             $blogCate= BlogCategories::model()->findAll();
@@ -96,6 +98,7 @@ class UsersController extends CController
                         $model->password= md5($model->password);
                         $model->save();
                         $blogs->usersId= $model->id;
+			$blogs->blogCategoryId= $model->blogCategoryId;
                         $blogs->save();
                         $transaction->commit();
                         $this->redirect(array('site/login'));
@@ -131,6 +134,8 @@ class UsersController extends CController
                 $this->render('register',array('model'=>$model,
                                                'blogCate'=>$blogCate,
                 ));
+
+		 /**/
         }
 
 	public function actionCreate()
@@ -161,10 +166,10 @@ class UsersController extends CController
                         if (!empty($_POST['Users']['password'])){
                             $model->password= md5($model->password);
                             if ($model->save(true,array('password','email','birthday','sex','realname','compnay','blogCategoryId','province','city','area')))
-                                $this->redirect(array('show','id'=>$model->id));
+                                $this->redirect(array('show','id'=>$model->id,'username'=>Yii::app()->user->name));
                         }else{
                             if ($model->save(true,array('email','birthday','sex','realname','compnay','blogCategoryId','province','city','area')))
-                                $this->redirect(array('show','id'=>$model->id));
+                                $this->redirect(array('show','id'=>$model->id,'username'=>Yii::app()->user->name));
                         }
 		}
 		$this->render('update',array('model'=>$model,
@@ -203,15 +208,16 @@ class UsersController extends CController
                  Yii::app()->thumb->crop($img['x1'],$img['y1'],$img['w'],$img['h']);
                  @unlink($user->getAvatarDir().$img['srcName']);
                  Yii::app()->thumb->save('avatar.'.$extName);
-                 Yii::app()->thumb->load($user->getAvatarDir().'avatar.'.$extName);
-                 Yii::app()->thumb->resize($smallAvatar,$smallAvatar);
-                 Yii::app()->thumb->save('smallAvatar.'.$extName);
-                 Yii::app()->thumb->load($user->getAvatarDir().'avatar.'.$extName);
+                 //Yii::app()->thumb->load($user->getAvatarDir().'avatar.'.$extName);
                  Yii::app()->thumb->resize($mediumAvatar,$mediumAvatar);
                  Yii::app()->thumb->save('mediumAvatar.'.$extName);
+                 //Yii::app()->thumb->load($user->getAvatarDir().'avatar.'.$extName);
+                 Yii::app()->thumb->resize($smallAvatar,$smallAvatar);
+                 Yii::app()->thumb->save('smallAvatar.'.$extName);
                  $user->avatar= 'avatar.'.$extName;
                  if($user->save(false,array('avatar'))){
-                     $this->redirect(array('show'));
+		     @unlink('avatar_tmp.'.$extName);
+                     $this->redirect(array('show','username'=>Yii::app()->user->name));
                  }
             }elseif(!empty($user->avatar)){ //如果有头像则执行这里
                 $avatarSize= getimagesize($saveDir.$user->avatar);

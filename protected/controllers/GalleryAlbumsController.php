@@ -129,7 +129,7 @@ class GalleryAlbumsController extends DController
 		$this->processAdminCommand();
                 
 		$criteria=new CDbCriteria;
-                $criteria->condition= '{{galleryalbums}}.usersId=:uid';
+                $criteria->condition= 't.usersId=:uid';
                 $criteria->params= array(':uid'=>Yii::app()->user->id);
 		$pages=new CPagination(GalleryAlbums::model()->count($criteria));
 		$pages->pageSize=self::PAGE_SIZE;
