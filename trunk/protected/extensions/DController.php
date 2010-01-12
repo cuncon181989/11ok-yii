@@ -29,8 +29,9 @@ class DController extends CController
                         $blog= null;
                         //unset($blog);
                 }
-                if (!$this->_user)
-                        throw new CHttpException(404,'用户不存在，URL无效');
+
+                if (!$this->_user && $this->getId()!='users')
+                        throw new CHttpException(404,'URL无效');
                 if (empty($theme))
                         $theme='default';
                 Yii::app()->setTheme($theme);

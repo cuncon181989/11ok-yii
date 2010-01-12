@@ -18,7 +18,7 @@
                 </div>
                 <?php endif ?>
                 <div id="webDiary">
-                <?php echo CHtml::link('&gt;&gt;我的日记', array('articles','username'=>$this->_user->username), array('class'=>'dTitle')); ?>
+                <?php echo CHtml::link('&gt;&gt;我的文章', array('articles','username'=>$this->_user->username), array('class'=>'dTitle')); ?>
                 <?php foreach ($articles as $key=>$article): ?>
                 <div id="dNeirong">
                         <div id="dBiaoti">

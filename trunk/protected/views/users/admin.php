@@ -1,8 +1,8 @@
 <h2>管理用户</h2>
 
 <div class="actionBar">
-[<?php echo CHtml::link('用户列表',array('list')); ?>]
-[<?php echo CHtml::link('创建用户',array('create')); ?>]
+[<?php echo CHtml::link('用户列表',array('list','username'=>Yii::app()->user->name)); ?>]
+[<?php echo CHtml::link('创建用户',array('create','username'=>Yii::app()->user->name)); ?>]
 </div>
 
 <table class="dataGrid">

@@ -1,11 +1,11 @@
 <h2>编辑头像</h2>
 
 <div class="actionBar">
-[<?php echo CHtml::link('用户列表',array('list')); ?>]
-[<?php echo CHtml::link('更新资料',array('update','id'=>$model->id)); ?>]
+[<?php echo CHtml::link('用户列表',array('list','username'=>Yii::app()->user->name)); ?>]
+[<?php echo CHtml::link('更新资料',array('update','id'=>$model->id,'username'=>Yii::app()->user->name)); ?>]
 </div>
 
-<div class="yiiForm">
+<div class="okform">
     <div>第一步：上传图片</div><br />
     <div class="simple">
     <?php echo CHtml::errorSummary($user); ?>

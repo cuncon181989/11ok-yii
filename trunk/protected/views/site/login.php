@@ -1,7 +1,7 @@
 <?php $this->pageTitle=Yii::app()->name . ' - 登录'; ?>
 
 <h1>登录</h1>
-<div class="yiiForm"><?php echo CHtml::beginForm(); ?> <?php echo CHtml::errorSummary($form); ?>
+<div class="okform"><?php echo CHtml::beginForm(); ?> <?php echo CHtml::errorSummary($form); ?>
 <div class="simple"><?php echo CHtml::activeLabel($form,'username'); ?>
 <?php echo CHtml::activeTextField($form,'username') ?></div>
 <div class="simple"><?php echo CHtml::activeLabel($form,'password'); ?>

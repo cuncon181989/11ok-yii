@@ -5,7 +5,7 @@
 <meta name="language" content="cn_zh" />
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/yellow.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/base.css" />
-<title><?php echo $this->pageTitle; ?></title>
+<title><?php echo $this->pageTitle; ?> | <?php echo Yii::app()->name; ?></title>
 </head>
 <body>
 <div id="webmap" align="center">
@@ -17,7 +17,7 @@
 <div id="weball" align="left">
 	<div id="webMenu">
                 <div id="menu"><?php echo CHtml::link('我的主页', array('blog/index','username'=>$this->_user['username'])); ?>|
-                        <?php echo CHtml::link('我的日记', array('blog/articles','username'=>$this->_user['username'])); ?>|
+                        <?php echo CHtml::link('我的文章', array('blog/articles','username'=>$this->_user['username'])); ?>|
                         <?php echo CHtml::link('我的相册', array('blog/galleryAlbums','username'=>$this->_user['username'])); ?>|
                         <?php echo CHtml::link('我的留言', array('blog/guestbook','username'=>$this->_user['username'])); ?></div>
         </div>

@@ -1,9 +1,8 @@
-<h2>Update Users <?php echo $model->id; ?></h2>
+<h2>更新资料<?php echo $model->id; ?></h2>
 
 <div class="actionBar">
-[<?php echo CHtml::link('用户列表',array('list')); ?>]
-[<?php echo CHtml::link('编辑资料',array('admin')); ?>]
-[<?php echo CHtml::link('编辑头像',array('avatar')); ?>]
+[<?php echo CHtml::link('编辑资料',array('admin','username'=>Yii::app()->user->name)); ?>]
+[<?php echo CHtml::link('编辑头像',array('avatar','username'=>Yii::app()->user->name)); ?>]
 </div>
 
 <?php echo $this->renderPartial('_formUpdate', array(

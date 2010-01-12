@@ -1,7 +1,7 @@
-<h2>View Users <?php echo $model->id; ?></h2>
+<h2>查看资料<?php echo $model->id; ?></h2>
 
-<div class="actionBar">[<?php echo CHtml::link('用户列表',array('list')); ?>]
-[<?php echo CHtml::link('编辑资料',array('update','id'=>$model->id)); ?>]
+<div class="actionBar">
+[<?php echo CHtml::link('编辑资料',array('update','id'=>$model->id,'username'=>Yii::app()->user->name)); ?>]
 </div>
 
 <table class="dataGrid">
@@ -29,7 +29,7 @@
 	<tr>
 		<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('avatar')); ?>
 		</th>
-		<td><?php echo CHtml::image($model->getAvatarUrl());?>[<?php echo CHtml::link('编辑头像',array('avatar','id'=>$model->id)); ?>]
+		<td><?php echo CHtml::image($model->getAvatarUrl());?>[<?php echo CHtml::link('编辑头像',array('avatar','id'=>$model->id,'username'=>Yii::app()->user->name)); ?>]
 		</td>
 	</tr>
 	<tr>

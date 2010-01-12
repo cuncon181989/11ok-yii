@@ -1,8 +1,8 @@
-<h2>Users List</h2>
+<h2>用户列表</h2>
 
 <div class="actionBar">
-[<?php echo CHtml::link('注册新用户',array('register')); ?>]
-[<?php echo CHtml::link('管理用户',array('admin')); ?>]
+[<?php echo CHtml::link('注册新用户',array('register','username'=>Yii::app()->user->name)); ?>]
+[<?php echo CHtml::link('管理用户',array('admin','username'=>Yii::app()->user->name)); ?>]
 </div>
 
 <?php $this->widget('CLinkPager',array('pages'=>$pages)); ?>
