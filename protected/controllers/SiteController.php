@@ -2,7 +2,7 @@
 
 class SiteController extends CController
 {
-        const PAGE_SIZE=6;
+        const PAGE_SIZE=12;
 
          /**
          * 为本控制器做初始化操作
@@ -32,7 +32,7 @@ class SiteController extends CController
 	public function actionIndex()
 	{
                 $form=new LoginForm;
-                $summary= new Summary;
+		$summary= new Summary;
 		$this->render('index',array('form'=>$form,
                                             'summary'=>$summary,
                                         ));
@@ -51,7 +51,9 @@ class SiteController extends CController
                 $pages->applyLimit($criteria);
                 
                 $users= Users::model()->with('blogs','blogCategory')->findAll($criteria);
+                $form=new LoginForm;
                 $this->render('list', array('users'=>$users,
+                                            'form'=>$form,
                                             'pages'=>$pages,
                                         ));
         }
@@ -63,12 +65,6 @@ class SiteController extends CController
                         extract($_POST['search']);
                         //mydebug($keyword);
                         $criteria= new CDbCriteria;
-                        $criteria->addCondition('userStatus=1 AND realname IS NOT NULL');
-
-                        $pages= new CPagination(Users::model()->count($criteria));
-                        $pages->pageSize= self::PAGE_SIZE;
-                        $pages->applyLimit($criteria);
-
                         if (!empty($keyword) && $keyword!='请输入关键字'){
                                 $criteria->addSearchCondition('username', $keyword, true, 'OR');
                                 $criteria->addSearchCondition('realname', $keyword, true, 'OR');
@@ -79,11 +75,18 @@ class SiteController extends CController
                         if (!empty($city))
                                 $criteria->addSearchCondition('city', $city, true, 'OR');
                         if (!empty($blogCategoryId))
-                                $criteria->addSearchCondition('blogCategoryId', $blogCategoryId);
+                                $criteria->addSearchCondition('t.blogCategoryId', $blogCategoryId);
+                        $criteria->addCondition('userStatus=1 AND realname IS NOT NULL','AND');
 
-                        $users= Users::model()->findAll($criteria);
-                        
+                        $pages= new CPagination(Users::model()->count($criteria));
+                        $pages->pageSize= self::PAGE_SIZE;
+                        $pages->applyLimit($criteria);
+
+                        $users= Users::model()->with('blogCategory','blogs')->findAll($criteria);
+
+			$form=new LoginForm;
                         $this->render('list', array('users'=>$users,
+                                                    'form'=>$form,
                                                     'pages'=>$pages,
                                                 ));
                 }

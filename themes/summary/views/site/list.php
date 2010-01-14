@@ -41,7 +41,7 @@
                                 </span>
                                 <div id="forma" align="right"><a href="#">忘记密码？</a></div>
                                 <div align="center"><?php echo CHtml::submitButton('点击登陆',array('class'=>'bottomcss','onfocus'=>'javascript:blur();')); ?></div>
-                                <div id="lianjiewenzi" align="center"><a href="register.html">加入搜商网,免费发布商情！</a></div>
+                                <div id="lianjiewenzi" align="center"><?php echo CHtml::link('加入搜商网,免费发布商情！', array('/site/register')); ?></div>
                                 </div>
                             <?php echo CHtml::endForm(); ?>
                             <?php else: ?>
@@ -54,35 +54,14 @@
                 <div id="sort">
                         <div id="sortTitle"><span>行业分类</span></div>
                         <div id="sortNeirong" align="center">
-                                <ul>
-                                        <li class="bj1"><a href="#">化学原料</a><a href="#">颜料油漆</a><a
-                                                        href="#">日化用品</a></li>
-                                        <li class="bj0"><a href="#">燃料油脂</a><a href="#">医 疗</a><a href="#">金属材料</a></li>
-                                        <li class="bj1"><a href="#">机械设备</a><a href="#">手工机械</a><a
-                                                        href="#">科学仪器</a></li>
-                                        <li class="bj0"><a href="#">医疗器械</a><a href="#">灯具空调</a><a
-                                                        href="#">运输工具</a></li>
-                                        <li class="bj1"><a href="#">军火烟火</a><a href="#">珠宝钟表</a><a
-                                                        href="#">乐 器</a></li>
-                                        <li class="bj0"><a href="#">办 公 品</a><a href="#">橡胶制品</a><a
-                                                        href="#">皮革皮具</a></li>
-                                        <li class="bj1"><a href="#">建筑材料</a><a href="#">家 具</a><a href="#">厨房洁具</a></li>
-                                        <li class="bj0"><a href="#">绳网袋篷</a><a href="#">纱 线 丝</a><a
-                                                        href="#">布料床单</a></li>
-                                        <li class="bj1"><a href="#">服装鞋帽</a><a href="#">纽扣拉链</a><a
-                                                        href="#">地毯席垫</a></li>
-                                        <li class="bj0"><a href="#">健身器材</a><a href="#">食 品</a><a href="#">方便食品</a></li>
-                                        <li class="bj1"><a href="#">饲料加工</a><a href="#">啤酒饮料</a><a
-                                                        href="#">酒</a></li>
-                                        <li class="bj0"><a href="#">烟草烟具</a><a href="#">广告销售</a><a
-                                                        href="#">金融物管</a></li>
-                                        <li class="bj1"><a href="#">建筑修理</a><a href="#">通讯服务</a><a
-                                                        href="#">运输贮藏</a></li>
-                                        <li class="bj0"><a href="#">材料加工</a><a href="#">教育娱乐</a><a
-                                                        href="#">设计研究</a></li>
-                                        <li class="bj1"><a href="#">餐饮住宿</a><a href="#">医疗园艺</a><a
-                                                        href="#">社会法律</a></li>
-                                </ul>
+			  <table>
+				<tr class="odd">
+				<?php foreach ($this->getBlogCategory() as $key=>$blogCate): ?>
+				<?php if ($key%3==0 && $key!=0): ?></tr><tr class="<?php echo $key%6?'even':'odd';?>"><?php endif ?>
+					<td><?php echo CHtml::link($blogCate->name, array('site/search','bcid'=>$blogCate->id)); ?></td>
+				<?php endforeach ?>
+				</tr>
+			  </table>
                         </div>
                 </div>
         </div>

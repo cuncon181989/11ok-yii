@@ -12,6 +12,7 @@ class DController extends CController
          */
          public function init(){
                 //先执行父级初始化
+                
                 parent::init();
                 //设置本控制器使用的皮肤
                 if (isset($_GET['username'])){
