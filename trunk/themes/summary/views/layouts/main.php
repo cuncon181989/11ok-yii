@@ -14,7 +14,7 @@
                 <a href="<?php echo $this->createUrl('site/index'); ?>"><img src="<?php echo Yii::app()->theme->baseUrl ?>/images/logo.gif" alt="11OK搜商网" border="0" /></a>
                 </div></div>
         <div id="mainNav">
-			<div id="topTextAd" align="right"><a href="#">设为首页</a>|<a href="#">加入收藏</a>|<a href="#">联系我们</a>|<a href="#">关于我们</a></div>
+			<div id="topTextAd" align="right"><a href="#">加入收藏</a>|<a href="#">联系我们</a>|<a href="#">关于我们</a></div>
 			<div class="Search_nav">
                                 <?php echo CHtml::link('<span>首　页</span>',array('site/index'),array('class'=>'index')) ?>
                                 <?php echo CHtml::link('<span>商人库</span>',array('site/list'),array('class'=>'people')) ?>

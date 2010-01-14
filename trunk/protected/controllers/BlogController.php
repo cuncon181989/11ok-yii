@@ -239,7 +239,23 @@ class BlogController extends DController
          * 添加悄悄话
          */
          public function actionAddSms(){
+		if (Yii::app()->user->isGuest){
+			Yii::app()->user->returnUrl= Yii::app()->getRequest()->getRequestUri();
+			Yii::app()->DRedirect->redirect('/site/login','需要登录使用此功能');
+		}
+		if (Yii::app()->user->id != $this->_user->id)
+			throw new CHttpException(403);
 
-                 $this->render('addSms', array());
+		$sms= new SiteSms;
+		if ($_POST['SiteSms']){
+			$sms->attributes=$_POST['SiteSms'];
+			if ($sms->save())
+				Yii::app()->DRedirect->redirect(array('blog/index','username'=>Yii::app()->user->name),'消息发送成功！');
+		}else{
+			$sms->toUsername= $_GET['to'];
+			$sms->toId= intval($_GET['uid']);
+		}
+			$this->render('addSms', array('sms'=>$sms,
+						));
          }
 }

@@ -198,7 +198,8 @@ class UsersController extends DController
                                    ));
                  }else
                     $this->render('avatar',array('user'=>$user));
-            }elseif ($_POST['saveAvatar'] && $_POST['img']['w']   && $_POST['img']['h']){ //如果是编辑头像执行这里,有高和宽即可，如果判断x1,y1的话当他们是从图片00开始截就会判断为假了
+            }elseif ($_POST['saveAvatar'] && $_POST['img']['w']   && $_POST['img']['h']){
+		 //如果是编辑头像执行这里,有高和宽即可，如果判断x1,y1的话当他们是从图片00开始截就会判断为假了
                  $img = $_POST['img'];
                  $extName = substr($img['srcName'],-3);
                  $smallAvatar = Yii::app()->params['smallAvatar'];

@@ -7,6 +7,7 @@ class SiteSms extends CActiveRecord
 	 * @var integer $id
 	 * @var integer $postId
 	 * @var integer $toId
+	 * @var integer $toUsername
 	 * @var integer $status
 	 * @var string $title
 	 * @var string $content
@@ -38,10 +39,10 @@ class SiteSms extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, createDate', 'required'),
+			array('toUsername, title, content', 'required'),
+			array('title, toUsername', 'length','min'=>2, 'max'=>255),
+			array('toUsername', 'exist', 'allowEmpty'=>false, 'className'=>'users','attributeName'=>'username'),
 			array('postId, toId, status, createDate', 'numerical', 'integerOnly'=>true),
-			array('title', 'length', 'max'=>255),
-			array('content', 'safe'),
 		);
 	}
 
@@ -53,6 +54,8 @@ class SiteSms extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'to_user'=>array(self::BELONGS_TO,'users','toId'),
+			'post_user'=>array(self::BELONGS_TO,'users','postId'),
 		);
 	}
 
@@ -63,12 +66,22 @@ class SiteSms extends CActiveRecord
 	{
 		return array(
 			'id' => 'Id',
-			'postId' => 'Post',
-			'toId' => 'To',
-			'status' => 'Status',
-			'title' => 'Title',
-			'content' => 'Content',
-			'createDate' => 'Create Date',
+			'postId' => '发送者ID',
+			'toId' => '接收者ID',
+			'toUsername'=>'接收者',
+			'status' => '状态',
+			'title' => '标题',
+			'content' => '内容',
+			'createDate' => '发生时间',
 		);
+	}
+
+	protected function beforeValidate(){
+		if ($this->isNewRecord){
+			$this->createDate= time();
+			$this->status=1;
+			$this->postId=Yii::app()->user->id;
+		}
+		return true;
 	}
 }

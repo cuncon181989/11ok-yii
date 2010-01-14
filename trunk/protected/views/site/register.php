@@ -44,7 +44,8 @@
             <?php echo CHtml::activeLabel($model,'verifyCode'); ?>
             <div>
             <?php echo CHtml::activeTextField($model,'verifyCode'); ?><br />
-            <?php $this->widget('CCaptcha'); ?>
+	    <?php echo CHtml::label('&nbsp;', 'null'); ?>
+            <?php $this->widget('CCaptcha',array('buttonLabel'=>' 刷新 ','clickableImage'=>true)); ?>
             </div>
     </div>
     <?php endif; ?>

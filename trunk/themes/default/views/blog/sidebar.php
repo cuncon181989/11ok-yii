@@ -7,8 +7,8 @@
                         <div> <?php if (Yii::app()->user->getState(isOwner)): ?>
                                 <?php echo CHtml::link('编辑资料', array('users/update','id'=>$this->_user->id,'username'=>$this->_user->username)); ?>
 			      <?php else: ?>
-                                <?php echo CHtml::link('加为好友', array('addFriend','uid'=>$this->_user->id,'username'=>$this->_user->username)); ?> |
-                                <?php echo CHtml::link('悄悄话', array('addSms','uid'=>$this->_user->id,'username'=>$this->_user->username)); ?>
+                                <?php echo CHtml::link('加为好友', array('addFriend','uid'=>$this->_user->id,'username'=>$this->_user->username)); ?>
+                                <?php if(!Yii::app()->user->isGuest) echo CHtml::link('悄悄话', array('addSms','uid'=>$this->_user->id, 'to'=>$this->_user->username,'username'=>Yii::app()->user->name)); ?>
 			      <?php endif ?>
                         </div>
 			</div>
