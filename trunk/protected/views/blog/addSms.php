@@ -1,3 +1,8 @@
+<h2>写短信</h2>
+<div class="actionBar">
+[<?php echo CHtml::link('收件箱',array('blog/inbox','username'=>Yii::app()->user->name)); ?>]
+[<?php echo CHtml::link('发件箱',array('blog/outbox','username'=>Yii::app()->user->name)); ?>]
+</div>
 <div class="okform">
 	<?php echo CHtml::beginForm(); ?>
 	<?php echo CHtml::errorSummary($sms); ?>

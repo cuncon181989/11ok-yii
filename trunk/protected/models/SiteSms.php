@@ -41,7 +41,7 @@ class SiteSms extends CActiveRecord
 		return array(
 			array('toUsername, title, content', 'required'),
 			array('title, toUsername', 'length','min'=>2, 'max'=>255),
-			array('toUsername', 'exist', 'allowEmpty'=>false, 'className'=>'users','attributeName'=>'username'),
+			array('toUsername', 'exist', 'allowEmpty'=>false, 'className'=>'users','attributeName'=>'username','message'=>'接收者用户不存在'),
 			array('postId, toId, status, createDate', 'numerical', 'integerOnly'=>true),
 		);
 	}

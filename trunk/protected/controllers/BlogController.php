@@ -22,7 +22,7 @@ class BlogController extends DController
 	{
 		return array(
 		array('allow',  // allow all users to perform 'list' and 'show' actions
-				'actions'=>array('index','articles','article','galleryalbums','galleries','gallery','guestbook','addFriend','addSms'),
+				'actions'=>array('index','articles','article','galleryalbums','galleries','gallery','guestbook','addFriend','friends','addSms','inbox','outbox'),
 				'users'=>array('*'),
 		),
 		array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -235,8 +235,17 @@ class BlogController extends DController
                         }
                 }
          }
+	 /**
+	  * 好友列表
+	  */
+	  public function actionFriends(){
+
+		  $this->render('friends',array(
+						
+						));
+	  }
         /**
-         * 添加悄悄话
+         * 添加站内短信(悄悄话)
          */
          public function actionAddSms(){
 		if (Yii::app()->user->isGuest){
@@ -258,4 +267,49 @@ class BlogController extends DController
 			$this->render('addSms', array('sms'=>$sms,
 						));
          }
+	 /**
+	  * 收件箱
+	  */
+	 public function actionInBox(){
+		if(isset($_POST['command'], $_POST['id']) && $_POST['command']==='delete')
+		{
+			SiteSms::model()->deleteByPk(intval($_POST['id']), 'toId=:toid', array(':toid'=>Yii::app()->user->id));
+			$this->refresh();
+		}
+
+		 $criteria= new CDbCriteria;
+		 $criteria->addCondition('toId='.Yii::app()->user->id);
+
+		 $pages= new CPagination(SiteSms::model()->count($criteria));
+		 $pages->setPageSize(10);
+		 $pages->applyLimit($criteria);
+
+		 $sms= SiteSms::model()->with('post_user')->findAll($criteria);
+		 $this->render('inbox',array('sms'=>$sms,
+					'pages'=>$pages,
+					));
+	 }
+	 /**
+	  * 发件箱
+	  */
+	 public function actionOutBox(){
+		if(isset($_POST['command'], $_POST['id']) && $_POST['command']==='delete')
+		{
+			SiteSms::model()->deleteByPk(intval($_POST['id']), 'postId=:postid', array(':postid'=>Yii::app()->user->id));
+			$this->refresh();
+		}
+		 
+		 $criteria= new CDbCriteria;
+		 $criteria->addCondition('postId='.Yii::app()->user->id);
+
+		 $pages= new CPagination(SiteSms::model()->count($criteria));
+		 $pages->setPageSize(10);
+		 $pages->applyLimit($criteria);
+
+		 $sms= SiteSms::model()->with('to_user')->findAll($criteria);
+		 $this->render('outbox',array('sms'=>$sms,
+					'pages'=>$pages,
+					));
+	 }
+
 }
