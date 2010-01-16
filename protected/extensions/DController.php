@@ -53,7 +53,7 @@ class DController extends CController
                         if ($num==0){
                                 $vCount= Visits::model()->count('visitId=:vid',array(':vid'=>$this->_user->id));
                                 if ($vCount>=12){
-                                //如果用户数大于12则刚新前面的记录
+                                //如果用户数大于12则更新前面的记录
                                 //否则更新最前面的一条
                                 Visits::model()->updateAll(array('userId'=>Yii::app()->user->id, 'visitId'=>$this->_user->id, 'visitDate'=>time()),
                                                                  'visitId=:vid ORDER BY visitDate ASC LIMIT 1',

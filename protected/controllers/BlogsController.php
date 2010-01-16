@@ -1,6 +1,6 @@
 <?php
 
-class BlogsController extends CController
+class BlogsController extends DController
 {
 	const PAGE_SIZE=10;
 
@@ -33,15 +33,15 @@ class BlogsController extends CController
 	{
 		return array(
 		array('allow',  // allow all users to perform 'list' and 'show' actions
-				'actions'=>array('list','show'),
+				'actions'=>array(),
 				'users'=>array('*'),
 		),
 		array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('update'),
+				'actions'=>array('show','update','settings'),
 				'users'=>array('@'),
 		),
 		array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('create','admin','delete'),
+				'actions'=>array('list','admin'),
 				'users'=>array('admin'),
 		),
 		array('deny',  // deny all users
@@ -83,18 +83,29 @@ class BlogsController extends CController
 	 */
 	public function actionUpdate()
 	{
-		$model=$this->loadBlogs();
+		$model=Blogs::model()->findbyPk(Yii::app()->user->blogId);
 		if($model->usersId != Yii::app()->user->id)
 		throw new CHttpException(404,'The requested post does not exist.');
 		if(isset($_POST['Blogs']))
 		{
 			$model->attributes=$_POST['Blogs'];
 			if($model->save())
-			$this->redirect(array('show','id'=>$model->id));
+			$this->redirect(array('show','id'=>$model->id,'username'=>Yii::app()->user->name));
 		}
 		$this->render('update',array('model'=>$model));
 	}
-
+	/**
+	 * 设置
+	 */
+	 public function actionSettings(){
+		if(isset($_POST['settings'])){
+			mydebug($_POST);
+		}
+		$blogs= Blogs::model()->findByPk(Yii::app()->user->blogId);
+		$this->render('settings',array('blogs'=>$blogs,
+						'settings'=>$settings,
+						));
+	 }
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'list' page.
@@ -116,6 +127,8 @@ class BlogsController extends CController
 	 */
 	public function actionList()
 	{
+		$this->redirect('/site/list');
+		/**
 		$criteria=new CDbCriteria;
 
 		$pages=new CPagination(Blogs::model()->count($criteria));
@@ -128,6 +141,7 @@ class BlogsController extends CController
 			'models'=>$models,
 			'pages'=>$pages,
 		));
+		/**/
 	}
 
 	/**
