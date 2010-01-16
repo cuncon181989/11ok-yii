@@ -5,13 +5,11 @@
  * @license http://www.yiiframework.com/license/
  */
 
-class DUrlManager extends CUrlManager
-{
-        public function createUrl($route, $params=array(), $ampersand='&')
-        {
-            //这里为每个url都加入当前登录的用户名。已经弃用，因为是想加上博客主的用户名而非当前用户的用户名
-            if(!Yii::app()->user->isGuest){
-                    $params['username']=Yii::app()->user->name;
+class DUrlManager extends CUrlManager{
+        public function createUrl($route, $params=array(), $ampersand='&') {
+            //已登录并且是DController的子类并且没有设置username参数
+            if(get_parent_class(Yii::app()->controller)=='DController' && !isset($params['username'])){
+                    $params['username']=Yii::app()->controller->_user->username;
             }
             return parent::createUrl($route,$params,$ampersand);
         }

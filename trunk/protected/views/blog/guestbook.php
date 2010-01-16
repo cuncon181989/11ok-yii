@@ -40,7 +40,7 @@
                         </div>
                         <div><?php $this->widget('CLinkPager',array('pages'=>$pages)); ?></div>
                         <div id="dBiaoti">　<strong>给我留言</strong></div>
-                        <?php echo $this->renderPartial('_form', array('gb'=>$gb,
+                        <?php echo $this->renderPartial('gb_form', array('gb'=>$gb,
                                                                         'reply'=>false,
                                                                 )); ?>
                 </div>

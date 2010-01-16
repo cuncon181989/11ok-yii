@@ -1,6 +1,4 @@
-<h2>Managing Blogs</h2>
-
-<div class="actionBar">[<?php echo CHtml::link('Blogs List',array('list')); ?>]
+<h2>管理</h2>
 [<?php echo CHtml::link('New Blogs',array('create')); ?>]</div>
 
 <table class="dataGrid">

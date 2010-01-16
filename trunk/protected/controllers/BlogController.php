@@ -86,8 +86,7 @@ class BlogController extends DController
 		$pages->applyLimit($acriteria);
 
                 $articles= Articles::model()->findAll($acriteria);
-		if (null== $articles)
-			throw new CHttpException(404,'没有找到该页！');
+		//if (null== $articles) throw new CHttpException(404,'没有文章！');
                 $this->pageTitle= $this->_user->realname.'的文章列表';
                 $this->render('articles', array(
                                              'articles'=>$articles,
@@ -239,9 +238,25 @@ class BlogController extends DController
 	  * 好友列表
 	  */
 	  public function actionFriends(){
+		if (Yii::app()->user->id != $this->_user->id)//可以根据用户是博客设置来决定是否任何人都能看到
+			throw new CHttpException(403);
+		if(isset($_POST['command'], $_POST['id']) && $_POST['command']==='delete')
+		{
+			Friends::model()->deleteByPk(intval($_POST['id']), 'userId=:uid', array(':uid'=>Yii::app()->user->id));
+			$this->refresh();
+		}
 
-		  $this->render('friends',array(
-						
+		$criteria= new CDbCriteria;
+		$criteria->addCondition('status=1');
+		$criteria->addCondition('userId='.Yii::app()->user->id);
+
+		$pages= new CPagination(Friends::model()->count($criteria));
+		$pages->setPageSize(10);
+		$pages->applyLimit($criteria);
+
+		 $friends= Friends::model()->with('info')->findAll($criteria);
+		 $this->render('friends',array('friends'=>$friends,
+						'pages'=>$pages,
 						));
 	  }
         /**

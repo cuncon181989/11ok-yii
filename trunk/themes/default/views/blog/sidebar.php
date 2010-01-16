@@ -5,11 +5,11 @@
                 	<div class="nr-touxiang" align="center">
                         <?php echo CHtml::image($this->_user->getAvatarUrl()); ?><br />
                         <div> <?php if (Yii::app()->user->getState(isOwner)): ?>
-                                <?php echo CHtml::link('编辑资料', array('users/update','username'=>Yii::app()->user->name)); ?>
-                                <?php echo CHtml::link('站内消息', array('blog/inbox','username'=>Yii::app()->user->name)); ?>
+                              <?php echo CHtml::link('编辑资料', array('users/update','username'=>Yii::app()->user->name)); ?>
+                              <?php echo CHtml::link('站内消息', array('blog/inbox','username'=>Yii::app()->user->name)); ?>
 			      <?php else: ?>
-                                <?php echo CHtml::link('加为好友', array('addFriend','uid'=>$this->_user->id,'username'=>$this->_user->username)); ?>
-                                <?php if(!Yii::app()->user->isGuest) echo CHtml::link('悄悄话', array('addSms','uid'=>$this->_user->id, 'to'=>$this->_user->username,'username'=>Yii::app()->user->name)); ?>
+                              <?php echo CHtml::link('加为好友', array('addFriend','uid'=>$this->_user->id,'username'=>$this->_user->username)); ?>
+                              <?php if(!Yii::app()->user->isGuest) echo CHtml::link('悄悄话', array('addSms','uid'=>$this->_user->id, 'to'=>$this->_user->username,'username'=>Yii::app()->user->name)); ?>
 			      <?php endif ?>
                         </div>
 			</div>
@@ -29,7 +29,7 @@
                 </div>
                 </div>
                 <div id="webKuang">
-            	<div id="kTitle">我的好友</div>
+            	<div id="kTitle">我的好友<span class="r"><?php if(Yii::app()->user->getState('isOwner')) echo CHtml::link('更多>>',array('blog/friends','username'=>$this->_user->username)); ?></span></div>
                 <div id="kNeirong">
                     <?php foreach ($this->_user->friends as $key=>$friend): ?>
                     <div class="Rf-friend">

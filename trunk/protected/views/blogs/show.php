@@ -1,11 +1,7 @@
 <h2>查看博客<?php echo $model->id; ?></h2>
 
 <div class="actionBar">
-[<?php echo CHtml::link('博客列表',array('list')); ?>]
-[<?php echo CHtml::link('新博客',array('create')); ?>]
-[<?php echo CHtml::link('修改博客设置',array('update','id'=>$model->id)); ?>]
-[<?php echo CHtml::linkButton('删除博客',array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure?')); ?>]
-[<?php echo CHtml::link('管理博客',array('admin')); ?>]
+[<?php echo CHtml::link('修改博客设置',array('update','id'=>$model->id,'username'=>Yii::app()->user->name)); ?>]
 </div>
 
 <table class="dataGrid">
