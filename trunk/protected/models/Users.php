@@ -56,7 +56,7 @@ class Users extends CActiveRecord
 			array('avatar', 'length', 'max'=>255),
 			array('username, password', 'required', 'on'=>'register'),
 			array('username', 'length', 'min'=>4, 'max'=>25 ),
-			array('username', 'match', 'pattern'=>'/^[\w]+$/', message=>'用户名只能是字母数字下划线！' ),
+			array('username', 'match', 'pattern'=>'/^[\w]+$/', 'message'=>'用户名只能是字母数字下划线！' ),
 			array('username', 'unique','className'=>'users','attributeName'=>'username'),
 			array('password', 'length', 'min'=>4, 'max'=>32),
 			array('password2', 'compare', 'compareAttribute'=>'password', 'on'=>'register'),
@@ -160,7 +160,12 @@ class Users extends CActiveRecord
          */
         protected function afterSave(){
             //用户更新行业的时候同时更新一下博客表的行业，使其同步
-            $this->dbConnection->createCommand('update {{blogs}} set blogCategoryId='.$this->blogCategoryId.' WHERE usersId='.$this->id)->execute(); 
+            $this->dbConnection->createCommand('update {{blogs}} set blogCategoryId='.$this->blogCategoryId.' WHERE usersId='.$this->id)->execute();
+	    if ($this->isNewRecord){
+		$blog= new UserInfo;
+		$blog->usersId= $this->id;
+		$blog->save(false);
+	    }
         }
         /**
          * 删除用户的时候减少相应行业统计
@@ -198,7 +203,7 @@ class Users extends CActiveRecord
                 if ($avatar=='noavatar1.jpg' || $avatar=='noavatar2.jpg')
                         return Yii::app()->getRequest()->getBaseUrl().'/images/'.$avatar;
                 else
-                        return Yii::app()->getRequest()->getBaseUrl().'/'.Yii::app()->params[uploadDir].'/'.$this->id.'/'.$avatar;
+                        return Yii::app()->getRequest()->getBaseUrl().'/'.Yii::app()->params['uploadDir'].'/'.$this->id.'/'.$avatar;
         }
         /**
          * @param string $size 头像的大小

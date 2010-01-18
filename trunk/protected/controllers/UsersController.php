@@ -184,7 +184,7 @@ class UsersController extends DController
         public function actionAvatar(){
             $user= $this->loadUsers();
             $saveDir= $user->getAvatarDir();
-            if ($_FILES['Users']){ //如果是上传文件执行这里
+            if (isset($_FILES['Users'])){ //如果是上传文件执行这里
                  $afile= CUploadedFile::getInstance($user,'avatar');
                  if(!is_dir($saveDir))
                     mkdir($saveDir,0644);
@@ -198,7 +198,7 @@ class UsersController extends DController
                                    ));
                  }else
                     $this->render('avatar',array('user'=>$user));
-            }elseif ($_POST['saveAvatar'] && $_POST['img']['w']   && $_POST['img']['h']){
+            }elseif (isset($_POST['saveAvatar']) && isset($_POST['img']['w']) && isset($_POST['img']['h'])){
 		 //如果是编辑头像执行这里,有高和宽即可，如果判断x1,y1的话当他们是从图片00开始截就会判断为假了
                  $img = $_POST['img'];
                  $extName = substr($img['srcName'],-3);

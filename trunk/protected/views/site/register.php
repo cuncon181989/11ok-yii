@@ -51,7 +51,7 @@
     <?php endif; ?>
 
     <div class="action">
-    <?php echo CHtml::submitButton($update ? '保存' : '提交'); ?>
+    <?php echo CHtml::submitButton('提交'); ?>
     </div>
     <?php echo CHtml::endForm(); ?>
 </div><!-- yiiForm -->

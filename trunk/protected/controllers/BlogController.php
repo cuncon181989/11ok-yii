@@ -22,7 +22,7 @@ class BlogController extends DController
 	{
 		return array(
 		array('allow',  // allow all users to perform 'list' and 'show' actions
-				'actions'=>array('index','articles','article','galleryalbums','galleries','gallery','guestbook','addFriend','friends','addSms','inbox','outbox'),
+				'actions'=>array('index','articles','article','galleryalbums','galleries','gallery','guestbook','addFriend','friends','addSms','inbox','outbox','showSms'),
 				'users'=>array('*'),
 		),
 		array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -58,7 +58,7 @@ class BlogController extends DController
                         $gongying= Articles::model()->findAll('blogsId=:bid AND globalArticlesCategoriesId=3 AND status=1 ORDER BY id DESC LIMIT 5', array(':bid'=>$this->_blog->id));
                 }else{
                         $gongying= array();
-                        $qiqgou  = array();
+                        $qiugou  = array();
                 }
                 $this->pageTitle= $this->_user->realname.'的e家';
                 $this->render('index', array(
@@ -66,7 +66,7 @@ class BlogController extends DController
                                              'pages'=>$pages,
                                              'galleries'=>$galleries,
                                              'gongying'=>$gongying,
-                                             'qiqgou'=>$qiugou,
+                                             'qiugou'=>$qiugou,
                                         ));
         }
         /**
@@ -271,29 +271,32 @@ class BlogController extends DController
 			throw new CHttpException(403);
 
 		$sms= new SiteSms;
-		if ($_POST['SiteSms']){
-			$sms->attributes=$_POST['SiteSms'];
-			if ($sms->save())
+		if (isset($_POST['SiteSms'])){
+			$sms2=new SiteSms;
+			$toUser= Users::model()->find('username=:uname', array('uname'=>$_POST['SiteSms']['toUsername']));
+			$sms2->attributes= $sms->attributes= $_POST['SiteSms'];
+			$sms2->toId= $sms->toId= $toUser->id;
+			$sms->ownerId= Yii::app()->user->id;
+			$sms2->ownerId= $toUser->id;
+			if ($sms->save()){
+				$sms2->save();
 				Yii::app()->DRedirect->redirect(array('blog/index','username'=>Yii::app()->user->name),'消息发送成功！');
+			}
 		}else{
 			$sms->toUsername= $_GET['to'];
-			$sms->toId= intval($_GET['uid']);
 		}
-			$this->render('addSms', array('sms'=>$sms,
-						));
+		$this->render('addSms', array('sms'=>$sms,
+					));
          }
 	 /**
 	  * 收件箱
 	  */
 	 public function actionInBox(){
-		if(isset($_POST['command'], $_POST['id']) && $_POST['command']==='delete')
-		{
-			SiteSms::model()->deleteByPk(intval($_POST['id']), 'toId=:toid', array(':toid'=>Yii::app()->user->id));
-			$this->refresh();
-		}
+		$this->processDelete();
 
 		 $criteria= new CDbCriteria;
 		 $criteria->addCondition('toId='.Yii::app()->user->id);
+		 $criteria->addCondition('ownerId='.Yii::app()->user->id);
 
 		 $pages= new CPagination(SiteSms::model()->count($criteria));
 		 $pages->setPageSize(10);
@@ -308,14 +311,11 @@ class BlogController extends DController
 	  * 发件箱
 	  */
 	 public function actionOutBox(){
-		if(isset($_POST['command'], $_POST['id']) && $_POST['command']==='delete')
-		{
-			SiteSms::model()->deleteByPk(intval($_POST['id']), 'postId=:postid', array(':postid'=>Yii::app()->user->id));
-			$this->refresh();
-		}
+		$this->processDelete();
 		 
 		 $criteria= new CDbCriteria;
 		 $criteria->addCondition('postId='.Yii::app()->user->id);
+		 $criteria->addCondition('ownerId='.Yii::app()->user->id);
 
 		 $pages= new CPagination(SiteSms::model()->count($criteria));
 		 $pages->setPageSize(10);
@@ -326,5 +326,27 @@ class BlogController extends DController
 					'pages'=>$pages,
 					));
 	 }
-
+	 /**
+	  * 查看sms内容
+	  */
+	  public function actionShowSms(){
+		  if (isset($_GET['sid'])){
+			$sid= intval($_GET['sid']);
+			$sms= SiteSms::model()->with('post_user')->findByPk($sid,'ownerId=:uid',array(':uid'=>Yii::app()->user->id));
+			if ($sms===null)
+				throw new CHttpException(404);
+			$this->render('showSms',array('sms'=>$sms));
+		  }else
+			throw new CHttpException(404);
+	  }
+	  /**
+	   * 处理删除请求
+	   */
+	  protected function processDelete(){
+		if(isset($_POST['command'], $_POST['id']) && $_POST['command']==='delete')
+		{
+			SiteSms::model()->deleteByPk(intval($_POST['id']), 'ownerId=:oid', array(':oid'=>Yii::app()->user->id));
+			$this->refresh();
+		}
+	  }
 }

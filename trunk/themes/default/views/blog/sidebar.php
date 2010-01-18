@@ -1,10 +1,10 @@
-        <div id="webRightmain">
+<div id="webRightmain">
         	<div id="webKuang">
             	<div id="kTitle"><a href="#">个人资料</a></div>
                 <div id="aNeirong">
                 	<div class="nr-touxiang" align="center">
                         <?php echo CHtml::image($this->_user->getAvatarUrl()); ?><br />
-                        <div> <?php if (Yii::app()->user->getState(isOwner)): ?>
+                        <div> <?php if (Yii::app()->user->getState('isOwner')): ?>
                               <?php echo CHtml::link('编辑资料', array('users/update','username'=>Yii::app()->user->name)); ?>
                               <?php echo CHtml::link('站内消息', array('blog/inbox','username'=>Yii::app()->user->name)); ?>
 			      <?php else: ?>

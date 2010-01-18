@@ -61,10 +61,10 @@ class SiteController extends CController
          * 搜索
          */
         public function actionSearch(){
+                        
+                $criteria= new CDbCriteria;
                 if (isset($_POST['search'])){
                         extract($_POST['search']);
-                        //mydebug($keyword);
-                        $criteria= new CDbCriteria;
                         if (!empty($keyword) && $keyword!='请输入关键字'){
                                 $criteria->addSearchCondition('username', $keyword, true, 'OR');
                                 $criteria->addSearchCondition('realname', $keyword, true, 'OR');
@@ -76,20 +76,23 @@ class SiteController extends CController
                                 $criteria->addSearchCondition('city', $city, true, 'OR');
                         if (!empty($blogCategoryId))
                                 $criteria->addSearchCondition('t.blogCategoryId', $blogCategoryId);
-                        $criteria->addCondition('userStatus=1 AND realname IS NOT NULL','AND');
-
-                        $pages= new CPagination(Users::model()->count($criteria));
-                        $pages->pageSize= self::PAGE_SIZE;
-                        $pages->applyLimit($criteria);
-
-                        $users= Users::model()->with('blogCategory','blogs')->findAll($criteria);
-
-			$form=new LoginForm;
-                        $this->render('list', array('users'=>$users,
-                                                    'form'=>$form,
-                                                    'pages'=>$pages,
-                                                ));
                 }
+		if (!empty($_GET['bcid']))
+			$criteria->addSearchCondition('t.blogCategoryId', intval($_GET['bcid']));
+
+		$criteria->addCondition('userStatus=1 AND realname IS NOT NULL','AND');
+
+		$pages= new CPagination(Users::model()->count($criteria));
+		$pages->pageSize= self::PAGE_SIZE;
+		$pages->applyLimit($criteria);
+
+		$users= Users::model()->with('blogCategory','blogs')->findAll($criteria);
+
+		$form=new LoginForm;
+		$this->render('list', array('users'=>$users,
+					    'form'=>$form,
+					    'pages'=>$pages,
+					));
         }
 
         
