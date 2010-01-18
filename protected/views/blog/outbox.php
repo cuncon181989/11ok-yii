@@ -17,7 +17,7 @@
 	<?php foreach ($sms as $key=>$s): ?>
 	<tr class="<?php echo $n%2?'even':'odd';?>">
 		<td><?php echo $key+1 ; ?></td>
-		<td><?php echo CHtml::link(CHtml::encode($s->title), array('inbox','sid'=>$s->id)); ?></td>
+		<td><?php echo CHtml::link(CHtml::encode($s->title), array('showSms','sid'=>$s->id,'username'=>Yii::app()->user->name)); ?></td>
 		<td><?php echo CHtml::link(CHtml::encode($s->to_user->username),array('blog/index','username'=>$s->to_user->username)); ?></td>
 		<td><?php echo date('Y-m-d H:i:s',$s->createDate); ?></td>
 		<td><?php echo CHtml::linkButton('删除',array(

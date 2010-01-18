@@ -66,13 +66,13 @@ class SiteSms extends CActiveRecord
 	{
 		return array(
 			'id' => 'Id',
-			'postId' => '发送者ID',
+			'postId' => '发送人',
 			'toId' => '接收者ID',
 			'toUsername'=>'接收者',
 			'status' => '状态',
 			'title' => '标题',
 			'content' => '内容',
-			'createDate' => '发生时间',
+			'createDate' => '时间',
 		);
 	}
 

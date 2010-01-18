@@ -153,8 +153,8 @@ class Gallery extends CActiveRecord
         }
         public function getGalleryUrl($size=null){
                 if ($size== null)
-                        return Yii::app()->getRequest()->getBaseUrl().'/'.Yii::app()->params[uploadDir].'/'.$this->usersId.'/'.$this->fileName;
+                        return Yii::app()->getRequest()->getBaseUrl().'/'.Yii::app()->params['uploadDir'].'/'.$this->usersId.'/'.$this->fileName;
                 else
-                        return Yii::app()->getRequest()->getBaseUrl().'/'.Yii::app()->params[uploadDir].'/'.$this->usersId.'/s/'.$this->fileName;
+                        return Yii::app()->getRequest()->getBaseUrl().'/'.Yii::app()->params['uploadDir'].'/'.$this->usersId.'/s/'.$this->fileName;
         }
 }

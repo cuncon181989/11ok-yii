@@ -20,7 +20,6 @@
 	</div>
 	<div class="simple">
 		<?php echo CHtml::Label('&nbsp;',''); ?>
-		<?php echo CHtml::activeHiddenField($sms, 'toId'); ?>
 		<?php echo CHtml::submitButton('发送'); ?>
 	</div>
 	<?php echo CHtml::endForm(); ?>

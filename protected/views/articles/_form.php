@@ -1,4 +1,4 @@
-<div class="okForm">
+<div class="okform">
 
 <p>
 带 <span class="required">*</span> 项目为必填项

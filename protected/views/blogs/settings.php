@@ -11,8 +11,8 @@
 </p>
 <?php echo CHtml::beginForm(); ?>
 <div class="simple">
-	<?php echo CHtml::label('测试', ''); ?>
-	<?php echo CHtml::textField('settings[theme]', $blogs->settings['theme']); ?>
+	<?php echo CHtml::label('测试', 'settings_theme'); ?>
+	<?php echo CHtml::textField('settings[theme]', $blogs->settings['theme'],array('id'=>'settings_theme')); ?>
 </div>
 <div class="action">
 <?php echo CHtml::submitButton('保存'); ?>
