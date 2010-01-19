@@ -57,9 +57,6 @@ return array(
                         'enableParamLogging'=>true,
                         'schemaCachingDuration'=>3600,
                 ),
-                'themeManager'=>array(
-                        
-                ),
                 'urlManager'=>array(
                         //'class'=>'ext.DUrlManager',//应该是加上博客所有人的,放到控制器初始化里面去做了
                         'urlFormat'=>'path',
@@ -88,7 +85,7 @@ return array(
                 ),
                 'DRedirect'=>array(
                         'class'=>'ext.DRedirect',
-                ),
+				),
 	),
 
 	// application-level parameters that can be accessed
