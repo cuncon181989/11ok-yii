@@ -37,7 +37,7 @@ class BlogsController extends DController
 				'users'=>array('*'),
 		),
 		array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('show','update','settings'),
+				'actions'=>array('show','update','setTheme'),
 				'users'=>array('@'),
 		),
 		array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -97,13 +97,34 @@ class BlogsController extends DController
 	/**
 	 * 设置
 	 */
-	 public function actionSettings(){
-		if(isset($_POST['settings'])){
-			mydebug($_POST);
-		}
+	 public function actionSetTheme(){
 		$blogs= Blogs::model()->findByPk(Yii::app()->user->blogId);
-		$this->render('settings',array('blogs'=>$blogs,
-						'settings'=>$settings,
+		if(isset($_POST['themeSelected'])){
+			$settings= $blogs->settings;
+			$name= $_POST['themeSelected'];
+			$settings['theme']= array(
+									'name'=>$name,
+									'aliasName'=>$_POST[$name]['aliasName'],
+									'style'=>$_POST[$name]['style'],
+								);
+			$blogs->settings=$settings;
+			if ($blogs->save())
+				$this->refresh();
+		}
+		//$themesDir  = Yii::app()->getThemeManager()->getBasePath();
+		$themeNames   = Yii::app()->getThemeManager()->getThemeNames();//得到所有theme
+		foreach ($themeNames as $key=>$themeName){
+			if ($themeName!= 'summary'){
+				$theme= Yii::app()->getThemeManager()->getTheme($themeName);//得到制定的theme对象
+				$themeConfig= require_once($theme->getBasePath().DS.'config.php');//获取指定theme中的配置文件
+				$themes[$key]=$themeConfig;
+				$themes[$key]['url']=$theme->getBaseUrl();
+				$themes[$key]['dirName']=$themeName;
+			}
+		}
+		$this->render('setTheme',array('blogs'=>$blogs,
+						'settheme'=>$blogs->settings['theme'],
+						'themes'=>$themes,
 						));
 	 }
 	/**

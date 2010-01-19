@@ -19,14 +19,14 @@ class DController extends CController
                         $user= Users::model()->with('blogs','userinfo','blogCategory','friends','visits')->find('t.username=:username', array(':username'=>$_GET['username']));
                         $this->_user= $user;
                         $this->_blog= $user->blogs;
-                        $theme= $user->blogs->settings['theme'];
+                        $theme= $user->blogs->settings['theme']['name'];
                         $user= null;
                         //unset($user);
                 }elseif (isset($_GET['uid'])){
                         $blog= Blogs::model()->with('users')->find('usersId=:uid',array(':uid'=>intval($_GET['uid'])));
                         $this->_user= $blog->users;
                         $this->_blog= $blog;
-                        $theme= $blog->settings['theme'];
+                        $theme= $blog->settings['theme']['name'];
                         $blog= null;
                         //unset($blog);
                 }
@@ -36,6 +36,8 @@ class DController extends CController
                 if (empty($theme))
                         $theme='default';
                 Yii::app()->setTheme($theme);
+				//在这里注册皮肤的css文件
+				
                 //如果当前用户是所有者则设置个标识
                 if (Yii::app()->user->id== $this->_user->id)
                         Yii::app()->user->setState('isOwner',1);
