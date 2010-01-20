@@ -36,8 +36,9 @@ class DController extends CController
                 if (empty($theme))
                         $theme='default';
                 Yii::app()->setTheme($theme);
-				//在这里注册皮肤的css文件
-				
+				$cssFile= Yii::app()->getTheme()->getBaseUrl().'/css/base.css';
+				$cssFile= Yii::app()->getTheme()->getBaseUrl().'/css/'.$this->_blog->settings['theme']['style'];
+				Yii::app()->clientScript->registerCssFile($cssFile);
                 //如果当前用户是所有者则设置个标识
                 if (Yii::app()->user->id== $this->_user->id)
                         Yii::app()->user->setState('isOwner',1);
@@ -55,18 +56,18 @@ class DController extends CController
                         if ($num==0){
                                 $vCount= Visits::model()->count('visitId=:vid',array(':vid'=>$this->_user->id));
                                 if ($vCount>=12){
-                                //如果用户数大于12则更新前面的记录
-                                //否则更新最前面的一条
-                                Visits::model()->updateAll(array('userId'=>Yii::app()->user->id, 'visitId'=>$this->_user->id, 'visitDate'=>time()),
+									//如果用户数大于12则更新前面的记录
+									//否则更新最前面的一条
+									Visits::model()->updateAll(array('userId'=>Yii::app()->user->id, 'visitId'=>$this->_user->id, 'visitDate'=>time()),
                                                                  'visitId=:vid ORDER BY visitDate ASC LIMIT 1',
                                                                  array(':vid'=>$this->_user->id)
                                                            );
                                 }else{
-                                        //否则插入新的记录
-                                        $visit= new Visits;
-                                        $visit->userId = Yii::app()->user->id;
-                                        $visit->visitId= $this->_user->id;
-                                        $visit->save();
+									//否则插入新的记录
+									$visit= new Visits;
+									$visit->userId = Yii::app()->user->id;
+									$visit->visitId= $this->_user->id;
+									$visit->save();
                                 }
                         }
                         Yii::app()->user->setState('view'.$this->_user->id,'1');
