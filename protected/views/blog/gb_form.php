@@ -1,5 +1,7 @@
 <div class="okform">
-<p>带 <span class="required">*</span> 项目为必填项</p>
+<p>
+<strong>带 <span class="required">*</span> 项目为必填项</strong>
+</p>
 <?php echo CHtml::beginForm(); ?>
 <?php echo CHtml::errorSummary($gb); ?>
 
@@ -35,7 +37,7 @@
         <?php endif ?>
         <div class="simple">
         <?php if ($reply){echo CHtml::activeHiddenField($gb, 'parentId',array('value'=>$_GET['gbid']));} ?>
-        <?php echo CHtml::submitButton($reply? '回复': '提交'); ?>
+        <?php echo CHtml::submitButton($reply? '回复': '提交',array('class'=>'anniubj')); ?>
         </div>
 <?php echo CHtml::endForm(); ?>
 </div>

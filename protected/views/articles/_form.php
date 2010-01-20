@@ -38,12 +38,10 @@
            'editorTemplate'=>'basic',
        )); ?>
 </div>
-<div class="simple">
-<label>　</label>
-<?php echo CHtml::activeCheckBox($model,'top'); ?><?php echo $model->getAttributeLabel('top') ?>
-</div>
 <div class="action">
-<?php echo CHtml::submitButton($update ? '保存' : '创建'); ?>
+<label>　</label>
+<?php echo CHtml::activeCheckBox($model,'top'); ?><?php echo $model->getAttributeLabel('top') ?>　
+<?php echo CHtml::submitButton($update ? '保存' : '创建',array('class'=>'anniubj')); ?>
 </div>
 
 <?php echo CHtml::endForm(); ?>

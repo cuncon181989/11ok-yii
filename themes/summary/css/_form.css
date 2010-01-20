@@ -1,6 +1,6 @@
+select  {color:#05ace6; border:1px solid #bbb; margin:0px;}
+input   {border:1px solid #CCC;color:#05ace6;}
 div.okform {
-	border: 2px solid #F08200;
-	background: #E7E7E7;
 	margin: 5px 0px;
 	padding: 5px;
 	text-align:left;
@@ -16,10 +16,10 @@ div.okform span.required {
 }
 
 div.errorSummary {
-	border: 2px solid #C00;
+	border: 2px solid #ffead2;
 	padding: 7px 7px 12px 7px;
 	margin: 0 0 20px 0;
-	background: #FEE;
+	background: #fff7ed;
 }
 
 div.errorSummary p {
@@ -66,6 +66,7 @@ div.okform div.action {
 div.okform div.simple,div.okform div.complex {
 	clear: left;
 	padding: 0.25em 0;
+	margin-bottom:5px;
 }
 
 div.okform div.simple label,div.okform div.complex span {

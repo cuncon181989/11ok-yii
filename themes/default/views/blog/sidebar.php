@@ -1,4 +1,4 @@
-<div id="webRightmain">
+ <div id="webRightmain">
         	<div id="webKuang">
             	<div id="kTitle"><a href="#">个人资料</a></div>
                 <div id="aNeirong">
@@ -47,7 +47,7 @@
                     <ul>
                     <?php foreach ($this->_user->visits as $key=>$visit): ?>
                             <li><?php echo CHtml::link(CHtml::image($visit->getAvatarUrl('small')), array('blog/index','username'=>$visit->username)); ?><br />
-                                <?php echo CHtml::link($visit->realname, $url); ?></li>
+                                <?php echo CHtml::link($visit->realname, array('blog/index','username'=>$visit->username)); ?></li>
                     <?php endforeach ?>
                     </ul>
                     <div class="clr"></div>

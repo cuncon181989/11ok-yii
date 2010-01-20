@@ -6,7 +6,7 @@
 <table class="dataGrid">
 	<thead>
 		<tr>
-                        <th><?php echo CHtml::encode('序号'); ?></th>
+            <th><?php echo CHtml::encode('序号'); ?></th>
 			<th><?php echo $sort->link('title'); ?></th>
 			<th><?php echo $sort->link('description'); ?></th>
 			<th><?php echo $sort->link('galleryAlbumsId'); ?></th>

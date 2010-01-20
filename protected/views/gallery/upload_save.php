@@ -13,5 +13,5 @@
 <br/>
 </div>
 <?php endforeach; ?>
-<?php echo CHtml::submitButton('保存',array('name'=>'upload_save')); ?>
+<?php echo CHtml::submitButton('保存',array('name'=>'upload_save','class'=>'anniubj')); ?>
 <?php echo CHtml::endForm(); ?>

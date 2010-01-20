@@ -44,7 +44,6 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			// 'allowAutoLogin'=>true,
-			'returnUrl'=>'/abc/abc',
 		),
 		// uncomment the following to set up database
 		'db'=>array(

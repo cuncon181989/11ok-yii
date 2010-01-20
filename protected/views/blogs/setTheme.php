@@ -1,7 +1,6 @@
 <h2>详细设置</h2>
 
 <div class="actionBar">
-[<?php echo CHtml::link('查看列表',array('show','username'=>Yii::app()->user->name)); ?>]
 [<?php echo CHtml::link('基本设置',array('update','username'=>Yii::app()->user->name)); ?>]
 </div>
 
@@ -31,7 +30,7 @@
 	jQuery(function(){
 		$("input[name='themeSelected']").click(function(){
 			$(".style_list").hide();
-			$(this).next().next('.style_list').show();
+			$(this).nextAll('.style_list').show();
 		});
 	});
 </script>

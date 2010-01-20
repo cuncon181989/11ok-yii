@@ -38,8 +38,7 @@
     <td><?php echo CHtml::encode($model->status); ?></td>
     <td><?php echo CHtml::encode($model->createDate); ?></td>
     <td>
-      <?php echo CHtml::link('更新',array('update','id'=>$model->id)); ?>
-      <?php echo CHtml::linkButton('删除',array(
+        <?php echo CHtml::linkButton('删除',array(
       	  'submit'=>'',
       	  'params'=>array('command'=>'delete','id'=>$model->id),
       	  'confirm'=>"确定删除?\n #{$model->id} {$model->title}")); ?>
