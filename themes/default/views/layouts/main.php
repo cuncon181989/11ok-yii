@@ -3,8 +3,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="language" content="cn_zh" />
-<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/base.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/<?php echo $this->_blog->settings['theme']['style']; ?>" />
 <title><?php echo $this->pageTitle; ?> | <?php echo Yii::app()->name; ?></title>
 </head>
 <body>

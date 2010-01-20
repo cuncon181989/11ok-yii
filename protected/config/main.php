@@ -37,55 +37,56 @@ return array(
 				),
 				array(
 					'class'=>'CProfileLogRoute',
-                                        'enabled'=>true,
+										'enabled'=>true,
 				),
 			),
 		),
 		'user'=>array(
 			// enable cookie-based authentication
 			// 'allowAutoLogin'=>true,
+			'returnUrl'=>'/abc/abc',
 		),
 		// uncomment the following to set up database
 		'db'=>array(
-                        'class'=>'CDbConnection',
-                        'connectionString'=>'mysql:host=localhost;dbname=11ok_yii',
-                        'charset'=>'utf8',
-                        'username'=>'webuser',
-                        'password'=>'webuser',
-                        'tablePrefix'=>'y11ok_',
-                        //'enableProfiling'=>true,
-                        'enableParamLogging'=>true,
-                        'schemaCachingDuration'=>3600,
-                ),
-                'urlManager'=>array(
-                        //'class'=>'ext.DUrlManager',//应该是加上博客所有人的,放到控制器初始化里面去做了
-                        'urlFormat'=>'path',
-                        //'appendParams'=>false,
-                        //'urlSuffix'=>'.html',
-                        'showScriptName'=>false,
-                        'rules'=>array(
-                                '/<_c:(site)>/<_a:>' => '<_c>/<_a>',
-                                '/<username:\w+>/<_c:>/<_a:>' => '<_c>/<_a>',
-                                '<_c:>/<_a:>' => '<_c>/<_a>',
-				//'blog/article-<aid:\d+>-<uid:\d+>' => 'blog/article',
-                                //'/<username:\w+>/<_c:(blogs|articles)>/<id:\d+>/<_a:(create|update|delete)>' => '<_c>/<_a>',
-                        ),
-                ),
-                /**
-                'cache'=>array(
-                        'class'=>'system.caching.CFileCache',
-                        'directoryLevel'=>0,
-                ),
-                /**/
-                'thumb'=>array(
-                        'class'=>'ext.phpthumb.EasyPhpThumb',
-                ),
-                'CFile'=>array(
-                        'class'=>'ext.CFile',
-                ),
-                'DRedirect'=>array(
-                        'class'=>'ext.DRedirect',
+				'class'=>'CDbConnection',
+				'connectionString'=>'mysql:host=localhost;dbname=11ok_yii',
+				'charset'=>'utf8',
+				'username'=>'webuser',
+				'password'=>'webuser',
+				'tablePrefix'=>'y11ok_',
+				//'enableProfiling'=>true,
+				'enableParamLogging'=>true,
+				'schemaCachingDuration'=>3600,
+		),
+		'urlManager'=>array(
+				//'class'=>'ext.DUrlManager',//应该是加上博客所有人的,放到控制器初始化里面去做了
+				'urlFormat'=>'path',
+				//'appendParams'=>false,
+				//'urlSuffix'=>'.html',
+				'showScriptName'=>false,
+				'rules'=>array(
+						'/<_c:(site)>/<_a:>' => '<_c>/<_a>',
+						'/<username:\w+>/<_c:>/<_a:>' => '<_c>/<_a>',
+						'<_c:>/<_a:>' => '<_c>/<_a>',
+		//'blog/article-<aid:\d+>-<uid:\d+>' => 'blog/article',
+						//'/<username:\w+>/<_c:(blogs|articles)>/<id:\d+>/<_a:(create|update|delete)>' => '<_c>/<_a>',
 				),
+		),
+		/**
+		'cache'=>array(
+				'class'=>'system.caching.CFileCache',
+				'directoryLevel'=>0,
+		),
+		/**/
+		'thumb'=>array(
+				'class'=>'ext.phpthumb.EasyPhpThumb',
+		),
+		'CFile'=>array(
+				'class'=>'ext.CFile',
+		),
+		'DRedirect'=>array(
+				'class'=>'ext.DRedirect',
+		),
 	),
 
 	// application-level parameters that can be accessed

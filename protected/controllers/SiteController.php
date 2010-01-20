@@ -174,6 +174,8 @@ class SiteController extends CController
 	 */
 	public function actionLogin()
 	{
+		if (!Yii::app()->user->isGuest)
+			$this->redirect('index');
 		$form=new LoginForm;
 		// collect user input data
 		if(isset($_POST['LoginForm']))
