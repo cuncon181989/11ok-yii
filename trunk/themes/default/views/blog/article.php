@@ -67,7 +67,7 @@
                                 <?php echo CHtml::activeTextArea($commentModel, 'content', array('rows'=>3,'cols'=>30)); ?>
                                 </div>
                                 <div class="simple">
-                                <?php echo CHtml::submitButton('提交'); ?>
+                                <?php echo CHtml::submitButton('提交',array('class'=>'anniubj')); ?>
                                 </div>
                                 <?php echo CHtml::endForm(); ?>
                         </div>

@@ -1,6 +1,6 @@
 <div class="okform">
 
-<p>带<span class="required">*</span>为必填项</p>
+<p><strong>带<span class="required">*</span>为必填项</strong></p>
 
 <?php echo CHtml::beginForm(); ?>
 <?php echo CHtml::errorSummary($model); ?>
@@ -13,7 +13,8 @@
 <div class="simple"><?php echo CHtml::activeLabelEx($model,'status'); ?>
 <?php echo CHtml::activeDropDownList($model, 'status', $model->getGalleryAlbumsStatus('list')); ?>
 </div>
-<div class="action"><?php echo CHtml::submitButton($update ? '更新' : '创建'); ?>
+<div class="action">
+<?php echo CHtml::submitButton($update ? '更新' : '创建',array('class'=>'anniubj')); ?>
 </div>
 
 <?php echo CHtml::endForm(); ?></div>

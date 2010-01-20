@@ -1,7 +1,7 @@
-<div class="okform">
+<div class="okform createcss">
 
-<p>
-系统限制一次最多选择10张图片上传！
+<p>　
+<strong>系统限制一次最多选择10张图片上传！</strong>
 </p>
 
 <?php echo CHtml::beginForm(array('Gallery/UploadFiles','username'=>$this->_user->username),'POST',array('enctype'=>'multipart/form-data')); ?>
@@ -19,7 +19,7 @@ $this->widget('application.extensions.uploadify.EuploadifyWidget',
             'fileDesc'=>'*.jpg *.gif *.png 图片文件',
             'fileExt' => '*.jpg;*gif;*png',
             'sizeLimit'=>1572864, //2M=2*1024Kb*1024Bytes=2097152 1.5M=1572864B
-            'buttonImg'=> Yii::app()->getRequest()->getBaseUrl().'/images/browse-files.png',
+            'buttonImg'=> Yii::app()->getRequest()->getBaseUrl().'/images/browse-files02.png',
             'wmode'=>'transparent',
             'width'=>102,
             'queueID'=>'FilesQueue',

@@ -8,6 +8,6 @@
 <?php echo CHtml::activePasswordField($form,'password') ?></div>
 <div class="action"><?php echo CHtml::activeCheckBox($form,'rememberMe'); ?>
 <?php echo CHtml::activeLabel($form,'rememberMe'); ?> <br />
-<?php echo CHtml::submitButton('登录'); ?></div>
+<?php echo CHtml::submitButton('登录',array('class'=>'bottoncss')); ?></div>
 <?php echo CHtml::endForm(); ?></div>
 <!-- yiiForm -->
