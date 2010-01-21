@@ -46,7 +46,7 @@ class Gallery extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('status, fileSize', 'numerical', 'integerOnly'=>true),
+			array('status, fileSize, galleryAlbumsId', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>50),
 			array('filePath, fileName', 'length', 'max'=>255),
 			array('fileType', 'length', 'max'=>25),

@@ -7,11 +7,11 @@
                 </span>
             </div>
                 <div id="webxiangce">
-                    <ul>
+                    <ul id="gallery">
                           <?php foreach ($galleries as $key=>$gallery): ?>
                             <?php if ($key==0) $this->pageTitle=$gallery->galleryAlbums->name; ?>
-                          <li><?php echo CHtml::link(CHtml::image($gallery->getGalleryUrl('small'), $gallery->title), array('gallery','gid'=>$gallery->id,'username'=>$this->_user->username)); ?><br />
-                              <?php echo CHtml::link(CHtml::encode($gallery->title), array('gallery','gid'=>$gallery->id,'username'=>$this->_user->username)); ?></li>
+							<li><a class="lightBox" href="<?php echo $gallery->getGalleryUrl(); ?>"><?php echo CHtml::image($gallery->getGalleryUrl('small')); ?></a><br />
+                            <?php echo CHtml::link(CHtml::encode($gallery->title), array('gallery','gid'=>$gallery->id,'username'=>$this->_user->username)); ?></li>
                           <?php endforeach ?>
                     </ul>
                   <div class="clr"></div>
@@ -20,4 +20,21 @@
         </div>
         <?php echo $this->renderPartial('sidebar_gallery') ?>
         <div class="clr"></div>
+		<?php $this->widget('CLinkPager',array('pages'=>$pages,'header'=>'')); ?>
 </div>
+<?php Yii::app()->clientScript->registerCoreScript('jquery'); ?>
+<?php Yii::app()->clientSCript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.lightbox.pack.js'); ?>
+<?php Yii::app()->clientScript->registerCssFile(Yii::app()->request->baseUrl.'/css/jquery.lightbox.css'); ?>
+<?php Yii::app()->clientScript->registerScript("userLightbox",
+	"$(function() {
+		$('#gallery a.lightBox').lightBox({
+			imageLoading: ".Yii::app()->request->baseUrl."'/images/lightbox-ico-loading.gif',
+			imageBtnClose: ".Yii::app()->request->baseUrl."'/images/lightbox-btn-close.gif',
+			imageBtnPrev: ".Yii::app()->request->baseUrl."'/images/lightbox-btn-prev.gif',
+			imageBtnNext: ".Yii::app()->request->baseUrl."'/images/lightbox-btn-next.gif',
+			txtOf: '/',
+			txtImage: '图片'
+		});
+	});",
+	CClientScript::POS_END
+); ?>

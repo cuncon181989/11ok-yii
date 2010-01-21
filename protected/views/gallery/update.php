@@ -2,7 +2,7 @@
 
 <div class="createcss">
 	<div class="actionBar">
-	[<?php echo CHtml::link('照片列表',array('list','username'=>$this->_user->username)); ?>]
+	[<?php echo CHtml::link('照片列表',array('blog/galleries','gaid'=>$gallery->galleryAlbumsId,'username'=>$this->_user->username)); ?>]
 	[<?php echo CHtml::link('上传照片',array('upload','username'=>$this->_user->username)); ?>]
 	[<?php echo CHtml::link('管理照片',array('admin','username'=>$this->_user->username)); ?>]
 	</div>
