@@ -47,9 +47,9 @@ class BlogController extends DController
                 $acriteria->condition= 'blogsId=:bid AND status=1';
                 $acriteria->params= array(':bid'=>$this->_blog->id);
                 $acriteria->order= 'createDate DESC';
-                $pages= new CPagination(Articles::model()->count($acriteria));
-		$pages->pageSize=self::PAGE_SIZE;
-		$pages->applyLimit($acriteria);
+				$pages= new CPagination(Articles::model()->count($acriteria));
+				$pages->pageSize=self::PAGE_SIZE;
+				$pages->applyLimit($acriteria);
                 
                 $articles= Articles::model()->findAll($acriteria);
                 $galleries= Gallery::model()->findAll('blogsId=:bid AND status=1 ORDER BY id DESC LIMIT 6', array(':bid'=>$this->_blog->id));
@@ -159,7 +159,7 @@ class BlogController extends DController
                 $acriteria->condition= 't.blogsId=:bid AND galleryAlbumsId=:gaid AND t.status=1';
                 $acriteria->params= array(':bid'=>$this->_blog->id,'gaid'=>$gaid);
                 $pages= new CPagination(Gallery::model()->count($acriteria));
-                $pages->pageSize= self::PAGE_SIZE; //这里可以根据用户博客设置来决定显示多少
+                $pages->pageSize= self::PAGE_SIZE *2; //这里可以根据用户博客设置来决定显示多少
                 $pages->applyLimit($acriteria);
 
                 $galleries= Gallery::model()->with('galleryAlbums')->findAll($acriteria);
