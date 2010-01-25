@@ -42,7 +42,7 @@ form  {margin:0px;}
 
 .fontcent  {text-align:center;}
 .diarypage a,#diarypage span  {margin:5px 5px;}
-#diarypinglun  {padding:5px;}
+#diarypinglun  {padding:5px 0px;}
 #webxiangce  {padding:10px;}
 #webxiangce li  {float:left; width:30%; height:170px; margin-bottom:10px; text-align:center; margin:10px;}
 #webxiangce img{ 

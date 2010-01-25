@@ -201,6 +201,33 @@ class SiteController extends CController
 		$this->redirect(Yii::app()->homeUrl);
 	}
 
+        public function actionGetPassword(){
+                if (isset($_POST[mail])){
+                        $message = '这是一封测试邮件'.date('Y-m-d H:i:s');
+                        $mailer = Yii::createComponent('application.extensions.mailer.EMailer');
+                        $mailer->From = 'admin@yix123.com';
+                        $mailer->AddReplyTo('admin@11ok.com');
+                        $mailer->AddAddress('dufei22@QQ.com');
+                        $mailer->AddAddress('dufei22@gmail.com');
+                        $mailer->FromName = '11ok搜商网';
+                        $mailer->CharSet = 'UTF-8';
+                        $mailer->Subject = '测试邮件3';
+                        $mailer->Body = $message;
+                        $mailer->Helo = 'Hello';
+                        $mailer->IsSMTP();
+                        $mailer->Host = 'smtp.gmail.com';
+                        $mailer->Port = 465;
+                        $mailer->SMTPSecure = 'ssl';
+                        $mailer->SMTPAuth = true;
+                        $mailer->Username = 'admin@yix123.com';
+                        $mailer->Password = 'yxsw.com.88';
+                        if($mailer->Send()){
+                                Yii::app()->DRedirect->redirect('/site/login','邮件已经发送成功，请点击邮件中的链接来重设密码！',10);
+                        }
+                }
+                $this->render('getpassword');
+        }
+        
         public function getBlogCategory(){
                 return BlogCategories::model()->findall();
         }
