@@ -3,6 +3,7 @@
 <div class="actionBar">
 [<?php echo CHtml::link('相册列表',array('blog/galleryAlbums','username'=>$this->_user->username)); ?>]
 [<?php echo CHtml::link('创建相册',array('create','username'=>$this->_user->username)); ?>]
+[<?php echo CHtml::link('上传照片',array('gallery/upload','username'=>$this->_user->username)); ?>]
 </div>
 
 <table class="dataGrid">

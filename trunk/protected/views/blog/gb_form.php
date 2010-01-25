@@ -36,6 +36,7 @@
         </div>
         <?php endif ?>
         <div class="simple">
+        <?php echo CHtml::label('&nbsp;', ''); ?>
         <?php if ($reply){echo CHtml::activeHiddenField($gb, 'parentId',array('value'=>$_GET['gbid']));} ?>
         <?php echo CHtml::submitButton($reply? '回复': '提交',array('class'=>'anniubj')); ?>
         </div>

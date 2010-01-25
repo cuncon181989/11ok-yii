@@ -21,6 +21,7 @@ return array(
                 'application.models.*',
                 'application.components.*',
                 'ext.DController',
+                'application.extensions.yiidebugtb.*',
         ),
 
 	// application components
@@ -32,13 +33,20 @@ return array(
 					'class'=>'CFileLogRoute',
 					'levels'=>'error,info',
 				),
+                                array(
+                                        'class'=>'XWebDebugRouter',
+                                        'config'=>'alignLeft, opaque, runInDebug, fixedPos, collapsed, yamlStyle',
+                                        'levels'=>'error, warning, trace, profile, info',
+                                ),
+                                /**
 				array(
 					'class'=>'CWebLogRoute',
 				),
 				array(
 					'class'=>'CProfileLogRoute',
-										'enabled'=>true,
+					'enabled'=>true,
 				),
+                                /**/
 			),
 		),
 		'user'=>array(
@@ -67,7 +75,7 @@ return array(
 						'/<_c:(site)>/<_a:>' => '<_c>/<_a>',
 						'/<username:\w+>/<_c:>/<_a:>' => '<_c>/<_a>',
 						'<_c:>/<_a:>' => '<_c>/<_a>',
-		//'blog/article-<aid:\d+>-<uid:\d+>' => 'blog/article',
+                                                //'blog/article-<aid:\d+>-<uid:\d+>' => 'blog/article',
 						//'/<username:\w+>/<_c:(blogs|articles)>/<id:\d+>/<_a:(create|update|delete)>' => '<_c>/<_a>',
 				),
 		),
@@ -77,14 +85,20 @@ return array(
 				'directoryLevel'=>0,
 		),
 		/**/
+                'mailer' => array(
+                        'class' => 'application.extensions.mailer.EMailer',
+                        //'pathViews' => 'application.views.email',
+                        //'pathLayouts' => 'application.views.email.layouts'
+                ),
+
 		'thumb'=>array(
-				'class'=>'ext.phpthumb.EasyPhpThumb',
+                        'class'=>'ext.phpthumb.EasyPhpThumb',
 		),
 		'CFile'=>array(
-				'class'=>'ext.CFile',
+                        'class'=>'ext.CFile',
 		),
 		'DRedirect'=>array(
-				'class'=>'ext.DRedirect',
+                        'class'=>'ext.DRedirect',
 		),
 	),
 

@@ -12,7 +12,8 @@
 <?php echo CHtml::activeLabelEx($model,'status'); ?>
 <?php echo CHtml::activeDropDownList($model,'status',$model->getGalleryStatus('list')); ?>
 </div>
-<div class="action">
+<div class="simple">
+<?php echo CHtml::label('&nbsp;', ''); ?>
 <?php echo CHtml::submitButton('下一步',array('name'=>'upload_step1','class'=>'anniubj')); ?>
 </div>
 </div>
