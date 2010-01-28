@@ -33,20 +33,20 @@ class DController extends CController
 
                 if (!$this->_user && $this->getId()!='users')
                         throw new CHttpException(404,'URL无效');
-                if (empty($theme))
+                if (empty($theme) || !is_file(Yii::app()->getTheme()->basePath.DS.'config.php'))
                         $theme='default';
                 Yii::app()->setTheme($theme);
-				//mydebug(Yii::app(),1);
-				$baseCssFile= Yii::app()->getTheme()->getBaseUrl().'/css/base.css';
-				if (!empty($this->_blog->settings['theme']['style'])){
-					$cssFile= Yii::app()->getTheme()->getBaseUrl().'/css/'.$this->_blog->settings['theme']['style'];
-				}else{
-					$theme= Yii::app()->getThemeManager()->getTheme($theme);//得到制定的theme对象
-					$themeConfig= require_once($theme->getBasePath().DS.'config.php');//获取指定theme中的配置文件
-					$cssFile= Yii::app()->getTheme()->getBaseUrl().'/css/'.$themeConfig['defaultStyle'];
-				}
-				Yii::app()->clientScript->registerCssFile($baseCssFile);
-				Yii::app()->clientScript->registerCssFile($cssFile);
+                $baseCssFile= Yii::app()->getTheme()->getBaseUrl().'/css/base.css';
+                if (isset($this->_blog->settings['theme']['style'])){
+                        $cssFile= Yii::app()->getTheme()->getBaseUrl().'/css/'.$this->_blog->settings['theme']['style'];
+                }else{
+                        $theme= Yii::app()->getThemeManager()->getTheme($theme);//得到制定的theme对象
+                        $themeConfig= require_once($theme->getBasePath().DS.'config.php');//获取指定theme中的配置文件
+                        $cssFile= Yii::app()->getTheme()->getBaseUrl().'/css/'.$themeConfig['defaultStyle'];
+                }
+                Yii::app()->clientScript->registerCssFile($baseCssFile);
+                Yii::app()->clientScript->registerCssFile($cssFile);
+                
                 //如果当前用户是所有者则设置个标识
                 if (Yii::app()->user->id== $this->_user->id)
                         Yii::app()->user->setState('isOwner',1);

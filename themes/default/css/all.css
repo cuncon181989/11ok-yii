@@ -24,7 +24,13 @@ form  {margin:0px;}
 
 #socroll_img{OVERFLOW:hidden;WIDTH:638px;HEIGHT:140px;white-space:nowrap;}
 .socroll_content, .socroll_content ul, .socroll_content ul li{display:inline;list-style:none;}
-.socroll_content li img {width:177px; height:130px; border:3px solid #ccc;}
+.socroll_content li img {
+	border:3px solid #ccc;
+	max-width:177px;
+	max-height:130px;
+	width: expression(this.width > 177 && this.width / 177 >= this.height / 130 ? 177 : true);
+	height: expression(this.height > 177 ? 130 : true);
+}
 #weball  {width:910px;}
 #webLeftmain  {width:648px; float:left;}
 #webDiary,#webPhoto,#webabout  {line-height:25px; margin-bottom:15px;}
@@ -43,14 +49,20 @@ form  {margin:0px;}
 .fontcent  {text-align:center;}
 .diarypage a,#diarypage span  {margin:5px 5px;}
 #diarypinglun  {padding:5px 0px;}
-#webxiangce  {padding:10px;}
-#webxiangce li  {float:left; width:30%; height:170px; margin-bottom:10px; text-align:center; margin:10px;}
+#webxiangce,#webxiangcelist  {padding:10px;}
+#webxiangcelist li ,#webxiangce li   {float:left; width:186px; height:170px; text-align:center; margin:11px; overflow:hidden;}
+#webxiangcelist img{ 
+	max-width:180px;
+	max-height:135px;
+	width: expression(this.width > 180 && this.width / 180 >= this.height / 135 ? 180 : true);
+	height: expression(this.height > 135 ? 135 : true);
+	margin-bottom:3px;
+}
 #webxiangce img{ 
 	max-width:180px;
 	max-height:135px;
 	width: expression(this.width > 180 && this.width / 180 >= this.height / 135 ? 180 : true);
 	height: expression(this.height > 135 ? 135 : true);
-	border:0px solid #e3e3e3; margin-bottom:3px;
 }
 #xiangceDetails  {margin-top:10px;}
 

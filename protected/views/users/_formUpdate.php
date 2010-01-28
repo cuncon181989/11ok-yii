@@ -65,7 +65,7 @@
     ?>
     </div>
     <div class="action">
-    <?php echo CHtml::submitButton($update ? '更新' : '提交'); ?>
+    <?php echo CHtml::submitButton($update ? '更新' : '提交',array('class'=>'anniubj')); ?>
     </div>
     <?php echo CHtml::endForm(); ?>
 </div><!-- yiiForm -->

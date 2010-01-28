@@ -39,6 +39,7 @@
                         <div id="dBiaoti"><a href="#" name="addcomment" /><strong>发表评论</strong></a></div>
                         <div class="flashMsg"><?php echo Yii::app()->user->getFlash('addcommment'); ?></div>
                         <div class="okform">
+							<div class="createcss">
                                 <?php echo CHtml::beginForm(); ?>
                                 <?php echo CHtml::errorSummary($commentModel); ?>
                                 <?php if (Yii::app()->user->isGuest): ?>
@@ -70,6 +71,7 @@
                                 <?php echo CHtml::submitButton('提交',array('class'=>'anniubj')); ?>
                                 </div>
                                 <?php echo CHtml::endForm(); ?>
+							</div>
                         </div>
                 </div>
         </div>

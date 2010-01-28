@@ -14,7 +14,21 @@ a:hover {
 	text-decoration: none;
 	color:#fad703;
 }
-
+#siteMenu{
+		background:#fefdf4;
+        border: 2px solid #c39403;
+        padding:5px;
+        width:200px;
+}
+#siteMenu a  {color:#c39403;}
+.actionBar {
+	margin: 10px;
+	border:1px solid #e7dc98;
+	background:#f5edbd;
+	padding:3px 5px 3px 5px;
+}
+.createcss  {padding:10px; background:#fffcec; border:1px solid #efe7b6}
+.photobox  {border:1px solid #e7dc98; width:180px; height:138px; padding:2px;}
 
 #webmap  {width:1003px; background:url(../images/picorange.jpg) center top no-repeat;}
 #webHeader  {width:1003px; height:194px;}
@@ -37,8 +51,6 @@ a:hover {
 #webFangke  {border:1px solid #b36300; padding:6px;}
 
 #webUnder  {margin-top:10px; background:url(../images/orangeunderline.gif) center top no-repeat; height:52px; text-align:center; line-height:52px;}
-
-
 .dTitle  {margin-left:10px; font-size:14px; font-weight:bold; color:#b36301}
 #dBiaoti,#pBiaoti,#aboutBiaoti  {height:25px; background-color:#fad703; border-left:3px solid #b36300; border-bottom:1px solid #fff;color:#b36301}
 #dBiaoti a,#dBiaoti span  {margin:0px 7px 0px 7px;color:#b36301}

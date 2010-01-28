@@ -2,7 +2,7 @@ body {
 	margin:0px auto;
 	padding:0px;
 	font-size:12px;
-	color:#666;
+	color:#888;
 	background-color:#000;
 }
 
@@ -14,7 +14,21 @@ a:hover {
 	text-decoration: none;
 	color:#9344d5;
 }
-
+#siteMenu{
+		background:#f8f0ff;
+        border: 2px solid #a75dcb;
+        padding:5px;
+        width:200px;
+}
+#siteMenu a  {color:#4f167e;}
+.actionBar {
+	margin: 10px;
+	border:1px solid #3b006b;
+	background:#2e074c;
+	padding:3px 5px 3px 5px;
+}
+.createcss  {padding:10px; background:#160027; border:1px solid #3b006b}
+.photobox  {border:1px solid #3b006b; width:180px; height:138px; padding:2px;}
 
 #webmap  {width:1003px;}
 #webHeader  {width:1003px; height:194px; background:url(../images/picpurple.jpg) center top no-repeat;}

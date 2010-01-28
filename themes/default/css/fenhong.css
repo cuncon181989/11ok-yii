@@ -14,7 +14,21 @@ a:hover {
 	text-decoration: none;
 	color:#d1437a;
 }
-
+#siteMenu{
+		background:#fff3f8;
+        border: 2px solid #f5a8c6;
+        padding:5px;
+        width:200px;
+}
+#siteMenu a  {color:#ed5298;}
+.actionBar {
+	margin: 10px;
+	border:1px solid #ddd;
+	background:#f5f5f5;
+	padding:3px 5px 3px 5px;
+}
+.createcss  {padding:10px; background:#fff; border:1px solid #ccc}
+.photobox  {border:1px solid #e3e3e3; width:180px; height:138px; padding:2px;}
 
 #webmap  {width:1003px;}
 #webHeader  {width:1003px; height:194px; background:url(../images/picfenhong.jpg) center top no-repeat;}

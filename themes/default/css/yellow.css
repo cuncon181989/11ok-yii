@@ -14,7 +14,21 @@ a:hover {
 	text-decoration: none;
 	color:#a59c29;
 }
-
+#siteMenu{
+		background:#fffff8;
+        border: 2px solid #cabe66;
+        padding:5px;
+        width:200px;
+}
+#siteMenu a  {color:#a59c29;}
+.actionBar {
+	margin: 10px;
+	border:1px solid #cabe66;
+	background:#fffff8;
+	padding:3px 5px 3px 5px;
+}
+.createcss  {padding:10px; background:#eae6b3; border:1px solid #a59c29}
+.photobox  {border:1px solid #cabe66; width:180px; height:138px; padding:2px;}
 
 
 #webmap  {width:1003px; background:url(../images/picyellow.jpg) center top no-repeat;}
@@ -31,23 +45,12 @@ a:hover {
 #webGongqiu  {border:1px solid #a59c29; background-color:#eae6b3; padding:5px 10px 5px 10px; margin-bottom:15px; line-height:25px;}
 #webGongqiu li  {float:left; width:50%;}
 #webGongqiu strong  {color:#a59c29;}
-
-
-
-
 #kTitle  {height:25px; line-height:25px; padding-left:27px; font-weight:bold; background:url(../images/yellowtitle.gif) left top no-repeat; font-size:14px; color:#FFF}
 #kTitle a  {color:#FFF;}
 
 #kNeirong,#aNeirong  {border:1px solid #a59c29; padding:6px;}
 #webFangke  {border:1px solid #a59c29; padding:6px;}
-
-
 #webUnder  {margin-top:10px; background:url(../images/yellowunderline.gif) center top no-repeat; height:52px; text-align:center; line-height:52px;}
-
-
-
-
-
 .dTitle  {margin-left:10px; font-size:14px; font-weight:bold; color:#a59c29}
 #dBiaoti,#pBiaoti,#aboutBiaoti  {height:25px; background-color:#eae6b3; border-left:3px solid #a59c29; border-bottom:1px solid #fbffee;color:#a59c29}
 #dBiaoti a,#dBiaoti span  {margin:0px 7px 0px 7px;color:#a59c29}

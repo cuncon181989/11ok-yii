@@ -7,7 +7,7 @@
                       <?php if(Yii::app()->user->getState('isOwner')){echo CHtml::link('管理相册',array('galleryAlbums/admin','username'=>Yii::app()->user->name));} ?>
                 </span>
             </div>
-                <div id="webxiangce">
+                <div id="webxiangcelist">
                 	<ul>
                                 <?php foreach ($galleries as $key=>$ga): ?>
                                 <li><?php echo CHtml::link(CHtml::image($ga->getGAimg(), $ga->name),array('galleries','gaid'=>$ga->id,'username'=>$this->_user->username)); ?>

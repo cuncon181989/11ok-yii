@@ -20,7 +20,7 @@
 <?php endforeach ?>
 </ul>
 <div class="action">
-<?php echo CHtml::submitButton('保存'); ?>
+<?php echo CHtml::submitButton('保存',array('class'=>'anniubj')); ?>
 </div>
 
 <?php echo CHtml::endForm(); ?>
