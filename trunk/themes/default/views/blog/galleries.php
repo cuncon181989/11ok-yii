@@ -10,7 +10,7 @@
                     <ul id="gallery">
                           <?php foreach ($galleries as $key=>$gallery): ?>
                             <?php if ($key==0) $this->pageTitle=$gallery->galleryAlbums->name; ?>
-							<li><a class="lightBox" href="<?php echo $gallery->getGalleryUrl(); ?>"><?php echo CHtml::image($gallery->getGalleryUrl('small')); ?></a><br />
+							<li><a class="lightBox" href="<?php echo $gallery->getGalleryUrl(); ?>"><div class="photobox"><?php echo CHtml::image($gallery->getGalleryUrl('small')); ?></div></a>
                             <?php echo CHtml::link(CHtml::encode($gallery->title), array('gallery','gid'=>$gallery->id,'username'=>$this->_user->username)); ?></li>
                           <?php endforeach ?>
                     </ul>

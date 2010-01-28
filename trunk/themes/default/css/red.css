@@ -2,7 +2,7 @@ body {
 	margin:0px auto;
 	padding:0px;
 	font-size:12px;
-	color:#666;
+	color:#888;
 	background-color:#000;
 }
 
@@ -14,12 +14,26 @@ a:hover {
 	text-decoration: none;
 	color:#f18585;
 }
-
+#siteMenu{
+		background:#fff3f2;
+        border: 2px solid #945655;
+        padding:5px;
+        width:200px;
+}
+#siteMenu a  {color:#945655;}
+.actionBar {
+	margin: 10px;
+	border:1px solid #5d0f0c;
+	background:#420604;
+	padding:3px 5px 3px 5px;
+}
+.createcss  {padding:10px; background:#310200; border:1px solid #500300}
+.photobox  {border:1px solid #5d0f0c; width:180px; height:138px; padding:2px;}
 
 #webmap  {width:1003px;}
 #webHeader  {width:1003px; height:115px; background:url(../images/picred.jpg) center top no-repeat;}
 #headerTitle  {padding:25px 0px 0px 10px; color:#5e9a00; height:43px; font:Arial, Helvetica, sans-serif; font-size:36px; font-weight:bold;color:#fff}
-#logo img  {margin:10px 10px 0px 0px; border:3px solid #8c3c3e;}
+#logo img  {margin:10px 10px 0px 0px; border:3px solid #945655;}
 
 #webMenu  {height:45px; background:url(../images/redmenu02.gif) center bottom no-repeat;}
 #menu  {height:34px; line-height:34px; background:url(../images/redmenu.gif) center top no-repeat; font-weight:bold; font-size:14px; color:#fff;}
