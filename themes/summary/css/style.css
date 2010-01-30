@@ -111,7 +111,7 @@ a.bbs:hover{color:#fff;background:url(../images/menuTab_04.gif) no-repeat;text-d
 #gongyingTitle,#qiugouTitle  {border-left:1px solid #cecece; border-top:1px solid #cecece; border-right:1px solid #cecece; background:url(../images/line04.gif) repeat-x;height:26px; padding:0px 10px 0px 11px;}
 #gongyingTitle span,#qiugouTitle span  {height:26px;width:200px;display: -moz-inline-stack;display: inline-block;padding-left:21px;font-size:14px;font-weight:bold;color:#44a100;float:left;background-image: url(../images/icon-all.gif);background-repeat: no-repeat; background-position:left -23px; line-height:26px;}
 #gongyingTitle a,#qiugouTitle a  {float:right; display:block; width:50px; background:url(../images/more.gif) center bottom no-repeat; text-align:center; height:19px; padding:0px; margin-top:7px; line-height:19px;}
-#gongqiuNeirong li{font-size:14px;line-height:30px;padding-left:21px;margin:0px 5px 0px 5px;border-bottom:#ccc 1px  dashed;}
+#gongqiuNeirong li{font-size:14px;line-height:30px;padding-left:21px;margin:0px 5px 0px 5px;border-bottom:#ccc 1px  dashed;  overflow:hidden; height:30px;}
 li.top0{background:url(../images/icon-all.gif) left -46px no-repeat;}
 li.top1{background:url(../images/icon-all.gif) left -76px no-repeat;}
 li.top2{background:url(../images/icon-all.gif) left -106px no-repeat;}
@@ -177,7 +177,7 @@ li.top5{background:url(../images/icon-all.gif) left -190px no-repeat;}
 .businessfont02  {float:right; background:url(../images/title02.gif) top right no-repeat; height:44px; width:175px; display:block; color:#f08200; line-height:44px; text-align:right;}
 .businessfont02 a  {color:#f08200; margin:10px 10px}
 #businessNeirong  {width:709px;}
-#businessNeirong li  {display:block; width:212px; float:left; height:86px; margin:0px 7px 14px 7px; border:1px dashed #f2cca2; background-color:#faf7ee; padding:6px 3px 6px 3px; line-height:22px;}
+#businessNeirong li  {display:block; width:212px; float:left; height:86px; margin:0px 7px 14px 7px; border:1px dashed #f2cca2; background-color:#faf7ee; padding:6px 3px 6px 3px; line-height:22px; overflow:hidden;}
 #businessNeirong li img  {float:left; margin-right:5px; height:84px; width:84px; border:1px dashed #dbdbdb;}
 #pagbusiness  {width:709px; background:url(../images/line09.gif) repeat-x; height:29px;}
 .pagfont  {text-align:right; display:block; padding-right:10px; background:url(../images/title04.gif) right top  no-repeat; height:29px; line-height:29px;}

@@ -18,7 +18,7 @@
     </div>
     <div class="simple">
     <?php echo CHtml::activeLabelEx($model,'realname'); ?>
-    <?php echo CHtml::activeTextField($model,'r_realname',array('size'=>25,'maxlength'=>12)); ?>
+    <?php echo CHtml::activeTextField($model,'realname',array('size'=>25,'maxlength'=>12)); ?>
     </div>
     <div class="simple">
     <?php echo CHtml::activeLabelEx($model,'compnay'); ?>
@@ -64,7 +64,8 @@
                 ));
     ?>
     </div>
-    <div class="action">
+    <div class="simple">
+    <?php echo CHtml::label('&nbsp;', ''); ?>
     <?php echo CHtml::submitButton($update ? '更新' : '提交',array('class'=>'anniubj')); ?>
     </div>
     <?php echo CHtml::endForm(); ?>

@@ -48,7 +48,7 @@ class UsersController extends DController
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('update','show','avatar'),
+				'actions'=>array('update','show','avatar','updateinfo'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -178,6 +178,24 @@ class UsersController extends DController
                 ));
 	}
 
+        /*
+         * 更新用户扩展信息
+         */
+        public function actionUpdateInfo(){
+                if (Yii::app()->user->isGuest)
+                    throw New CHttpException(404);
+
+                $userinfo= UserInfo::model()->findByPk(Yii::app()->user->id);
+                if ($userinfo==null)
+                    $userinfo= new UserInfo;
+
+                if (isset($_POST['UserInfo'])){
+                        $userinfo->attributes= $_POST['UserInfo'];
+                        if($userinfo->save())
+                                $this->redirect(array('update','username'=>Yii::app()->user->name));
+                }
+                $this->render('updateinfo', array('userinfo'=>$userinfo));
+        }
         /**
          * 更新头像
          */
