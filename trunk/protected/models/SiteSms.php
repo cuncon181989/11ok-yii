@@ -28,7 +28,7 @@ class SiteSms extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{SiteSms}}';
+		return '{{sitesms}}';
 	}
 
 	/**
@@ -54,8 +54,8 @@ class SiteSms extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'to_user'=>array(self::BELONGS_TO,'users','toId'),
-			'post_user'=>array(self::BELONGS_TO,'users','postId'),
+			'to_user'=>array(self::BELONGS_TO,'Users','toId'),
+			'post_user'=>array(self::BELONGS_TO,'Users','postId'),
 		);
 	}
 

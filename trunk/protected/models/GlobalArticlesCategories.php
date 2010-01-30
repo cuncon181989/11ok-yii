@@ -25,7 +25,7 @@ class GlobalArticlesCategories extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{GlobalArticlesCategories}}';
+		return '{{globalarticlescategories}}';
 	}
 
 	/**

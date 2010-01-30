@@ -46,7 +46,7 @@
                         <?php echo CHtml::link('我的留言', array('blog/guestbook','username'=>$this->_user['username'])); ?></div>
         </div>
         <?php echo $content; ?>
-        <div id="webUnder">CopyRight © 11ok.net 2009-2019 MEM:<?php echo round(memory_get_usage()/1024/1024,4). 'M (peak): '. round(memory_get_peak_usage()/1024/1024,4); ?></div>
+        <div id="webUnder">CopyRight © 11ok.net 2010-2019</div>
 </div>
 </div>
 </body>

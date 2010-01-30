@@ -29,7 +29,7 @@ class GalleryAlbums extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{GalleryAlbums}}';
+		return '{{galleryalbums}}';
 	}
 
 	/**
@@ -55,9 +55,9 @@ class GalleryAlbums extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                        'blog'=>array(self::BELONGS_TO,'blogs','blogsId'),
-                        'user'=>array(self::BELONGS_TO,'users','usersId'),
-                        'gallerys'=>array(self::HAS_MANY,'gallery','galleryAlbumsId', 'limit'=>10),
+                        'blog'=>array(self::BELONGS_TO,'Blogs','blogsId'),
+                        'user'=>array(self::BELONGS_TO,'Users','usersId'),
+                        'gallerys'=>array(self::HAS_MANY,'Gallery','galleryAlbumsId', 'limit'=>10),
 		);
 	}
 

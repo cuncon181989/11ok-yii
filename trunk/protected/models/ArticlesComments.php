@@ -34,7 +34,7 @@ class ArticlesComments extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{ArticlesComments}}';
+		return '{{articlescomments}}';
 	}
 
 	/**
@@ -62,7 +62,7 @@ class ArticlesComments extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                        'user'=>array(self::BELONGS_TO,'users','usersId'),
+                        'user'=>array(self::BELONGS_TO,'Users','usersId'),
 		);
 	}
 

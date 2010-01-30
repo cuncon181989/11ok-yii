@@ -26,7 +26,7 @@ class Friends extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{Friends}}';
+		return '{{friends}}';
 	}
 
 	/**
@@ -50,7 +50,7 @@ class Friends extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'info'=>array(self::BELONGS_TO,'users','friendId'),
+			'info'=>array(self::BELONGS_TO,'Users','friendId'),
 		);
 	}
 

@@ -228,7 +228,7 @@ class ArticlesController extends DController
         public function loadArticlesCategory (){
             $artCate= ArticlesCategories::model()->findAll('usersId=:uid',array(':uid'=>Yii::app()->user->id));
             if ($artCate==null)
-                $this->redirect(array('articlesCategories/create'));
+                $this->redirect(array('articlesCategories/create','username=>'Yii::app()->user->name));
                 //throw new CHttpException(404, '没有个人分类，请先创建分类！');
             return $artCate;
         }
