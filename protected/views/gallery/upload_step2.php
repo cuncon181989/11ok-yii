@@ -21,7 +21,8 @@ $this->widget('application.extensions.uploadify.EuploadifyWidget',
             'sizeLimit'=>1572864, //2M=2*1024Kb*1024Bytes=2097152 1.5M=1572864B
             'buttonImg'=> Yii::app()->getRequest()->getBaseUrl().'/images/browse-files02.png',
             'wmode'=>'transparent',
-            'width'=>102,
+            'width'=>95,
+			'height'=>20,
             'queueID'=>'FilesQueue',
             'queueSizeLimit'=>10,
             //'simUploadLimit'=>1, //如果这里数字改变那么onComplete里的fileCount也要跟着变要不会造成无法正确判断文件是否传完了
@@ -38,7 +39,7 @@ $this->widget('application.extensions.uploadify.EuploadifyWidget',
                 }
                 $("#uploadInfo").append("剩余文件数："+ data.fileCount);
                 $("#uploadInfo").append(fileObj.name+ "上传完成！"+ "<br />");
-                $("#uploadInfo").append(response);
+                //$("#uploadInfo").append(response);
            }',
            'onSelectOnce' => 'function(event,data){
                 if (data.fileCount== 1){

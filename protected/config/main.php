@@ -106,7 +106,7 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
-		'adminEmail'=>'admin@11ok.net',
+		'adminEmail'=>'admin@yix123.com',
                 //默认theme
                 'defautTheme'=>'default',
                 //用户上传的目录

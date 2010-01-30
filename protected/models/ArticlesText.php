@@ -23,7 +23,7 @@ class ArticlesText extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{ArticlesText}}';
+		return '{{articlestext}}';
 	}
 
 	/**
@@ -47,7 +47,7 @@ class ArticlesText extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'articles'=>array(self::BELONGS_TO,'articles','articelsId'),
+                    'articles'=>array(self::BELONGS_TO,'Articles','articelsId'),
 		);
 	}
 

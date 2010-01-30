@@ -110,9 +110,9 @@ class GalleryController extends DController
                 $gallery= new Gallery;
                 $saveDir= $gallery->getGalleryDir();
                 if(!is_dir($saveDir))
-                    mkdir($saveDir,0644);
+                    mkdir($saveDir,0755);
                 if(!is_dir($saveDir.DS.'s'))
-                    mkdir($saveDir.DS.'s',0644);
+                    mkdir($saveDir.DS.'s',0755);
                 $ufile= CUploadedFile::getInstanceByName('gallery');
                 $saveFileName= date('YmdHis',time()).rand(100,999).'.'.$ufile->getExtensionName();
                 if ($ufile->saveAs($saveDir.$saveFileName)){
@@ -140,6 +140,7 @@ class GalleryController extends DController
                                 if($_REQUEST['isComplete']==1){
                                         @$_SESSION['uploadFinish']=true;
                                 }
+								echo 'ok';
                         }else{
                                 unlink($saveDir.$saveFileName);
                                 unlink($saveDir.'s'.DS.$saveFileName);

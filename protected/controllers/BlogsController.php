@@ -116,7 +116,7 @@ class BlogsController extends DController
 		foreach ($themeNames as $key=>$themeName){
 			if ($themeName!= 'summary'){
 				$theme= Yii::app()->getThemeManager()->getTheme($themeName);//得到制定的theme对象
-				$themeConfig= require_once($theme->getBasePath().DS.'config.php');//获取指定theme中的配置文件
+				$themeConfig= require($theme->getBasePath().DS.'config.php');//获取指定theme中的配置文件
 				$themes[$key]=$themeConfig;
 				$themes[$key]['url']=$theme->getBaseUrl();
 				$themes[$key]['dirName']=$themeName;

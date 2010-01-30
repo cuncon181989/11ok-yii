@@ -33,7 +33,7 @@ class GuestBook extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{GuestBook}}';
+		return '{{guestbook}}';
 	}
 
 	/**
@@ -61,7 +61,7 @@ class GuestBook extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                        'user'=>array(self::BELONGS_TO,'users','usersId'),
+                        'user'=>array(self::BELONGS_TO,'Users','usersId'),
                         'parent'=>array(self::BELONGS_TO,'GuestBook','parentId'),
                         'reply'=>array(self::HAS_MANY,'GuestBook','parentId'),
 		);

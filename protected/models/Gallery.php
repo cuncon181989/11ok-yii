@@ -35,7 +35,7 @@ class Gallery extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{Gallery}}';
+		return '{{gallery}}';
 	}
 
 	/**
@@ -62,7 +62,7 @@ class Gallery extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                        'blog'=>array(self::BELONGS_TO,'blogs','blogsId'),
+                        'blog'=>array(self::BELONGS_TO,'Blogs','blogsId'),
                         'galleryAlbums'=>array(self::BELONGS_TO,'GalleryAlbums','galleryAlbumsId'),
 		);
 	}

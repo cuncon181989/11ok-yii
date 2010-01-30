@@ -21,8 +21,9 @@ class Users extends CActiveRecord
 	 * @var string $regDate
 	 */
 	public $password2;
-        public $verifyCode;
-        public $oldBlogCate;//标记用户旧行业，更新的时候用来判断用户是否改变来分类来做相应分类统计的加减
+	public $verifyCode;
+	public $oldBlogCate;//标记用户旧行业，更新的时候用来判断用户是否改变来分类来做相应分类统计的加减
+	public $r_realname;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return CActiveRecord the static model class
@@ -37,7 +38,7 @@ class Users extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{Users}}';
+		return '{{users}}';
 	}
 	
 	/**
@@ -50,9 +51,9 @@ class Users extends CActiveRecord
 		return array(
 			array('username, password, password2, realname, compnay, verifyCode, province, city, area, blogCategoryId, oldBlogCate, userType, avatar, sex, birthday','safe'),
 			array('email, province, blogCategoryId', 'required'),
-                        array('top_trade, top_site','safe', 'on'=>'admin'),
-                        array('birthday','type','type'=>'date','dateFormat'=>'yyyy-mm-dd','message'=>'生日必须为正确的日期格式！'),
-                        array('avatar', 'file', 'types'=>'jpg, gif, png','maxSize'=>'128000','tooLarge'=>'文件大小不能超过128K','allowEmpty'=>TRUE),
+			array('top_trade, top_site','safe', 'on'=>'admin'),
+			array('birthday','type','type'=>'date','dateFormat'=>'yyyy-mm-dd','message'=>'生日必须为正确的日期格式！'),
+			array('avatar', 'file', 'types'=>'jpg, gif, png','maxSize'=>'128000','tooLarge'=>'文件大小不能超过128K','allowEmpty'=>TRUE),
 			array('avatar', 'length', 'max'=>255),
 			array('username, password', 'required', 'on'=>'register'),
 			array('username', 'length', 'min'=>4, 'max'=>25 ),
@@ -75,12 +76,12 @@ class Users extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
                     'blogCategory'=>array(self::BELONGS_TO,'BlogCategories','blogCategoryId'),
-                    'blogs'=>array(self::HAS_ONE,'blogs','usersId'),
-                    'userinfo'=>array(self::HAS_ONE,'userinfo','usersId'),
-                    'friends'=>array(self::MANY_MANY,'users','{{friends}}(userId,friendId)', 'limit'=>5),
-                    'visits'=>array(self::MANY_MANY,'users','{{Visits}}(visitId,userId)', 'limit'=>16),
-		    'articlesCategory'=>array(self::HAS_MANY,'articlescategories','usersId'),
-		    'galleryAlbums'=>array(self::HAS_MANY,'galleryAlbums','usersId'),
+                    'blogs'=>array(self::HAS_ONE,'Blogs','usersId'),
+                    'userinfo'=>array(self::HAS_ONE,'UserInfo','usersId'),
+                    'friends'=>array(self::MANY_MANY,'Users','{{friends}}(userId,friendId)', 'limit'=>5),
+                    'visits'=>array(self::MANY_MANY,'Users','{{visits}}(visitId,userId)', 'limit'=>16),
+		    'articlesCategory'=>array(self::HAS_MANY,'ArticlesCategories','usersId'),
+		    'galleryAlbums'=>array(self::HAS_MANY,'GalleryAlbums','usersId'),
 		);
 	}
 
@@ -99,17 +100,17 @@ class Users extends CActiveRecord
 			'realname' => '真实姓名',
 			'compnay' => '所在企业',
 			'sex' => '性别',
-                        'province'=>'所在地',
-                        'city'=>'市',
-                        'area'=>'区',
-                        'blogCategoryId'=>'行业',
+			'province'=>'所在地',
+			'city'=>'市',
+			'area'=>'区',
+			'blogCategoryId'=>'行业',
 			'birthday' => '生日',
 			'userType' => '类型',
 			'userStatus' => '状态',
-                        'top_trade'=>'行业推荐',
-                        'top_site'=>'全站推荐',
-                        'settings'=>'设置',
-                        'verifyCode'=>'验证码',
+			'top_trade'=>'行业推荐',
+			'top_site'=>'全站推荐',
+			'settings'=>'设置',
+			'verifyCode'=>'验证码',
 			'lastLoginDate' => '最后登陆时间',
 			'regIp' => '注册IP',
 			'lastLoginIp' => '最后登陆IP',
@@ -131,6 +132,9 @@ class Users extends CActiveRecord
                 $http1=new CHttpRequest();
                 $this->lastLoginIp= Yii::app()->getRequest()->getUserHostAddress();
             }
+			if (empty($this->realname))
+				$this->realname=null;
+				
             return true;
         }
         /**
@@ -139,6 +143,7 @@ class Users extends CActiveRecord
         protected function afterFind(){
             $this->oldBlogCate= $this->blogCategoryId;
             $this->settings= unserialize($this->settings);
+			$this->r_realname= $this->realname;
             if ($this->realname=='') $this->realname= $this->username;
         }
         /**
@@ -161,11 +166,11 @@ class Users extends CActiveRecord
         protected function afterSave(){
             //用户更新行业的时候同时更新一下博客表的行业，使其同步
             $this->dbConnection->createCommand('update {{blogs}} set blogCategoryId='.$this->blogCategoryId.' WHERE usersId='.$this->id)->execute();
-	    if ($this->isNewRecord){
-		$blog= new UserInfo;
-		$blog->usersId= $this->id;
-		$blog->save(false);
-	    }
+			if ($this->isNewRecord){
+				$blog= new UserInfo;
+				$blog->usersId= $this->id;
+				$blog->save(false);
+			}
         }
         /**
          * 删除用户的时候减少相应行业统计

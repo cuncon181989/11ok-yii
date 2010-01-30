@@ -145,7 +145,7 @@ class BlogController extends DController
                 $galleries= GalleryAlbums::model()->findAll($acriteria);
 
                 $this->pageTitle= $this->_user->realname.'的相册集';
-                $this->render('GalleryAlbums', array(
+                $this->render('galleryAlbums', array(
                                              'galleries'=>$galleries,
                                              'pages'=>$pages,
                                         ));
@@ -163,7 +163,7 @@ class BlogController extends DController
                 $pages->applyLimit($acriteria);
 
                 $galleries= Gallery::model()->with('galleryAlbums')->findAll($acriteria);
-                $this->render('Galleries', array('galleries'=>$galleries,
+                $this->render('galleries', array('galleries'=>$galleries,
                                                  'pages'=>$pages,
                                                 ));
          }
@@ -176,7 +176,7 @@ class BlogController extends DController
                 if ($gallery===null)
                         throw new CHttpException(404,'没有找到可以查看的图片');
                 $this->pageTitle= $gallery->title;
-                $this->render('Gallery', array('gallery'=>$gallery,));
+                $this->render('gallery', array('gallery'=>$gallery,));
         }
         /**
          *  留言板列表页
@@ -206,7 +206,7 @@ class BlogController extends DController
                 }
 
                 $this->pageTitle= $this->_user->realname.'的留言板';
-                $this->render('Guestbook', array('guestbooks'=>$guestbooks,
+                $this->render('guestbook', array('guestbooks'=>$guestbooks,
                                                  'gb'=>$gb,
                                                  'pages'=>$pages,
                                                 ));

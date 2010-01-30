@@ -25,7 +25,7 @@ class BlogCategories extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{BlogCategories}}';
+		return '{{blogcategories}}';
 	}
 
 	/**
@@ -49,8 +49,8 @@ class BlogCategories extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'blogs'=>array(self::HAS_MANY, 'blogs', 'blogCategoryId'),
-                    'users'=>array(self::HAS_MANY,'users','blogCategoryId'),
+                    'blogs'=>array(self::HAS_MANY, 'Blogs', 'blogCategoryId'),
+                    'users'=>array(self::HAS_MANY,'Users','blogCategoryId'),
 		);
 	}
 

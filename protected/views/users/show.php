@@ -14,7 +14,7 @@
 	<tr>
 		<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('realname')); ?>
 		</th>
-		<td><?php echo CHtml::encode($model->realname); ?></td>
+		<td><?php echo CHtml::encode($model->r_realname);?></td>
 	</tr>
 	<tr>
 		<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('compnay')); ?>

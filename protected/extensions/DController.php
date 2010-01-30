@@ -19,14 +19,16 @@ class DController extends CController
                         $user= Users::model()->with('blogs','userinfo','blogCategory','friends','visits')->find('t.username=:username', array(':username'=>$_GET['username']));
                         $this->_user= $user;
                         $this->_blog= $user->blogs;
-                        $theme= $user->blogs->settings['theme']['name'];
+                        if (isset($user->blogs->settings['theme']['name']))
+							$theme= $user->blogs->settings['theme']['name'];
                         $user= null;
                         //unset($user);
                 }elseif (isset($_GET['uid'])){
                         $blog= Blogs::model()->with('users')->find('usersId=:uid',array(':uid'=>intval($_GET['uid'])));
                         $this->_user= $blog->users;
                         $this->_blog= $blog;
-                        $theme= $blog->settings['theme']['name'];
+						if (isset($blog->settings['theme']['name']))
+							$theme= $blog->settings['theme']['name'];
                         $blog= null;
                         //unset($blog);
                 }
@@ -37,7 +39,7 @@ class DController extends CController
                         $theme='default';
                 Yii::app()->setTheme($theme);
                 $baseCssFile= Yii::app()->getTheme()->getBaseUrl().'/css/base.css';
-                if (isset($this->_blog->settings['theme']['style'])){
+                if (!empty($this->_blog->settings['theme']['style'])){
                         $cssFile= Yii::app()->getTheme()->getBaseUrl().'/css/'.$this->_blog->settings['theme']['style'];
                 }else{
                         $theme= Yii::app()->getThemeManager()->getTheme($theme);//得到制定的theme对象

@@ -187,7 +187,7 @@ class UsersController extends DController
             if (isset($_FILES['Users'])){ //如果是上传文件执行这里
                  $afile= CUploadedFile::getInstance($user,'avatar');
                  if(!is_dir($saveDir))
-                    mkdir($saveDir,0644);
+                    mkdir($saveDir,0755);
                  $saveTmpName='avatar_tmp'.'.'.$afile->getExtensionName();
                  if($user->validate(array('avatar'))){
                      $afile->saveAs($saveDir.$saveTmpName);

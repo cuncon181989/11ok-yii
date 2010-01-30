@@ -31,7 +31,7 @@ class Blogs extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{Blogs}}';
+		return '{{blogs}}';
 	}
 
 	/**
@@ -89,7 +89,7 @@ class Blogs extends CActiveRecord
             if ($this->isNewRecord){
                 $this->createDate= $this->updateDate= time();
                 $this->status= 1;
-                $this->settings= array('theme'=>'default');
+                $this->settings= array('theme'=>array('name'=>'default'));
             }else
                 $this->updateDate= time();
             return true;

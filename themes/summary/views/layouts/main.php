@@ -54,8 +54,18 @@
 <?php echo $content; ?>
     <div class="clr"></div>
     <div id="under">
-        <div id="underFont" align="center"><a href="/index.php?op=Summary" target="_blank">首页</a>|<a href="/index.php?op=BlogList" target="_blank">商人库</a>|<a href="/read" target="_blank">充电休闲</a>|<a href="/bbs" target="_blank">论坛</a>|<a href="http://www.11ok.net/Contact%20.htm#p">关于我们</a>|<a href="http://www.11ok.net/Contact%20.htm#p">广告合作</a>|<a href="/stp" target="_blank">网站地图</a>|<a href="lianjie.html">友情链接</a>|<a href="#">全站搜索</a></div>
-        <div align="center" id="underFont02">Copyright (c) 2008-2018 中国搜商网 All Rights Reserved 版权所有<br />ICP备案：<a href="http://www.miibeian.gov.cn" target="_blank">湘ICP备案中</a>  MEM:<?php echo round(memory_get_usage()/1024/1024,4). 'M (peak): '. round(memory_get_peak_usage()/1024/1024,4); ?></div>
+        <div id="underFont" align="center">
+		 <?php echo CHtml::link('首　页',array('site/index')) ?>
+         |<?php echo CHtml::link('商人库',array('site/list')) ?>
+		 |<a href="/read">充电休闲</a>
+		 |<a href="/bbs">论坛</a>
+		 |<a href="#">关于我们</a>
+		 |<?php echo CHtml::link('网站地图',array('site/map')) ?>
+		 |<a href="#">全站搜索</a></div>
+        <div align="center" id="underFont02">
+			Copyright (c) 2008-2018 中国搜商网 All Rights Reserved 版权所有<br />
+			ICP备案：<a href="http://www.miibeian.gov.cn" target="_blank">湘ICP备案中</a>
+		</div>
 </div>
 </div>
 </body>
