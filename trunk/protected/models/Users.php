@@ -132,8 +132,8 @@ class Users extends CActiveRecord
                 $http1=new CHttpRequest();
                 $this->lastLoginIp= Yii::app()->getRequest()->getUserHostAddress();
             }
-			if (empty($this->realname))
-				$this->realname=null;
+            if (empty($this->realname))
+               $this->realname=null;
 				
             return true;
         }
@@ -143,8 +143,8 @@ class Users extends CActiveRecord
         protected function afterFind(){
             $this->oldBlogCate= $this->blogCategoryId;
             $this->settings= unserialize($this->settings);
-			$this->r_realname= $this->realname;
-            if ($this->realname=='') $this->realname= $this->username;
+            $this->r_realname= $this->realname;
+            if (empty($this->realname)) $this->realname= $this->username;
         }
         /**
          * 这里更新一下行业统计字段

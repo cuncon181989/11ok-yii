@@ -44,8 +44,10 @@ class UserInfo extends CActiveRecord
 		return array(
 			array('position, address, hobby', 'length', 'max'=>255),
 			array('native, url, mobilePhone, msn', 'length', 'max'=>50),
+                        array('url', 'url'),
+                        array('msn', 'email'),
 			array('tel', 'length', 'max'=>25),
-			array('qq', 'length', 'max'=>11),
+			array('qq, tel', 'length', 'min'=>5, 'max'=>11),
 			array('about', 'safe'),
 		);
 	}
@@ -81,4 +83,10 @@ class UserInfo extends CActiveRecord
 			'about' => '关于自己',
 		);
 	}
+
+        protected function beforeViladate(){
+                if ($this->isNewRecord){
+                        $this->sersId= Yii::app()->user->id;
+                }
+        }
 }
