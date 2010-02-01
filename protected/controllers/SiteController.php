@@ -43,11 +43,12 @@ class SiteController extends CController
         public function actionList(){
                 $criteria= new CDbCriteria();
                 $criteria->addCondition('userStatus=1');
+                $criteria->order= 'regDate DESC';
                 if (isset($_GET['order']))
                         $criteria->order= ($_GET['order']=='hot')? 'regDate ASC': 'regDate DESC';
 
                 $pages= new CPagination(Users::model()->count($criteria));
-                $pages->pageSize= self::PAGE_SIZE;
+                $pages->pageSize= self::PAGE_SIZE*2;
                 $pages->applyLimit($criteria);
                 
                 $users= Users::model()->with('blogs','blogCategory')->findAll($criteria);

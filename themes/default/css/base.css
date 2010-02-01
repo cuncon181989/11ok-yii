@@ -53,12 +53,20 @@ div.item {
 	padding: 5px;
 }
 
+#siteMenu{
+        padding:5px;
+        width:200px;
+}
 #siteMenu li {
         list-style-type:none;
-        margin:5px 5px;
         font-size:14px;
-        float:left;
+        width:65px;
+        height:24px;
+        line-height:24px;
+        overflow:hidden;
         white-space:nowrap;
+        float:left;
+        text-align:center;
 }
 #Container  {
 }
