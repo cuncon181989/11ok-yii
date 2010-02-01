@@ -23,25 +23,30 @@
 </div>
 <div class="simple">
 <?php echo CHtml::activeLabelEx($model,'title'); ?>
-<?php echo CHtml::activeTextField($model,'title',array('size'=>60,'maxlength'=>255)); ?>
+<?php echo CHtml::activeTextField($model,'title',array('size'=>73,'maxlength'=>255)); ?>
 </div>
 <div class="simple">
 <?php echo CHtml::activeLabelEx($model,'summary'); ?>
 <?php echo CHtml::activeTextArea($model,'summary',array('rows'=>3, 'cols'=>50)); ?>
 </div>
-<div class="">
+<div class="simple">
 <?php echo CHtml::activeLabelEx($model,'content'); ?>
 <?php //echo CHtml::activeTextArea($model,'content',array('rows'=>6,'cols'=>50)); ?>
 <?php $this->widget('application.extensions.ckeditor.CKEditor', 
     array( 'model'=>$model,
            'attribute'=>'content',
            'editorTemplate'=>'basic',
+           'Options' => array(
+                        'width'=>750,
+                        ),
        )); ?>
 </div>
-<div class="action">
-<label>　</label>
+<div class="simple">
+<label>&nbsp;</label>
 <?php echo CHtml::activeCheckBox($model,'top'); ?><?php echo $model->getAttributeLabel('top') ?>　
-<?php echo CHtml::submitButton($update ? '保存' : '创建',array('class'=>'anniubj')); ?>
+</div>
+<div class="simple">
+<label>&nbsp;</label><?php echo CHtml::submitButton($update ? '保存' : '创建',array('class'=>'anniubj')); ?>
 </div>
 
 <?php echo CHtml::endForm(); ?>

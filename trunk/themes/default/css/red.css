@@ -15,10 +15,8 @@ a:hover {
 	color:#f18585;
 }
 #siteMenu{
-		background:#fff3f2;
+	background:#fff3f2;
         border: 2px solid #945655;
-        padding:5px;
-        width:200px;
 }
 #siteMenu a  {color:#945655;}
 .actionBar {
