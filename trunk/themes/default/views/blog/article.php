@@ -6,8 +6,8 @@
                         <div class="clr"></div>
                         <div class="clr" style="height:5px;"></div>
                         <div id="dNeirong">
-                               <h3><?php echo CHtml::encode($article->title); ?></h3>
-                               <div>查看(<?php echo $article->countReads; ?>) 评论(<?php echo $article->countComments; ?>) 发布日期：<?php echo date('Y-m-d H:i:s',$article->createDate); ?></div>
+                               <h2><?php echo CHtml::encode($article->title); ?></h2>
+                               <div class="des">查看(<?php echo $article->countReads; ?>) 评论(<?php echo $article->countComments; ?>) 发布日期：<?php echo date('Y-m-d H:i:s',$article->createDate); ?></div>
                                 <p id="dzhengwen">
                                         <?php echo $article->artText->content; ?>
                                 </p>

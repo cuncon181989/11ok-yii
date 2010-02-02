@@ -53,9 +53,9 @@ class BlogController extends DController
                 
                 $articles= Articles::model()->findAll($acriteria);
                 $galleries= Gallery::model()->findAll('blogsId=:bid AND status=1 ORDER BY id DESC LIMIT 6', array(':bid'=>$this->_blog->id));
-                if ($this->_user['userType']==2){
+                if ($this->_blog->settings['isShowGQ']==1){
                         $gongying= Articles::model()->findAll('blogsId=:bid AND globalArticlesCategoriesId=2 AND status=1 ORDER BY id DESC LIMIT 5', array(':bid'=>$this->_blog->id));
-                        $gongying= Articles::model()->findAll('blogsId=:bid AND globalArticlesCategoriesId=3 AND status=1 ORDER BY id DESC LIMIT 5', array(':bid'=>$this->_blog->id));
+                        $qiugou  = Articles::model()->findAll('blogsId=:bid AND globalArticlesCategoriesId=3 AND status=1 ORDER BY id DESC LIMIT 5', array(':bid'=>$this->_blog->id));
                 }else{
                         $gongying= array();
                         $qiugou  = array();

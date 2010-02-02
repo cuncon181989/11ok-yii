@@ -20,15 +20,22 @@
 <?php echo CHtml::activeTextField($model,'name',array('size'=>50,'maxlength'=>50)); ?>
 </div>
 <div class="simple">
-<?php echo CHtml::activeLabelEx($model,'createDate'); ?>
-<?php echo CHtml::encode(date('Y-m-d H:i:s',$model->createDate)); ?>
+        <?php echo CHtml::label('是否显示供求', ''); ?>
+        <span class="normallist">
+        <?php if($model->settings['isShowGQ']): ?>
+        <?php echo CHtml::radioButtonList('isShowGQ', $model->settings['isShowGQ'], array('0'=>'不显示','1'=>'显示'), array('separator'=>' ')); ?>
+        <?php else: ?>
+        <?php echo CHtml::radioButtonList('isShowGQ', '0', array('0'=>'不显示','1'=>'显示'), array('separator'=>' ')); ?>
+        <?php endif; ?>
+        </span>
 </div>
 <div class="simple">
 <?php echo CHtml::activeLabelEx($model,'about'); ?>
 <?php echo CHtml::activeTextArea($model,'about',array('rows'=>6, 'cols'=>50)); ?>
 </div>
 
-<div class="action">
+<div class="simple">
+<?php echo CHtml::label('&nbsp;', ''); ?>
 <?php echo CHtml::submitButton('保存'); ?>
 </div>
 

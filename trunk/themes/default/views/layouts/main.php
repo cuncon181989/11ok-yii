@@ -28,6 +28,7 @@
                         <li><?php echo CHtml::link('照片管理', array('gallery/admin','username'=>Yii::app()->user->name)); ?></li>
                         <li><?php echo CHtml::link('上传照片', array('gallery/upload','username'=>Yii::app()->user->name)); ?></li>
                         <?php else: ?>
+                        <li>&nbsp;</li>
                         <li><?php echo CHtml::link('会员登录', array('site/login')); ?></li>
                         <?php endif ?>
                 </ul>
