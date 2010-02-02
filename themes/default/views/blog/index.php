@@ -1,17 +1,21 @@
 <div id="webMain">
     	<div id="webLeftmain">
-                <?php if ($this->_user->userType==2): ?>
+                <?php if ($this->_blog->settings['isShowGQ']==1): ?>
                 <div id="webGongqiu">
                 <ul>
                 <li><strong>我的供应</strong><br />
-                        <?php foreach ($gongying as $key=>$g): ?>
-                        <?php echo $key+1 .'、'.$g->title.'<br />'; ?>
-                        <?php endforeach ?>
+                        <?php if(!empty($gongying)): ?>
+                                <?php foreach ($gongying as $key=>$g): ?>
+                                <?php echo $key+1 .'、'.CHtml::link(CHtml::encode($g->title), array('article','aid'=>$g->id,'username'=>$this->_user->username)).'<br />'; ?>
+                                <?php endforeach ?>
+                        <?php endif; ?>
                 </li>
                 <li><strong>我的求购</strong><br />
-                        <?php foreach ($qiqgou as $key=>$q): ?>
-                        <?php echo $key+1 .'、'.$q->title.'<br />'; ?>
-                        <?php endforeach ?>
+                        <?php if(!empty($qiugou)): ?>
+                                <?php foreach ($qiqgou as $key=>$q): ?>
+                                <?php echo $key+1 .'、'.$q->title.'<br />'; ?>
+                                <?php endforeach ?>
+                        <?php endif; ?>
                 </li>
                 </ul>
                 <div class="clr"></div>

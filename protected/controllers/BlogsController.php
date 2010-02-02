@@ -89,8 +89,11 @@ class BlogsController extends DController
 		if(isset($_POST['Blogs']))
 		{
 			$model->attributes=$_POST['Blogs'];
+                        $tempSet= $model->attributes['settings'];
+                        $tempSet['isShowGQ']= $_POST['isShowGQ'];
+                        $model->settings= $tempSet;
 			if($model->save())
-			$this->redirect(array('show','id'=>$model->id,'username'=>Yii::app()->user->name));
+                                $this->redirect(array('show','id'=>$model->id,'username'=>Yii::app()->user->name));
 		}
 		$this->render('update',array('model'=>$model));
 	}
@@ -103,10 +106,10 @@ class BlogsController extends DController
 			$settings= $blogs->settings;
 			$name= $_POST['themeSelected'];
 			$settings['theme']= array(
-									'name'=>$name,
-									'aliasName'=>$_POST[$name]['aliasName'],
-									'style'=>$_POST[$name]['style'],
-								);
+                                                'name'=>$name,
+                                                'aliasName'=>$_POST[$name]['aliasName'],
+                                                'style'=>$_POST[$name]['style'],
+                                                );
 			$blogs->settings=$settings;
 			if ($blogs->save())
 				$this->refresh();
