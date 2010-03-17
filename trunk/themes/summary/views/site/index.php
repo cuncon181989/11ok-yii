@@ -27,8 +27,8 @@
 			<div id="pic_list" align="center">
 				<ul>
 					<?php foreach ($summary->getTopSite() as $key=>$user): ?>
-					<li title="<?php echo $user->realname; ?>"><?php echo CHtml::link(CHtml::image($user->getAvatarUrl(), $user->realname), array('blog/index','uid'=>$user->id,'username'=>$user->username)); ?><br />
-						<?php echo CHtml::link($user->realname.'<br />'.$user->compnay, array('blog/index','uid'=>$user->id,'username'=>$user->username)); ?></li>
+					<li title="<?php echo $user->realname; ?>"><?php echo CHtml::link(CHtml::image($user->getAvatarUrl(), $user->realname), array('blog/index','username'=>$user->username)); ?><br />
+						<?php echo CHtml::link($user->realname.'<br />'.$user->compnay, array('blog/index','username'=>$user->username)); ?></li>
 					<?php endforeach ?>
 				</ul>
 			</div>
@@ -40,8 +40,8 @@
 			<div id="pic_list" align="center">
 				<ul>
 					<?php foreach ($summary->getTopTrade() as $key=>$user): ?>
-					<li title="<?php echo $user->realname; ?>"><?php echo CHtml::link(CHtml::image($user->getAvatarUrl(), $user->realname), array('blog/index','uid'=>$user->id,'username'=>$user->username)); ?><br />
-						<?php echo CHtml::link($user->realname.'<br />'.$user->compnay, array('blog/index','uid'=>$user->id,'username'=>$user->username)); ?></li>
+					<li title="<?php echo $user->realname; ?>"><?php echo CHtml::link(CHtml::image($user->getAvatarUrl(), $user->realname), array('blog/index','username'=>$user->username)); ?><br />
+						<?php echo CHtml::link($user->realname.'<br />'.$user->compnay, array('blog/index','username'=>$user->username)); ?></li>
 					<?php endforeach ?>
 				</ul>
 			</div>
