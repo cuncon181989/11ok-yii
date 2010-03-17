@@ -3,6 +3,7 @@
 <div class="actionBar">
 [<?php echo CHtml::link('查看列表',array('show','username'=>Yii::app()->user->name)); ?>]
 [<?php echo CHtml::link('模板设置',array('setTheme','username'=>Yii::app()->user->name)); ?>]
+[<?php echo CHtml::link('用户设置',array('users/update','username'=>Yii::app()->user->name)); ?>]
 </div>
 
 <div class="okform">

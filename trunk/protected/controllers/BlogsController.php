@@ -32,21 +32,17 @@ class BlogsController extends DController
 	public function accessRules()
 	{
 		return array(
-		array('allow',  // allow all users to perform 'list' and 'show' actions
-				'actions'=>array(),
-				'users'=>array('*'),
-		),
-		array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('show','update','setTheme'),
-				'users'=>array('@'),
-		),
-		array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('list','admin'),
-				'users'=>array('admin'),
-		),
-		array('deny',  // deny all users
-				'users'=>array('*'),
-		),
+                        array('allow', // allow authenticated user to perform 'create' and 'update' actions
+                                'actions'=>array('list','show','update','setTheme'),
+                                'users'=>array('@'),
+                        ),
+                        array('allow', // allow admin user to perform 'admin' and 'delete' actions
+                                'actions'=>array('admin'),
+                                'users'=>array('admin'),
+                        ),
+                        array('deny',  // deny all users
+                                'users'=>array('*'),
+                        ),
 		);
 	}
 

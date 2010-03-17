@@ -11,14 +11,14 @@ class Summary extends CFormModel
          * @return <objects> 返回limit指定数量的站点推荐的会员
          */
         public function getTopSite($limit=6){
-                return Users::model()->findAll('top_site=1 AND realname IS NOT NULL ORDER BY id DESC LIMIT '.$limit);
+                return Users::model()->findAll('top_site=1 AND realname IS NOT NULL ORDER BY lastLoginDate DESC LIMIT '.$limit);
         }
         /**
          * @param <int> $limit 设置返回多少条行业推荐会员
          * @return <objects> 返回limit指定数量的行业推荐的会员
          */
         public function getTopTrade($limit=6){
-                return Users::model()->findAll('top_trade=1 AND realname IS NOT NULL ORDER BY id DESC LIMIT '.$limit);
+                return Users::model()->findAll('top_trade=1 AND realname IS NOT NULL ORDER BY lastLoginDate DESC LIMIT '.$limit);
         }
         /**
          * @param <int> $id 全局分类代码
