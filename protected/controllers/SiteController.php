@@ -80,8 +80,11 @@ class SiteController extends CController
                 }
 		if (!empty($_GET['bcid']))
 			$criteria->addSearchCondition('t.blogCategoryId', intval($_GET['bcid']));
+		if (in_array($_GET['type'], array('top_site','top_trade')))
+			$criteria->addSearchCondition("t.{$_GET['type']}", '1');
 
 		$criteria->addCondition('userStatus=1 AND realname IS NOT NULL','AND');
+                $criteria->order= 'lastLoginDate desc';
 
 		$pages= new CPagination(Users::model()->count($criteria));
 		$pages->pageSize= self::PAGE_SIZE;

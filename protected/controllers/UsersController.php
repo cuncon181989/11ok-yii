@@ -52,7 +52,7 @@ class UsersController extends DController
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete', 'register'),
+				'actions'=>array('admin','updateUser','delete', 'register'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // authenticated user can't register
@@ -176,6 +176,26 @@ class UsersController extends DController
                                              'blogCate'=>$blogCate,
                                              'userAttr'=>$model->getAttributes(),
                 ));
+	}
+
+	public function actionUpdateUser()
+	{
+		$model=$this->loadUsers(intval($_GET[id]));
+                $blogCate= BlogCategories::model()->findAll();
+		if(isset($_POST['Users']))
+		{
+                        $model->setScenario('admin');
+			$model->attributes=$_POST['Users'];
+                        if (!empty($_POST['Users']['password'])){
+                            $model->password= md5($model->password);
+                            if ($model->save(true,array('password','top_site','top_trade')))
+                                $this->redirect(array('admin','id'=>$model->id,'username'=>Yii::app()->user->name));
+                        }else{
+                            if ($model->save(true,array('top_site','top_trade')))
+                                $this->redirect(array('admin','id'=>$model->id,'username'=>Yii::app()->user->name));
+                        }
+		}
+		$this->render('updateuser',array('model'=>$model));
 	}
 
         /*

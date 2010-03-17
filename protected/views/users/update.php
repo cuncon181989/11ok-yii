@@ -5,6 +5,7 @@
 	[<?php echo CHtml::link('查看资料',array('show','username'=>Yii::app()->user->name)); ?>]
 	[<?php echo CHtml::link('编辑扩展资料',array('updateinfo','username'=>Yii::app()->user->name)); ?>]
 	[<?php echo CHtml::link('编辑头像',array('avatar','username'=>Yii::app()->user->name)); ?>]
+	[<?php echo CHtml::link('编辑博客设置',array('blogs/update','username'=>Yii::app()->user->name)); ?>]
 	</div>
 
 	<?php echo $this->renderPartial('_formUpdate', array(

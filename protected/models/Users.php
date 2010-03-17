@@ -49,9 +49,9 @@ class Users extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, password2, realname, compnay, verifyCode, province, city, area, blogCategoryId, oldBlogCate, userType, avatar, sex, birthday','safe'),
-			array('email, province, blogCategoryId', 'required'),
-			array('top_trade, top_site','safe', 'on'=>'admin'),
+			array('realname, compnay, province, city, area, blogCategoryId, oldBlogCate, userType, avatar, sex, birthday','safe'),
+			array('email, province, blogCategoryId', 'required', 'on'=>'register'),
+			array('top_trade, top_site','numerical', 'on'=>'admin'),
 			array('birthday','type','type'=>'date','dateFormat'=>'yyyy-mm-dd','message'=>'生日必须为正确的日期格式！'),
 			array('avatar', 'file', 'types'=>'jpg, gif, png','maxSize'=>'128000','tooLarge'=>'文件大小不能超过128K','allowEmpty'=>TRUE),
 			array('avatar', 'length', 'max'=>255),

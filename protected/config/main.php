@@ -72,10 +72,11 @@ return array(
 				//'urlSuffix'=>'.html',
 				'showScriptName'=>false,
 				'rules'=>array(
+                                                //'http://<domain:\w+>/<_c:>/<_a:>' => '<_c>/<_a>',
 						'/<_c:(site)>/<_a:>' => '<_c>/<_a>',
 						'/<username:\w+>/<_c:>/<_a:>' => '<_c>/<_a>',
 						'<_c:>/<_a:>' => '<_c>/<_a>',
-                        //'blog/article-<aid:\d+>-<uid:\d+>' => 'blog/article',
+                        			//'blog/article-<aid:\d+>-<uid:\d+>' => 'blog/article',
 						//'/<username:\w+>/<_c:(blogs|articles)>/<id:\d+>/<_a:(create|update|delete)>' => '<_c>/<_a>',
 				),
 		),

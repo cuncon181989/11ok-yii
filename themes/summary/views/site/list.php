@@ -2,8 +2,8 @@
         <div id="webLeftmain">
                 <div id="businessTitle"><span class="FloatLeft"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/title01.gif" alt="商人库" /></span>
                         <span class="businessfont02">
-                        <?php echo CHtml::link('按时间排序', array('site/list','order'=>'time')); ?>|
-                        <?php echo CHtml::link('按人气排序', array('site/list','order'=>'hot')); ?>
+                        <?php //echo CHtml::link('按时间排序', array('site/list','order'=>'time')); ?>|
+                        <?php //echo CHtml::link('按人气排序', array('site/list','order'=>'hot')); ?>
                         </span></div>
                 <div class="clr"></div>
                 <div id="businessNeirong">

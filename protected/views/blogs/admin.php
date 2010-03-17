@@ -1,5 +1,5 @@
 <h2>管理</h2>
-[<?php echo CHtml::link('New Blogs',array('create')); ?>]</div>
+
 
 <table class="dataGrid">
 	<thead>
@@ -12,7 +12,6 @@
 			<th><?php echo $sort->link('status'); ?></th>
 			<th><?php echo $sort->link('name'); ?></th>
 			<th><?php echo $sort->link('about'); ?></th>
-			<th><?php echo $sort->link('settings'); ?></th>
 			<th><?php echo $sort->link('createDate'); ?></th>
 			<th><?php echo $sort->link('updateDate'); ?></th>
 			<th>Actions</th>
@@ -29,14 +28,13 @@
 			<td><?php echo CHtml::encode($model->status); ?></td>
 			<td><?php echo CHtml::encode($model->name); ?></td>
 			<td><?php echo CHtml::encode($model->about); ?></td>
-			<td><?php echo CHtml::encode($model->settings); ?></td>
-			<td><?php echo CHtml::encode($model->createDate); ?></td>
-			<td><?php echo CHtml::encode($model->updateDate); ?></td>
-			<td><?php echo CHtml::link('Update',array('update','id'=>$model->id)); ?>
-			<?php echo CHtml::linkButton('Delete',array(
-      	  'submit'=>'',
-      	  'params'=>array('command'=>'delete','id'=>$model->id),
-      	  'confirm'=>"Are you sure to delete #{$model->id}?")); ?></td>
+			<td><?php echo date('Y-m-d',$model->createDate); ?></td>
+			<td><?php echo date('Y-m-d',$model->updateDate); ?></td>
+			<td><?php echo CHtml::link('更新',array('adminblog','id'=>$model->id)); ?>
+			<?php echo CHtml::linkButton('禁用',array(
+                          'submit'=>'',
+                          'params'=>array('command'=>'disable','id'=>$model->id),
+                          'confirm'=>"确定禁用此博客 #{$model->name}?")); ?></td>
 		</tr>
 		<?php endforeach; ?>
 	</tbody>
