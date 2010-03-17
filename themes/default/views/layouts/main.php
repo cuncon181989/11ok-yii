@@ -47,7 +47,7 @@
                         <?php echo CHtml::link('我的留言', array('blog/guestbook','username'=>$this->_user['username'])); ?></div>
         </div>
         <?php echo $content; ?>
-        <div id="webUnder">CopyRight © 11ok.net 2010-2019</div>
+        <div id="webUnder">CopyRight © <a href="http://www.11ok.net">11ok.net</a> 2010-<?php echo date('Y',time())+10?></div>
 </div>
 </div>
 </body>

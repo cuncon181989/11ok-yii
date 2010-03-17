@@ -188,10 +188,10 @@ class UsersController extends DController
 			$model->attributes=$_POST['Users'];
                         if (!empty($_POST['Users']['password'])){
                             $model->password= md5($model->password);
-                            if ($model->save(true,array('password','top_site','top_trade')))
+                            if ($model->save(true,array('password','userStatus','top_site','top_trade')))
                                 $this->redirect(array('admin','id'=>$model->id,'username'=>Yii::app()->user->name));
                         }else{
-                            if ($model->save(true,array('top_site','top_trade')))
+                            if ($model->save(true,array('userStatus','top_site','top_trade')))
                                 $this->redirect(array('admin','id'=>$model->id,'username'=>Yii::app()->user->name));
                         }
 		}

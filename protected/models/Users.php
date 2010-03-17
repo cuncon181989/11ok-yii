@@ -51,7 +51,7 @@ class Users extends CActiveRecord
 		return array(
 			array('realname, compnay, province, city, area, blogCategoryId, oldBlogCate, userType, avatar, sex, birthday','safe'),
 			array('email, province, blogCategoryId', 'required', 'on'=>'register'),
-			array('top_trade, top_site','numerical', 'on'=>'admin'),
+			array('userStatus, top_trade, top_site','numerical', 'on'=>'admin'),
 			array('birthday','type','type'=>'date','dateFormat'=>'yyyy-mm-dd','message'=>'生日必须为正确的日期格式！'),
 			array('avatar', 'file', 'types'=>'jpg, gif, png','maxSize'=>'128000','tooLarge'=>'文件大小不能超过128K','allowEmpty'=>TRUE),
 			array('avatar', 'length', 'max'=>255),
