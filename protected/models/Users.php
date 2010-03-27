@@ -49,7 +49,7 @@ class Users extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('realname, compnay, province, city, area, blogCategoryId, oldBlogCate, userType, avatar, sex, birthday','safe'),
+			array('verifyCode,password2,realname, compnay, province, city, area, blogCategoryId, oldBlogCate, userType, avatar, sex, birthday','safe'),
 			array('email, province, blogCategoryId', 'required', 'on'=>'register'),
 			array('userStatus, top_trade, top_site','numerical', 'on'=>'admin'),
 			array('birthday','type','type'=>'date','dateFormat'=>'yyyy-mm-dd','message'=>'生日必须为正确的日期格式！'),
@@ -63,7 +63,7 @@ class Users extends CActiveRecord
 			array('password2', 'compare', 'compareAttribute'=>'password', 'on'=>'register'),
 			array('email', 'email'),
 			array('sex', 'in', 'range'=>array(0,1,2)),
-                        array('verifyCode', 'captcha', 'allowEmpty'=>!extension_loaded('gd'), 'on'=>'register'),
+            array('verifyCode', 'captcha', 'allowEmpty'=>!extension_loaded('gd'), 'on'=>'register'),
 		);
 	}
 

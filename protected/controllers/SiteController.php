@@ -163,6 +163,7 @@ class SiteController extends CController
                                                     'blogs'=>$blogs,
                     ));
                 }else
+				mydebug($model->getErrors());
                     $this->render('register',array('model'=>$model,
                                                'blogCate'=>$blogCate,
                 ));

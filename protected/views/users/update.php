@@ -1,4 +1,4 @@
-<h2>更新资料<?php echo $model->id; ?></h2>
+<h2>更新资料</h2>
 
 <div class="createcss">
 	<div class="actionBar">

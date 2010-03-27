@@ -8,7 +8,7 @@
 <body>
 <div id="webmap" align="center">
 <div id="webHeader" align="left">
-        <div id="headerTitle" class="FloatLeft">欢迎来到<?php echo $this->_user['realname']; ?>的<img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/ie.gif" />家</div>
+        <div id="headerTitle" class="FloatLeft"><?php echo CHtml::encode($this->_blog->name); ?></div>
         <div id="logo" class="FloatRight">
                 <?php echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl.'/images/logo.gif'), '#', array('id'=>'button')); ?>
         </div>

@@ -60,7 +60,7 @@ class BlogController extends DController
                         $gongying= array();
                         $qiugou  = array();
                 }
-                $this->pageTitle= $this->_user->realname.'的e家';
+                $this->pageTitle= $this->_blog->name;
                 $this->render('index', array(
                                              'articles'=>$articles,
                                              'pages'=>$pages,
