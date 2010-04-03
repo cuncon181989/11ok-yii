@@ -79,14 +79,14 @@ class Articles extends CActiveRecord
 			'id' => 'Id',
 			'blogsId' => '博客ID',
 			'usersId' => '用户ID',
-                        'articlesCategoryId'=>'个人分类',
+            'articlesCategoryId'=>'个人分类',
 			'globalArticlesCategoriesId' => '全局分类',
 			'countReads' => '查看数',
 			'countComments' => '评论数',
 			'top' => '置顶',
 			'status' => '状态',
 			'title' => '标题',
-                        'content'=>'内容',
+            'content'=>'内容',
 			'summary' => '摘要',
 			'settings' => '设置',
 			'createDate' => '创建时间',
@@ -95,7 +95,7 @@ class Articles extends CActiveRecord
 	}
 
         public function getArticlesStatus($list=null){
-            $tmpArr= array('1'=>'发布','2'=>'草稿');
+            $tmpArr= array('0'=>'草稿','1'=>'发布');
             if (!is_null($list))
                 return $tmpArr;
             else

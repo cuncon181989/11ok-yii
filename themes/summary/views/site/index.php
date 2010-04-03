@@ -28,7 +28,7 @@
 				<ul>
 					<?php foreach ($summary->getTopSite() as $key=>$user): ?>
 					<li title="<?php echo $user->realname; ?>"><?php echo CHtml::link(CHtml::image($user->getAvatarUrl(), $user->realname), array('blog/index','username'=>$user->username)); ?><br />
-						<?php echo CHtml::link($user->realname.'<br />'.$user->compnay, array('blog/index','username'=>$user->username)); ?></li>
+						<?php echo CHtml::link($user->realname.'<br />'.mb_substr($user->compnay,0,8,'UTF-8'), array('blog/index','username'=>$user->username)); ?></li>
 					<?php endforeach ?>
 				</ul>
 			</div>
@@ -41,7 +41,7 @@
 				<ul>
 					<?php foreach ($summary->getTopTrade() as $key=>$user): ?>
 					<li title="<?php echo $user->realname; ?>"><?php echo CHtml::link(CHtml::image($user->getAvatarUrl(), $user->realname), array('blog/index','username'=>$user->username)); ?><br />
-						<?php echo CHtml::link($user->realname.'<br />'.$user->compnay, array('blog/index','username'=>$user->username)); ?></li>
+						<?php echo CHtml::link($user->realname.'<br />'.mb_substr($user->compnay,0,8,'UTF-8'), array('blog/index','username'=>$user->username)); ?></li>
 					<?php endforeach ?>
 				</ul>
 			</div>
