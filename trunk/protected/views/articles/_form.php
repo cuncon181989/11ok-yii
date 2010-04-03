@@ -51,4 +51,4 @@
 
 <?php echo CHtml::endForm(); ?>
 
-</div><!-- yiiForm -->
+</div>

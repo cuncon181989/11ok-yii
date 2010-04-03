@@ -41,7 +41,7 @@ class ArticlesController extends DController
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin'),
+				'actions'=>array('admin','ToIndex'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -106,6 +106,7 @@ class ArticlesController extends DController
 		if (isset($_POST['Articles']))
 		{
                     $model->attributes=$_POST['Articles'];
+					$model->gacStatus=0;//防止用户通过之后修改内容为不允许推荐到首页去的
                     if($model->validate()){
                        $transaction=Yii::app()->getDB()->beginTransaction();
                         try{
@@ -195,6 +196,31 @@ class ArticlesController extends DController
 		));
 	}
 
+/**
+ *首页打分类文章的管理
+ */
+	public function actionToIndex()
+	{
+		if(Yii::app()->getRequest()->isPostRequest)
+		{
+			//mydebug($_POST);
+			$criteria= new CDBcriteria;
+			$criteria->addInCondition('id', $_POST['checked']);
+			articles::model()->updateAll(array('gacStatus'=>'1'), $criteria);
+			$this->refresh();
+		}else{
+			$dataProvider=new CActiveDataProvider('articles', array(
+				'criteria'=>array(
+					'condition'=>'status=1 AND globalArticlesCategoriesId>1 AND gacStatus=0',
+					'with'=>array('gArtCate'),
+				),
+			));
+
+			$this->render('toindex',array(
+				'dataProvider'=>$dataProvider,
+			));
+		}
+	}
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

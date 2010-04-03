@@ -11,14 +11,14 @@ class Summary extends CFormModel
          * @return <objects> 返回limit指定数量的站点推荐的会员
          */
         public function getTopSite($limit=6){
-                return Users::model()->findAll('top_site=1 AND realname IS NOT NULL ORDER BY lastLoginDate DESC LIMIT '.$limit);
+                return Users::model()->findAll('top_site=1 AND userStatus=1 AND realname IS NOT NULL ORDER BY lastLoginDate DESC LIMIT '.$limit);
         }
         /**
          * @param <int> $limit 设置返回多少条行业推荐会员
          * @return <objects> 返回limit指定数量的行业推荐的会员
          */
         public function getTopTrade($limit=6){
-                return Users::model()->findAll('top_trade=1 AND realname IS NOT NULL ORDER BY lastLoginDate DESC LIMIT '.$limit);
+                return Users::model()->findAll('top_trade=1 AND userStatus=1 AND realname IS NOT NULL ORDER BY lastLoginDate DESC LIMIT '.$limit);
         }
         /**
          * @param <int> $id 全局分类代码
@@ -27,7 +27,7 @@ class Summary extends CFormModel
          */
         public function getByGCate ($id, $limit=6){
                 if(intval($id))
-                        return Articles::model()->findAll('globalArticlesCategoriesId=:id ORDER BY id DESC LIMIT :limit', array(':id'=>$id,':limit'=>$limit));
+                        return Articles::model()->findAll('gacStatus=1 AND status=1 AND globalArticlesCategoriesId=:id ORDER BY updateDate DESC LIMIT :limit', array(':id'=>$id,':limit'=>$limit));
                 return NULL;
         }
 }
