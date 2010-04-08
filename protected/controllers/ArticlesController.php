@@ -99,7 +99,7 @@ class ArticlesController extends DController
 	public function actionUpdate()
 	{
 		$model=$this->loadArticles($_GET['id']);
-                $artText= ArticlesText::model()->findByPk($_GET['id']);
+                $artText= ArticlesText::model()->findByPk(intval($_GET['id']));
                 $model->content= $artText->content;
                 if ($model->usersId != Yii::app()->user->id)
                     throw NEW CHttpException(404,'没有权限！');
@@ -203,19 +203,24 @@ class ArticlesController extends DController
 	{
 		if(Yii::app()->getRequest()->isPostRequest)
 		{
-			//mydebug($_POST);
+			//更新审核状态
 			$criteria= new CDBcriteria;
 			$criteria->addInCondition('id', $_POST['checked']);
-			articles::model()->updateAll(array('gacStatus'=>'1'), $criteria);
+			Articles::model()->updateAll(array('gacStatus'=>intval($_POST['gacStatus'])), $criteria);
 			$this->refresh();
 		}else{
-			$dataProvider=new CActiveDataProvider('articles', array(
-				'criteria'=>array(
-					'condition'=>'status=1 AND globalArticlesCategoriesId>1 AND gacStatus=0',
-					'with'=>array('gArtCate'),
-				),
+			$criteria= new CDBcriteria;
+			$criteria->condition='status=1 AND globalArticlesCategoriesId>1 AND gacStatus=:gs';
+			$criteria->with=array('gArtCate');
+			if (isset($_GET['gacStatus']))
+				$criteria->params=array(':gs'=>$_GET['gacStatus']);
+			else
+				$criteria->params=array(':gs'=>0);
+				
+			$dataProvider=new CActiveDataProvider('Articles', array(
+				'criteria'=>$criteria,
 			));
-
+		
 			$this->render('toindex',array(
 				'dataProvider'=>$dataProvider,
 			));

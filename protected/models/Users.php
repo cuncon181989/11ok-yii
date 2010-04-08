@@ -75,13 +75,13 @@ class Users extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'blogCategory'=>array(self::BELONGS_TO,'BlogCategories','blogCategoryId'),
-                    'blogs'=>array(self::HAS_ONE,'Blogs','usersId'),
-                    'userinfo'=>array(self::HAS_ONE,'UserInfo','usersId'),
-                    'friends'=>array(self::MANY_MANY,'Users','{{friends}}(userId,friendId)', 'limit'=>5),
-                    'visits'=>array(self::MANY_MANY,'Users','{{visits}}(visitId,userId)', 'limit'=>16),
-		    'articlesCategory'=>array(self::HAS_MANY,'ArticlesCategories','usersId'),
-		    'galleryAlbums'=>array(self::HAS_MANY,'GalleryAlbums','usersId'),
+			'blogCategory'=>array(self::BELONGS_TO,'BlogCategories','blogCategoryId'),
+			'blogs'=>array(self::HAS_ONE,'Blogs','usersId'),
+			'userinfo'=>array(self::HAS_ONE,'UserInfo','usersId'),
+			'friends'=>array(self::MANY_MANY,'Users','{{friends}}(userId,friendId)', 'limit'=>5),
+			'visits'=>array(self::MANY_MANY,'Users','{{visits}}(visitId,userId)', 'limit'=>16),
+			'articlesCategory'=>array(self::HAS_MANY,'ArticlesCategories','usersId'),
+			'galleryAlbums'=>array(self::HAS_MANY,'GalleryAlbums','usersId'),
 		);
 	}
 

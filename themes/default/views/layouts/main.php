@@ -41,13 +41,13 @@
 </div>
 <div id="weball" align="left">
 	<div id="webMenu">
-                <div id="menu"><?php echo CHtml::link('我的主页', array('blog/index','username'=>$this->_user['username'])); ?>|
-                        <?php echo CHtml::link('我的文章', array('blog/articles','username'=>$this->_user['username'])); ?>|
-                        <?php echo CHtml::link('我的相册', array('blog/galleryAlbums','username'=>$this->_user['username'])); ?>|
-                        <?php echo CHtml::link('我的留言', array('blog/guestbook','username'=>$this->_user['username'])); ?></div>
+		<div id="menu"><?php echo CHtml::link('我的主页', array('blog/index','username'=>$this->_user['username'])); ?>|
+				<?php echo CHtml::link('我的文章', array('blog/articles','username'=>$this->_user['username'])); ?>|
+				<?php echo CHtml::link('我的相册', array('blog/galleryAlbums','username'=>$this->_user['username'])); ?>|
+				<?php echo CHtml::link('我的留言', array('blog/guestbook','username'=>$this->_user['username'])); ?></div>
         </div>
         <?php echo $content; ?>
-        <div id="webUnder">CopyRight © <a href="http://www.11ok.net">11ok.net</a> 2010-<?php echo date('Y',time())+10?></div>
+        <div id="webUnder">CopyRight © <a href="http://www.11ok.net">11ok.net</a> 2010-<?php echo date('Y',time())+1?></div>
 </div>
 </div>
 </body>

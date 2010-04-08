@@ -85,6 +85,7 @@ class Articles extends CActiveRecord
 			'countComments' => '评论数',
 			'top' => '置顶',
 			'status' => '状态',
+			'gacStatus'=>'全局分类状态',
 			'title' => '标题',
             'content'=>'内容',
 			'summary' => '摘要',
@@ -100,6 +101,17 @@ class Articles extends CActiveRecord
                 return $tmpArr;
             else
                 return $tmpArr[$this->status];
+        }
+
+		public static function getGacStatusList(){
+			return array('0'=>'待审核','1'=>'通过','2'=>'未通过');
+		}
+        public function getGacStatus($list=null){
+            $tmpArr= self::getGacStatusList();
+            if (!is_null($list))
+                return $tmpArr;
+            else
+                return $tmpArr[$this->gacStatus];
         }
 
         public function getArticlesTop($list=null){
