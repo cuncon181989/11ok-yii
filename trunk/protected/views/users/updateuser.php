@@ -21,6 +21,10 @@
             <?php echo CHtml::activeTextField($model,'password',array('size'=>25,'maxlength'=>32,'value'=>'')); ?>
             </div>
             <div class="simple">
+            <?php echo CHtml::activeLabelEx($model,'realname'); ?>
+            <?php echo CHtml::activeTextField($model,'realname',array('size'=>25,'maxlength'=>32)); ?>
+            </div>
+            <div class="simple">
             <?php echo CHtml::activeLabelEx($model,'userStatus'); ?>
                 <span class="normallist">
                 <?php echo CHtml::activeRadioButtonList($model, 'userStatus', array('0'=>'否','1'=>'是'), array('separator'=>' ')); ?>

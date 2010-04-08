@@ -23,8 +23,8 @@ class UsersController extends DController
 			'captcha'=>array(
 				'class'=>'CCaptchaAction',
 				'backColor'=>0xEBF4FB,
-                                'minLength'=>4,
-                                'maxLength'=>5,
+				'minLength'=>4,
+				'maxLength'=>5,
 			),
 		);
 	}
@@ -56,7 +56,7 @@ class UsersController extends DController
 				'users'=>array('admin'),
 			),
 			array('deny',  // authenticated user can't register
-                                'actions'=>array('register'),
+				'actions'=>array('register'),
 				'users'=>array('@'),
 			),
 			array('allow',  // allow all users to perform 'list' and 'show' actions
@@ -178,25 +178,6 @@ class UsersController extends DController
                 ));
 	}
 
-	public function actionUpdateUser()
-	{
-		$model=$this->loadUsers(intval($_GET[id]));
-                $blogCate= BlogCategories::model()->findAll();
-		if(isset($_POST['Users']))
-		{
-                        $model->setScenario('admin');
-			$model->attributes=$_POST['Users'];
-                        if (!empty($_POST['Users']['password'])){
-                            $model->password= md5($model->password);
-                            if ($model->save(true,array('password','userStatus','top_site','top_trade')))
-                                $this->redirect(array('admin','id'=>$model->id,'username'=>Yii::app()->user->name));
-                        }else{
-                            if ($model->save(true,array('userStatus','top_site','top_trade')))
-                                $this->redirect(array('admin','id'=>$model->id,'username'=>Yii::app()->user->name));
-                        }
-		}
-		$this->render('updateuser',array('model'=>$model));
-	}
 
         /*
          * 更新用户扩展信息
@@ -310,6 +291,10 @@ class UsersController extends DController
 		$this->processAdminCommand();
 
 		$criteria=new CDbCriteria;
+		if ($_GET['q']){
+			$criteria->addSearchCondition('username', $_GET['q']);
+			$criteria->addSearchCondition('realname', $_GET['q'], true, 'OR');
+		}
 
 		$pages=new CPagination(Users::model()->count($criteria));
 		$pages->pageSize=self::PAGE_SIZE;
@@ -327,6 +312,26 @@ class UsersController extends DController
 		));
 	}
 
+
+	public function actionUpdateUser()
+	{
+		$model=$this->loadUsers(intval($_GET[id]));
+                $blogCate= BlogCategories::model()->findAll();
+		if(isset($_POST['Users']))
+		{
+                        $model->setScenario('admin');
+			$model->attributes=$_POST['Users'];
+                        if (!empty($_POST['Users']['password'])){
+                            $model->password= md5($model->password);
+                            if ($model->save(true,array('realname','password','userStatus','top_site','top_trade')))
+                                $this->redirect(array('admin','id'=>$model->id,'username'=>Yii::app()->user->name));
+                        }else{
+                            if ($model->save(true,array('realname','userStatus','top_site','top_trade')))
+                                $this->redirect(array('admin','id'=>$model->id,'username'=>Yii::app()->user->name));
+                        }
+		}
+		$this->render('updateuser',array('model'=>$model));
+	}
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

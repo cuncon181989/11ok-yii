@@ -56,10 +56,12 @@ class BlogController extends DController
                 if ($this->_blog->settings['isShowGQ']==1){
                         $gongying= Articles::model()->findAll('blogsId=:bid AND globalArticlesCategoriesId=2 AND status=1 ORDER BY id DESC LIMIT 5', array(':bid'=>$this->_blog->id));
                         $qiugou  = Articles::model()->findAll('blogsId=:bid AND globalArticlesCategoriesId=3 AND status=1 ORDER BY id DESC LIMIT 5', array(':bid'=>$this->_blog->id));
-                }else{
-                        $gongying= array();
-                        $qiugou  = array();
                 }
+				if ($gongying===null)
+                        $gongying= array();
+				if ($qiqgou===null)
+                        $qiugou  = array();
+                
                 $this->pageTitle= $this->_blog->name;
                 $this->render('index', array(
                                              'articles'=>$articles,

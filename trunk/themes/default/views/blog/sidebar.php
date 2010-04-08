@@ -1,4 +1,5 @@
 <div id="webRightmain">
+	<?php $this->renderPartial('sidebar_menu') ; ?>
         <div id="webKuang">
         <div id="kTitle"><a href="#">个人资料</a></div>
         <div id="aNeirong">
