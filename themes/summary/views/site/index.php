@@ -49,7 +49,7 @@
 		<div class="clr" style="height:10px"></div>
 		<div id="information">
 			<div id="gongying" class="FloatLeft">
-				<div id="gongyingTitle"><span>供应信息</span><a href="#">更多>></a></div>
+				<div id="gongyingTitle"><span>供应信息</span><?php echo CHtml::link('更多>>',array('site/artlist', 'gid'=>'2')); ?></div>
 				<div class="clr"></div>
 				<div id="gongqiuNeirong">
 					<ul>
@@ -60,7 +60,7 @@
 				</div>
 			</div>
 			<div id="qiugou" class="FloatRight">
-				<div id="qiugouTitle"><span>求购信息</span><a href="#">更多>></a></div>
+				<div id="qiugouTitle"><span>求购信息</span><?php echo CHtml::link('更多>>',array('site/artlist', 'gid'=>'3')); ?></div>
 				<div class="clr"></div>
 				<div id="gongqiuNeirong">
 					<ul>

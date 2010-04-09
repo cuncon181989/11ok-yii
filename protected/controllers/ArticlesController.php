@@ -219,6 +219,7 @@ class ArticlesController extends DController
 				
 			$dataProvider=new CActiveDataProvider('Articles', array(
 				'criteria'=>$criteria,
+				'sort'=>array('defaultOrder'=>'t.id DESC'),
 			));
 		
 			$this->render('toindex',array(

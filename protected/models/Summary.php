@@ -1,11 +1,11 @@
 <?php
 
+/**
+ * 这个类为整站提供一个数据摘要服务，主要供站点汇总页使用
+ */
+
 class Summary extends CFormModel
 {
-        /**
-         * 这个类为整站提供一个数据摘要服务，主要供站点汇总页使用
-         */
-
         /**
          * @param <int> $limit 设置返回多少条站点推荐会员
          * @return <objects> 返回limit指定数量的站点推荐的会员

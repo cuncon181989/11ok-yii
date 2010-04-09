@@ -58,6 +58,23 @@ class SiteController extends CController
                                             'pages'=>$pages,
                                         ));
         }
+		/**
+		 * 文章列表
+		 */
+		public function actionArtList(){
+			$criteria= new CDbCriteria;
+			$criteria->order= 'id DESC';
+			if (isset($_GET['gid']))
+				$criteria->addCondition('globalArticlesCategoriesId='.intval($_GET['gid']));
+
+			$pages= new CPagination(Articles::model()->count($criteria));
+			$pages->pageSize= self::PAGE_SIZE*2;
+			$pages->applyLimit($criteria);
+
+			$aritcles= Articles::model()->findAll($criteria);
+
+			$this->render('artlist',array('articles'=>$aritcles,));
+		}
         /**
          * 搜索
          */
@@ -218,7 +235,6 @@ class SiteController extends CController
                         $mailer->CharSet = 'UTF-8';
                         $mailer->Subject = '测试邮件3';
                         $mailer->Body = $message;
-                        $mailer->Helo = 'Hello';
                         $mailer->IsSMTP();
                         $mailer->Host = 'smtp.gmail.com';
                         $mailer->Port = 465;
