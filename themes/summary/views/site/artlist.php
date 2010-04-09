@@ -6,5 +6,5 @@
 		<?php endforeach; ?>
 		</ul>
 	</div>
-	<?php $this->renderPartial('_sidebar_r'); ?>
+	<?php echo $this->renderPartial('_sidebar_r',array('form'=>$form,)); ?>
 </div>

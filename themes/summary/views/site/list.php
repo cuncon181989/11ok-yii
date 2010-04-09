@@ -23,5 +23,5 @@
                         <div class="clr"></div>
                 </div>
         </div>
-	<?php $this->renderPartial('_sidebar_r'); ?>
+	<?php echo $this->renderPartial('_sidebar_r',array('form'=>$form,)); ?>
 </div>
