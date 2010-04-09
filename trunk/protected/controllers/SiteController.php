@@ -52,9 +52,8 @@ class SiteController extends CController
                 $pages->applyLimit($criteria);
                 
                 $users= Users::model()->with('blogs','blogCategory')->findAll($criteria);
-                $form=new LoginForm;
                 $this->render('list', array('users'=>$users,
-                                            'form'=>$form,
+                                            'form'=>new LoginForm,
                                             'pages'=>$pages,
                                         ));
         }
@@ -73,7 +72,7 @@ class SiteController extends CController
 
 			$aritcles= Articles::model()->findAll($criteria);
 
-			$this->render('artlist',array('articles'=>$aritcles,));
+			$this->render('artlist',array('articles'=>$aritcles,'form'=>new LoginForm(),));
 		}
         /**
          * 搜索
