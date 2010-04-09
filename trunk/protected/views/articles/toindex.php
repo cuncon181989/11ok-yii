@@ -19,7 +19,7 @@
 		),
 		'id',
 		array(
-			'name'=>'分类',
+			'name'=>'globalArticlesCategoriesId',
 			'value'=>'$data->gArtCate->name',
 		),
 		array(

@@ -16,3 +16,13 @@ div.item {
 	border: 1px solid silver;
 	padding: 5px;
 }
+
+.artlist li {
+	list-style-type:none;
+	width:50%;
+	float:left;
+	height:25px;
+	overflow:hidden;
+	line-height:25px;
+	font-size:14px;
+}
