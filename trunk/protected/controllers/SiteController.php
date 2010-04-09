@@ -72,7 +72,7 @@ class SiteController extends CController
 
 			$aritcles= Articles::model()->findAll($criteria);
 
-			$this->render('artlist',array('articles'=>$aritcles,'form'=>new LoginForm(),));
+			$this->render('artlist',array('articles'=>$aritcles,'form'=>new LoginForm(),'pages'=>$pages,));
 		}
         /**
          * 搜索
