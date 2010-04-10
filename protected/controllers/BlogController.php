@@ -116,6 +116,12 @@ class BlogController extends DController
                                 $this->redirect(array('article','aid'=>$comment->articlesId,'username'=>$this->_user->username,'#'=>$comment->id));
                         }
                 }
+				//删除评论
+				if(isset($_POST['command'], $_POST['id']) && $_POST['command']==='delete'){
+					//mydebug($this->_blog->id,1);
+					ArticlesComments::model()->findByPk(intval($_POST['id']), 'blogsId=:bid', array(':bid'=>$this->_blog->id))->delete();
+					$this->refresh();
+				}
                 //显示文章
                 $aid= intval($_GET['aid']);
                 if (!$aid)

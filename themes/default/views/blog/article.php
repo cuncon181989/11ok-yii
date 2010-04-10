@@ -30,7 +30,14 @@
                                                 <span class="FloatRight rightpinglun">
                                                 <?php echo CHtml::link(CHtml::encode($comment->title),'#',array('name'=>$comment->id)); ?><br />
                                                 <?php echo CHtml::encode($comment->content); ?><br />
-                                                <?php echo date('Y-m-d H:i:s',$comment->createDate); ?></span>
+                                                <?php echo date('Y-m-d H:i:s',$comment->createDate); ?>
+												<?php if ($this->_user->username==(Yii::app()->user->name)): ?>
+												<?php echo CHtml::linkButton('删除', array(
+													  'submit'=>'',
+													  'params'=>array('command'=>'delete','id'=>$comment->id),
+													  'confirm'=>"确定删除?\n #{$comment->id} {$comment->title}")); ?>
+												<?php endif; ?>
+												</span>
                                                 <div class="clr"></div>
                                         </li>
                                         <?php endforeach ?>

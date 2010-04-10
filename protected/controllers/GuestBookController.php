@@ -76,8 +76,8 @@ class GuestBookController extends DController
 		if(Yii::app()->request->isPostRequest)
 		{
 			$this->loadGuestBook()->delete();
-                                Yii::app()->DRedirect->redirect(array('blog/guestbook','username'=>$this->_user->username),'删除留言成功!');
-		}
+			Yii::app()->DRedirect->redirect(array('blog/guestbook','username'=>$this->_user->username),'删除留言成功!');
+	}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
