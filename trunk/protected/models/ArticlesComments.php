@@ -45,9 +45,9 @@ class ArticlesComments extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                        array('userName, title, content', 'required'),
-                        array('userEmail', 'email'),
-                        array('userUrl', 'url'),
+			array('userName, title, content', 'required'),
+			array('userEmail', 'email'),
+			array('userUrl', 'url'),
 			array('articlesId, private, status', 'numerical', 'integerOnly'=>true),
 			array('userName, userEmail, userUrl, title', 'length', 'max'=>255),
 			array('content', 'length', 'min'=>6),
@@ -62,7 +62,7 @@ class ArticlesComments extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                        'user'=>array(self::BELONGS_TO,'Users','usersId'),
+			'user'=>array(self::BELONGS_TO,'Users','usersId'),
 		);
 	}
 
@@ -99,4 +99,8 @@ class ArticlesComments extends CActiveRecord
         protected function beforeSave(){
                 return true;
         }
+
+		protected function afterDelete(){
+			Articles::model()->updateCounters(array('countComments'=>-1), 'id=:aid',array(':aid'=>$this->articlesId));
+		}
 }

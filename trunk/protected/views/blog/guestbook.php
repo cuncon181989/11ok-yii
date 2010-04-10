@@ -1,7 +1,7 @@
 <div id="webMain">
         <div id="webLeftmain">
                 <div id="webDiary">
-                        <div id="dBiaoti"><strong class="FloatLeft">　所有留言</strong><span class="FloatRight diarypage"><?php if(Yii::app()->user->getState('isOwner')){echo CHtml::link('留言管理', array('guestbook/admin','username'=>$this->_user->username));} ?></span>
+                        <div id="dBiaoti"><strong class="FloatLeft">　所有留言</strong><span class="FloatRight diarypage"><?php if(Yii::app()->user->getState('isOwner')){echo CHtml::link('留言管理', array('GuestBook/admin','username'=>$this->_user->username));} ?></span>
                                 <div class="clr"></div></div>
                         <div id="diarypinglun">
                                 <ul>
@@ -19,15 +19,15 @@
                                                 </div>
                                                 <div class="FloatRight rightpinglun">
                                                         <div><span class="l">标题：<?php echo CHtml::encode($guestbook->title); ?></span>
-                                                                <span class="r"><?php if(Yii::app()->user->getState('isOwner')){echo CHtml::link('回复留言', array('guestbook/reply','gbid'=>$guestbook->id,'username'=>Yii::app()->user->name));} ?>
-                                                                <?php if(Yii::app()->user->getState('isOwner')){echo CHtml::linkButton('删除留言',array('submit'=>array('guestbook/delete','id'=>$guestbook->id,'username'=>Yii::app()->user->name),'confirm'=>'确定删除留言及回复?'));}; ?></span></div>
+                                                                <span class="r"><?php if(Yii::app()->user->getState('isOwner')){echo CHtml::link('回复留言', array('/GuestBook/reply','gbid'=>$guestbook->id,'username'=>Yii::app()->user->name));} ?>
+                                                                <?php if(Yii::app()->user->getState('isOwner')){echo CHtml::linkButton('删除留言',array('submit'=>array('/GuestBook/delete','id'=>$guestbook->id,'username'=>Yii::app()->user->name),'confirm'=>'确定删除留言及回复?'));}; ?></span></div>
                                                                 <br /><p>内容：<?php echo CHtml::encode($guestbook->content); ?></p>
                                                                 <div class="text_right"><?php echo date('Y-m-d H:i:s',$guestbook->createDate); ?></div>
                                                                 <?php if ($guestbook->reply): ?>
                                                                 <?php foreach ($guestbook->reply as $key=>$g): ?>
                                                                 <div class="reply"><?php $g->userName; ?>回复：<?php echo CHtml::encode($g->title); ?> 
                                                                         <br />回复内容：<?php echo CHtml::encode($g->content); ?>
-                                                                        <div class="text_right"><?php if(Yii::app()->user->getState('isOwner')){echo CHtml::linkButton('删除回复',array('submit'=>array('guestbook/delete','id'=>$g->id,'username'=>Yii::app()->user->name),'confirm'=>'确定删除回复?'));}; ?> [<?php echo date('Y-m-d H:i:s',$g->createDate) ?>]</div>
+                                                                        <div class="text_right"><?php if(Yii::app()->user->getState('isOwner')){echo CHtml::linkButton('删除回复',array('submit'=>array('/GuestBook/delete','id'=>$g->id,'username'=>Yii::app()->user->name),'confirm'=>'确定删除回复?'));}; ?> [<?php echo date('Y-m-d H:i:s',$g->createDate) ?>]</div>
                                                                 </div>
                                                                 <?php endforeach ?>
                                                                 <?php endif ?>

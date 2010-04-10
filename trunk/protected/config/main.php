@@ -33,12 +33,12 @@ return array(
 					'class'=>'CFileLogRoute',
 					'levels'=>'error,info',
 				),
-                                array(
-                                        'class'=>'XWebDebugRouter',
-                                        'config'=>'alignLeft, opaque, runInDebug, fixedPos, collapsed, yamlStyle',
-                                        'levels'=>'error, warning, trace, profile, info',
-                                ),
-                                /**
+				array(
+						'class'=>'XWebDebugRouter',
+						'config'=>'alignLeft, opaque, runInDebug, fixedPos, collapsed, yamlStyle',
+						'levels'=>'error, warning, trace, profile, info',
+				),
+				/**
 				array(
 					'class'=>'CWebLogRoute',
 				),
@@ -71,13 +71,14 @@ return array(
 				//'appendParams'=>false,
 				//'urlSuffix'=>'.html',
 				'showScriptName'=>false,
+				'caseSensitive'=>false,
 				'rules'=>array(
-                                                //'http://<domain:\w+>/<_c:>/<_a:>' => '<_c>/<_a>',
-						'/<_c:(site)>/<_a:>' => '<_c>/<_a>',
-						'/<username:\w+>/<_c:>/<_a:>' => '<_c>/<_a>',
-						'<_c:>/<_a:>' => '<_c>/<_a>',
-                        			//'blog/article-<aid:\d+>-<uid:\d+>' => 'blog/article',
-						//'/<username:\w+>/<_c:(blogs|articles)>/<id:\d+>/<_a:(create|update|delete)>' => '<_c>/<_a>',
+					//'http://<domain:\w+>/<_c:>/<_a:>' => '<_c>/<_a>',
+					'/<_c:(site)>/<_a:>' => '<_c>/<_a>',
+					'/<username:\w+>/<_c:>/<_a:>' => '<_c>/<_a>',
+					'<_c:>/<_a:>' => '<_c>/<_a>',
+					//'blog/article-<aid:\d+>-<uid:\d+>' => 'blog/article',
+					//'/<username:\w+>/<_c:(blogs|articles)>/<id:\d+>/<_a:(create|update|delete)>' => '<_c>/<_a>',
 				),
 		),
 		/**
@@ -86,11 +87,11 @@ return array(
 				'directoryLevel'=>0,
 		),
 		/**/
-                'mailer' => array(
-                        'class' => 'application.extensions.mailer.EMailer',
-                        //'pathViews' => 'application.views.email',
-                        //'pathLayouts' => 'application.views.email.layouts'
-                ),
+		'mailer' => array(
+				'class' => 'application.extensions.mailer.EMailer',
+				//'pathViews' => 'application.views.email',
+				//'pathLayouts' => 'application.views.email.layouts'
+		),
 
 		'thumb'=>array(
                         'class'=>'ext.phpthumb.EasyPhpThumb',
