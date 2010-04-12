@@ -9,8 +9,8 @@
                 <div id="businessNeirong">
                         <ul>
                                 <?php foreach ($users as $key=>$user): ?>
-                                <li><?php echo CHtml::link(CHtml::image($user->getAvatarUrl(), $user->realname), array('blog/index','uid'=>$user->id,'username'=>$user->username)); ?>
-                                        姓名：<?php echo CHtml::link($user->realname, array('blog/index','uid'=>$user->id,'username'=>$user->username)); ?><br />
+                                <li><?php echo CHtml::link(CHtml::image($user->getAvatarUrl(), $user->realname), array('blog/index','username'=>$user->username)); ?>
+                                        姓名：<?php echo CHtml::link($user->realname, array('blog/index','username'=>$user->username)); ?><br />
                                         公司：<?php echo CHtml::encode($user->compnay); ?><br />
                                         行业：<?php echo CHtml::encode($user->blogCategory->name); ?><br />
                                         E 家：<?php echo CHtml::encode($user->blogs->name); ?></li>
