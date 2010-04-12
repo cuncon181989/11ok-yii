@@ -81,12 +81,12 @@
 					<?php echo CHtml::beginForm(array('site/login'),'POST',array('name'=>'loginForm')); ?>
 				<div id="loginform">
 					<span>
-                                                <?php echo CHtml::activeLabel($form,'username'); ?>：
-                                                <?php echo CHtml::activeTextField($form,'username',array('size'=>15,'maxlength'=>15,'class'=>'formcss')); ?>
+						<?php echo CHtml::activeLabel($form,'username'); ?>：
+						<?php echo CHtml::activeTextField($form,'username',array('size'=>15,'maxlength'=>15,'class'=>'formcss')); ?>
 					</span>
 					<span>
-                                                <?php echo CHtml::activeLabel($form,'password'); ?>：
-                                                <?php echo CHtml::activePasswordField($form,'password',array('size'=>15,'maxlength'=>15,'class'=>'formcss')); ?>
+						<?php echo CHtml::activeLabel($form,'password'); ?>：
+						<?php echo CHtml::activePasswordField($form,'password',array('size'=>15,'maxlength'=>15,'class'=>'formcss')); ?>
 					</span>
 					<div id="forma" align="right"><a href="#">忘记密码？</a></div>
 					<div align="center" ><?php echo CHtml::submitButton('点击登陆',array('class'=>'bottoncss','onfocus'=>'javascript:blur();')); ?></div>
