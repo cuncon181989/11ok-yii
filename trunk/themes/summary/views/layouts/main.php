@@ -18,11 +18,11 @@
         <div id="mainNav">
 			<div id="topTextAd" align="right"><a href="#">加入收藏</a>|<a href="#">联系我们</a>|<a href="#">关于我们</a></div>
 			<div class="Search_nav">
-                                <?php echo CHtml::link('<span>首　页</span>',array('site/index'),array('class'=>'index')) ?>
-                                <?php echo CHtml::link('<span>商人库</span>',array('site/list'),array('class'=>'people')) ?>
-                                <a class="happy" href="http://www.11ok.net/read/"><span>充电休闲</span></a>
-                                <a class="bbs" href="http://www.11ok.net/bbs/"><span>论　坛</span></a>
-                        </div>
+				<?php echo CHtml::link('<span>首　页</span>',array('site/index'),array('class'=>'index')) ?>
+				<?php echo CHtml::link('<span>商人库</span>',array('site/list'),array('class'=>'people')) ?>
+				<a class="happy" href="http://www.11ok.net/read/"><span>充电休闲</span></a>
+				<a class="bbs" href="http://www.11ok.net/bbs/"><span>论　坛</span></a>
+			</div>
         </div>
 		<div class="clr"></div>
         <div id="search">
