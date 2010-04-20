@@ -25,7 +25,7 @@
 		array(
 			'name'=>'title',
 			'type'=>'raw',
-			'value'=>'CHtml::link(CHtml::encode("$data->title"),array("blog/article","uid"=>"$data->usersId","aid"=>"$data->id"),array("target"=>"_black"))',
+			'value'=>'CHtml::link(CHtml::encode("$data->title"),array("blog/article","uid"=>"$data->usersId","aid"=>"$data->id"),array("target"=>"_blank"))',
 		),
 		array(
 			'name'=>'gacStatus',
