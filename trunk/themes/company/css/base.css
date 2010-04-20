@@ -1,0 +1,136 @@
+@import url("_form.css");
+
+.clr {
+	clear:both;
+	margin:0px;
+	padding:0px;
+	font-size:0px;
+	line-height:0px;
+	height:0px;
+}
+p,ul,span,dt,dl,li,hr,img{
+	margin:0px;
+	padding:0px;
+	border:none;
+	list-style-type:none;
+	font-style:normal;
+	font-weight:normal;
+}
+
+.FloatLeft {
+	float:left;
+}
+.FloatRight {
+	float:right;
+}
+form  {margin:0px;}
+
+#socroll_img{OVERFLOW:hidden;WIDTH:615px;HEIGHT:140px;white-space:nowrap;}
+.socroll_content, .socroll_content ul, .socroll_content ul li{display:inline;list-style:none;}
+.socroll_content li img {
+	max-width:177px;
+	max-height:130px;
+	width: expression(this.width > 177 && this.width / 177 >= this.height / 130 ? 177 : true);
+	height: expression(this.height > 177 ? 130 : true);
+}
+.bor03  {width:181px; height:134px; border:1px solid #ccc; display:block;}
+
+#web  {width:1003px;}
+#webHeader  {height:173px; padding:47px 0px 0px 25px;}
+#webHeader img  {margin:0px 5px 0px 5px;}
+#webMenu  {height:50px; margin-bottom:10px; width:910px;}
+#webMenu a  {margin:23px 23px; font-size:14px; font-weight:bold; line-height:50px;}
+#webMain  {width:890px; margin-bottom:10px;}
+#webLeftmain  {float:left; width:635px;}
+#webRightmain  {float:right; width:245px;}
+#webLt,#webRt  {height:27px; line-height:27px; font-size:14px; padding-left:30px;}
+#webLn,#webLp02,#webLd  {line-height:25px; margin:10px;}
+#webmessage  {line-height:25px}
+.Ld-neirong img  {margin:5px 20px 0px 20px; border:3px solid #e3e3e3;}
+.fontcent  {text-align:center;}
+#webRa,#webphotolist  {margin:5px 5px 10px 5px;}
+#webRf img  {height:42px; width:42px; border:2px solid #e3e3e3; float:left; margin:0px 10px 10px 0px;}
+#webUnder  {height:54px; width:910px; line-height:54px;}
+.anniubj  {background:url(../images/anniu01.gif) left top no-repeat; border:0px; height:20px; width:60px; margin-top:5px; display:block; line-height:20px; margin:5px 10px 0px 10px; float: left;}
+.margin20  {padding-left:15px;}
+#fangke  {margin-top:10px;}
+#fkNeirong li  {width:25%; float:left; margin-bottom:5px; text-align:center;}
+#fkNeirong img  {width:42px; height:42px; border:2px solid #e3e3e3; margin-bottom:3px;}
+#diaryPage  {margin:5px 0px 10px 0px; padding-right:10px; height:20px; line-height:20px; text-align:right;}
+#webxiangce  {padding:10px;}
+#webxiangce li  {float:left; width:33%; margin-bottom:10px; text-align:center;}
+#webxiangce img  {width:180px; height:135px; border:3px solid #e3e3e3; margin-bottom:3px;}
+#webLn li  {width:49%; line-height:25px; overflow:hidden; float:left;}
+.Ld-all  {line-height:25px; margin-bottom:5px;}
+.Ld-title a,.Ld-title span{}
+.Ra-ziliao  {line-height:25px;}           
+.xiangceDetails  {margin:10px 0px 10px 0px; line-height:25px;}
+.xiangceDetails img  {margin-bottom:5px;}
+.border01 img  {margin-bottom:5px; width:42px; height:42px; border:2px solid #ccc;}
+
+/***********************************************/
+table.dataGrid {
+	background: white;
+	border-collapse: collapse;
+	width: 97.8%;
+	margin-left:10px;
+}
+
+table.dataGrid th,table.dataGrid td {
+	font-size: 12px;
+	border: 1px #aaa solid;
+	padding: 0.3em;
+}
+
+table.dataGrid th {
+	background: #ddd;
+	text-align: center;
+}
+
+table.dataGrid th.label {
+	width: 150px;
+}
+
+table.dataGrid tr.odd {
+	background: #f5f5f5;
+}
+
+/* end of data grid style */
+#siteMenu{
+        padding:5px;
+        width:200px;
+        background-color: #eee;
+}
+#siteMenu li {
+        list-style-type:none;
+        font-size:14px;
+        width:65px;
+        height:24px;
+        line-height:24px;
+        overflow:hidden;
+        white-space:nowrap;
+        float:left;
+        text-align:center;
+}
+#selfMenu ul{
+	margin:0px auto;
+	width:210px;
+}
+#selfMenu a, #selfMenu a:hover{
+	color:#111;
+}
+#selfMenu li {
+        list-style-type:none;
+		padding:2px 5px;
+        font-size:14px;
+        height:24px;
+        line-height:24px;
+        overflow:hidden;
+        white-space:nowrap;
+        float:left;
+        text-align:center;
+}#Container  {
+}
+.grid-view table.items th, .grid-view table.items td {
+	font-size:12px;
+}

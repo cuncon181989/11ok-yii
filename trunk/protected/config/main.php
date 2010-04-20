@@ -33,12 +33,12 @@ return array(
 					'class'=>'CFileLogRoute',
 					'levels'=>'error,info',
 				),
+				/**
 				array(
 						'class'=>'XWebDebugRouter',
 						'config'=>'alignLeft, opaque, runInDebug, fixedPos, collapsed, yamlStyle',
 						'levels'=>'error, warning, trace, profile, info',
 				),
-				/**
 				array(
 					'class'=>'CWebLogRoute',
 				),

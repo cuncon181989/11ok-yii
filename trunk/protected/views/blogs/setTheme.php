@@ -6,19 +6,20 @@
 
 <div class="okform">
 <?php echo CHtml::beginForm(); ?>
-<ul class="theme_list">
+        <ul class="theme_list">
 <?php foreach($themes as $key=>$theme): ?>
 	<li>
-		<?php echo CHtml::image($theme['url'].$theme['screenShot']); ?><br>
-		<?php echo CHtml::radioButton('themeSelected', $blogs->settings['theme']['name'],array('value'=>$theme['dirName'],'id'=>'theme_'.$key)); ?>
-		<?php echo CHtml::hiddenField($theme['dirName'].'[aliasName]', $theme['aliasName']); ?>
-		<?php echo CHtml::label($theme['aliasName'], 'theme_'.$key); ?>
-		<div class="style_list" <?php if ($blogs->settings['theme']['name']!= $theme['dirName']) echo 'style="display:none;"'; ?>>
-			<?php echo CHtml::radioButtonList($theme['dirName'].'[style]', $blogs->settings['theme']['style'], $theme['styles'],array('separator'=>'')); ?>
-		</div>
+                <?php echo CHtml::image($theme['url'].$theme['screenShot']); ?><br>
+                <?php echo CHtml::radioButton('themeSelected', ($blogs->settings['theme']['name']==$theme['dirName'])?true:false,array('value'=>$theme['dirName'],'id'=>'theme_'.$key)); ?>
+                <?php echo CHtml::hiddenField($theme['dirName'].'[aliasName]', $theme['aliasName']); ?>
+                <?php echo CHtml::label($theme['aliasName'], 'theme_'.$key); ?>
+                <div class="style_list" <?php if ($blogs->settings['theme']['name']!= $theme['dirName']) echo 'style="display:none;"'; ?>>
+                        <?php echo CHtml::radioButtonList($theme['dirName'].'[style]', $blogs->settings['theme']['style'], $theme['styles'],array('separator'=>'')); ?>
+                </div>
 	</li>
 <?php endforeach ?>
 </ul>
+<div class="clr"></div>
 <div class="action">
 <?php echo CHtml::submitButton('保存',array('class'=>'anniubj')); ?>
 </div>

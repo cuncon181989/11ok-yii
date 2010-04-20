@@ -1,0 +1,66 @@
+body {
+	margin:0px auto;
+	padding:0px;
+	font-size:12px;
+	color:#333;
+	background-color:#fbf7cf;
+}
+a {
+	color:#333;
+	text-decoration:none;
+}
+a:hover {
+	text-decoration: underline;
+	color:#999;
+}
+
+#weball {width:910px; background-color:#fff;}
+#fkTitle  {background:url(../images/iconwhite02.gif) left center no-repeat; font-weight:bold; padding-left:18px; height:25px; line-height:25px;}
+#webphotolist li  {border-bottom:1px dashed #ccc; line-height:25px; height:25px; background:url(../images/iconwhite03.gif) left center no-repeat; padding-left:20px;}
+.picbj  {background:url(../images/picgreen.jpg) no-repeat;}
+.title  {height:43px; text-align:left; font:Arial, Helvetica, sans-serif; font-size:36px; line-height:43px; width:500px; color:#67b17e;}
+.menufont  {background-color:#54a881; color:#fbf28c;}
+.menufont a,.lt-title a,.Rt-title a  {color:#fbf28c;}
+.menufont a:hover,.lt-title a:hover,.Rt-title a:hover {text-decoration: underline;color:#fbf7cf;}
+.lt-title,.Rt-title  {background:url(../images/icongreen01.gif) left center no-repeat #93bd3f; font-weight:bold; color:#fbf28c;}
+.Ld-title  {border-bottom:1px solid #aaa;}
+
+.Rf-friend  {border-bottom:1px solid #ccc; line-height:16px; margin-top:10px;}
+.Ldiary-page  {background-color:#f5faec; border:1px solid #e3e3e3;}
+.Ldiary-page a,.Ldiary-page span {margin:0px 3px 0px 3px; color:#999}
+.Ldiary-pinglun a,.Ldiary-pinglun span {margin:0px 3px 0px 3px; color:#fff; font-size:12px; font-weight:bold;}
+.border01  {border-right:3px solid #fff; text-align:center; width:48px;background-color:#e0eec4; display:block; padding:5px;}
+.border02  {width:564px;background-color:#e0eec4; display:block; padding:5px;}
+#huifu  {margin-left:14px; background-color:#f5faec; width:530px; padding:0px 10px 0px 10px;}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
