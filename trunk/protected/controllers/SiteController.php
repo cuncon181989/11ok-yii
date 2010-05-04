@@ -70,9 +70,9 @@ class SiteController extends CController
 			$pages->pageSize= self::PAGE_SIZE*2;
 			$pages->applyLimit($criteria);
 
-			$aritcles= Articles::model()->findAll($criteria);
+			$articles= Articles::model()->findAll($criteria);
 
-			$this->render('artlist',array('articles'=>$aritcles,'form'=>new LoginForm(),'pages'=>$pages,));
+			$this->render('artlist',array('articles'=>$articles,'form'=>new LoginForm(),'pages'=>$pages,));
 		}
         /**
          * 搜索

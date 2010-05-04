@@ -13,10 +13,10 @@
     </div>
         <div id="webMenu" class="menufont" align="left">
         	<div class="FloatLeft">
-                        <?php echo CHtml::link('我的主页', array('blog/index','username'=>$this->_user['username'])); ?>|
-			<?php echo CHtml::link('我的文章', array('blog/articles','username'=>$this->_user['username'])); ?>|
-			<?php echo CHtml::link('我的相册', array('blog/galleryAlbums','username'=>$this->_user['username'])); ?>|
-			<?php echo CHtml::link('我的留言', array('blog/guestbook','username'=>$this->_user['username'])); ?>
+            <?php echo CHtml::link('我的首页', array('blog/index','username'=>$this->_user['username'])); ?>
+			<?php foreach ($this->_blog->getCustomLinks() as $link): ?>
+				|<?php echo CHtml::link($link[0], $link[1]); ?>
+			<?php endforeach; ?>
                 </div>
                 <div id="logo" class="FloatRight">
                         <?php echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl.'/images/logo.gif'), '#', array('id'=>'button')); ?>
