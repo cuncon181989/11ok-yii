@@ -12,11 +12,12 @@ class Blogs extends CActiveRecord
 	 * @var integer $status
 	 * @var string $name
 	 * @var string $about
+	 * @var string $customLinks
 	 * @var string $settings
 	 * @var string $createDate
 	 * @var integer $updateDate
 	 */
-
+	 public $_customLinks;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return CActiveRecord the static model class
@@ -44,7 +45,7 @@ class Blogs extends CActiveRecord
 		return array(
 			array('name', 'required'),
 			array('name', 'length', 'max'=>50),
-			array('about', 'safe'),
+			array('about,_customLinks', 'safe'),
 		);
 	}
 
@@ -96,12 +97,19 @@ class Blogs extends CActiveRecord
         }
         
         protected function beforeSave(){
+			$temp= $this->settings;
+			$temp['customLinks']=$this->_customLinks;
+			$this->settings= $temp;
             $this->settings= serialize($this->settings);
             return true;
         }
 
         protected function afterFind(){
             $this->settings= unserialize($this->settings);
+			$this->_customLinks=$this->settings['customLinks'];
+			if (empty($this->_customLinks))
+					$this->_customLinks="我的文章|http://localhost/admin/articles\n我的相册|http://localhost/admin/galleryAlbums\n我的留言|http://localhost/admin/guestbook";
+
             return true;
         }
 
@@ -112,4 +120,11 @@ class Blogs extends CActiveRecord
             else
                 return $tmpArr[$this->status];
         }
+		public function getCustomLinks(){
+			$arr=explode("\n",strip_tags($this->_customLinks));
+			foreach ($arr as $link){
+				$links[]= explode('|',$link);
+			}
+			return $links;
+		}
 }

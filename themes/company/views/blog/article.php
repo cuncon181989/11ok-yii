@@ -16,38 +16,39 @@
 			</div>
 			<div class="Ld-neirong"><?php echo $article->artText->content; ?></div>
 		</div>
-	  <div id="webLt" class="lt-title"><strong class="FloatLeft">所有评论</strong><font class="FloatRight Ldiary-pinglun">
+		<div id="webLt" class="lt-title"><strong class="FloatLeft">所有评论</strong><font class="FloatRight Ldiary-pinglun">
 			  <span><?php echo $article->countComments; ?></span>
-			  </font></div>
-				<div id="diarypinglun">
-					<ul>
-						<?php foreach ($article->comments as $key=>$comment): ?>
-						<li>
-							<span class="FloatLeft leftpinglun">
-							<?php if ($comment->usersId>0): ?>
-							<?php echo CHtml::link(CHtml::image($comment->user->getAvatarUrl()),array('blog/index','username'=>$comment->user->username)); ?><br />
-							<?php echo CHtml::link(CHtml::encode($comment->userName),array('blog/index','username'=>$comment->user->username)); ?>
-							<?php else: ?>
-							<?php echo CHtml::image(Yii::app()->getRequest()->baseUrl.'/images/guestAvatar.gif'); ?><br />
-							<?php echo CHtml::encode($comment->userName); ?>
-							<?php endif ?>
-							</span>
-							<span class="FloatRight rightpinglun">
-							<?php echo CHtml::link(CHtml::encode($comment->title),'#',array('name'=>$comment->id)); ?><br />
-							<?php echo CHtml::encode($comment->content); ?><br />
-							<?php echo date('Y-m-d H:i:s',$comment->createDate); ?>
-							<?php if ($this->_user->username==(Yii::app()->user->name)): ?>
-							<?php echo CHtml::linkButton('删除', array(
-								  'submit'=>'',
-								  'params'=>array('command'=>'delete','id'=>$comment->id),
-								  'confirm'=>"确定删除?\n #{$comment->id} {$comment->title}")); ?>
-							<?php endif; ?>
-							</span>
-							<div class="clr"></div>
-						</li>
-						<?php endforeach ?>
-					</ul>
-				</div>
+			  </font>
+		</div>
+		<div id="diarypinglun">
+			<ul>
+				<?php foreach ($article->comments as $key=>$comment): ?>
+				<li>
+					<span class="FloatLeft leftpinglun">
+					<?php if ($comment->usersId>0): ?>
+					<?php echo CHtml::link(CHtml::image($comment->user->getAvatarUrl()),array('blog/index','username'=>$comment->user->username)); ?><br />
+					<?php echo CHtml::link(CHtml::encode($comment->userName),array('blog/index','username'=>$comment->user->username)); ?>
+					<?php else: ?>
+					<?php echo CHtml::image(Yii::app()->getRequest()->baseUrl.'/images/guestAvatar.gif'); ?><br />
+					<?php echo CHtml::encode($comment->userName); ?>
+					<?php endif ?>
+					</span>
+					<span class="FloatRight rightpinglun">
+					<?php echo CHtml::link(CHtml::encode($comment->title),'#',array('name'=>$comment->id)); ?><br />
+					<?php echo CHtml::encode($comment->content); ?><br />
+					<?php echo date('Y-m-d H:i:s',$comment->createDate); ?>
+					<?php if ($this->_user->username==(Yii::app()->user->name)): ?>
+					<?php echo CHtml::linkButton('删除', array(
+						  'submit'=>'',
+						  'params'=>array('command'=>'delete','id'=>$comment->id),
+						  'confirm'=>"确定删除?\n #{$comment->id} {$comment->title}")); ?>
+					<?php endif; ?>
+					</span>
+					<div class="clr"></div>
+				</li>
+				<?php endforeach ?>
+			</ul>
+		</div>
 	   <div id="webLt" class="lt-title">发表评论</div>
 			<div class="flashMsg"><?php echo Yii::app()->user->getFlash('addcommment'); ?></div>
 			<div class="okform">
