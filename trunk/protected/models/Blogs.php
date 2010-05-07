@@ -108,8 +108,7 @@ class Blogs extends CActiveRecord
             $this->settings= unserialize($this->settings);
 			$this->_customLinks=$this->settings['customLinks'];
 			if (empty($this->_customLinks))
-					$this->_customLinks="我的文章|http://localhost/admin/articles\n我的相册|http://localhost/admin/galleryAlbums\n我的留言|http://localhost/admin/guestbook";
-
+					$this->_customLinks="我的文章|{url}/{username}/articles\n我的相册|{url}/{username}/galleryAlbums\n我的留言|{url}/{username}/guestbook";
             return true;
         }
 
@@ -123,7 +122,10 @@ class Blogs extends CActiveRecord
 		public function getCustomLinks(){
 			$arr=explode("\n",strip_tags($this->_customLinks));
 			foreach ($arr as $link){
-				$links[]= explode('|',$link);
+				$tmp= explode('|',$link);
+				$tmp[1]=str_replace('{url}', Yii::app()->getRequest()->getBaseUrl(true), $tmp[1]);
+				$tmp[1]=str_replace('{username}', Yii::app()->getController()->_user->username, $tmp[1]);
+				$links[]=$tmp;
 			}
 			return $links;
 		}
