@@ -7,15 +7,8 @@
 </div>
 
 <div class="okform">
-<p>
-    带<span class="required">*</span>为必填项
-</p>
 <?php echo CHtml::beginForm(); ?>
 <?php echo CHtml::errorSummary($model); ?>
-<div class="simple">
-<?php echo CHtml::activeLabelEx($model,'blogCategoryId'); ?>
-<?php echo CHtml::encode($model->blogCategory->name); ?>
-</div>
 <div class="simple">
 <?php echo CHtml::activeLabelEx($model,'name'); ?>
 <?php echo CHtml::activeTextField($model,'name',array('size'=>50,'maxlength'=>50)); ?>
@@ -35,8 +28,12 @@
 <?php echo CHtml::activeTextArea($model,'about',array('rows'=>1, 'cols'=>50)); ?>
 </div>
 <div class="simple">
-    <?php echo CHtml::label('自定义连接', ''); ?>
-	<?php echo CHtml::activeTextArea($model,'_customLinks',array('rows'=>5, 'cols'=>50, 'wrap'=>'off')); ?>
+    <?php echo CHtml::label('自定义链接', ''); ?>
+	<?php echo CHtml::activeTextArea($model,'_customLinks',array('rows'=>4, 'cols'=>50, 'wrap'=>'off')); ?>
+</div>
+<div class="simple">
+    <?php echo CHtml::label('&nbsp;', ''); ?>
+	可以使用{username}代表当前用户名;{url}代表<?php echo Yii::app()->; ?>
 </div>
 
 <div class="simple">
