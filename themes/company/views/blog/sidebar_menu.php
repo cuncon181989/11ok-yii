@@ -1,11 +1,12 @@
 <?php if ($_GET['username']==Yii::app()->user->name):?>
 	<div id="selfMenu" style="background-color:#FFF;">
 		<ul>
-			<li><?php echo CHtml::link('11ok首页', '/'); ?></li>
-			<li><?php echo CHtml::link('我的主页', array('blog/index','username'=>Yii::app()->user->name)); ?></li>
+			<li><?php echo CHtml::link('我的首页', array('blog/index','username'=>Yii::app()->user->name)); ?></li>
 			<li><?php echo CHtml::link('退出登录', '/site/logout'); ?></li>
 			<li><?php echo CHtml::link('修改资料', array('users/update','username'=>Yii::app()->user->name)); ?></li>
+			<li><?php echo CHtml::link('扩展资料', array('users/updateinfo','username'=>Yii::app()->user->name)); ?></li>
 			<li><?php echo CHtml::link('修改头像', array('users/avatar','username'=>Yii::app()->user->name)); ?></li>
+			<li><?php echo CHtml::link('基本设置', array('blogs/update','username'=>Yii::app()->user->name)); ?></li>
 			<li><?php echo CHtml::link('更换皮肤', array('blogs/setTheme','username'=>Yii::app()->user->name)); ?></li>
 			<li><?php echo CHtml::link('文章分类', array('articlesCategories/admin','username'=>Yii::app()->user->name)); ?></li>
 			<li><?php echo CHtml::link('管理文章', array('articles/admin','username'=>Yii::app()->user->name)); ?></li>
