@@ -33,7 +33,7 @@
 </div>
 <div class="simple">
     <?php echo CHtml::label('&nbsp;', ''); ?>
-	可以使用{username}代表当前用户名;{url}代表<?php echo Yii::app()->; ?>
+	可以使用{username}代表当前用户名;{url}代表<?php echo Yii::app()->getRequest()->getBaseUrl(true); ?>
 </div>
 
 <div class="simple">

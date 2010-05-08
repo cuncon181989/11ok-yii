@@ -16,11 +16,14 @@
 		<ul>
 			<li><?php echo CHtml::link('11ok首页', '/'); ?></li>
 			<?php if(!Yii::app()->user->isGuest): ?>
-			<li><?php echo CHtml::link('我的主页', array('blog/index','username'=>Yii::app()->user->name)); ?></li>
+			<li><?php echo CHtml::link('我的首页', array('blog/index','username'=>Yii::app()->user->name)); ?></li>
 			<li><?php echo CHtml::link('退出登录', '/site/logout'); ?></li>
 			<li><?php echo CHtml::link('修改资料', array('users/update','username'=>Yii::app()->user->name)); ?></li>
+			<li><?php echo CHtml::link('扩展资料', array('users/updateinfo','username'=>Yii::app()->user->name)); ?></li>
 			<li><?php echo CHtml::link('修改头像', array('users/avatar','username'=>Yii::app()->user->name)); ?></li>
+			<li><?php echo CHtml::link('基本设置', array('blogs/update','username'=>Yii::app()->user->name)); ?></li>
 			<li><?php echo CHtml::link('更换皮肤', array('blogs/setTheme','username'=>Yii::app()->user->name)); ?></li>
+			<li>&nbsp;</li>
 			<li><?php echo CHtml::link('文章分类', array('articlesCategories/admin','username'=>Yii::app()->user->name)); ?></li>
 			<li><?php echo CHtml::link('管理文章', array('articles/admin','username'=>Yii::app()->user->name)); ?></li>
 			<li><?php echo CHtml::link('写新文章', array('articles/create','username'=>Yii::app()->user->name)); ?></li>
@@ -41,10 +44,11 @@
 </div>
 <div id="weball" align="left">
 	<div id="webMenu">
-		<div id="menu"><?php echo CHtml::link('我的主页', array('blog/index','username'=>$this->_user['username'])); ?>|
-			<?php echo CHtml::link('我的文章', array('blog/articles','username'=>$this->_user['username'])); ?>|
-			<?php echo CHtml::link('我的相册', array('blog/galleryAlbums','username'=>$this->_user['username'])); ?>|
-			<?php echo CHtml::link('我的留言', array('blog/guestbook','username'=>$this->_user['username'])); ?></div>
+		<div id="menu"><?php echo CHtml::link('我的首页', array('blog/index','username'=>$this->_user['username'])); ?>
+			<?php foreach ($this->_blog->getCustomLinks() as $link): ?>
+				|<?php echo CHtml::link($link[0], $link[1]); ?>
+			<?php endforeach; ?>
+		</div>
 	</div>
         <?php echo $content; ?>
         <div id="webUnder">CopyRight © <a href="http://www.11ok.net">11ok.net</a> 2010-<?php echo date('Y',time())+1?></div>
