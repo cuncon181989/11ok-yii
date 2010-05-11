@@ -81,17 +81,34 @@ class BlogsController extends DController
 	{
 		$model=Blogs::model()->findbyPk(Yii::app()->user->blogId);
 		if($model->usersId != Yii::app()->user->id)
-		throw new CHttpException(404,'The requested post does not exist.');
+			throw new CHttpException(404,'The requested post does not exist.');
 		if(isset($_POST['Blogs']))
 		{
 			$model->attributes=$_POST['Blogs'];
 			$tempSet= $model->attributes['settings'];
 			$tempSet['isShowGQ']= $_POST['isShowGQ'];
+			if (!empty($_FILES['headBg']['name'][0])){
+				$imgFile= CUploadedFile::getInstancesByName('headBg');
+				$saveName= 'headbg.'.$imgFile[0]->getExtensionName();
+				if (!in_array($imgFile[0]->getExtensionName(),array('jpg','gif','png')))
+						throw new CHttpException(403, '不允许的文件！');
+				$imgFile[0]->saveAs($this->_user->getUploadDir().$saveName);
+				$tempSet['headbg']=array(
+					'enabled'=>true,
+					'filename'=>$saveName,
+				);
+			}
+			if ($_POST['command']=='clearTheme'){ //删除背景图
+				if (!empty($tempSet['headbg']['filename']))
+					@unlink($this->_user->getUploadDir().$tempSet['headbg']['filename']);
+				unset($tempSet['headbg']);
+			}
 			$model->settings= $tempSet;
 			if($model->save())
 				$this->redirect(array('show','id'=>$model->id,'username'=>Yii::app()->user->name));
 		}
-		$this->render('update',array('model'=>$model));
+		$themeConfig= require(Yii::app()->getTheme()->basePath.DS.'config.php');
+		$this->render('update',array('model'=>$model,'themeConfig'=>$themeConfig));
 	}
 	/**
 	 * 设置
@@ -139,7 +156,7 @@ class BlogsController extends DController
 			$this->redirect(array('list'));
 		}
 		else
-		throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 
 	/**

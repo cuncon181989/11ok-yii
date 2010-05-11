@@ -43,8 +43,8 @@ class DController extends CController
                 if (!empty($this->_blog->settings['theme']['style'])){
                         $cssFile= Yii::app()->getTheme()->getBaseUrl().'/css/'.$this->_blog->settings['theme']['style'];
                 }else{
-                        $theme= Yii::app()->getThemeManager()->getTheme($theme);//得到制定的theme对象
-                        $themeConfig= require_once($theme->getBasePath().DS.'config.php');//获取指定theme中的配置文件
+                        $theme= Yii::app()->getThemeManager()->getTheme($theme);//得到指定的theme对象
+                        $themeConfig= require($theme->getBasePath().DS.'config.php');//获取指定theme中的配置文件
                         $cssFile= Yii::app()->getTheme()->getBaseUrl().'/css/'.$themeConfig['defaultStyle'];
                 }
                 Yii::app()->clientScript->registerCssFile($baseCssFile);

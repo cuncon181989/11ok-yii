@@ -189,17 +189,30 @@ class Users extends CActiveRecord
             else
                 return $tmpArr[$this->sex];
         }
+
+		/**
+		 * @return string 建立一个到getUploadDir的方法，初期没考虑到这个。
+		 */
+		public function getAvatarDir($fullpath=true){
+			return $this->getUploadDir($fullpath);
+        }
         /**
          * @return string 头像目录
          * @fullpath 是否完全路径，不完全路径主要thumb组件用
          */
-        public function getAvatarDir($fullpath=true){
+		public function getUploadDir($fullpath=true){
             if ($fullpath)
                 return Yii::getPathOfAlias('webroot').DS.Yii::app()->params['uploadDir'].DS.$this->id.DS;
             else
                 return DS.Yii::app()->params['uploadDir'].DS.$this->id;
                 //return Yii::app()->getBasePath().DS.'..'.DS.Yii::app()->params['uploadDir'].DS.$this->id.DS;
-        }
+		}
+		/*
+		 * @return string 返回用户上传目录的URL
+		 */
+		public function getUploadUrl(){
+			return Yii::app()->getRequest()->getBaseUrl().'/'.Yii::app()->params['uploadDir'].'/'.$this->id.'/';
+		}
         /**
          *  @return string 头像url路径包含文件名
          */
@@ -208,7 +221,7 @@ class Users extends CActiveRecord
                 if ($avatar=='noavatar1.jpg' || $avatar=='noavatar2.jpg')
                         return Yii::app()->getRequest()->getBaseUrl().'/images/'.$avatar;
                 else
-                        return Yii::app()->getRequest()->getBaseUrl().'/'.Yii::app()->params['uploadDir'].'/'.$this->id.'/'.$avatar;
+                        return $this->getUploadUrl().$avatar;
         }
         /**
          * @param string $size 头像的大小

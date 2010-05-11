@@ -134,3 +134,5 @@ table.dataGrid tr.odd {
 .grid-view table.items th, .grid-view table.items td {
 	font-size:12px;
 }
+.MultiFile-list{margin-left:110px; }
+.actionBar{padding:10px;background-color:#eee;}
