@@ -5,6 +5,11 @@ return array(
 	'description'=>'11ok默认模板',
 	'defaultStyle'=>'blue.css',
 	'screenShot'=>'/screenshot.jpg',
+	'headbg'=>array( //头部背景图
+		'enabled'=>true,
+		'width'=>900,
+		'height'=>200,
+		),
 	'styles'=>array(
 		'black.css'		=>'黑色',
 		'blue.css'		=>'蓝色',

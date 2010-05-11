@@ -8,7 +8,11 @@
 <body>
 <div id="web" align="center">
 <div id="weball" align="center">
-    <div id="webHeader" class="picbj" align="left">
+    <div id="webHeader" class="picbj" align="left"
+		 <?php if ($this->_blog['settings']['headbg']['enabled']===true): ?>
+		 style="background:url(<?php echo $this->_user->getUploadUrl().$this->_blog['settings']['headbg']['filename'] ?>) no-repeat;"
+		 <?php endif; ?>
+		 >
         <div class="title"><?php echo CHtml::encode($this->_blog->name); ?></div>
     </div>
         <div id="webMenu" class="menufont" align="left">

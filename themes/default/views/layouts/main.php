@@ -7,7 +7,11 @@
 </head>
 <body>
 <div id="webmap" align="center">
-<div id="webHeader" align="left">
+<div id="webHeader" align="left"
+		 <?php if ($this->_blog['settings']['headbg']['enabled']===true): ?>
+		 style="background:url(<?php echo $this->_user->getUploadUrl().$this->_blog['settings']['headbg']['filename'] ?>) no-repeat;"
+		 <?php endif; ?>
+		 >
 	<div id="headerTitle" class="FloatLeft"><?php echo CHtml::encode($this->_blog->name); ?></div>
 	<div id="logo" class="FloatRight">
 		<?php echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl.'/images/logo.gif'), '#', array('id'=>'button')); ?>

@@ -11,18 +11,18 @@ return array(
 	'language'=>'zh_cn',
 	'timeZone' => 'Asia/Shanghai',
 	'homeUrl'=>'/',
-        //'defaultController'=>'site',
+    //'defaultController'=>'site',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
 
 	// autoloading model and component classes
-        'import'=>array(
-                'application.models.*',
-                'application.components.*',
-                'ext.DController',
-                'application.extensions.yiidebugtb.*',
-        ),
+	'import'=>array(
+			'application.models.*',
+			'application.components.*',
+			'ext.DController',
+			'application.extensions.yiidebugtb.*',
+	),
 
 	// application components
 	'components'=>array(
@@ -33,12 +33,12 @@ return array(
 					'class'=>'CFileLogRoute',
 					'levels'=>'error,info',
 				),
-				/**
 				array(
 						'class'=>'XWebDebugRouter',
 						'config'=>'alignLeft, opaque, runInDebug, fixedPos, collapsed, yamlStyle',
 						'levels'=>'error, warning, trace, profile, info',
 				),
+				/**
 				array(
 					'class'=>'CWebLogRoute',
 				),
@@ -46,7 +46,7 @@ return array(
 					'class'=>'CProfileLogRoute',
 					'enabled'=>true,
 				),
-                                /**/
+                /**/
 			),
 		),
 		'user'=>array(
