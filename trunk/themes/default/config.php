@@ -7,8 +7,8 @@ return array(
 	'screenShot'=>'/screenshot.jpg',
 	'headbg'=>array( //头部背景图
 		'enabled'=>true,
-		'width'=>900,
-		'height'=>200,
+		'width'=>1007,
+		'height'=>195,
 		),
 	'styles'=>array(
 		'black.css'		=>'黑色',

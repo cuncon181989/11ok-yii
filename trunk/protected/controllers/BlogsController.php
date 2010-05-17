@@ -86,7 +86,8 @@ class BlogsController extends DController
 		{
 			$model->attributes=$_POST['Blogs'];
 			$tempSet= $model->attributes['settings'];
-			$tempSet['isShowGQ']= $_POST['isShowGQ'];
+			$tempSet['isShowGQ']= (int)$_POST['isShowGQ'];
+			$tempSet['isShowProfile']= (int)$_POST['isShowProfile'];
 			if (!empty($_FILES['headBg']['name'][0])){
 				$imgFile= CUploadedFile::getInstancesByName('headBg');
 				$saveName= 'headbg.'.$imgFile[0]->getExtensionName();

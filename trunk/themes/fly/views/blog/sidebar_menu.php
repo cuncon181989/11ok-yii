@@ -1,5 +1,6 @@
 <?php if ($_GET['username']==Yii::app()->user->name):?>
-	<div id="selfMenu" style="background-color:#FFF;">
+    <div id="right_title">操作项</div>
+	<div class="selfMenu">
 		<ul>
 			<li><a href="<?php echo Yii::app()->homeUrl; ?>">11ok首页</a></li>
 			<li><?php echo CHtml::link('我的首页', array('blog/index','username'=>Yii::app()->user->name)); ?></li>
@@ -22,5 +23,4 @@
 		</ul>
 	<div class="clr"></div>
 	</div>
-<br/>
 <?php endif;?>

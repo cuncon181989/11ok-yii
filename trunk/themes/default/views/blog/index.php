@@ -13,7 +13,7 @@
                 <li><strong>我的求购</strong><br />
                         <?php if(!empty($qiugou)): ?>
                                 <?php foreach ($qiqgou as $key=>$q): ?>
-                                <?php echo $key+1 .'、'.$q->title.'<br />'; ?>
+                                <?php echo $key+1 .'、'.CHtml::link(CHtml::encode($q->title), array('article','aid'=>$q->id,'username'=>$this->_user->username)).'<br />'; ?>
                                 <?php endforeach ?>
                         <?php endif; ?>
                 </li>

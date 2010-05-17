@@ -24,6 +24,16 @@
 	</span>
 </div>
 <div class="simple">
+	<?php echo CHtml::label('是否显示个人信息', ''); ?>
+	<span class="normallist">
+	<?php if($model->settings['isShowProfile']): ?>
+	<?php echo CHtml::radioButtonList('isShowProfile', $model->settings['isShowProfile'], array('0'=>'不显示','1'=>'显示'), array('separator'=>' ')); ?>
+	<?php else: ?>
+	<?php echo CHtml::radioButtonList('isShowProfile', '0', array('0'=>'不显示','1'=>'显示'), array('separator'=>' ')); ?>
+	<?php endif; ?>
+	</span>
+</div>
+<div class="simple">
 <?php echo CHtml::activeLabelEx($model,'about'); ?>
 <?php echo CHtml::activeTextArea($model,'about',array('rows'=>1, 'cols'=>50)); ?>
 </div>

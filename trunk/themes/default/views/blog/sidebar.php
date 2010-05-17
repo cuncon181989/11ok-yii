@@ -1,5 +1,6 @@
 <div id="webRightmain">
 	<?php $this->renderPartial('sidebar_menu') ; ?>
+	<?php if($this->_blog->settings['isShowProfile']==1): ?>
         <div id="webKuang">
         <div id="kTitle"><a href="#">个人资料</a></div>
         <div id="aNeirong">
@@ -29,6 +30,7 @@
             </div>
         </div>
         </div>
+	<?php endif ?>
         <div id="webKuang">
         <div id="kTitle">我的好友<span class="r"><?php if(Yii::app()->user->getState('isOwner')) echo CHtml::link('更多>>',array('blog/friends','username'=>$this->_user->username)); ?></span></div>
         <div id="kNeirong">

@@ -1,0 +1,56 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	color:#000000;
+}
+a:link {
+	color: #000000;
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #000000;
+}
+a:hover {
+	text-decoration: underline;
+	color: #ff0000;
+}
+.menu_right{ color:#c0f8ff; }
+#menu ul{ margin:0; padding:0; }
+#menu ul li{ list-style:none; background:url(../images/red_05.jpg) no-repeat; height:38px; line-height:35px; padding-left:30px; font-weight:bold;}
+#menu ul li a{color:#ffffff; text-decoration:none; }
+#menu ul li a:hover{color:#ff6378;}
+#menu li#current{background:url(../images/red_menu.jpg) no-repeat; height:38px; line-height:34px;}
+#banner{ float:left; height:130px; width:784px;  background:url(../images/red.jpg) no-repeat;font-size:24px; color:#fff; padding-left:20px; padding-top:80px;}
+#left_xqtitle{ width:292px; height:27px; background:url(../images/redtit_03.jpg) no-repeat; font-size:12px; font-weight:bold; padding-left:18px; line-height:27px; color:#fff;}
+#list li{ margin:0; padding:0; border-bottom:1px #CCCCCC dashed; height:22px; line-height:22px;}
+#left_title{ width:704px; height:25px; background:url(../images/red_11.jpg) no-repeat; padding-left:18px; color:#fff; line-height:25px; font-size:12px; font-weight:bold;}
+#left_gytitle{ width:377px; height:27px; background:url(../images/redtit_05.jpg) no-repeat; font-size:12px; font-weight:bold; padding-left:18px; line-height:27px; color:#fff;}
+.Ld-title  { border-bottom:1px solid #CCCCCC;}
+.Ld-neirong{ color:#000000;}
+.FloatLeft {
+	height:25px; color:#000000; font-weight:bold; font-size:14px; width:380px;
+}
+.FloatRight1 a:hover{color:#000000;}
+.FloatLeft2 a{color:#6ba92e;}
+.FloatLeft2 a:hover{
+color:#000000;
+}
+#right_title{ height:27px; width:200px; padding-left:15px; background:url(../images/red_08.jpg) no-repeat; line-height:27px; font-size:12px; font-weight:bold; color:#fff;}
+#right_1{ width:208px; height:auto; overflow:hidden; padding-left:5px; border-left:1px solid #ededed;border-bottom:1px solid #ededed;border-right:1px solid #ededed; background:#f7f7f7;}
+.Rf-friend  {border-bottom:1px dashed #cccccc ; line-height:16px; margin-top:2px; text-decoration:none; padding:8px 0 6px 6px; height:55px; margin-bottom:5px;}
+#right_2{width:212px;padding:0 0 0 33px;  margin-bottom:8px; border-left:1px solid #ededed;border-bottom:1px solid #ededed;border-right:1px solid #ededed; background:#f7f7f7; padding:0;}
+#fkNeirong{ border:0;background:#f3f3f3; width:215px; height:180px; list-style:none; }
+#photo_left{ height:300px; width:90px; float:left; padding-left:8px;}
+#photo_left li{border-bottom:1px dashed #cccccc; height:25px; line-height:25px;}
+
+#webxiangce li  {
+border:2px solid #e3e3e3; list-style:none;
+}
+.border01  { text-align:center; width:62px;background-color:#e2e2e2; display:block; padding:3px; font-size:12px; color:#000000; height:73px;}
+.border02  {width:628px;display:block; padding:5px; margin-bottom:8px; background:#f7f7f7; color:#000000;}
+.border01 img  {margin-top:5px; width:42px; height:42px; border:2px solid #ccc; background:#CCCCCC; margin-right:1px;}
+#huifu  {margin-left:8px; background-color:#e5e5e5; width:580px; padding:0px 10px 0px 10px;}
+#copyright{ height:36px; width:980px; margin-left:auto; margin-right:auto; text-align:center; border-top:1px solid #CCCCCC; margin-top:15px;} 
+.liuyan{background:#000000; color:#ffffff; height:25px; line-height:25px; font-weight:bold;padding-left:8px; margin-bottom:5px;}
