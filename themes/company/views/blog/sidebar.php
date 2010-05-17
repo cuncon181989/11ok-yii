@@ -1,5 +1,6 @@
     <div id="webRightmain">
 		<?php $this->renderPartial('sidebar_menu') ; ?>
+		<?php if($this->_blog->settings['isShowProfile']==1): ?>
         <div id="webRt" class="Rt-title"><a href="about.html">个人资料</a></div>
         <div id="webRa">
 		<div id="Ra-touxiang" align="center">
@@ -27,6 +28,7 @@
 				手机：<?php echo CHtml::encode($this->_user->userinfo->mobilePhone); ?>
 			</div>
       </div>
+	  <?php endif ?>
       <div id="webRt" class="Rt-title"><?php if(Yii::app()->user->getState('isOwner')) echo CHtml::link('我的好友',array('blog/friends','username'=>$this->_user->username)); ?></div>
       <div id="webRf">
 		<?php foreach ($this->_user->friends as $key=>$friend): ?>

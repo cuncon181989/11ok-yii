@@ -1,6 +1,7 @@
 <?php if ($_GET['username']==Yii::app()->user->name):?>
 	<div id="selfMenu" style="background-color:#FFF;">
 		<ul>
+			<li><a href="<?php echo Yii::app()->homeUrl; ?>">11ok首页</a></li>
 			<li><?php echo CHtml::link('我的首页', array('blog/index','username'=>Yii::app()->user->name)); ?></li>
 			<li><?php echo CHtml::link('退出登录', '/site/logout'); ?></li>
 			<li><?php echo CHtml::link('修改资料', array('users/update','username'=>Yii::app()->user->name)); ?></li>

@@ -1,0 +1,206 @@
+@charset "utf-8";
+@import url("_form.css");
+
+/* CSS Document */
+
+
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	font-size:12px;
+	line-height:22px;
+}
+a:active {
+	text-decoration: none;
+}
+.font_1{ color:#66CC00; font-size:14px; font-weight:bold;}
+#top{ width:965px; height:210px; margin-left:auto; margin-right:auto;position:relative;}
+#menu{ width:158px; height:210px; margin:0; padding:0;color:#FFFFFF; float:left} 
+#menu ul li {overflow:hidden;white-space:nowrap;}
+#middle{ height:auto; overflow:hidden; width:965px; margin-left:auto; margin-right:auto; margin-top:12px;}
+#left{ width:720px; height:auto; overflow:hidden; float:left;}
+#left_1{ width:100%; height:214px;}
+#left_xq{ height:214px; width:310px; float:left; }
+#list{ width:100%; margin:0; padding:0; height:185px; margin-top:5px;}
+#list ul{ margin:0; padding:0; list-style:none;}
+#left_gy{ height:214px; width:395px; float:right; }
+.Ld-all  {line-height:25px; margin-bottom:5px; margin-top:10px; }
+.Ld-title { height:28px;}
+.Ld-title a,.Ld-title span{margin:0px 10px 0px 10px;}
+.Ld-neirong img  {margin:5px 20px 0px 20px; border:3px solid #e3e3e3;}
+.FloatLeft {
+	float:left;
+}
+.FloatLeft1 {
+	float:left;
+	height:25px; color:#ffffff; font-weight:bold; font-size:14px; width:380px; 
+}
+.FloatRight1 {float:right; padding-right:8px;}
+.FloatRight1 a{color:#6ba92e;}
+.FloatRight {
+	float:right;
+}
+.FloatLeft2 {float:left;height:25px;font-weight:bold; font-size:14px;}
+
+.FloatRight2 {float:right;}
+.FloatRight2 a{color:#6ba92e;}
+
+
+#webLn{ height:650px; overflow:hidden; padding-top:3px; list-style:none;background:#fbfafa; margin:3px 0 10px 0;}
+#webLn li  {width:49%; line-height:25px; overflow:hidden; float:left; list-style:none; margin:0;}
+
+
+#right{ width:215px; height:auto; overflow:hidden; float:right;}
+#tx{ text-align:center; margin-top:8px; width:100%; margin-bottom:8px;}
+.Rf-friend img  {border:1px solid #cccccc ; }
+.Rf-friend li{ float:left; list-style:none; padding:0 5px 0 0;}
+#Ra-touxiang{ padding:12px 0 0 0;}
+#fangke  {margin:0 auto; height:22px; margin:0; }
+#fkTitle  {background:url(../images/right1_03.gif) left center no-repeat; font-weight:bold; height:25px; line-height:25px; color:#FFFFFF;}
+#fkNeirong ul{ margin:0; padding:0; list-style:none;}
+
+#fkNeirong li  {width:25%; float:left;overflow:hidden;white-space:nowrap; margin-bottom:5px; text-align:center; padding-top:8px; margin-left:10px; list-style:none;}
+#fkNeirong img  {width:42px; height:42px; border:2px solid #e3e3e3; margin-bottom:3px;}
+/*about*/
+#about_right{ float:right; height:auto; overflow:hidden; width:98%;}
+.about{ height:auto; float:right;overflow:hidden;text-indent:2em;  background:#f9f9f9;  padding:5px; margin-bottom:8px; padding-right:10px; width:590px;}
+/*/
+/*photo*/
+#photo{ height:auto; overflow:hidden; background:#f9f9f9;}
+#photo_left{ height:300px; width:90px; float:left; padding-left:8px;}
+#photo_left ul{ margin:0; padding:0; list-style:none;}
+#webxiangce  { margin:0; float:right; width:600px; }
+#webxiangce ul{ padding:0;margin:0;}
+#webxiangce li  {
+float:left; width:90px; margin-bottom:10px; text-align:center;list-style:none; margin:5px 20px 35px 5px; overflow:hidden;
+}
+#webxiangce img  {width:80px; height:70px;  margin-bottom:3px; padding-top:5px;}
+.Ldiary-page  {background-color:#ac8dc4; border:1px solid #7e5a9b;}
+.Ldiary-page a,.Ldiary-page span {margin:0px 3px 0px 3px; color:#fff}
+.Ldiary-pinglun a,.Ldiary-pinglun span {margin:0px 3px 0px 1px; font-size:12px; font-weight:bold; height:20px;}
+.xiangceDetails  {margin:10px 0px 10px 0px; line-height:25px; font-size:12px;}
+.xiangceDetails img  {margin-bottom:5px; width:450px; height:400px;}
+/*over*/
+/*message*/
+#diarypinglun{ height:auto; overflow:inherit;  padding-top:10px; margin:0; width:100%; float:right;}
+.message_left{ width:76px; height:80px; float:left; text-align:center; background:#EEEEEE; padding-top:5px; list-style:none; margin:0}
+#diarypinglun ul{ margin:0; list-style:none; height:auto; overflow:inherit; }
+#diarypinglun li{ padding:8px 0 8px 8px; border-bottom:1px solid #EAEAEA;}
+.message_left img{ padding-left:2px;}
+.message_right{ float:left; background:#F5F5F5; margin-left:3px; width:390px; padding:3px 0 0 8px;}
+.clr {
+	clear:both;
+	margin:0px;
+	padding:0px;
+	font-size:0px;
+	line-height:0px;
+	height:0px;
+	color:#009933;
+}
+.border01 img  {margin-top:5px; width:42px; height:42px; border:2px solid #ccc; background:#CCCCCC; margin-right:1px;}
+#webmessage  {line-height:25px}
+/*over*/
+#dBiaoti{ padding:5px 10px 0 3px;  height:28px; border-bottom:1px solid #CCCCCC; color:#6ba92e; font-weight:bold;}
+#diary_1{ width:100%; height:auto; overflow:hidden;}
+#diary_right{ height:auto; overflow:hidden; float:right; width:610px;}
+
+/***********************************************/
+table.dataGrid {
+	background: white;
+	border-collapse: collapse;
+	width: 97.8%;
+	margin-left:10px;
+}
+
+table.dataGrid th,table.dataGrid td {
+	font-size: 12px;
+	border: 1px #aaa solid;
+	padding: 0.3em;
+}
+
+table.dataGrid th {
+	background: #ddd;
+	text-align: center;
+}
+
+table.dataGrid th.label {
+	width: 150px;
+}
+
+table.dataGrid tr.odd {
+	background: #f5f5f5;
+}
+
+/* end of data grid style */
+#siteMenu{
+        padding:5px;
+        width:200px;
+        background-color: #eee;
+}
+#siteMenu li {
+        list-style-type:none;
+        font-size:14px;
+        width:65px;
+        height:24px;
+        line-height:24px;
+        overflow:hidden;
+        white-space:nowrap;
+        float:left;
+        text-align:center;
+}
+#selfMenu ul{
+	margin:0px auto;
+	width:210px;
+}
+#selfMenu a, #selfMenu a:hover{
+	color:#111;
+}
+#selfMenu li {
+        list-style-type:none;
+		padding:2px 5px;
+        font-size:14px;
+        height:24px;
+        line-height:24px;
+        overflow:hidden;
+        white-space:nowrap;
+        float:left;
+        text-align:center;
+}#Container  {
+}
+.grid-view table.items th, .grid-view table.items td {
+	font-size:12px;
+}
+.MultiFile-list{margin-left:110px; }
+.actionBar{padding:10px;margin-bottom:5px;background-color:#eee;}
+
+#jsweb8_cn_left img{height:80px;}
+a img{border:none;}
+ul {margin:0px;padding:0px;}
+.message {padding:5px 0px; border-top:#eee 1px solid;}
+.r {float:right;margin-right:5px;}
+.selfMenu ul{
+	margin:0px auto;
+	width:210px;
+}
+.selfMenu li {
+        list-style-type:none;
+		padding:2px 5px;
+        font-size:14px;
+		width:27%;
+        height:24px;
+        line-height:24px;
+        overflow:hidden;
+        white-space:nowrap;
+        float:left;
+        text-align:center;
+}
+
+#site11ok{
+	width:50px;
+	height:50px;
+	position:relative;
+	top:-210px;
+	left:900px;
+}

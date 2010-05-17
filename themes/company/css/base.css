@@ -129,7 +129,8 @@ table.dataGrid tr.odd {
         white-space:nowrap;
         float:left;
         text-align:center;
-}#Container  {
+}
+#Container  {
 }
 .grid-view table.items th, .grid-view table.items td {
 	font-size:12px;
