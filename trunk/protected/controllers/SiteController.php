@@ -151,7 +151,7 @@ class SiteController extends CController
                         $model->password= md5($model->password);
                         $model->save();
                         $blogs->usersId= $model->id;
-			$blogs->blogCategoryId= $model->blogCategoryId;
+						$blogs->blogCategoryId= $model->blogCategoryId;
                         $blogs->save();
                         $transaction->commit();
                         $this->redirect(array('site/login'));
@@ -179,7 +179,6 @@ class SiteController extends CController
                                                     'blogs'=>$blogs,
                     ));
                 }else
-				mydebug($model->getErrors());
                     $this->render('register',array('model'=>$model,
                                                'blogCate'=>$blogCate,
                 ));
