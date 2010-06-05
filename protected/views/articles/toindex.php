@@ -10,6 +10,7 @@
 <?php echo CHtml::beginForm(); ?>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$dataProvider,
+	'cssFile'=>Yii::app()->homeUrl.'css/gridview.css',
 	'summaryText'=>'显示{start}-{end}条 总共{count}条',
 	'selectableRows'=>2,
 	'columns'=>array(
