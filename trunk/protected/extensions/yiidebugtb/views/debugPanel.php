@@ -9,18 +9,22 @@
 		<?php if ($alignLeft): ?>
 		float: left;
 		left: 0;
+		border-right: solid 1px #000;
+		border-bottom: solid 1px #000;
 		<?php else: ?>
 		float: right;
 		right: 0;
+		border-left: solid 1px #000;
+		border-bottom: solid 1px #000;
 		<?php endif ?>
 		
 		top: 0;
 		height: 16px;
 		background-color: #eef;
-		border: solid 1px #000;
+		color: #444;
 		padding: 1px;
-		z-index: 65536;
-		font: normal 10pt Arial, Helvetica,sans-serif;
+		z-index: 65535;
+		font: normal 10pxt Arial, Helvetica, sans-serif;
 	}
 	
 	.yiiWebDebugOpacity {
@@ -59,6 +63,7 @@
 	
 	#yiiWebDebugToolbar .yiiLinkItem:hover {
 		text-decoration: none;
+		background: none;
 	}
 	
 	ul#yiiWebDebugToolbarItems {
@@ -77,11 +82,13 @@
 	
 	#yiiWebDebugPanel {
 		background-color: #eee;
+		color: #000;
 		position: absolute;
 		width: 100%;
 		top: 0;
-		z-index:65535;
-		border: solid 1px #888;
+		left: 0;
+		font: normal 10pt Arial, Helvetica, sans-serif;
+		z-index:65534;
 	}
 	
 	#yiiWebDebugPanel .panelHeadInfo {}
@@ -110,6 +117,7 @@
 	}
 	
 	#yiiWebDebugPanel .panelGrid table thead th {
+		text-align: left;
 		padding-right: 5px;
 		padding-left: 5px;
 		border: solid 1px #888;
@@ -121,6 +129,7 @@
 	}
 	
 	#yiiWebDebugPanel .panelGrid table tbody td {
+		text-align: left;
 		padding-right: 5px;
 		padding-left: 5px;
 		border: solid 1px #888;
@@ -147,9 +156,10 @@
 	.yiiDebugInfoList {}
 	
 	.yiiDebugInfoList h2 {
-		font-size: 16px;
+		font-size: 11pt;
 		margin: 0;
 		border-bottom: solid 1px #bbb;
+		color: #444;
 	}
 	
 	.yiiDebugInfoList h2 a {
@@ -162,6 +172,7 @@
 	}
 
 	.yiiDebugInfoList div pre {
+		font-size: 10pt;
 		margin: 0px;
 		padding: 0px;
 	}
@@ -183,14 +194,14 @@
 <div id="yiiWebDebugToolbar" onmouseover="yiiDebugMouse(true);" onmouseout="yiiDebugMouse(false);">
 	<?php if (!$alignLeft): ?>
 	<ul>
-		<li><a href="#" class="yiiLink" onClick="yiiWebDebugToggle('yiiWebDebugToolbarItems');">Yii</a></li>
+		<li><a href="#" class="yiiLink" onclick="return yiiWebDebugToggle('yiiWebDebugToolbarItems');">Yii</a></li>
 	</ul>
 	<?php endif ?>
 	
 	<ul id="yiiWebDebugToolbarItems">
 		<?php $index = 0; foreach ($items as $item): ?>
 		<li>[&nbsp;
-			<?php echo (isset($item['content']) && !is_null($item['content'])) ? '<a href="#" class="yiiLinkItem" onClick="yiiWebDebugToggle(\'__yiiWDP'.$index.'\');">'.$item['title'].'</a>' : $item['title'] ?>
+			<?php echo (isset($item['content']) && !is_null($item['content'])) ? '<a href="#" class="yiiLinkItem" onclick="return yiiWebDebugToggle(\'__yiiWDP'.$index.'\');">'.$item['title'].'</a>' : $item['title'] ?>
 			&nbsp;]
 		</li>
 		<?php if (isset($item['content']) && !is_null($item['content'])) $index++; endforeach ?>
@@ -198,7 +209,7 @@
 	
 	<?php if ($alignLeft): ?>
 	<ul>
-		<li><a href="#" class="yiiLink" onClick="yiiWebDebugToggle('yiiWebDebugToolbarItems');">Yii</a></li>
+		<li><a href="#" class="yiiLink" onclick="return yiiWebDebugToggle('yiiWebDebugToolbarItems');">Yii</a></li>
 	</ul>
 	<?php endif ?>
 </div>
@@ -229,8 +240,9 @@
 	</div>
 	
 	<?php
-	$index++;
-	endforeach; ?>
+		$index++;
+		endforeach;
+	?>
 </div>
 
 <script type="text/javascript">
